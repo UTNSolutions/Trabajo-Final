@@ -15,8 +15,8 @@ namespace EnviarMailYahoo.Test
             IServicio servicioYahoo = new ServicioYahoo("yahoo",nuevaCuenta);
             MailMessage nuevoMail = new MailMessage();
             nuevoMail.From = new MailAddress(nuevaCuenta.Direccion);
-            nuevoMail.To.Add("brian_fellin@yahoo.com");
-            nuevoMail.Subject = "Hola";
+            nuevoMail.To.Add("brian-fellin@yahoohotmail.com");
+            nuevoMail.Subject = "Hola como andas";
             servicioYahoo.EnviarMail(nuevoMail);
         }
     }
