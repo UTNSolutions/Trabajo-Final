@@ -48,6 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Cuenta.cs" />
+    <Compile Include="Excepciones\DAOExcepcion.cs" />
     <Compile Include="Excepciones\EmailExcepcion.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
