@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 using System.Net;
 using System.Net.Mail;
 using Trabajo_Final.Excepciones;
+using OpenPop.Pop3;
+using OpenPop.Mime;
+using Trabajo_Final.Persistencia;
 
 namespace Trabajo_Final
 {
@@ -44,7 +47,27 @@ namespace Trabajo_Final
 
         public IList<MailMessage> RecibirMail()
         {
-            throw new NotImplementedException();
+            try
+            {
+                Pop3Client client = new Pop3Client();
+                client.Connect("pop.gmail.com", 995, true);
+                client.Authenticate(this.iCuenta.Direccion, this.iCuenta.Contraseña);
+                int indice = 0;
+                IList<MailMessage> listaADevolver = new List<MailMessage>();
+                while (indice <= client.GetMessageCount())
+                {
+                   Message mail = client.GetMessage(indice);
+                    MailMessage msj = mail.ToMailMessage();
+                    listaADevolver.Add(msj);
+                    indice++;
+                }
+                client.Disconnect();
+                return listaADevolver;
+            }
+            catch (OpenPop.Pop3.Exceptions.InvalidLoginException)
+            {
+                throw new EmailExcepcion("Error en el acceso a la cuenta, verifique los datos ingresados");
+            }
         }
     }
 }

@@ -33,7 +33,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="OpenPop">
-      <HintPath>H:\OpenPop.dll</HintPath>
+      <HintPath>..\..\..\..\..\Desktop\OpenPop.NET 2.0.5\test application\OpenPop.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
