@@ -9,7 +9,7 @@ namespace Trabajo_Final
     /// <summary>
     /// Representa una cuenta de correo electronico de un usuario
     /// </summary>
-    class Cuenta
+    public class Cuenta
     {
         private String iNombre ;
 

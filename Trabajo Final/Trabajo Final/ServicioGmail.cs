@@ -6,8 +6,6 @@ using System.Threading.Tasks;
 using System.Net;
 using System.Net.Mail;
 using Trabajo_Final.Excepciones;
-using OpenPop.Pop3;
-using OpenPop.Mime;
 
 namespace Trabajo_Final
 {
@@ -47,17 +45,7 @@ namespace Trabajo_Final
         public IList<MailMessage> RecibirMail()
         {
             Pop3Client client = new Pop3Client();
-            client.Connect("smtp.gmail.com", 587, true);
-            client.Authenticate(this.iCuenta.Direccion, this.iCuenta.Contraseña);
-            int numeroMails = client.GetMessageCount();
-            int indice = 0;
-            IList<MailMessage> listaADevolver = new List<MailMessage>();
-            while (indice <= numeroMails)
-            {
-                Message mail = client.GetMessage(indice);
-               
-            }
-
+            client.Authenticate(this.cuenta.Direccion, this.cuenta.Contraseña);
         }
     }
 }
