@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Net;
 using System.Net.Mail;
 using Trabajo_Final.Excepciones;
+using OpenPop.Pop3;
 
 namespace Trabajo_Final
 {
@@ -19,7 +20,7 @@ namespace Trabajo_Final
         {
             this.iNombre = pNombre;
             this.cuenta = pCuenta;
-            this.credenciales = new NetworkCredential(pCuenta.Direccion, pCuenta.Contraseña);
+            this.credenciales = new NetworkCredential(this.pCuenta.Direccion, this.pCuenta.Contraseña);
         }
 
         public void EnviarMail(MailMessage pMail)
@@ -44,7 +45,8 @@ namespace Trabajo_Final
 
         public IList<MailMessage> RecibirMail()
         {
-           Pop3Email 
+            Pop3Client client = new Pop3Client();
+            client.Authenticate(this.cuenta.Direccion, this.cuenta.Contraseña);
         }
     }
 }
