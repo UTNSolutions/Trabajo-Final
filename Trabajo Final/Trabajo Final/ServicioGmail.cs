@@ -44,8 +44,7 @@ namespace Trabajo_Final
 
         public IList<MailMessage> RecibirMail()
         {
-            Pop3Client client = new Pop3Client();
-            client.Authenticate(this.cuenta.Direccion, this.cuenta.Contraseña);
+            throw new NotImplementedException();
         }
     }
 }

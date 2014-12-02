@@ -11,6 +11,8 @@ namespace Trabajo_Final.Persistencia
     /// </summary>
     class CuentaDTO
     {
+        private int iIdCuenta;
+
         private String iNombre ;
 
         private String iDireccion ;
@@ -27,6 +29,19 @@ namespace Trabajo_Final.Persistencia
             this.iContraseña = pContraseña;
         }
 
+        public CuentaDTO(int pIdCuenta,String pNombre,String pDireccion, String pServicio, String pContraseña)
+        {
+            this.iIdCuenta = pIdCuenta;
+            this.iNombre = pNombre;
+            this.iDireccion = pDireccion;
+            this.iServicio = pServicio;
+            this.iContraseña = pContraseña;
+        }
+
+        public int IdCuenta
+        {
+            get {return this.iIdCuenta;}
+        }
         public String Nombre
         {
             get { return this.iNombre;}
