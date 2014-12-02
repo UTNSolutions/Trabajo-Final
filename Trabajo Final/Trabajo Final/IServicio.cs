@@ -10,15 +10,12 @@ namespace Trabajo_Final
     /// <summary>
     /// Representa operaciones para el manejo de una cuenta de correo
     /// </summary>
-    interface IServicio
+    public interface IServicio
     {
-        //Representa el nombre del servicio de correo, ej: Yahoo,Gmail
-        String iNombre;
-
         /// <summary>
         /// Permite enviar un mail
         /// </summary>
-        void EnviarMail();
+        void EnviarMail(MailMessage pMail);
 
         /// <summary>
         /// Permite recibir emails

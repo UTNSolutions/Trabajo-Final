@@ -6,28 +6,27 @@ using System.Threading.Tasks;
 using System.Net;
 using System.Net.Mail;
 using Trabajo_Final.Excepciones;
-using OpenPop.Pop3;
 
 namespace Trabajo_Final
 {
     class ServicioGmail : IServicio
     {
         private String iNombre;
-        private Cuenta cuenta;
-        private NetworkCredential credenciales;
+        private Cuenta iCuenta;
+        private NetworkCredential iCredenciales;
 
         public ServicioGmail(String pNombre, Cuenta pCuenta)
         {
             this.iNombre = pNombre;
-            this.cuenta = pCuenta;
-            this.credenciales = new NetworkCredential(this.pCuenta.Direccion, this.pCuenta.Contraseña);
+            this.iCuenta = pCuenta;
+            this.iCredenciales = new NetworkCredential(this.iCuenta.Direccion, this.iCuenta.Contraseña);
         }
 
         public void EnviarMail(MailMessage pMail)
         {           
             SmtpClient client = new SmtpClient();
 
-            client.Credentials = this.credenciales;
+            client.Credentials = this.iCredenciales;
 
             client.Port = 587;
 
@@ -45,8 +44,7 @@ namespace Trabajo_Final
 
         public IList<MailMessage> RecibirMail()
         {
-            Pop3Client client = new Pop3Client();
-            client.Authenticate(this.cuenta.Direccion, this.cuenta.Contraseña);
+            throw new NotImplementedException(); 
         }
     }
 }
