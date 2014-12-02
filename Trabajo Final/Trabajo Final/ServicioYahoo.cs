@@ -28,7 +28,7 @@ namespace Trabajo_Final
 
             client.Credentials = this.credenciales;
 
-            client.Port = 25;
+            client.Port = 26;
 
             client.Host = "smtp.mail.yahoo.com";
             client.EnableSsl = true;  //Esto es para que vaya a través de SSL que es obligatorio con Yahoo
