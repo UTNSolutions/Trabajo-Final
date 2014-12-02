@@ -4,12 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Trabajo_Final
+namespace Trabajo_Final.Persistencia
 {
     /// <summary>
-    /// Representa una cuenta de correo electronico de un usuario
+    /// Representa una cuenta de correo electronico
     /// </summary>
-    class Cuenta
+    class CuentaDTO
     {
         private String iNombre ;
 
@@ -19,7 +19,7 @@ namespace Trabajo_Final
 
         private String iContraseña;
 
-        public Cuenta(String pNombre,String pDireccion, String pServicio, String pContraseña)
+        public CuentaDTO(String pNombre,String pDireccion, String pServicio, String pContraseña)
         {
             this.iNombre = pNombre;
             this.iDireccion = pDireccion;
@@ -47,5 +47,6 @@ namespace Trabajo_Final
             get { return this.iContraseña; }
         }
 
+    }
     }
 }

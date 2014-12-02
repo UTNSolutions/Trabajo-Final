@@ -56,6 +56,14 @@
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="IServicio.cs" />
+    <Compile Include="Persistencia\CuentaDTO.cs" />
+    <Compile Include="Persistencia\DAOFactory.cs" />
+    <Compile Include="Persistencia\EmailDTO.cs" />
+    <Compile Include="Persistencia\ICuentaDAO.cs" />
+    <Compile Include="Persistencia\IMailDAO.cs" />
+    <Compile Include="Persistencia\SQLServerCuentaDAO.cs" />
+    <Compile Include="Persistencia\SQLServerDAOFactory.cs" />
+    <Compile Include="Persistencia\SQLServerEmailDAO.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServicioGmail.cs" />
