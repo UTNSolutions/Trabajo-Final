@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Net.Mail;
+using Trabajo_Final.Persistencia;
 
 namespace Trabajo_Final
 {
