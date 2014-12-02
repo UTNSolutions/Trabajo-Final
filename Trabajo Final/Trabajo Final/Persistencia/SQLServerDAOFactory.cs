@@ -26,7 +26,7 @@ namespace Trabajo_Final.Persistencia
             }
         }
 
-        public override IMailDAO MailDAO
+        public override IMailDAO MailDao
         {
             get
             {

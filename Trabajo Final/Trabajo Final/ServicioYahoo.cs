@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using System.Net.Mail;
 using System.Net;
 using Trabajo_Final.Excepciones;
+using OpenPop.Pop3;
+using OpenPop.Mime;
 
 namespace Trabajo_Final
 {
@@ -28,7 +30,7 @@ namespace Trabajo_Final
 
             client.Credentials = this.credenciales;
 
-            client.Port = 26;
+            client.Port = 25;
 
             client.Host = "smtp.mail.yahoo.com";
             client.EnableSsl = true;  //Esto es para que vaya a través de SSL que es obligatorio con Yahoo
@@ -44,7 +46,12 @@ namespace Trabajo_Final
 
         public IList<MailMessage> RecibirMail()
         {
-            throw new NotImplementedException();
+            IList<MailMessage> listaMails = new List<MailMessage>();
+            Pop3Client cliente = new Pop3Client();            
+            cliente.Connect("pop.mail.yahoo.com",995,true);
+            cliente.Authenticate(this.cuenta.Direccion, this.cuenta.Contraseña);
+            listaMails.Add(cliente.GetMessage(1).ToMailMessage());
+            return listaMails;
         }
     }
 }
