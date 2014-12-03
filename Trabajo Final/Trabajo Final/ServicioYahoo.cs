@@ -14,21 +14,21 @@ namespace Trabajo_Final
     public class ServicioYahoo : IServicio
     {
         private string iNombre;
-        private Cuenta cuenta;
-        private NetworkCredential credenciales;
+        private Cuenta iCuenta;
+        private NetworkCredential iCredenciales;
 
         public ServicioYahoo(string pNombre, Cuenta pCuenta)
         {
             this.iNombre = pNombre;
-            this.cuenta = pCuenta;
-            this.credenciales = new NetworkCredential(pCuenta.Direccion, pCuenta.Contraseña);
+            this.iCuenta = pCuenta;
+            this.iCredenciales = new NetworkCredential(pCuenta.Direccion, pCuenta.Contraseña);
         }
 
         public void EnviarMail(MailMessage pMail)
         {
             SmtpClient client = new SmtpClient();
 
-            client.Credentials = this.credenciales;
+            client.Credentials = this.iCredenciales;
 
             client.Port = 25;
 
@@ -46,12 +46,27 @@ namespace Trabajo_Final
 
         public IList<MailMessage> RecibirMail()
         {
-            IList<MailMessage> listaMails = new List<MailMessage>();
-            Pop3Client cliente = new Pop3Client();            
-            cliente.Connect("pop.mail.yahoo.com",995,true);
-            cliente.Authenticate(this.cuenta.Direccion, this.cuenta.Contraseña);
-            listaMails.Add(cliente.GetMessage(1).ToMailMessage());
-            return listaMails;
+            try
+            {
+                Pop3Client client = new Pop3Client();
+                client.Connect("pop.mail.yahoo.com", 995, true);
+                client.Authenticate(this.iCuenta.Direccion, this.iCuenta.Contraseña);
+                int indice = 1;
+                IList<MailMessage> listaADevolver = new List<MailMessage>();
+                while (indice <= client.GetMessageCount())
+                {
+                    Message mail = client.GetMessage(indice);
+                    MailMessage msj = mail.ToMailMessage();
+                    listaADevolver.Add(msj);
+                    indice++;
+                }
+                client.Disconnect();
+                return listaADevolver;
+            }
+            catch (OpenPop.Pop3.Exceptions.InvalidLoginException)
+            {
+                throw new EmailExcepcion("Error en el acceso a la cuenta, verifique los datos ingresados");
+            }
         }
     }
 }
