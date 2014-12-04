@@ -11,21 +11,25 @@ using OpenPop.Mime;
 
 namespace Trabajo_Final
 {
-    public class ServicioYahoo : IServicio
+    public class ServicioYahoo : Servicio
     {
         private string iNombre;
         private Cuenta iCuenta;
         private NetworkCredential iCredenciales;
 
-        public ServicioYahoo(string pNombre, Cuenta pCuenta)
+        public ServicioYahoo(string pNombre)
         {
             this.iNombre = pNombre;
-            this.iCuenta = pCuenta;
-            this.iCredenciales = new NetworkCredential(pCuenta.Direccion, pCuenta.Contraseña);
+            this.iCuenta = null;
         }
 
         public void EnviarMail(MailMessage pMail)
         {
+            if (this.iCuenta == null)
+            {
+                throw new NullReferenceException("No hay una cuenta asociada para realizar la operación");
+            }
+
             SmtpClient client = new SmtpClient();
 
             client.Credentials = this.iCredenciales;
@@ -38,14 +42,23 @@ namespace Trabajo_Final
             {
                 client.Send(pMail);
             }
-            catch (SmtpException)
+            catch (SmtpFailedRecipientsException)
+            {
+                throw new EmailExcepcion("No se pudo enviar el mail a todos los destinatarios, verifique los datos");
+            }
+            catch (SmtpFailedRecipientException)
             {
                 throw new EmailExcepcion("No se pudo enviar el mail, verifique los datos");
             }
+
         }
 
         public IList<MailMessage> RecibirMail()
         {
+            if (this.iCuenta == null)
+            {
+                throw new NullReferenceException("No hay una cuenta asociada para realizar la operación");
+            }
             try
             {
                 Pop3Client client = new Pop3Client();
@@ -63,10 +76,32 @@ namespace Trabajo_Final
                 client.Disconnect();
                 return listaADevolver;
             }
+            catch (OpenPop.Pop3.Exceptions.PopServerException)
+            {
+                throw new EmailExcepcion("Error en el servidor, no responde");
+            }
             catch (OpenPop.Pop3.Exceptions.InvalidLoginException)
             {
                 throw new EmailExcepcion("Error en el acceso a la cuenta, verifique los datos ingresados");
             }
+        }
+
+        public override Cuenta Cuenta
+        {
+            get
+            {
+                return this.iCuenta;
+            }
+            set
+            {
+                this.iCuenta = value;
+                this.iCredenciales = new NetworkCredential(iCuenta.Direccion, iCuenta.Contraseña);
+            }
+        }
+
+        public override string Nombre
+        {
+            get { return this.iNombre; }
         }
     }
 }
