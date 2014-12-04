@@ -48,6 +48,7 @@
             this.button3 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
+            this.tbIdCuenta = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgCuentas)).BeginInit();
             this.SuspendLayout();
             // 
@@ -66,10 +67,12 @@
             this.dgCuentas.Name = "dgCuentas";
             this.dgCuentas.ReadOnly = true;
             this.dgCuentas.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgCuentas.Size = new System.Drawing.Size(306, 279);
+            this.dgCuentas.Size = new System.Drawing.Size(308, 279);
             this.dgCuentas.TabIndex = 0;
             this.dgCuentas.TabStop = false;
             this.dgCuentas.Click += new System.EventHandler(this.MostrarDatos);
+            this.dgCuentas.KeyDown += new System.Windows.Forms.KeyEventHandler(this.MostrarDatos);
+            this.dgCuentas.KeyUp += new System.Windows.Forms.KeyEventHandler(this.MostrarDatos);
             // 
             // idCuenta
             // 
@@ -92,6 +95,7 @@
             this.direccion.HeaderText = "Direccion";
             this.direccion.Name = "direccion";
             this.direccion.ReadOnly = true;
+            this.direccion.Width = 160;
             // 
             // servicio
             // 
@@ -221,6 +225,7 @@
             this.button3.Text = "Eliminar  ";
             this.button3.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.EliminarCuenta);
             // 
             // button2
             // 
@@ -233,6 +238,7 @@
             this.button2.Text = "Modificar";
             this.button2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.ModificarCuenta);
             // 
             // button1
             // 
@@ -247,11 +253,21 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.AltaCuenta);
             // 
+            // tbIdCuenta
+            // 
+            this.tbIdCuenta.Location = new System.Drawing.Point(618, 30);
+            this.tbIdCuenta.Name = "tbIdCuenta";
+            this.tbIdCuenta.ReadOnly = true;
+            this.tbIdCuenta.Size = new System.Drawing.Size(36, 20);
+            this.tbIdCuenta.TabIndex = 12;
+            this.tbIdCuenta.Visible = false;
+            // 
             // FormAdministrarCuentas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(676, 309);
+            this.Controls.Add(this.tbIdCuenta);
             this.Controls.Add(this.labelMailError);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.button3);
@@ -295,12 +311,13 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label labelMailError;
+        private System.Windows.Forms.TextBox tbIdCuenta;
         private System.Windows.Forms.DataGridViewTextBoxColumn idCuenta;
         private System.Windows.Forms.DataGridViewTextBoxColumn nombre;
         private System.Windows.Forms.DataGridViewTextBoxColumn direccion;
         private System.Windows.Forms.DataGridViewTextBoxColumn servicio;
         private System.Windows.Forms.DataGridViewTextBoxColumn contraseña;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label labelMailError;
     }
 }

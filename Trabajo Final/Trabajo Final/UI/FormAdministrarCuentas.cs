@@ -55,10 +55,7 @@ namespace Trabajo_Final.UI
         /// <param name="e"></param>
         private void ValidarMail(object sender, EventArgs e)
         {
-            if (!MailCorrecto())
-            {
-                labelMailError.Visible = true;
-            }
+
         }
 
         /// <summary>
@@ -69,6 +66,17 @@ namespace Trabajo_Final.UI
         private void MostrarDatos(object sender,EventArgs e)
         {
             CuentaDTO fila = (CuentaDTO) dgCuentas.CurrentRow.DataBoundItem;
+            tbIdCuenta.Text = Convert.ToString(fila.IdCuenta);
+            tbCuenta.Text = fila.Nombre;
+            tbMail.Text = fila.Direccion;
+            tbContraseña.Text = fila.Contraseña;
+            cbServicio.SelectedItem = fila.NombreServicio;
+        }
+
+        private void MostrarDatos(object sender, KeyEventArgs k )
+        {
+            CuentaDTO fila = (CuentaDTO)dgCuentas.CurrentRow.DataBoundItem;
+            tbIdCuenta.Text = Convert.ToString(fila.IdCuenta);
             tbCuenta.Text = fila.Nombre;
             tbMail.Text = fila.Direccion;
             tbContraseña.Text = fila.Contraseña;
@@ -106,5 +114,66 @@ namespace Trabajo_Final.UI
                 }
             }
         }
+
+        /// <summary>
+        /// Permite modificar los datos de una cuenta de correo
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ModificarCuenta(object sender, EventArgs e)
+        {
+          if (tbCuenta.Text == "" | tbMail.Text == "")
+          {
+               MessageBox.Show("Falta completar datos obligatorios", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Error);
+          }
+          else
+          {
+              try
+                {
+                    Fachada.Instancia.ModificarCuenta(Convert.ToInt32(tbIdCuenta.Text),tbCuenta.Text, tbMail.Text, cbServicio.SelectedItem.ToString(), tbContraseña.Text);
+                    MessageBox.Show("Datos de la cuenta modificados con exito", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    CargarDataGridCuentas();
+                 }
+               catch (DAOExcepcion ex)
+                {
+                      MessageBox.Show(ex.Message, "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+               catch (NombreCuentaExcepcion ex)
+                {
+                      MessageBox.Show(ex.Message, "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+          }
+       } 
+
+       /// <summary>
+       /// Permite eliminar una cuenta de correo 
+       /// </summary>
+       /// <param name="sender"></param>
+       /// <param name="e"></param>
+        private void EliminarCuenta(object sender, EventArgs e)
+        {
+            if (tbIdCuenta.Text == "")
+            {
+                MessageBox.Show("Seleccione una cuenta, antes de eliminar", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
+            {
+                DialogResult resultado = MessageBox.Show("¿Está seguro que desea eliminar dicha cuenta?", "Atención", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (resultado == DialogResult.Yes)
+                {
+                    try
+                    {
+                        Fachada.Instancia.EliminarCuenta(Convert.ToInt32(tbIdCuenta.Text), tbCuenta.Text, tbMail.Text, cbServicio.SelectedItem.ToString(), tbContraseña.Text);
+                        MessageBox.Show("La cuenta ha sido eliminada con éxito", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        CargarDataGridCuentas();
+                    }
+                    catch (DAOExcepcion ex)
+                    {
+                        MessageBox.Show(ex.Message, "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            }
+        }
+    
     }
 }

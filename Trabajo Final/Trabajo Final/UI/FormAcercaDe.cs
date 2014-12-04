@@ -101,5 +101,10 @@ namespace Trabajo_Final.UI
             }
         }
         #endregion
+
+        private void okButton_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
     }
 }

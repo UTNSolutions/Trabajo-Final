@@ -31,6 +31,11 @@ namespace Trabajo_Final.Dominio
                }
         }
 
+        public IList<Cuenta> ListaCuentas
+        {
+            get { return this.iListaCuentas; }
+        }
+
         /// <summary>
         /// Agrega una cuenta de correo a la lista de cuentas
         /// </summary>
