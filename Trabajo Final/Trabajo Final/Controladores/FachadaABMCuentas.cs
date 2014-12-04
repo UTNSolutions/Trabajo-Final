@@ -8,7 +8,7 @@ using Trabajo_Final.Excepciones;
 
 namespace Trabajo_Final.Controladores
 {
-    class FachadaABMCuentas
+    public class FachadaABMCuentas
     {
         private static FachadaABMCuentas iInstanciaSingleton;
         private FachadaABMCuentas()
