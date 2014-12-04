@@ -10,14 +10,28 @@ namespace Trabajo_Final.Controladores
 {
     class FachadaABMCuentas
     {
-        public FachadaABMCuentas ()
+        private static FachadaABMCuentas iInstanciaSingleton;
+        private FachadaABMCuentas()
         {
         }
+
+        public static FachadaABMCuentas Instancia
+        {
+            get { 
+                    if (iInstanciaSingleton == null)
+                    {    
+                        iInstanciaSingleton = new FachadaABMCuentas ();
+                    }
+                    return iInstanciaSingleton;
+                }
+        }
+        
 
         /// <summary>
         /// Devuelve una lista de todos las cuentas de correo
         /// </summary>
         /// <returns></returns>
+        /// <exception cref="DAOExcepcion"></exception>        
         public IList<CuentaDTO> ListarCuentas()
         {
             DAOFactory factory = null;
@@ -42,6 +56,7 @@ namespace Trabajo_Final.Controladores
         /// Crea una nueva cuenta de correo  
         /// </summary>
         /// <param name="pCuenta"></param>
+        /// <exception cref="DAOExcepcion"></exception>
         public void CrearCuenta(CuentaDTO pCuenta)
         {
             DAOFactory factory = null;
@@ -69,6 +84,7 @@ namespace Trabajo_Final.Controladores
         /// Modifica los datos de una cuenta de correo en particular
         /// </summary>
         /// <param name="pCuenta"></param>
+        /// <exception cref="DAOExcepcion"></exception>
         public void ModificarCuenta(CuentaDTO pCuenta)
         {
             DAOFactory factory = null;
@@ -97,6 +113,7 @@ namespace Trabajo_Final.Controladores
         /// Elimina una cuenta de correo  
         /// </summary>
         /// <param name="pCuenta"></param>
+        /// <exception cref="DAOExcepcion"></exception>
         public void EliminarCuenta(CuentaDTO pCuenta)
         {
             DAOFactory factory = null;
@@ -121,4 +138,3 @@ namespace Trabajo_Final.Controladores
         }
     }
     }
-}

@@ -60,7 +60,7 @@ namespace Trabajo_Final.Persistencia
         {
             if (this.iConexion == null)
             {
-                this.iConexion = new SqlConnection(conexion);
+                this.iConexion = new SqlConnection(this.conexion);
             }
             this.iConexion = Conexion;
         }

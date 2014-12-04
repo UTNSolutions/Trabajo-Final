@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Trabajo_Final
+namespace Trabajo_Final.Dominio
 {
     /// <summary>
     /// Representa una cuenta de correo electronico de un usuario
@@ -15,16 +15,19 @@ namespace Trabajo_Final
 
         private String iDireccion ;
 
-        private String iServicio ;
+        private String iNombreServicio ;
 
         private String iContraseña;
+
+        private IServicio iServicio;
 
         public Cuenta(String pNombre,String pDireccion, String pServicio, String pContraseña)
         {
             this.iNombre = pNombre;
             this.iDireccion = pDireccion;
-            this.iServicio = pServicio;
+            this.iNombreServicio = pServicio;
             this.iContraseña = pContraseña;
+            this.iServicio = FabricaServicios.Instancia.GetServicio(pServicio);
         }
 
         public String Nombre
@@ -37,9 +40,9 @@ namespace Trabajo_Final
             get { return this.iDireccion; }
         }
 
-        public String Servicio
+        public String NombreServicio
         {
-            get { return this.iServicio; }
+            get { return this.iNombreServicio; }
         }
 
         public String Contraseña
@@ -47,5 +50,9 @@ namespace Trabajo_Final
             get { return this.iContraseña; }
         }
 
+        public IServicio Servicio
+        {
+            get { return this.iServicio; }
+        }
     }
 }

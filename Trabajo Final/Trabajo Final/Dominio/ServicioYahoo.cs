@@ -3,60 +3,72 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Net;
 using System.Net.Mail;
+using System.Net;
 using Trabajo_Final.Excepciones;
 using OpenPop.Pop3;
 using OpenPop.Mime;
-using Trabajo_Final.Persistencia;
 
-namespace Trabajo_Final
+namespace Trabajo_Final.Dominio
 {
-    class ServicioGmail : Servicio
+    public class ServicioYahoo : Servicio
     {
-        private String iNombre;
+        private string iNombre;
         private Cuenta iCuenta;
         private NetworkCredential iCredenciales;
 
-        public ServicioGmail(String pNombre)
+        public ServicioYahoo(string pNombre)
         {
             this.iNombre = pNombre;
-            this.iCuenta = null;            
+            this.iCuenta = null;
         }
 
+        public override void EnviarMail(MailMessage pMail)
+        {
+            if (this.iCuenta == null)
+            {
+                throw new NullReferenceException("No hay una cuenta asociada para realizar la operación");
+            }
 
-        public void EnviarMail(MailMessage pMail)
-        {           
             SmtpClient client = new SmtpClient();
 
             client.Credentials = this.iCredenciales;
 
-            client.Port = 587;
+            client.Port = 25;
 
-            client.Host = "smtp.gmail.com";
-            client.EnableSsl = true;  //Esto es para que vaya a través de SSL que es obligatorio con GMail
+            client.Host = "smtp.mail.yahoo.com";
+            client.EnableSsl = true;  //Esto es para que vaya a través de SSL que es obligatorio con Yahoo
             try
             {
                 client.Send(pMail);
             }
-            catch (SmtpException)
+            catch (SmtpFailedRecipientsException)
             {
-                throw new EmailExcepcion("No se pudo enviar el mail, verifique los datos");        
+                throw new EmailExcepcion("No se pudo enviar el mail a todos los destinatarios, verifique los datos");
             }
+            catch (SmtpFailedRecipientException)
+            {
+                throw new EmailExcepcion("No se pudo enviar el mail, verifique los datos");
+            }
+
         }
 
-        public IList<MailMessage> RecibirMail()
+        public override IList<MailMessage> RecibirMail()
         {
+            if (this.iCuenta == null)
+            {
+                throw new NullReferenceException("No hay una cuenta asociada para realizar la operación");
+            }
             try
             {
                 Pop3Client client = new Pop3Client();
-                client.Connect("pop.gmail.com", 995, true);
+                client.Connect("pop.mail.yahoo.com", 995, true);
                 client.Authenticate(this.iCuenta.Direccion, this.iCuenta.Contraseña);
-                int indice = 0;
+                int indice = 1;
                 IList<MailMessage> listaADevolver = new List<MailMessage>();
                 while (indice <= client.GetMessageCount())
                 {
-                   Message mail = client.GetMessage(indice);
+                    Message mail = client.GetMessage(indice);
                     MailMessage msj = mail.ToMailMessage();
                     listaADevolver.Add(msj);
                     indice++;
@@ -64,7 +76,7 @@ namespace Trabajo_Final
                 client.Disconnect();
                 return listaADevolver;
             }
-            catch(OpenPop.Pop3.Exceptions.PopServerException)
+            catch (OpenPop.Pop3.Exceptions.PopServerException)
             {
                 throw new EmailExcepcion("Error en el servidor, no responde");
             }
@@ -83,7 +95,7 @@ namespace Trabajo_Final
             set
             {
                 this.iCuenta = value;
-                this.iCredenciales = new NetworkCredential(this.iCuenta.Direccion, this.iCuenta.Contraseña);
+                this.iCredenciales = new NetworkCredential(iCuenta.Direccion, iCuenta.Contraseña);
             }
         }
 

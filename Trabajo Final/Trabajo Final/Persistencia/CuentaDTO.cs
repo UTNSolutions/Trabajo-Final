@@ -18,24 +18,24 @@ namespace Trabajo_Final.Persistencia
 
         private String iDireccion ;
 
-        private String iServicio ;
+        private String iNombreServicio ;
 
         private String iContraseña;
 
-        public CuentaDTO(String pNombre,String pDireccion, String pServicio, String pContraseña)
+        public CuentaDTO(String pNombre,String pDireccion, String pNombreServicio, String pContraseña)
         {
             this.iNombre = pNombre;
             this.iDireccion = pDireccion;
-            this.iServicio = pServicio;
+            this.iNombreServicio = pNombreServicio;
             this.iContraseña = pContraseña;
         }
 
-        public CuentaDTO(int pIdCuenta,String pNombre,String pDireccion, String pServicio, String pContraseña)
+        public CuentaDTO(int pIdCuenta,String pNombre,String pDireccion, String pNombreServicio, String pContraseña)
         {
             this.iIdCuenta = pIdCuenta;
             this.iNombre = pNombre;
             this.iDireccion = pDireccion;
-            this.iServicio = pServicio;
+            this.iNombreServicio = pNombreServicio;
             this.iContraseña = pContraseña;
         }
 
@@ -46,21 +46,25 @@ namespace Trabajo_Final.Persistencia
         public String Nombre
         {
             get { return this.iNombre;}
+            set { this.iNombre = value; }
         }
 
         public String Direccion
         {
             get { return this.iDireccion; }
+            set { this.iDireccion = value; }
         }
 
-        public String Servicio
+        public String NombreServicio
         {
-            get { return this.iServicio; }
+            get { return this.iNombreServicio; }
+            set { this.iNombreServicio = value; }
         }
 
         public String Contraseña
         {
             get { return this.iContraseña; }
+            set { this.iContraseña = value; }
         }
 
     }

@@ -25,7 +25,7 @@ namespace Trabajo_Final.Persistencia
             {
                 SqlCommand comando = new SqlCommand("insert into Cuenta(nombre,direccion,servicio,contraseña) values(@nombre,@direccion,@servicio,@contraseña)", this.iConexion, this.iTransaccion);
                 comando.Parameters.AddWithValue("@nombre", pCuenta.Nombre);
-                comando.Parameters.AddWithValue("@servicio", pCuenta.Servicio);
+                comando.Parameters.AddWithValue("@servicio", pCuenta.NombreServicio);
                 comando.Parameters.AddWithValue("@direccion", pCuenta.Direccion);
                 comando.Parameters.AddWithValue("@contraseña", pCuenta.Contraseña);
                 comando.ExecuteNonQuery();
@@ -41,7 +41,7 @@ namespace Trabajo_Final.Persistencia
             SqlCommand comando = new SqlCommand("update Cuenta set nombre=@nombre, servicio=@servicio, direccion= @direccion , contraseña = @contraseña where idCuenta=@idCuenta", this.iConexion, this.iTransaccion);
             comando.Parameters.AddWithValue("@idCuenta", pCuenta.IdCuenta);
             comando.Parameters.AddWithValue("@nombre", pCuenta.Nombre);
-            comando.Parameters.AddWithValue("@servicio", pCuenta.Servicio);
+            comando.Parameters.AddWithValue("@servicio", pCuenta.NombreServicio);
             comando.Parameters.AddWithValue("@direccion", pCuenta.Direccion);
             comando.Parameters.AddWithValue("@contraseña", pCuenta.Contraseña);
             try
