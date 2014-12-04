@@ -28,8 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Cuentas de Correo");
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Cuentas de Correo");
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.cuentasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.acercaDeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -59,6 +58,8 @@
             this.asunto = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.fecha = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panelCuentas = new System.Windows.Forms.Panel();
+            this.botonCC = new System.Windows.Forms.Button();
+            this.botonCCO = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.menuStrip2.SuspendLayout();
@@ -96,10 +97,10 @@
             // 
             this.tvCuentas.Location = new System.Drawing.Point(12, 78);
             this.tvCuentas.Name = "tvCuentas";
-            treeNode1.Name = "Nodo0";
-            treeNode1.Text = "Cuentas de Correo";
+            treeNode2.Name = "Nodo0";
+            treeNode2.Text = "Cuentas de Correo";
             this.tvCuentas.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode1});
+            treeNode2});
             this.tvCuentas.Size = new System.Drawing.Size(185, 371);
             this.tvCuentas.TabIndex = 1;
             // 
@@ -156,8 +157,8 @@
             // 
             // gpNuevoMail
             // 
-            this.gpNuevoMail.Controls.Add(this.button2);
-            this.gpNuevoMail.Controls.Add(this.button1);
+            this.gpNuevoMail.Controls.Add(this.botonCCO);
+            this.gpNuevoMail.Controls.Add(this.botonCC);
             this.gpNuevoMail.Controls.Add(this.bAdjuntar);
             this.gpNuevoMail.Controls.Add(this.bGuardar);
             this.gpNuevoMail.Controls.Add(this.tbAsunto);
@@ -181,11 +182,12 @@
             // bAdjuntar
             // 
             this.bAdjuntar.Image = global::Trabajo_Final.Properties.Resources.attach;
-            this.bAdjuntar.Location = new System.Drawing.Point(377, 154);
+            this.bAdjuntar.Location = new System.Drawing.Point(425, 147);
             this.bAdjuntar.Name = "bAdjuntar";
             this.bAdjuntar.Size = new System.Drawing.Size(36, 24);
             this.bAdjuntar.TabIndex = 11;
             this.bAdjuntar.UseVisualStyleBackColor = true;
+            this.bAdjuntar.Click += new System.EventHandler(this.bAdjuntar_Click);
             // 
             // bGuardar
             // 
@@ -287,14 +289,6 @@
             this.dgvCuentas.AllowUserToAddRows = false;
             this.dgvCuentas.AllowUserToDeleteRows = false;
             this.dgvCuentas.BackgroundColor = System.Drawing.Color.LightGray;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.GradientActiveCaption;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvCuentas.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.dgvCuentas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvCuentas.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.nombre,
@@ -343,6 +337,26 @@
             this.panelCuentas.Name = "panelCuentas";
             this.panelCuentas.Size = new System.Drawing.Size(824, 374);
             this.panelCuentas.TabIndex = 7;
+            // 
+            // botonCC
+            // 
+            this.botonCC.Location = new System.Drawing.Point(72, 84);
+            this.botonCC.Name = "botonCC";
+            this.botonCC.Size = new System.Drawing.Size(37, 23);
+            this.botonCC.TabIndex = 12;
+            this.botonCC.Text = "CC";
+            this.botonCC.UseVisualStyleBackColor = true;
+            this.botonCC.Click += new System.EventHandler(this.botonCC_Click);
+            // 
+            // botonCCO
+            // 
+            this.botonCCO.Location = new System.Drawing.Point(72, 116);
+            this.botonCCO.Name = "botonCCO";
+            this.botonCCO.Size = new System.Drawing.Size(37, 23);
+            this.botonCCO.TabIndex = 13;
+            this.botonCCO.Text = "CCO";
+            this.botonCCO.UseVisualStyleBackColor = true;
+            this.botonCCO.Click += new System.EventHandler(this.botonCCO_Click);
             // 
             // FormPrincipal
             // 
@@ -411,6 +425,8 @@
         private System.Windows.Forms.Panel panelCuentas;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button botonCCO;
+        private System.Windows.Forms.Button botonCC;
     }
 }
 

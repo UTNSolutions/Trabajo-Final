@@ -85,7 +85,7 @@ namespace Trabajo_Final.UI
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void buton_Click(object sender, EventArgs e)
+        private void botonCCO_Click(object sender, EventArgs e)
         {
             tbCCO.ReadOnly = false;
         }
