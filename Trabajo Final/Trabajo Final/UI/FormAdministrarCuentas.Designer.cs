@@ -43,10 +43,11 @@
             this.tbMail = new System.Windows.Forms.TextBox();
             this.cbServicio = new System.Windows.Forms.ComboBox();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.labelMailError = new System.Windows.Forms.Label();
             this.button3 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
-            this.label5 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgCuentas)).BeginInit();
             this.SuspendLayout();
             // 
@@ -68,6 +69,7 @@
             this.dgCuentas.Size = new System.Drawing.Size(306, 279);
             this.dgCuentas.TabIndex = 0;
             this.dgCuentas.TabStop = false;
+            this.dgCuentas.Click += new System.EventHandler(this.MostrarDatos);
             // 
             // idCuenta
             // 
@@ -188,6 +190,26 @@
             this.checkBox1.Text = "Mostrar contraseña";
             this.checkBox1.UseVisualStyleBackColor = true;
             // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(558, 210);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(106, 13);
+            this.label5.TabIndex = 10;
+            this.label5.Text = "(*) Datos Obligatorios";
+            // 
+            // labelMailError
+            // 
+            this.labelMailError.AutoSize = true;
+            this.labelMailError.ForeColor = System.Drawing.Color.Red;
+            this.labelMailError.Location = new System.Drawing.Point(413, 144);
+            this.labelMailError.Name = "labelMailError";
+            this.labelMailError.Size = new System.Drawing.Size(157, 13);
+            this.labelMailError.TabIndex = 11;
+            this.labelMailError.Text = "E-Mail con estructura incorrecta";
+            this.labelMailError.Visible = false;
+            // 
             // button3
             // 
             this.button3.Image = global::Trabajo_Final.Properties.Resources.editdelete;
@@ -225,20 +247,12 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.AltaCuenta);
             // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(558, 210);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(106, 13);
-            this.label5.TabIndex = 10;
-            this.label5.Text = "(*) Datos Obligatorios";
-            // 
             // FormAdministrarCuentas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(676, 309);
+            this.Controls.Add(this.labelMailError);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
@@ -287,5 +301,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn servicio;
         private System.Windows.Forms.DataGridViewTextBoxColumn contraseña;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label labelMailError;
     }
 }

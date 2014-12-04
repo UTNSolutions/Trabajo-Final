@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 
-namespace Trabajo_Final.Persistencia
+namespace Trabajo_Final.DTO
 {
     /// <summary>
     /// Representa una cuenta de correo electronico

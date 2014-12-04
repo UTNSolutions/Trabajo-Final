@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Trabajo_Final.Persistencia
+namespace Trabajo_Final.DTO
 {
     /// <summary>
     /// Representa un email

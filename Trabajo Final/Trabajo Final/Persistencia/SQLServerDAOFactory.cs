@@ -15,7 +15,7 @@ namespace Trabajo_Final.Persistencia
     {
         private SqlConnection iConexion;
         private SqlTransaction iTransaccion;
-        private String conexion = ConfigurationSettings.AppSettings["CadenaSqlServer"];
+        private String conexion = "Data Source=MATI-D; INITIAL Catalog=CuentasCorreo; Persist Security Info=True;User ID=sa;Password=06qiad";
 
 
         public override ICuentaDAO CuentaDAO
