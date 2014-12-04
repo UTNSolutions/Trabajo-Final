@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Net.Mail;
 using Trabajo_Final.Persistencia;
 
-namespace Trabajo_Final
+namespace Trabajo_Final.Dominio
 {
     /// <summary>
     /// Representa operaciones para el manejo de una cuenta de correo

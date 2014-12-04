@@ -28,42 +28,42 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.TreeNode treeNode7 = new System.Windows.Forms.TreeNode("Recibidos");
-            System.Windows.Forms.TreeNode treeNode8 = new System.Windows.Forms.TreeNode("Enviados");
-            System.Windows.Forms.TreeNode treeNode9 = new System.Windows.Forms.TreeNode("Mati", new System.Windows.Forms.TreeNode[] {
-            treeNode7,
-            treeNode8});
-            System.Windows.Forms.TreeNode treeNode10 = new System.Windows.Forms.TreeNode("Recibidos");
-            System.Windows.Forms.TreeNode treeNode11 = new System.Windows.Forms.TreeNode("Brian", new System.Windows.Forms.TreeNode[] {
-            treeNode10});
-            System.Windows.Forms.TreeNode treeNode12 = new System.Windows.Forms.TreeNode("Cuentas de Correo", new System.Windows.Forms.TreeNode[] {
-            treeNode9,
-            treeNode11});
+            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Recibidos");
+            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Enviados");
+            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("Mati", new System.Windows.Forms.TreeNode[] {
+            treeNode1,
+            treeNode2});
+            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("Recibidos");
+            System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("Brian", new System.Windows.Forms.TreeNode[] {
+            treeNode4});
+            System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("Cuentas de Correo", new System.Windows.Forms.TreeNode[] {
+            treeNode3,
+            treeNode5});
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.cuentasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.acercaDeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.treeView1 = new System.Windows.Forms.TreeView();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.menuStrip2 = new System.Windows.Forms.MenuStrip();
             this.obtenerMailsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.textBox1 = new System.Windows.Forms.TextBox();
             this.obtenerTodosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.tbPara = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.tbCCO = new System.Windows.Forms.TextBox();
-            this.tbCC = new System.Windows.Forms.TextBox();
-            this.tbCuerpo = new System.Windows.Forms.RichTextBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.tbAsunto = new System.Windows.Forms.TextBox();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.bAdjuntar = new System.Windows.Forms.Button();
             this.bGuardar = new System.Windows.Forms.Button();
+            this.tbAsunto = new System.Windows.Forms.TextBox();
             this.bEnviar = new System.Windows.Forms.Button();
-            this.acercaDeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.label5 = new System.Windows.Forms.Label();
+            this.tbCuerpo = new System.Windows.Forms.RichTextBox();
+            this.tbCC = new System.Windows.Forms.TextBox();
+            this.tbCCO = new System.Windows.Forms.TextBox();
+            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.tbPara = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.menuStrip2.SuspendLayout();
@@ -87,25 +87,33 @@
             this.cuentasToolStripMenuItem.Name = "cuentasToolStripMenuItem";
             this.cuentasToolStripMenuItem.Size = new System.Drawing.Size(62, 20);
             this.cuentasToolStripMenuItem.Text = "Cuentas";
+            this.cuentasToolStripMenuItem.Click += new System.EventHandler(this.cuentasToolStripMenuItem_Click);
+            // 
+            // acercaDeToolStripMenuItem
+            // 
+            this.acercaDeToolStripMenuItem.Name = "acercaDeToolStripMenuItem";
+            this.acercaDeToolStripMenuItem.Size = new System.Drawing.Size(83, 20);
+            this.acercaDeToolStripMenuItem.Text = "Acerca de ...";
+            this.acercaDeToolStripMenuItem.Click += new System.EventHandler(this.acercaDeToolStripMenuItem_Click);
             // 
             // treeView1
             // 
             this.treeView1.Location = new System.Drawing.Point(12, 75);
             this.treeView1.Name = "treeView1";
-            treeNode7.Name = "Nodo0";
-            treeNode7.Text = "Recibidos";
-            treeNode8.Name = "Nodo1";
-            treeNode8.Text = "Enviados";
-            treeNode9.Name = "Nodo1";
-            treeNode9.Text = "Mati";
-            treeNode10.Name = "Nodo7";
-            treeNode10.Text = "Recibidos";
-            treeNode11.Name = "Nodo3";
-            treeNode11.Text = "Brian";
-            treeNode12.Name = "Nodo0";
-            treeNode12.Text = "Cuentas de Correo";
+            treeNode1.Name = "Nodo0";
+            treeNode1.Text = "Recibidos";
+            treeNode2.Name = "Nodo1";
+            treeNode2.Text = "Enviados";
+            treeNode3.Name = "Nodo1";
+            treeNode3.Text = "Mati";
+            treeNode4.Name = "Nodo7";
+            treeNode4.Text = "Recibidos";
+            treeNode5.Name = "Nodo3";
+            treeNode5.Text = "Brian";
+            treeNode6.Name = "Nodo0";
+            treeNode6.Text = "Cuentas de Correo";
             this.treeView1.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode12});
+            treeNode6});
             this.treeView1.Size = new System.Drawing.Size(160, 353);
             this.treeView1.TabIndex = 1;
             // 
@@ -135,6 +143,12 @@
             this.obtenerMailsToolStripMenuItem.Size = new System.Drawing.Size(62, 20);
             this.obtenerMailsToolStripMenuItem.Text = "Obtener";
             // 
+            // obtenerTodosToolStripMenuItem
+            // 
+            this.obtenerTodosToolStripMenuItem.Name = "obtenerTodosToolStripMenuItem";
+            this.obtenerTodosToolStripMenuItem.Size = new System.Drawing.Size(98, 20);
+            this.obtenerTodosToolStripMenuItem.Text = "Obtener Todos";
+            // 
             // textBox1
             // 
             this.textBox1.Location = new System.Drawing.Point(203, 75);
@@ -142,12 +156,6 @@
             this.textBox1.Size = new System.Drawing.Size(182, 20);
             this.textBox1.TabIndex = 4;
             this.textBox1.Text = "Buscar";
-            // 
-            // obtenerTodosToolStripMenuItem
-            // 
-            this.obtenerTodosToolStripMenuItem.Name = "obtenerTodosToolStripMenuItem";
-            this.obtenerTodosToolStripMenuItem.Size = new System.Drawing.Size(98, 20);
-            this.obtenerTodosToolStripMenuItem.Text = "Obtener Todos";
             // 
             // groupBox2
             // 
@@ -172,102 +180,6 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Nuevo Email";
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(31, 53);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(29, 13);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Para";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(31, 88);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(21, 13);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "CC";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(31, 118);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(29, 13);
-            this.label3.TabIndex = 2;
-            this.label3.Text = "CCO";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(31, 157);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(92, 13);
-            this.label4.TabIndex = 3;
-            this.label4.Text = "Archivos Adjuntos";
-            // 
-            // tbPara
-            // 
-            this.tbPara.Location = new System.Drawing.Point(75, 50);
-            this.tbPara.Name = "tbPara";
-            this.tbPara.Size = new System.Drawing.Size(296, 20);
-            this.tbPara.TabIndex = 4;
-            // 
-            // textBox3
-            // 
-            this.textBox3.Location = new System.Drawing.Point(124, 154);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(247, 20);
-            this.textBox3.TabIndex = 5;
-            // 
-            // tbCCO
-            // 
-            this.tbCCO.Location = new System.Drawing.Point(75, 118);
-            this.tbCCO.Name = "tbCCO";
-            this.tbCCO.Size = new System.Drawing.Size(296, 20);
-            this.tbCCO.TabIndex = 6;
-            // 
-            // tbCC
-            // 
-            this.tbCC.Location = new System.Drawing.Point(75, 88);
-            this.tbCC.Name = "tbCC";
-            this.tbCC.Size = new System.Drawing.Size(296, 20);
-            this.tbCC.TabIndex = 7;
-            // 
-            // tbCuerpo
-            // 
-            this.tbCuerpo.Location = new System.Drawing.Point(34, 219);
-            this.tbCuerpo.Name = "tbCuerpo";
-            this.tbCuerpo.Size = new System.Drawing.Size(337, 134);
-            this.tbCuerpo.TabIndex = 8;
-            this.tbCuerpo.Text = "";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(31, 185);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(40, 13);
-            this.label5.TabIndex = 9;
-            this.label5.Text = "Asunto";
-            // 
-            // tbAsunto
-            // 
-            this.tbAsunto.Location = new System.Drawing.Point(77, 185);
-            this.tbAsunto.Name = "tbAsunto";
-            this.tbAsunto.Size = new System.Drawing.Size(294, 20);
-            this.tbAsunto.TabIndex = 10;
-            // 
-            // dataGridView1
-            // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(203, 102);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(182, 326);
-            this.dataGridView1.TabIndex = 6;
-            // 
             // bAdjuntar
             // 
             this.bAdjuntar.Image = global::Trabajo_Final.Properties.Resources.attach;
@@ -289,6 +201,13 @@
             this.bGuardar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.bGuardar.UseVisualStyleBackColor = true;
             // 
+            // tbAsunto
+            // 
+            this.tbAsunto.Location = new System.Drawing.Point(77, 185);
+            this.tbAsunto.Name = "tbAsunto";
+            this.tbAsunto.Size = new System.Drawing.Size(294, 20);
+            this.tbAsunto.TabIndex = 10;
+            // 
             // bEnviar
             // 
             this.bEnviar.Image = global::Trabajo_Final.Properties.Resources.mail_send;
@@ -300,12 +219,94 @@
             this.bEnviar.Text = "Enviar";
             this.bEnviar.UseVisualStyleBackColor = true;
             // 
-            // acercaDeToolStripMenuItem
+            // label5
             // 
-            this.acercaDeToolStripMenuItem.Name = "acercaDeToolStripMenuItem";
-            this.acercaDeToolStripMenuItem.Size = new System.Drawing.Size(83, 20);
-            this.acercaDeToolStripMenuItem.Text = "Acerca de ...";
-            this.acercaDeToolStripMenuItem.Click += new System.EventHandler(this.acercaDeToolStripMenuItem_Click);
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(31, 185);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(40, 13);
+            this.label5.TabIndex = 9;
+            this.label5.Text = "Asunto";
+            // 
+            // tbCuerpo
+            // 
+            this.tbCuerpo.Location = new System.Drawing.Point(34, 219);
+            this.tbCuerpo.Name = "tbCuerpo";
+            this.tbCuerpo.Size = new System.Drawing.Size(337, 134);
+            this.tbCuerpo.TabIndex = 8;
+            this.tbCuerpo.Text = "";
+            // 
+            // tbCC
+            // 
+            this.tbCC.Location = new System.Drawing.Point(75, 88);
+            this.tbCC.Name = "tbCC";
+            this.tbCC.Size = new System.Drawing.Size(296, 20);
+            this.tbCC.TabIndex = 7;
+            // 
+            // tbCCO
+            // 
+            this.tbCCO.Location = new System.Drawing.Point(75, 118);
+            this.tbCCO.Name = "tbCCO";
+            this.tbCCO.Size = new System.Drawing.Size(296, 20);
+            this.tbCCO.TabIndex = 6;
+            // 
+            // textBox3
+            // 
+            this.textBox3.Location = new System.Drawing.Point(124, 154);
+            this.textBox3.Name = "textBox3";
+            this.textBox3.Size = new System.Drawing.Size(247, 20);
+            this.textBox3.TabIndex = 5;
+            // 
+            // tbPara
+            // 
+            this.tbPara.Location = new System.Drawing.Point(75, 50);
+            this.tbPara.Name = "tbPara";
+            this.tbPara.Size = new System.Drawing.Size(296, 20);
+            this.tbPara.TabIndex = 4;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(31, 157);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(92, 13);
+            this.label4.TabIndex = 3;
+            this.label4.Text = "Archivos Adjuntos";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(31, 118);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(29, 13);
+            this.label3.TabIndex = 2;
+            this.label3.Text = "CCO";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(31, 88);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(21, 13);
+            this.label2.TabIndex = 1;
+            this.label2.Text = "CC";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(31, 53);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(29, 13);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Para";
+            // 
+            // dataGridView1
+            // 
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Location = new System.Drawing.Point(203, 102);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.Size = new System.Drawing.Size(182, 326);
+            this.dataGridView1.TabIndex = 6;
             // 
             // FormPrincipal
             // 

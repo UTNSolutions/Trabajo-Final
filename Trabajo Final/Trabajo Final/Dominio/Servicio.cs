@@ -5,12 +5,12 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Net.Mail;
 
-namespace Trabajo_Final
+namespace Trabajo_Final.Dominio
 {
-    abstract class Servicio : IServicio
+    public abstract class Servicio : IServicio
     {
-        private abstract Cuenta iCuenta;
-        private abstract string iNombre;
+        private  Cuenta iCuenta;
+        private  string iNombre;
 
         public abstract void EnviarMail(MailMessage pMail);
 

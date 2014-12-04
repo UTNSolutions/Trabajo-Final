@@ -13,13 +13,13 @@ namespace Trabajo_Final.Persistencia
     {
         private String iDestinatario;
 
-        private Cuenta iCuenta;
+        private CuentaDTO iCuenta;
 
         private String iCuerpo;
 
         private String iAsunto;
 
-        public EmailDTO(Cuenta pCuenta,String pDestinatario,String pCuerpo, String pAsunto)
+        public EmailDTO(CuentaDTO pCuenta,String pDestinatario,String pCuerpo, String pAsunto)
         {
             this.iDestinatario = pDestinatario;
             this.iCuenta = pCuenta;
@@ -39,7 +39,7 @@ namespace Trabajo_Final.Persistencia
         /// <summary>
         /// Devuelve la componente Cuenta a la que pertenece dicho Email
         /// </summary>
-        public Cuenta Cuenta
+        public CuentaDTO Cuenta
         {
             get { return this.iCuenta; }
             set { this.iCuenta = value; }
