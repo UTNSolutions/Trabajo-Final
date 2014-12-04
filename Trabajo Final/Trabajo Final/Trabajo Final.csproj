@@ -94,9 +94,6 @@
     <EmbeddedResource Include="UI\FormAdministrarCuentas.resx">
       <DependentUpon>FormAdministrarCuentas.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\FormPrincipal.resx">
-      <DependentUpon>FormPrincipal.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
