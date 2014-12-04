@@ -28,18 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.TreeNode treeNode7 = new System.Windows.Forms.TreeNode("Recibidos");
-            System.Windows.Forms.TreeNode treeNode8 = new System.Windows.Forms.TreeNode("Enviados");
-            System.Windows.Forms.TreeNode treeNode9 = new System.Windows.Forms.TreeNode("Mati", new System.Windows.Forms.TreeNode[] {
-            treeNode7,
-            treeNode8});
-            System.Windows.Forms.TreeNode treeNode10 = new System.Windows.Forms.TreeNode("Recibidos");
-            System.Windows.Forms.TreeNode treeNode11 = new System.Windows.Forms.TreeNode("Brian", new System.Windows.Forms.TreeNode[] {
-            treeNode10});
-            System.Windows.Forms.TreeNode treeNode12 = new System.Windows.Forms.TreeNode("Cuentas de Correo", new System.Windows.Forms.TreeNode[] {
-            treeNode9,
-            treeNode11});
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Cuentas de Correo");
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.cuentasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.acercaDeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -51,8 +41,6 @@
             this.nuevoMeilToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.gpNuevoMail = new System.Windows.Forms.GroupBox();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
             this.bAdjuntar = new System.Windows.Forms.Button();
             this.bGuardar = new System.Windows.Forms.Button();
             this.tbAsunto = new System.Windows.Forms.TextBox();
@@ -108,20 +96,10 @@
             // 
             this.tvCuentas.Location = new System.Drawing.Point(12, 78);
             this.tvCuentas.Name = "tvCuentas";
-            treeNode7.Name = "Nodo0";
-            treeNode7.Text = "Recibidos";
-            treeNode8.Name = "Nodo1";
-            treeNode8.Text = "Enviados";
-            treeNode9.Name = "Nodo1";
-            treeNode9.Text = "Mati";
-            treeNode10.Name = "Nodo7";
-            treeNode10.Text = "Recibidos";
-            treeNode11.Name = "Nodo3";
-            treeNode11.Text = "Brian";
-            treeNode12.Name = "Nodo0";
-            treeNode12.Text = "Cuentas de Correo";
+            treeNode1.Name = "Nodo0";
+            treeNode1.Text = "Cuentas de Correo";
             this.tvCuentas.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode12});
+            treeNode1});
             this.tvCuentas.Size = new System.Drawing.Size(185, 371);
             this.tvCuentas.TabIndex = 1;
             // 
@@ -164,8 +142,8 @@
             // 
             this.nuevoMeilToolStripMenuItem.Image = global::Trabajo_Final.Properties.Resources.icono_del_l_piz_y_del_cuaderno_7956808___1_;
             this.nuevoMeilToolStripMenuItem.Name = "nuevoMeilToolStripMenuItem";
-            this.nuevoMeilToolStripMenuItem.Size = new System.Drawing.Size(96, 20);
-            this.nuevoMeilToolStripMenuItem.Text = "Nuevo Meil";
+            this.nuevoMeilToolStripMenuItem.Size = new System.Drawing.Size(102, 20);
+            this.nuevoMeilToolStripMenuItem.Text = "Nuevo Email";
             this.nuevoMeilToolStripMenuItem.Click += new System.EventHandler(this.nuevoMeilToolStripMenuItem_Click);
             // 
             // textBox1
@@ -200,41 +178,20 @@
             this.gpNuevoMail.Text = "Nuevo Email";
             this.gpNuevoMail.Visible = false;
             // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(72, 116);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(37, 23);
-            this.button2.TabIndex = 13;
-            this.button2.Text = "CCO";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.buton_Click);
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(72, 84);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(37, 23);
-            this.button1.TabIndex = 12;
-            this.button1.Text = "CC";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.botonCC_Click);
-            // 
             // bAdjuntar
             // 
             this.bAdjuntar.Image = global::Trabajo_Final.Properties.Resources.attach;
-            this.bAdjuntar.Location = new System.Drawing.Point(425, 147);
+            this.bAdjuntar.Location = new System.Drawing.Point(377, 154);
             this.bAdjuntar.Name = "bAdjuntar";
             this.bAdjuntar.Size = new System.Drawing.Size(36, 24);
             this.bAdjuntar.TabIndex = 11;
             this.bAdjuntar.UseVisualStyleBackColor = true;
-            this.bAdjuntar.Click += new System.EventHandler(this.bAdjuntar_Click);
             // 
             // bGuardar
             // 
             this.bGuardar.Image = global::Trabajo_Final.Properties.Resources.filesave;
             this.bGuardar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.bGuardar.Location = new System.Drawing.Point(223, 17);
+            this.bGuardar.Location = new System.Drawing.Point(174, 13);
             this.bGuardar.Name = "bGuardar";
             this.bGuardar.Size = new System.Drawing.Size(75, 31);
             this.bGuardar.TabIndex = 7;
@@ -253,7 +210,7 @@
             // 
             this.bEnviar.Image = global::Trabajo_Final.Properties.Resources.mail_send;
             this.bEnviar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.bEnviar.Location = new System.Drawing.Point(124, 17);
+            this.bEnviar.Location = new System.Drawing.Point(75, 13);
             this.bEnviar.Name = "bEnviar";
             this.bEnviar.Size = new System.Drawing.Size(73, 31);
             this.bEnviar.TabIndex = 6;
@@ -404,6 +361,7 @@
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Administrador de Correo";
+            this.Load += new System.EventHandler(this.FormPrincipal_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.groupBox1.ResumeLayout(false);
