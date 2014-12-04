@@ -8,11 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Trabajo_Final
+namespace Trabajo_Final.UI
 {
-    public partial class Form1 : Form
+    public partial class FormAdministrarCuenta : Form
     {
-        public Form1()
+        public FormAdministrarCuenta()
         {
             InitializeComponent();
         }

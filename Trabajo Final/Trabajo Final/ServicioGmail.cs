@@ -12,18 +12,18 @@ using Trabajo_Final.Persistencia;
 
 namespace Trabajo_Final
 {
-    class ServicioGmail : IServicio
+    class ServicioGmail : Servicio
     {
         private String iNombre;
         private Cuenta iCuenta;
         private NetworkCredential iCredenciales;
 
-        public ServicioGmail(String pNombre, Cuenta pCuenta)
+        public ServicioGmail(String pNombre)
         {
             this.iNombre = pNombre;
-            this.iCuenta = pCuenta;
-            this.iCredenciales = new NetworkCredential(this.iCuenta.Direccion, this.iCuenta.Contraseña);
+            this.iCuenta = null;            
         }
+
 
         public void EnviarMail(MailMessage pMail)
         {           
@@ -64,10 +64,32 @@ namespace Trabajo_Final
                 client.Disconnect();
                 return listaADevolver;
             }
+            catch(OpenPop.Pop3.Exceptions.PopServerException)
+            {
+                throw new EmailExcepcion("Error en el servidor, no responde");
+            }
             catch (OpenPop.Pop3.Exceptions.InvalidLoginException)
             {
                 throw new EmailExcepcion("Error en el acceso a la cuenta, verifique los datos ingresados");
             }
+        }
+
+        public override Cuenta Cuenta
+        {
+            get
+            {
+                return this.iCuenta;
+            }
+            set
+            {
+                this.iCuenta = value;
+                this.iCredenciales = new NetworkCredential(this.iCuenta.Direccion, this.iCuenta.Contraseña);
+            }
+        }
+
+        public override string Nombre
+        {
+            get { return this.iNombre; }
         }
     }
 }
