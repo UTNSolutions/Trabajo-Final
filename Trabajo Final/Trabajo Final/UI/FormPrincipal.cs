@@ -28,5 +28,19 @@ namespace Trabajo_Final.UI
             FormAdministrarCuentas formAdminCuentas = new FormAdministrarCuentas();
             formAdminCuentas.Show();
         }
+
+        private void nuevoMeilToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            panelCuentas.Visible = false;
+            gpNuevoMail.Visible = true;
+
+        }
+
+        private void obtenerMailsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            gpNuevoMail.Visible = false;
+            panelCuentas.Visible = true;            
+        }
+
     }
 }

@@ -33,7 +33,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="OpenPop">
-      <HintPath>..\..\..\..\..\Desktop\OpenPop.NET 2.0.5\test application\OpenPop.dll</HintPath>
+      <HintPath>H:\OpenPop.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -104,6 +104,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="UI\FormPrincipal.resx">
+      <DependentUpon>FormPrincipal.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -137,6 +140,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\editdelete.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icono-del-l_piz-y-del-cuaderno-7956808_.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icono-del-l_piz-y-del-cuaderno-7956808_ %281%29.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
