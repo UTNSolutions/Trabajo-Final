@@ -10,7 +10,7 @@ namespace Trabajo_Final.Persistencia
     /// <summary>
     /// Representa una cuenta de correo electronico
     /// </summary>
-    class CuentaDTO
+    public class CuentaDTO
     {
         private int iIdCuenta;
 
