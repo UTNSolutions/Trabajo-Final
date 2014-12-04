@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Trabajo_Final.Persistencia;
 using Trabajo_Final.Excepciones;
 using Trabajo_Final.Dominio;
+using Trabajo_Final.DTO;
 
 namespace Trabajo_Final.Controladores
 {
