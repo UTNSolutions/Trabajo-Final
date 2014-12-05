@@ -50,6 +50,7 @@
   <ItemGroup>
     <Compile Include="Controladores\Fachada.cs" />
     <Compile Include="Controladores\FachadaABMCuentas.cs" />
+    <Compile Include="Controladores\FachadaABMEmail.cs" />
     <Compile Include="Dominio\Cuenta.cs" />
     <Compile Include="Dominio\Cuentas.cs" />
     <Compile Include="Excepciones\DAOExcepcion.cs" />
@@ -88,6 +89,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Dominio\ServicioGmail.cs" />
     <Compile Include="Dominio\ServicioYahoo.cs" />
+    <Compile Include="Utils\EncriptadorCesar.cs" />
     <EmbeddedResource Include="UI\FormAcercaDe.resx">
       <DependentUpon>FormAcercaDe.cs</DependentUpon>
     </EmbeddedResource>

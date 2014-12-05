@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Cuentas de Correo");
+            System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("Cuentas de Correo");
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.cuentasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.acercaDeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -40,6 +40,8 @@
             this.nuevoMeilToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.gpNuevoMail = new System.Windows.Forms.GroupBox();
+            this.botonCCO = new System.Windows.Forms.Button();
+            this.botonCC = new System.Windows.Forms.Button();
             this.bAdjuntar = new System.Windows.Forms.Button();
             this.bGuardar = new System.Windows.Forms.Button();
             this.tbAsunto = new System.Windows.Forms.TextBox();
@@ -58,8 +60,6 @@
             this.asunto = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.fecha = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panelCuentas = new System.Windows.Forms.Panel();
-            this.botonCC = new System.Windows.Forms.Button();
-            this.botonCCO = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.menuStrip2.SuspendLayout();
@@ -97,10 +97,10 @@
             // 
             this.tvCuentas.Location = new System.Drawing.Point(12, 78);
             this.tvCuentas.Name = "tvCuentas";
-            treeNode2.Name = "Nodo0";
-            treeNode2.Text = "Cuentas de Correo";
+            treeNode5.Name = "Nodo0";
+            treeNode5.Text = "Cuentas de Correo";
             this.tvCuentas.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode2});
+            treeNode5});
             this.tvCuentas.Size = new System.Drawing.Size(185, 371);
             this.tvCuentas.TabIndex = 1;
             // 
@@ -178,6 +178,26 @@
             this.gpNuevoMail.TabStop = false;
             this.gpNuevoMail.Text = "Nuevo Email";
             this.gpNuevoMail.Visible = false;
+            // 
+            // botonCCO
+            // 
+            this.botonCCO.Location = new System.Drawing.Point(72, 116);
+            this.botonCCO.Name = "botonCCO";
+            this.botonCCO.Size = new System.Drawing.Size(37, 23);
+            this.botonCCO.TabIndex = 13;
+            this.botonCCO.Text = "CCO";
+            this.botonCCO.UseVisualStyleBackColor = true;
+            this.botonCCO.Click += new System.EventHandler(this.botonCCO_Click);
+            // 
+            // botonCC
+            // 
+            this.botonCC.Location = new System.Drawing.Point(72, 84);
+            this.botonCC.Name = "botonCC";
+            this.botonCC.Size = new System.Drawing.Size(37, 23);
+            this.botonCC.TabIndex = 12;
+            this.botonCC.Text = "CC";
+            this.botonCC.UseVisualStyleBackColor = true;
+            this.botonCC.Click += new System.EventHandler(this.botonCC_Click);
             // 
             // bAdjuntar
             // 
@@ -337,26 +357,6 @@
             this.panelCuentas.Name = "panelCuentas";
             this.panelCuentas.Size = new System.Drawing.Size(824, 374);
             this.panelCuentas.TabIndex = 7;
-            // 
-            // botonCC
-            // 
-            this.botonCC.Location = new System.Drawing.Point(72, 84);
-            this.botonCC.Name = "botonCC";
-            this.botonCC.Size = new System.Drawing.Size(37, 23);
-            this.botonCC.TabIndex = 12;
-            this.botonCC.Text = "CC";
-            this.botonCC.UseVisualStyleBackColor = true;
-            this.botonCC.Click += new System.EventHandler(this.botonCC_Click);
-            // 
-            // botonCCO
-            // 
-            this.botonCCO.Location = new System.Drawing.Point(72, 116);
-            this.botonCCO.Name = "botonCCO";
-            this.botonCCO.Size = new System.Drawing.Size(37, 23);
-            this.botonCCO.TabIndex = 13;
-            this.botonCCO.Text = "CCO";
-            this.botonCCO.UseVisualStyleBackColor = true;
-            this.botonCCO.Click += new System.EventHandler(this.botonCCO_Click);
             // 
             // FormPrincipal
             // 

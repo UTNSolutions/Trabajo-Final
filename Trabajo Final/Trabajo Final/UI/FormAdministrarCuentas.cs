@@ -45,6 +45,8 @@ namespace Trabajo_Final.UI
         /// <returns></returns>
         private bool MailCorrecto()
         {
+            String servicio = cbServicio.SelectedItem.ToString();
+            String cadena = tbMail.Text;
             return Regex.IsMatch(tbMail.Text, "\\w+([-+.']\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*");
         }
 
@@ -59,28 +61,51 @@ namespace Trabajo_Final.UI
         }
 
         /// <summary>
+        /// Permite mostrar u ocultar la contraseña en el textBox de contraseña
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void MostrarContraseña(object sender, EventArgs e)
+        {
+            if (chbContraseña.Checked)
+            {
+                tbContraseña.UseSystemPasswordChar = false;
+            }
+            else
+            {
+                tbContraseña.UseSystemPasswordChar = true;
+            }
+        }
+
+        /// <summary>
         /// Muestra los datos de una fila seleccionada del dataGridView en los textBoxs
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void MostrarDatos(object sender,EventArgs e)
         {
-            CuentaDTO fila = (CuentaDTO) dgCuentas.CurrentRow.DataBoundItem;
-            tbIdCuenta.Text = Convert.ToString(fila.IdCuenta);
-            tbCuenta.Text = fila.Nombre;
-            tbMail.Text = fila.Direccion;
-            tbContraseña.Text = fila.Contraseña;
-            cbServicio.SelectedItem = fila.NombreServicio;
+            if (dgCuentas.RowCount > 0)
+            {
+                CuentaDTO fila = (CuentaDTO)dgCuentas.CurrentRow.DataBoundItem;
+                tbIdCuenta.Text = Convert.ToString(fila.IdCuenta);
+                tbCuenta.Text = fila.Nombre;
+                tbMail.Text = fila.Direccion;
+                tbContraseña.Text = fila.Contraseña;
+                cbServicio.SelectedItem = fila.NombreServicio;
+            }
         }
 
         private void MostrarDatos(object sender, KeyEventArgs k )
         {
-            CuentaDTO fila = (CuentaDTO)dgCuentas.CurrentRow.DataBoundItem;
-            tbIdCuenta.Text = Convert.ToString(fila.IdCuenta);
-            tbCuenta.Text = fila.Nombre;
-            tbMail.Text = fila.Direccion;
-            tbContraseña.Text = fila.Contraseña;
-            cbServicio.SelectedItem = fila.NombreServicio;
+            if (dgCuentas.RowCount > 0)
+            {
+                CuentaDTO fila = (CuentaDTO)dgCuentas.CurrentRow.DataBoundItem;
+                tbIdCuenta.Text = Convert.ToString(fila.IdCuenta);
+                tbCuenta.Text = fila.Nombre;
+                tbMail.Text = fila.Direccion;
+                tbContraseña.Text = fila.Contraseña;
+                cbServicio.SelectedItem = fila.NombreServicio;
+            }
         }
 
         /// <summary>

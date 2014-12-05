@@ -13,16 +13,27 @@ namespace Trabajo_Final.DTO
     {
         private String iDestinatario;
 
-        private CuentaDTO iCuenta;
+        private int iIdEmail;
+
+        private int iIdCuenta;
 
         private String iCuerpo;
 
         private String iAsunto;
 
-        public EmailDTO(CuentaDTO pCuenta,String pDestinatario,String pCuerpo, String pAsunto)
+        public EmailDTO(int pIdCuenta,String pDestinatario,String pCuerpo, String pAsunto)
         {
             this.iDestinatario = pDestinatario;
-            this.iCuenta = pCuenta;
+            this.iIdCuenta = pIdCuenta;
+            this.iCuerpo = pCuerpo;
+            this.iAsunto = pAsunto;
+        }
+
+        public EmailDTO(int pIdEmail,int pIdCuenta, String pDestinatario, String pCuerpo, String pAsunto)
+        {
+            this.iIdEmail = pIdEmail;
+            this.iDestinatario = pDestinatario;
+            this.iIdCuenta = pIdCuenta;
             this.iCuerpo = pCuerpo;
             this.iAsunto = pAsunto;
         }
@@ -37,12 +48,21 @@ namespace Trabajo_Final.DTO
         }
 
         /// <summary>
-        /// Devuelve la componente Cuenta a la que pertenece dicho Email
+        /// Devuelve la componente IdCuenta a la que pertenece dicho Email
         /// </summary>
-        public CuentaDTO Cuenta
+        public int IdCuenta
         {
-            get { return this.iCuenta; }
-            set { this.iCuenta = value; }
+            get { return this.iIdCuenta; }
+            set { this.iIdCuenta = value; }
+        }
+
+        /// <summary>
+        /// Devuelve la componente IdEmail de dicho mail
+        /// </summary>
+        public int IdEmail
+        {
+            get { return this.iIdEmail; }
+            set { this.iIdEmail = value; }
         }
 
         /// <summary>

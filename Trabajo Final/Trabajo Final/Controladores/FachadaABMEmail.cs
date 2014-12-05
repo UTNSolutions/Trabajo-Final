@@ -3,40 +3,41 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Trabajo_Final.DTO;
 using Trabajo_Final.Persistencia;
 using Trabajo_Final.Excepciones;
-using Trabajo_Final.DTO;
 
 namespace Trabajo_Final.Controladores
 {
     /// <summary>
-    /// Representa funcionalidades para la persistencia de Cuentas de correo en base de datos
+    /// Representa funcionalidades para la persistencia de Emails en base de datos
     /// </summary>
-    public class FachadaABMCuentas
+    class FachadaABMEmail
     {
-        private static FachadaABMCuentas iInstanciaSingleton;
-        private FachadaABMCuentas()
+        private static FachadaABMEmail iInstanciaSingleton;
+        private FachadaABMEmail()
         {
         }
 
-        public static FachadaABMCuentas Instancia
+        public static FachadaABMEmail Instancia
         {
-            get { 
-                    if (iInstanciaSingleton == null)
-                    {    
-                        iInstanciaSingleton = new FachadaABMCuentas ();
-                    }
-                    return iInstanciaSingleton;
+            get
+            {
+                if (iInstanciaSingleton == null)
+                {
+                    iInstanciaSingleton = new FachadaABMEmail();
                 }
+                return iInstanciaSingleton;
+            }
         }
-        
+
 
         /// <summary>
-        /// Devuelve una lista de todos las cuentas de correo
+        /// Devuelve una lista de todos los emails asociados a una cuenta
         /// </summary>
         /// <returns></returns>
         /// <exception cref="DAOExcepcion"></exception>        
-        public IList<CuentaDTO> ListarCuentas()
+        public IList<EmailDTO> ListarEmails(int pIdCuenta)
         {
             DAOFactory factory = null;
 
@@ -44,7 +45,7 @@ namespace Trabajo_Final.Controladores
             {
                 factory = DAOFactory.Instancia;
                 factory.IniciarConexion();
-                return factory.CuentaDAO.Obtener();
+                return factory.MailDao.Obtener(pIdCuenta);
             }
             catch (DAOExcepcion ex)
             {
@@ -57,11 +58,11 @@ namespace Trabajo_Final.Controladores
         }
 
         /// <summary>
-        /// Crea una nueva cuenta de correo  
+        /// Inserta un nuevo email en la base de datos
         /// </summary>
         /// <param name="pCuenta"></param>
         /// <exception cref="DAOExcepcion"></exception>
-        public void CrearCuenta(CuentaDTO pCuenta)
+        public void NuevoEmail(EmailDTO pEmail)
         {
             DAOFactory factory = null;
 
@@ -70,35 +71,7 @@ namespace Trabajo_Final.Controladores
                 factory = DAOFactory.Instancia;
                 factory.IniciarConexion();
                 factory.ComenzarTransaccion();
-                factory.CuentaDAO.Insertar(pCuenta);
-                factory.Commit();
-            }
-            catch (DAOExcepcion ex)
-            {          
-                factory.RollBack();
-                throw ex;
-            }
-            finally
-            {
-                factory.FinalizarConexion();
-            }
-        }
-
-        /// <summary>
-        /// Modifica los datos de una cuenta de correo en particular
-        /// </summary>
-        /// <param name="pCuenta"></param>
-        /// <exception cref="DAOExcepcion"></exception>
-        public void ModificarCuenta(CuentaDTO pCuenta)
-        {
-            DAOFactory factory = null;
-
-            try
-            {
-                factory = DAOFactory.Instancia;
-                factory.IniciarConexion();
-                factory.ComenzarTransaccion();
-                factory.CuentaDAO.Modificar(pCuenta);
+                factory.MailDao.Insertar(pEmail);
                 factory.Commit();
             }
             catch (DAOExcepcion ex)
@@ -112,13 +85,12 @@ namespace Trabajo_Final.Controladores
             }
         }
 
-
         /// <summary>
-        /// Elimina una cuenta de correo  
+        /// Elimina un email de una cuenta de la base de datos  
         /// </summary>
         /// <param name="pCuenta"></param>
         /// <exception cref="DAOExcepcion"></exception>
-        public void EliminarCuenta(CuentaDTO pCuenta)
+        public void EliminarCuenta(int pIdEmail)
         {
             DAOFactory factory = null;
 
@@ -127,7 +99,7 @@ namespace Trabajo_Final.Controladores
                 factory = DAOFactory.Instancia;
                 factory.IniciarConexion();
                 factory.ComenzarTransaccion();
-                factory.CuentaDAO.Eliminar(pCuenta);
+                factory.MailDao.Eliminar(pIdEmail);
                 factory.Commit();
             }
             catch (DAOExcepcion ex)
@@ -141,4 +113,5 @@ namespace Trabajo_Final.Controladores
             }
         }
     }
-    }
+}
+

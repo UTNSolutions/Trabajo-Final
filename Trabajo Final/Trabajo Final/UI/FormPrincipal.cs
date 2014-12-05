@@ -15,6 +15,8 @@ namespace Trabajo_Final.UI
 {
     public partial class FormPrincipal : Form
     {
+        private static FormAdministrarCuentas iFormAdminCuentas;
+        private static FormAcercaDe iFormAcercaDe;
         public FormPrincipal()
         {
             InitializeComponent();
@@ -22,14 +24,20 @@ namespace Trabajo_Final.UI
 
         private void acercaDeToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            FormAcercaDe formAcercaDe = new FormAcercaDe();
-            formAcercaDe.Show();
+            if (iFormAcercaDe == null)
+            {
+                iFormAcercaDe = new FormAcercaDe();
+            }
+            iFormAcercaDe.Show();
         }
 
         private void cuentasToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            FormAdministrarCuentas formAdminCuentas = new FormAdministrarCuentas();
-            formAdminCuentas.Show();
+            if (iFormAdminCuentas == null)
+            {
+                iFormAdminCuentas = new FormAdministrarCuentas();
+            }
+            iFormAdminCuentas.Show();
         }
 
         /// <summary>

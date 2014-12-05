@@ -7,6 +7,7 @@ using System.Data.SqlClient;
 using System.Data;
 using Trabajo_Final.Excepciones;
 using Trabajo_Final.DTO;
+using Trabajo_Final.Utils;
 
 namespace Trabajo_Final.Persistencia
 {
@@ -24,11 +25,13 @@ namespace Trabajo_Final.Persistencia
         {
             try
             {
+                EncriptadorCesar encriptador = new EncriptadorCesar(4);
+                String contraseñaEncriptada = encriptador.Encriptar(pCuenta.Contraseña);
                 SqlCommand comando = new SqlCommand("insert into Cuenta(nombre,direccion,servicio,contraseña) values(@nombre,@direccion,@servicio,@contraseña)", this.iConexion, this.iTransaccion);
                 comando.Parameters.AddWithValue("@nombre", pCuenta.Nombre);
                 comando.Parameters.AddWithValue("@servicio", pCuenta.NombreServicio);
                 comando.Parameters.AddWithValue("@direccion", pCuenta.Direccion);
-                comando.Parameters.AddWithValue("@contraseña", pCuenta.Contraseña);
+                comando.Parameters.AddWithValue("@contraseña", contraseñaEncriptada);
                 comando.ExecuteNonQuery();
             }
             catch(SqlException)
@@ -39,12 +42,14 @@ namespace Trabajo_Final.Persistencia
 
         public void Modificar(CuentaDTO pCuenta)
         {
+            EncriptadorCesar encriptador = new EncriptadorCesar(4);
+            String contraseñaEncriptada = encriptador.Encriptar(pCuenta.Contraseña);
             SqlCommand comando = new SqlCommand("update Cuenta set nombre=@nombre, servicio=@servicio, direccion= @direccion , contraseña = @contraseña where idCuenta=@idCuenta", this.iConexion, this.iTransaccion);
             comando.Parameters.AddWithValue("@idCuenta", pCuenta.IdCuenta);
             comando.Parameters.AddWithValue("@nombre", pCuenta.Nombre);
             comando.Parameters.AddWithValue("@servicio", pCuenta.NombreServicio);
             comando.Parameters.AddWithValue("@direccion", pCuenta.Direccion);
-            comando.Parameters.AddWithValue("@contraseña", pCuenta.Contraseña);
+            comando.Parameters.AddWithValue("@contraseña", contraseñaEncriptada);
             try
             {
                 comando.ExecuteNonQuery();
@@ -78,15 +83,17 @@ namespace Trabajo_Final.Persistencia
             {
                 SqlDataAdapter operacion = new SqlDataAdapter(comando);
                 operacion.Fill(tabla);
+                EncriptadorCesar encriptador = new EncriptadorCesar(4);
                 foreach (DataRow fila in tabla.Rows)
                 {
-                    listaCuentas.Add(new CuentaDTO(Convert.ToInt32(fila["idCuenta"]),Convert.ToString(fila["nombre"]),Convert.ToString(fila["direccion"]),Convert.ToString(fila["servicio"]),Convert.ToString(fila["contraseña"])));
+                    String contraseñaDesencriptada = encriptador.Desencriptar(Convert.ToString(fila["contraseña"]));
+                    listaCuentas.Add(new CuentaDTO(Convert.ToInt32(fila["idCuenta"]), Convert.ToString(fila["nombre"]), Convert.ToString(fila["direccion"]), Convert.ToString(fila["servicio"]), contraseñaDesencriptada));
                 }
                 return listaCuentas;
             }
             catch (SqlException)
             {
-                throw new DAOExcepcion("No se pudo obtener de los datos de las cuentas");
+                throw new DAOExcepcion("No se pudo obtener los datos de las cuentas");
             }
         }
     }

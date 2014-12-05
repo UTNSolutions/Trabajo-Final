@@ -20,12 +20,12 @@ namespace Trabajo_Final.Persistencia
         /// Permite eliminar un Email de la base de datos
         /// </summary>
         /// <param name="pCuenta"></param>
-        void Eliminar(EmailDTO pEmail);
+        void Eliminar(int pIdEmail);
 
         /// <summary>
         /// Obtiene todos los Emails correspondiente a una Cuenata de correo
         /// </summary>
         /// <returns></returns>
-        IList<EmailDTO> Obtener(CuentaDTO pCuenta);
+        IList<EmailDTO> Obtener(int pIdCuenta);
     }
 }

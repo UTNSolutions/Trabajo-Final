@@ -42,7 +42,7 @@
             this.tbContraseña = new System.Windows.Forms.TextBox();
             this.tbMail = new System.Windows.Forms.TextBox();
             this.cbServicio = new System.Windows.Forms.ComboBox();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.chbContraseña = new System.Windows.Forms.CheckBox();
             this.label5 = new System.Windows.Forms.Label();
             this.labelMailError = new System.Windows.Forms.Label();
             this.button3 = new System.Windows.Forms.Button();
@@ -160,16 +160,16 @@
             // 
             this.tbContraseña.Location = new System.Drawing.Point(413, 163);
             this.tbContraseña.Name = "tbContraseña";
-            this.tbContraseña.PasswordChar = '*';
             this.tbContraseña.Size = new System.Drawing.Size(180, 20);
-            this.tbContraseña.TabIndex = 3;
+            this.tbContraseña.TabIndex = 4;
+            this.tbContraseña.UseSystemPasswordChar = true;
             // 
             // tbMail
             // 
             this.tbMail.Location = new System.Drawing.Point(413, 118);
             this.tbMail.Name = "tbMail";
             this.tbMail.Size = new System.Drawing.Size(180, 20);
-            this.tbMail.TabIndex = 4;
+            this.tbMail.TabIndex = 3;
             // 
             // cbServicio
             // 
@@ -183,16 +183,17 @@
             this.cbServicio.Size = new System.Drawing.Size(122, 21);
             this.cbServicio.TabIndex = 2;
             // 
-            // checkBox1
+            // chbContraseña
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(413, 189);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(117, 17);
-            this.checkBox1.TabIndex = 9;
-            this.checkBox1.TabStop = false;
-            this.checkBox1.Text = "Mostrar contraseña";
-            this.checkBox1.UseVisualStyleBackColor = true;
+            this.chbContraseña.AutoSize = true;
+            this.chbContraseña.Location = new System.Drawing.Point(413, 189);
+            this.chbContraseña.Name = "chbContraseña";
+            this.chbContraseña.Size = new System.Drawing.Size(117, 17);
+            this.chbContraseña.TabIndex = 9;
+            this.chbContraseña.TabStop = false;
+            this.chbContraseña.Text = "Mostrar contraseña";
+            this.chbContraseña.UseVisualStyleBackColor = true;
+            this.chbContraseña.CheckedChanged += new System.EventHandler(this.MostrarContraseña);
             // 
             // label5
             // 
@@ -260,6 +261,7 @@
             this.tbIdCuenta.ReadOnly = true;
             this.tbIdCuenta.Size = new System.Drawing.Size(36, 20);
             this.tbIdCuenta.TabIndex = 12;
+            this.tbIdCuenta.TabStop = false;
             this.tbIdCuenta.Visible = false;
             // 
             // FormAdministrarCuentas
@@ -273,7 +275,7 @@
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
-            this.Controls.Add(this.checkBox1);
+            this.Controls.Add(this.chbContraseña);
             this.Controls.Add(this.cbServicio);
             this.Controls.Add(this.tbMail);
             this.Controls.Add(this.tbContraseña);
@@ -287,8 +289,10 @@
             this.MaximizeBox = false;
             this.Name = "FormAdministrarCuentas";
             this.ShowIcon = false;
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Administrar cuentas";
+            this.TopMost = true;
             this.Load += new System.EventHandler(this.FormAdministrarCuentas_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgCuentas)).EndInit();
             this.ResumeLayout(false);
@@ -307,7 +311,7 @@
         private System.Windows.Forms.TextBox tbContraseña;
         private System.Windows.Forms.TextBox tbMail;
         private System.Windows.Forms.ComboBox cbServicio;
-        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.CheckBox chbContraseña;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;
