@@ -235,11 +235,13 @@ namespace Trabajo_Final.UI
         /// <param name="e"></param>
         private void toolStripMenubEnviar_Click(object sender, EventArgs e)
         {
+            FormEnviandoMail enviandoMail = new FormEnviandoMail();
+            enviandoMail.Show();
             try
             {
                 CuentaDTO cuenta = Fachada.Instancia.BuscarCuenta(combobDe.SelectedValue.ToString());
                 Fachada.Instancia.EnviarEmail(new EmailDTO(Convert.ToInt32(cuenta.IdCuenta), Convert.ToString(tbPara.Text), Convert.ToString(tbCuerpo.Text), Convert.ToString(tbAsunto.Text)), cuenta.Nombre);
-                
+                enviandoMail.Close();
             }
             catch (DAOExcepcion ex)
             {
@@ -255,11 +257,10 @@ namespace Trabajo_Final.UI
             }
             
         }
-
+            
         private void guardarComoBorradorToolStripMenuItem_Click(object sender, EventArgs e)
         {
             
         }
-
     }
 }
