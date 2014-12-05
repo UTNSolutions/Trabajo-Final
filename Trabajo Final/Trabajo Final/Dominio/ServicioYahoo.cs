@@ -24,7 +24,7 @@ namespace Trabajo_Final.Dominio
             this.iNombre = pNombre;
             this.iCuenta = null;
         }
-
+                
         public override void EnviarMail(EmailDTO pMail)
         {
             if (this.iCuenta == null)
@@ -35,6 +35,10 @@ namespace Trabajo_Final.Dominio
             if (!(Regex.IsMatch(cadena, "\\w+([-+.']\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*")))
             {
                 throw new EmailExcepcion("El destinatario no posee la estructura correcta");
+            }
+            if (!AccesoInternet())
+            {
+                throw new InternetExcepcion("Existe un problema con la conexión a Internet");
             }
             SmtpClient client = new SmtpClient();
 
@@ -112,6 +116,23 @@ namespace Trabajo_Final.Dominio
         public override string Nombre
         {
             get { return this.iNombre; }
+        }
+
+        /// <summary>
+        /// Verifica la conección a Internet.
+        /// </summary>
+        /// <returns></returns>
+        private bool AccesoInternet()
+        {
+            try
+            {
+                IPHostEntry host = Dns.GetHostEntry("www.google.com");
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
     }
 }

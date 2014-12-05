@@ -55,6 +55,10 @@ namespace Trabajo_Final.Dominio
             {
                 throw new EmailExcepcion("El destinatario no posee la estructura correcta");
             }
+            if (!AccesoInternet())
+            {
+                throw new InternetExcepcion("Existe un problema con la conexión a Internet");
+            }
             SmtpClient client = new SmtpClient();
 
             client.Credentials = this.iCredenciales;
@@ -115,6 +119,22 @@ namespace Trabajo_Final.Dominio
             }
         }
 
+        /// <summary>
+        /// Verifica la conección a Internet.
+        /// </summary>
+        /// <returns></returns>
+        private bool AccesoInternet() 
+        {
+            try
+            {
+                IPHostEntry host = Dns.GetHostEntry("www.google.com");
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
        
     }
 }

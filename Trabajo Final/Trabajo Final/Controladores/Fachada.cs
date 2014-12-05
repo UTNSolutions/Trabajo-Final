@@ -184,11 +184,15 @@ namespace Trabajo_Final.Controladores
                 cuenta.Servicio.Cuenta = cuenta;
                 cuenta.Servicio.EnviarMail(pEmail);
             }
-            catch(FormatException)
+            catch (FormatException)
             {
                 throw new FormatException("Se produjo un error interno, intente mas tarde");
             }
-            catch(EmailExcepcion ex)
+            catch (EmailExcepcion ex)
+            {
+                throw ex;
+            }
+            catch (InternetExcepcion ex)
             {
                 throw ex;
             }

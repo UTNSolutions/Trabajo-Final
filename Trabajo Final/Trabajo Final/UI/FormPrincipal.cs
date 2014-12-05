@@ -23,6 +23,11 @@ namespace Trabajo_Final.UI
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Abre un formulario con la especificaciones del programa. 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void acercaDeToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (iFormAcercaDe == null)
@@ -33,6 +38,11 @@ namespace Trabajo_Final.UI
             iFormAcercaDe.Show();
         }
 
+        /// <summary>
+        /// Abre un formulario que permite administrar cuentas de correo.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void cuentasToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (iFormAdminCuentas == null)
@@ -43,6 +53,11 @@ namespace Trabajo_Final.UI
             iFormAdminCuentas.Show();
         }
 
+        /// <summary>
+        /// Le asigna null a los formularios para que no se puedan abrir de nuevo.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void form_Disposed(object sender, EventArgs e)
         {
             iFormAdminCuentas = null;
@@ -130,11 +145,19 @@ namespace Trabajo_Final.UI
             tbAdjuntos.Text = file.SafeFileName;
         }
 
+        /// <summary>
+        /// Evento que se ejecuta cuando inicia el formulario principal.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void FormPrincipal_Load(object sender, EventArgs e)
         {
             CargarCuentasCorreo();
         }
 
+        /// <summary>
+        /// Carga las cuetas en el formulario principal.
+        /// </summary>
         public void CargarCuentasCorreo()
         {
             IList<Cuenta> listaCuentas = Fachada.Instancia.CargarCuentasCorreo();
@@ -195,7 +218,11 @@ namespace Trabajo_Final.UI
             }
         }
 
-
+        /// <summary>
+        /// Envia un mail.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void toolStripMenubEnviar_Click(object sender, EventArgs e)
         {
             try
@@ -208,6 +235,10 @@ namespace Trabajo_Final.UI
                 MessageBox.Show(ex.Message, "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             catch (EmailExcepcion ex)
+            {
+                MessageBox.Show(ex.Message, "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (InternetExcepcion ex)
             {
                 MessageBox.Show(ex.Message, "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }

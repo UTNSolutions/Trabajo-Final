@@ -55,6 +55,7 @@
     <Compile Include="Dominio\Cuentas.cs" />
     <Compile Include="Excepciones\DAOExcepcion.cs" />
     <Compile Include="Excepciones\EmailExcepcion.cs" />
+    <Compile Include="Excepciones\InternetExcepcion.cs" />
     <Compile Include="Excepciones\NombreCuentaExcepcion.cs" />
     <Compile Include="Dominio\FabricaServicios.cs" />
     <Compile Include="Dominio\Servicio.cs" />
