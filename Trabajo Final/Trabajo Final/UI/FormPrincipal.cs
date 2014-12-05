@@ -49,11 +49,13 @@ namespace Trabajo_Final.UI
         {
             if (!gpNuevoMail.Visible)
             {
+                gbOpciones1.Visible = false;
+                gbEnviarMail.Visible = true;
                 tbCCO.ReadOnly = true;
                 tbCC.ReadOnly = true;
-            panelCuentas.Visible = false;
-            gpNuevoMail.Visible = true;
-        }
+                panelCuentas.Visible = false;
+                gpNuevoMail.Visible = true;
+            }
         }
 
         /// <summary>
@@ -64,7 +66,7 @@ namespace Trabajo_Final.UI
         private void obtenerMailsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             gpNuevoMail.Visible = false;
-            panelCuentas.Visible = true;            
+            panelCuentas.Visible = true;
         }
 
         /// <summary>
@@ -98,9 +100,8 @@ namespace Trabajo_Final.UI
             tbCCO.ReadOnly = false;
         }
 
-        private void bAdjuntar_Click(object sender, EventArgs e)
-        {
-            IList<FileDialog> listaDeAdjuntos = new List<FileDialog>(); 
+        private void botonAdjuntar_Click(object sender, EventArgs e)
+        {            
             OpenFileDialog file = new OpenFileDialog();
             file.Title = "Seleccione Archivo";
             file.InitialDirectory = @"c:\";
@@ -118,15 +119,62 @@ namespace Trabajo_Final.UI
 
         private void CargarCuentasCorreo()
         {
-           IList<Cuenta> listaCuentas = Fachada.Instancia.CargarCuentasCorreo();
-           foreach (Cuenta cuenta in listaCuentas)
-           {
-               TreeNode nodo = tvCuentas.Nodes.Add(cuenta.Nombre);
-               nodo.Nodes.Add("Recibidos");
-               nodo.Nodes.Add("Enviados");
-               nodo.Nodes.Add("Borradores");               
-           }
+            IList<Cuenta> listaCuentas = Fachada.Instancia.CargarCuentasCorreo();
+            foreach (Cuenta cuenta in listaCuentas)
+            {
+                TreeNode nodo = tvCuentas.Nodes.Add(cuenta.Nombre);
+                nodo.Nodes.Add("Recibidos");
+                nodo.Nodes.Add("Enviados");
+                nodo.Nodes.Add("Borradores");
+            }
         }
 
+        /// <summary>
+        /// Cambia la pantalla principal y abilita el panel para mostrar los mail de las cuentas.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void toolStripMenuAdministrarCorreo_Click(object sender, EventArgs e)
+        {
+            if (VaciarDatosEnviarMail_TextChanged(sender, e))
+            {
+                gbEnviarMail.Visible = false;
+                gbOpciones1.Visible = true;
+                gpNuevoMail.Visible = false;
+                panelCuentas.Visible = true;
+            }
+        }
+
+        /// <summary>
+        /// Vacia los datos cargados en el panel de nuevo mail.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        /// <returns></returns>
+        private bool VaciarDatosEnviarMail_TextChanged(object sender, EventArgs e)
+        {
+            if (tbPara.Text != "" || tbCC.Text != "" || tbCCO.Text != "" || tbAsunto.Text != "" || tbAdjuntos.Text != "" || tbCuerpo.Text != "")
+            {
+                DialogResult resultado = MessageBox.Show("Esta seguro que quiere eliminar este mail no enviado", "Advertencia", MessageBoxButtons.OKCancel);
+                if (resultado == DialogResult.OK)
+                {
+                    tbPara.Text = "";
+                    tbCC.Text = "";
+                    tbCCO.Text = "";
+                    tbAsunto.Text = "";
+                    tbAdjuntos.Text = "";
+                    tbCuerpo.Text = "";
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                return false;
+            }
+        }
     }
 }
