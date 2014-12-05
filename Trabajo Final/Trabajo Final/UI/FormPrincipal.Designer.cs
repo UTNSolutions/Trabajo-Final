@@ -28,22 +28,22 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Cuentas de Correo");
+            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Cuentas de Correo");
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.cuentasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.acercaDeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tvCuentas = new System.Windows.Forms.TreeView();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.gbOpciones1 = new System.Windows.Forms.GroupBox();
             this.menuStrip2 = new System.Windows.Forms.MenuStrip();
             this.obtenerMailsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.obtenerTodosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.nuevoMeilToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.gpNuevoMail = new System.Windows.Forms.GroupBox();
+            this.botonCCO = new System.Windows.Forms.Button();
+            this.botonCC = new System.Windows.Forms.Button();
             this.bAdjuntar = new System.Windows.Forms.Button();
-            this.bGuardar = new System.Windows.Forms.Button();
             this.tbAsunto = new System.Windows.Forms.TextBox();
-            this.bEnviar = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.tbCuerpo = new System.Windows.Forms.RichTextBox();
             this.tbCC = new System.Windows.Forms.TextBox();
@@ -58,14 +58,19 @@
             this.asunto = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.fecha = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panelCuentas = new System.Windows.Forms.Panel();
-            this.botonCC = new System.Windows.Forms.Button();
-            this.botonCCO = new System.Windows.Forms.Button();
+            this.gbEnviarMail = new System.Windows.Forms.GroupBox();
+            this.menuStrip3 = new System.Windows.Forms.MenuStrip();
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.guardarComoBorradorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
-            this.groupBox1.SuspendLayout();
+            this.gbOpciones1.SuspendLayout();
             this.menuStrip2.SuspendLayout();
             this.gpNuevoMail.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCuentas)).BeginInit();
             this.panelCuentas.SuspendLayout();
+            this.gbEnviarMail.SuspendLayout();
+            this.menuStrip3.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -75,7 +80,7 @@
             this.acercaDeToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(819, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(853, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -95,23 +100,23 @@
             // 
             // tvCuentas
             // 
-            this.tvCuentas.Location = new System.Drawing.Point(12, 78);
+            this.tvCuentas.Location = new System.Drawing.Point(3, 3);
             this.tvCuentas.Name = "tvCuentas";
-            treeNode2.Name = "Nodo0";
-            treeNode2.Text = "Cuentas de Correo";
+            treeNode1.Name = "Nodo0";
+            treeNode1.Text = "Cuentas de Correo";
             this.tvCuentas.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode2});
-            this.tvCuentas.Size = new System.Drawing.Size(185, 371);
+            treeNode1});
+            this.tvCuentas.Size = new System.Drawing.Size(185, 378);
             this.tvCuentas.TabIndex = 1;
             // 
-            // groupBox1
+            // gbOpciones1
             // 
-            this.groupBox1.Controls.Add(this.menuStrip2);
-            this.groupBox1.Location = new System.Drawing.Point(12, 27);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(530, 45);
-            this.groupBox1.TabIndex = 2;
-            this.groupBox1.TabStop = false;
+            this.gbOpciones1.Controls.Add(this.menuStrip2);
+            this.gbOpciones1.Location = new System.Drawing.Point(0, 27);
+            this.gbOpciones1.Name = "gbOpciones1";
+            this.gbOpciones1.Size = new System.Drawing.Size(845, 45);
+            this.gbOpciones1.TabIndex = 2;
+            this.gbOpciones1.TabStop = false;
             // 
             // menuStrip2
             // 
@@ -121,7 +126,7 @@
             this.nuevoMeilToolStripMenuItem});
             this.menuStrip2.Location = new System.Drawing.Point(3, 16);
             this.menuStrip2.Name = "menuStrip2";
-            this.menuStrip2.Size = new System.Drawing.Size(524, 24);
+            this.menuStrip2.Size = new System.Drawing.Size(839, 24);
             this.menuStrip2.TabIndex = 0;
             this.menuStrip2.Text = "menuStrip2";
             // 
@@ -149,7 +154,7 @@
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(3, 4);
+            this.textBox1.Location = new System.Drawing.Point(194, 7);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(182, 20);
             this.textBox1.TabIndex = 4;
@@ -160,9 +165,7 @@
             this.gpNuevoMail.Controls.Add(this.botonCCO);
             this.gpNuevoMail.Controls.Add(this.botonCC);
             this.gpNuevoMail.Controls.Add(this.bAdjuntar);
-            this.gpNuevoMail.Controls.Add(this.bGuardar);
             this.gpNuevoMail.Controls.Add(this.tbAsunto);
-            this.gpNuevoMail.Controls.Add(this.bEnviar);
             this.gpNuevoMail.Controls.Add(this.label5);
             this.gpNuevoMail.Controls.Add(this.tbCuerpo);
             this.gpNuevoMail.Controls.Add(this.tbCC);
@@ -171,58 +174,55 @@
             this.gpNuevoMail.Controls.Add(this.tbPara);
             this.gpNuevoMail.Controls.Add(this.label4);
             this.gpNuevoMail.Controls.Add(this.label1);
-            this.gpNuevoMail.Location = new System.Drawing.Point(203, 78);
+            this.gpNuevoMail.Location = new System.Drawing.Point(0, 78);
             this.gpNuevoMail.Name = "gpNuevoMail";
-            this.gpNuevoMail.Size = new System.Drawing.Size(604, 371);
+            this.gpNuevoMail.Size = new System.Drawing.Size(845, 382);
             this.gpNuevoMail.TabIndex = 5;
             this.gpNuevoMail.TabStop = false;
             this.gpNuevoMail.Text = "Nuevo Email";
             this.gpNuevoMail.Visible = false;
             // 
+            // botonCCO
+            // 
+            this.botonCCO.Location = new System.Drawing.Point(61, 135);
+            this.botonCCO.Name = "botonCCO";
+            this.botonCCO.Size = new System.Drawing.Size(37, 23);
+            this.botonCCO.TabIndex = 13;
+            this.botonCCO.Text = "CCO";
+            this.botonCCO.UseVisualStyleBackColor = true;
+            this.botonCCO.Click += new System.EventHandler(this.botonCCO_Click);
+            // 
+            // botonCC
+            // 
+            this.botonCC.Location = new System.Drawing.Point(61, 76);
+            this.botonCC.Name = "botonCC";
+            this.botonCC.Size = new System.Drawing.Size(37, 23);
+            this.botonCC.TabIndex = 12;
+            this.botonCC.Text = "CC";
+            this.botonCC.UseVisualStyleBackColor = true;
+            this.botonCC.Click += new System.EventHandler(this.botonCC_Click);
+            // 
             // bAdjuntar
             // 
             this.bAdjuntar.Image = global::Trabajo_Final.Properties.Resources.attach;
-            this.bAdjuntar.Location = new System.Drawing.Point(425, 147);
+            this.bAdjuntar.Location = new System.Drawing.Point(397, 238);
             this.bAdjuntar.Name = "bAdjuntar";
             this.bAdjuntar.Size = new System.Drawing.Size(36, 24);
             this.bAdjuntar.TabIndex = 11;
             this.bAdjuntar.UseVisualStyleBackColor = true;
-            this.bAdjuntar.Click += new System.EventHandler(this.bAdjuntar_Click);
-            // 
-            // bGuardar
-            // 
-            this.bGuardar.Image = global::Trabajo_Final.Properties.Resources.filesave;
-            this.bGuardar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.bGuardar.Location = new System.Drawing.Point(174, 13);
-            this.bGuardar.Name = "bGuardar";
-            this.bGuardar.Size = new System.Drawing.Size(75, 31);
-            this.bGuardar.TabIndex = 7;
-            this.bGuardar.Text = "Guardar";
-            this.bGuardar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.bGuardar.UseVisualStyleBackColor = true;
+            this.bAdjuntar.Click += new System.EventHandler(this.botonAdjuntar_Click);
             // 
             // tbAsunto
             // 
-            this.tbAsunto.Location = new System.Drawing.Point(124, 182);
+            this.tbAsunto.Location = new System.Drawing.Point(104, 191);
             this.tbAsunto.Name = "tbAsunto";
-            this.tbAsunto.Size = new System.Drawing.Size(337, 20);
+            this.tbAsunto.Size = new System.Drawing.Size(329, 20);
             this.tbAsunto.TabIndex = 10;
-            // 
-            // bEnviar
-            // 
-            this.bEnviar.Image = global::Trabajo_Final.Properties.Resources.mail_send;
-            this.bEnviar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.bEnviar.Location = new System.Drawing.Point(75, 13);
-            this.bEnviar.Name = "bEnviar";
-            this.bEnviar.Size = new System.Drawing.Size(73, 31);
-            this.bEnviar.TabIndex = 6;
-            this.bEnviar.Text = "Enviar";
-            this.bEnviar.UseVisualStyleBackColor = true;
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(69, 185);
+            this.label5.Location = new System.Drawing.Point(58, 194);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(40, 13);
             this.label5.TabIndex = 9;
@@ -230,46 +230,47 @@
             // 
             // tbCuerpo
             // 
-            this.tbCuerpo.Location = new System.Drawing.Point(124, 217);
+            this.tbCuerpo.Location = new System.Drawing.Point(442, 24);
             this.tbCuerpo.Name = "tbCuerpo";
-            this.tbCuerpo.Size = new System.Drawing.Size(337, 134);
+            this.tbCuerpo.Size = new System.Drawing.Size(397, 341);
             this.tbCuerpo.TabIndex = 8;
             this.tbCuerpo.Text = "";
             // 
             // tbCC
             // 
-            this.tbCC.Location = new System.Drawing.Point(124, 86);
+            this.tbCC.Location = new System.Drawing.Point(104, 78);
             this.tbCC.Name = "tbCC";
             this.tbCC.ReadOnly = true;
-            this.tbCC.Size = new System.Drawing.Size(337, 20);
+            this.tbCC.Size = new System.Drawing.Size(329, 20);
             this.tbCC.TabIndex = 7;
             // 
             // tbCCO
             // 
-            this.tbCCO.Location = new System.Drawing.Point(124, 118);
+            this.tbCCO.Location = new System.Drawing.Point(104, 137);
             this.tbCCO.Name = "tbCCO";
             this.tbCCO.ReadOnly = true;
-            this.tbCCO.Size = new System.Drawing.Size(337, 20);
+            this.tbCCO.Size = new System.Drawing.Size(329, 20);
             this.tbCCO.TabIndex = 6;
             // 
             // tbAdjuntos
             // 
-            this.tbAdjuntos.Location = new System.Drawing.Point(124, 150);
+            this.tbAdjuntos.Location = new System.Drawing.Point(104, 241);
             this.tbAdjuntos.Name = "tbAdjuntos";
-            this.tbAdjuntos.Size = new System.Drawing.Size(295, 20);
+            this.tbAdjuntos.ReadOnly = true;
+            this.tbAdjuntos.Size = new System.Drawing.Size(287, 20);
             this.tbAdjuntos.TabIndex = 5;
             // 
             // tbPara
             // 
-            this.tbPara.Location = new System.Drawing.Point(124, 54);
+            this.tbPara.Location = new System.Drawing.Point(104, 24);
             this.tbPara.Name = "tbPara";
-            this.tbPara.Size = new System.Drawing.Size(337, 20);
+            this.tbPara.Size = new System.Drawing.Size(329, 20);
             this.tbPara.TabIndex = 4;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(17, 153);
+            this.label4.Location = new System.Drawing.Point(6, 243);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(92, 13);
             this.label4.TabIndex = 3;
@@ -278,7 +279,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(80, 57);
+            this.label1.Location = new System.Drawing.Point(69, 27);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(29, 13);
             this.label1.TabIndex = 0;
@@ -295,11 +296,11 @@
             this.correo,
             this.asunto,
             this.fecha});
-            this.dgvCuentas.Location = new System.Drawing.Point(3, 30);
+            this.dgvCuentas.Location = new System.Drawing.Point(194, 33);
             this.dgvCuentas.Name = "dgvCuentas";
             this.dgvCuentas.ReadOnly = true;
             this.dgvCuentas.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.dgvCuentas.Size = new System.Drawing.Size(605, 341);
+            this.dgvCuentas.Size = new System.Drawing.Size(648, 348);
             this.dgvCuentas.TabIndex = 6;
             // 
             // nombre
@@ -320,7 +321,7 @@
             this.asunto.HeaderText = "Asunto";
             this.asunto.Name = "asunto";
             this.asunto.ReadOnly = true;
-            this.asunto.Width = 200;
+            this.asunto.Width = 250;
             // 
             // fecha
             // 
@@ -332,42 +333,66 @@
             // panelCuentas
             // 
             this.panelCuentas.Controls.Add(this.dgvCuentas);
+            this.panelCuentas.Controls.Add(this.tvCuentas);
             this.panelCuentas.Controls.Add(this.textBox1);
-            this.panelCuentas.Location = new System.Drawing.Point(741, 43);
+            this.panelCuentas.Location = new System.Drawing.Point(0, 78);
             this.panelCuentas.Name = "panelCuentas";
-            this.panelCuentas.Size = new System.Drawing.Size(824, 374);
+            this.panelCuentas.Size = new System.Drawing.Size(845, 384);
             this.panelCuentas.TabIndex = 7;
             // 
-            // botonCC
+            // gbEnviarMail
             // 
-            this.botonCC.Location = new System.Drawing.Point(72, 84);
-            this.botonCC.Name = "botonCC";
-            this.botonCC.Size = new System.Drawing.Size(37, 23);
-            this.botonCC.TabIndex = 12;
-            this.botonCC.Text = "CC";
-            this.botonCC.UseVisualStyleBackColor = true;
-            this.botonCC.Click += new System.EventHandler(this.botonCC_Click);
+            this.gbEnviarMail.Controls.Add(this.menuStrip3);
+            this.gbEnviarMail.Location = new System.Drawing.Point(0, 27);
+            this.gbEnviarMail.Name = "gbEnviarMail";
+            this.gbEnviarMail.Size = new System.Drawing.Size(845, 45);
+            this.gbEnviarMail.TabIndex = 8;
+            this.gbEnviarMail.TabStop = false;
+            this.gbEnviarMail.Visible = false;
             // 
-            // botonCCO
+            // menuStrip3
             // 
-            this.botonCCO.Location = new System.Drawing.Point(72, 116);
-            this.botonCCO.Name = "botonCCO";
-            this.botonCCO.Size = new System.Drawing.Size(37, 23);
-            this.botonCCO.TabIndex = 13;
-            this.botonCCO.Text = "CCO";
-            this.botonCCO.UseVisualStyleBackColor = true;
-            this.botonCCO.Click += new System.EventHandler(this.botonCCO_Click);
+            this.menuStrip3.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItem1,
+            this.toolStripMenuItem2,
+            this.guardarComoBorradorToolStripMenuItem});
+            this.menuStrip3.Location = new System.Drawing.Point(3, 16);
+            this.menuStrip3.Name = "menuStrip3";
+            this.menuStrip3.Size = new System.Drawing.Size(839, 24);
+            this.menuStrip3.TabIndex = 0;
+            this.menuStrip3.Text = "menuStrip3";
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(150, 20);
+            this.toolStripMenuItem1.Text = "Administrador de Correo";
+            this.toolStripMenuItem1.Click += new System.EventHandler(this.toolStripMenuAdministrarCorreo_Click);
+            // 
+            // toolStripMenuItem2
+            // 
+            this.toolStripMenuItem2.Image = global::Trabajo_Final.Properties.Resources.mail_send;
+            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(67, 20);
+            this.toolStripMenuItem2.Text = "Enviar";
+            // 
+            // guardarComoBorradorToolStripMenuItem
+            // 
+            this.guardarComoBorradorToolStripMenuItem.Image = global::Trabajo_Final.Properties.Resources.filesave;
+            this.guardarComoBorradorToolStripMenuItem.Name = "guardarComoBorradorToolStripMenuItem";
+            this.guardarComoBorradorToolStripMenuItem.Size = new System.Drawing.Size(160, 20);
+            this.guardarComoBorradorToolStripMenuItem.Text = "Guardar como borrador";
             // 
             // FormPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(819, 458);
-            this.Controls.Add(this.tvCuentas);
-            this.Controls.Add(this.panelCuentas);
-            this.Controls.Add(this.gpNuevoMail);
-            this.Controls.Add(this.groupBox1);
+            this.ClientSize = new System.Drawing.Size(853, 462);
+            this.Controls.Add(this.gbOpciones1);
             this.Controls.Add(this.menuStrip1);
+            this.Controls.Add(this.panelCuentas);
+            this.Controls.Add(this.gbEnviarMail);
+            this.Controls.Add(this.gpNuevoMail);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MainMenuStrip = this.menuStrip1;
             this.MaximizeBox = false;
@@ -378,8 +403,8 @@
             this.Load += new System.EventHandler(this.FormPrincipal_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
+            this.gbOpciones1.ResumeLayout(false);
+            this.gbOpciones1.PerformLayout();
             this.menuStrip2.ResumeLayout(false);
             this.menuStrip2.PerformLayout();
             this.gpNuevoMail.ResumeLayout(false);
@@ -387,6 +412,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvCuentas)).EndInit();
             this.panelCuentas.ResumeLayout(false);
             this.panelCuentas.PerformLayout();
+            this.gbEnviarMail.ResumeLayout(false);
+            this.gbEnviarMail.PerformLayout();
+            this.menuStrip3.ResumeLayout(false);
+            this.menuStrip3.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -397,7 +426,7 @@
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem cuentasToolStripMenuItem;
         private System.Windows.Forms.TreeView tvCuentas;
-        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox gbOpciones1;
         private System.Windows.Forms.MenuStrip menuStrip2;
         private System.Windows.Forms.ToolStripMenuItem obtenerMailsToolStripMenuItem;
         private System.Windows.Forms.TextBox textBox1;
@@ -412,21 +441,24 @@
         private System.Windows.Forms.TextBox tbPara;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button bEnviar;
-        private System.Windows.Forms.Button bGuardar;
         private System.Windows.Forms.Button bAdjuntar;
         private System.Windows.Forms.DataGridView dgvCuentas;
         private System.Windows.Forms.ToolStripMenuItem acercaDeToolStripMenuItem;
-        private System.Windows.Forms.DataGridViewTextBoxColumn nombre;
-        private System.Windows.Forms.DataGridViewTextBoxColumn correo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn asunto;
-        private System.Windows.Forms.DataGridViewTextBoxColumn fecha;
         private System.Windows.Forms.ToolStripMenuItem nuevoMeilToolStripMenuItem;
         private System.Windows.Forms.Panel panelCuentas;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button botonCCO;
         private System.Windows.Forms.Button botonCC;
+        private System.Windows.Forms.GroupBox gbEnviarMail;
+        private System.Windows.Forms.MenuStrip menuStrip3;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem2;
+        private System.Windows.Forms.ToolStripMenuItem guardarComoBorradorToolStripMenuItem;
+        private System.Windows.Forms.DataGridViewTextBoxColumn nombre;
+        private System.Windows.Forms.DataGridViewTextBoxColumn correo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn asunto;
+        private System.Windows.Forms.DataGridViewTextBoxColumn fecha;
     }
 }
 
