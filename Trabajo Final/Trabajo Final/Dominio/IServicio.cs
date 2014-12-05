@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Net.Mail;
 using Trabajo_Final.Persistencia;
+using Trabajo_Final.DTO;
 
 namespace Trabajo_Final.Dominio
 {
@@ -16,11 +17,18 @@ namespace Trabajo_Final.Dominio
         /// <summary>
         /// Permite enviar un mail
         /// </summary>
-        void EnviarMail(MailMessage pMail);
+        /// <exception cref="NullReferenceException"></exception>
+        /// <exception cref="EmailExcepcion"></exception>
+        void EnviarMail(EmailDTO pMail);
 
         /// <summary>
         /// Permite recibir emails
         /// </summary>
+        /// <exception cref="NullReferenceException"></exception>
+        /// <exception cref="EmailExcepcion"></exception>
         IList<MailMessage> RecibirMail();
+
+        Cuenta Cuenta { get; set; }
+
     }
 }

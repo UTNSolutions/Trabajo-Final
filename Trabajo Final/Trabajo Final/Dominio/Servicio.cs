@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Net.Mail;
+using Trabajo_Final.DTO;
 
 namespace Trabajo_Final.Dominio
 {
@@ -12,7 +13,7 @@ namespace Trabajo_Final.Dominio
         private  Cuenta iCuenta;
         private  string iNombre;
 
-        public abstract void EnviarMail(MailMessage pMail);
+        public abstract void EnviarMail(EmailDTO pMail);
 
         public abstract IList<MailMessage> RecibirMail();
 

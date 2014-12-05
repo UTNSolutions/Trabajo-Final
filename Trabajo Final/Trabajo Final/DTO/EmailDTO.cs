@@ -9,7 +9,7 @@ namespace Trabajo_Final.DTO
     /// <summary>
     /// Representa un email
     /// </summary>
-    class EmailDTO
+    public class EmailDTO
     {
         private String iDestinatario;
 

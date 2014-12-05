@@ -467,8 +467,6 @@
         private System.Windows.Forms.ToolStripMenuItem acercaDeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem nuevoMeilToolStripMenuItem;
         private System.Windows.Forms.Panel panelCuentas;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button botonCCO;
         private System.Windows.Forms.Button botonCC;
         private System.Windows.Forms.GroupBox gbEnviarMail;
