@@ -172,11 +172,15 @@ namespace Trabajo_Final.Controladores
         /// <param name="pEmail">Email a enviar</param>
         /// <param name="pCuenta">Cuenta con la que se quiere enviar el email</param>
         /// <exception cref="EmailExcepcion"></exception>
-        public void EnviarEmail(EmailDTO pEmail,CuentaDTO pCuenta)
+        public void EnviarEmail(EmailDTO pEmail,string pNombreCuenta)
         {
+            if (pEmail.Destinatario == null)
+            {
+                throw new EmailExcepcion("Se debe ingresar un destinatario");
+            }
             try
             {
-                Cuenta cuenta = Cuentas.Instancia.GetCuenta(pCuenta.Nombre);
+                Cuenta cuenta = Cuentas.Instancia.GetCuenta(pNombreCuenta);
                 cuenta.Servicio.Cuenta = cuenta;
                 cuenta.Servicio.EnviarMail(pEmail);
             }
@@ -185,6 +189,18 @@ namespace Trabajo_Final.Controladores
                 throw new FormatException("Se produjo un error interno, intente mas tarde");
             }
             catch(EmailExcepcion ex)
+            {
+                throw ex;
+            }
+        }
+
+        public CuentaDTO BuscarCuenta(string pNombreCuenta)
+        {
+            try
+            {
+                return FachadaABMCuentas.Instancia.BuscarCuenta(pNombreCuenta);
+            }
+            catch (DAOExcepcion ex)
             {
                 throw ex;
             }

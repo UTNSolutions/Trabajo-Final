@@ -96,5 +96,29 @@ namespace Trabajo_Final.Persistencia
                 throw new DAOExcepcion("No se pudo obtener los datos de las cuentas");
             }
         }
+
+        public CuentaDTO BuscarCuenta(string pNombreCuenta)
+        {
+            SqlCommand comando = new SqlCommand("select * from Cuenta where nombre = @NombreCuenta", this.iConexion);
+            comando.Parameters.AddWithValue("@NombreCuenta", pNombreCuenta);
+            try
+            {
+                CuentaDTO cuenta = null;
+                DataTable tabla = new DataTable();
+                EncriptadorCesar encriptador = new EncriptadorCesar(4);
+                SqlDataAdapter operacion = new SqlDataAdapter(comando);
+                operacion.Fill(tabla);
+                foreach (DataRow fila in tabla.Rows)
+                {
+                    String contraseñaDesencriptada = encriptador.Desencriptar(Convert.ToString(fila["contraseña"]));
+                    cuenta = new CuentaDTO(Convert.ToInt32(fila["idCuenta"]), Convert.ToString(fila["nombre"]), Convert.ToString(fila["direccion"]), Convert.ToString(fila["servicio"]), contraseñaDesencriptada);
+                }
+                return cuenta;
+            }
+            catch (SqlException)
+            {
+                throw new DAOExcepcion("No se pudo obtener los datos de las cuentas");
+            }
+        }
     }
 }

@@ -140,5 +140,25 @@ namespace Trabajo_Final.Controladores
                 factory.FinalizarConexion();
             }
         }
+
+        public CuentaDTO BuscarCuenta(String pnombreCuenta)
+        {
+            DAOFactory factory = null;
+
+            try
+            {
+                factory = DAOFactory.Instancia;
+                factory.IniciarConexion();
+                return factory.CuentaDAO.BuscarCuenta(pnombreCuenta);
+            }
+            catch (DAOExcepcion ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                factory.FinalizarConexion();
+            }
+        }
     }
     }

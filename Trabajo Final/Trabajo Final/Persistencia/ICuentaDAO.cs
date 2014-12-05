@@ -35,7 +35,13 @@ namespace Trabajo_Final.Persistencia
         /// </summary>
         /// <returns></returns>
         IList<CuentaDTO> Obtener();
-      
+
+        /// <summary>
+        /// Obtiene una cuenta de correo electronico identificada por su nombre.
+        /// </summary>
+        /// <param name="pNombreCuenta"></param>
+        /// <returns></returns>
+        CuentaDTO BuscarCuenta(string pNombreCuenta);      
 
     }
 }

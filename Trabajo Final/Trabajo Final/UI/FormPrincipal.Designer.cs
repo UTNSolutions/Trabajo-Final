@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Cuentas de Correo");
+            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Cuentas de Correo");
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.cuentasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.acercaDeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -40,6 +40,8 @@
             this.nuevoMeilToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.gpNuevoMail = new System.Windows.Forms.GroupBox();
+            this.combobDe = new System.Windows.Forms.ComboBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.botonCCO = new System.Windows.Forms.Button();
             this.botonCC = new System.Windows.Forms.Button();
             this.bAdjuntar = new System.Windows.Forms.Button();
@@ -61,10 +63,8 @@
             this.gbEnviarMail = new System.Windows.Forms.GroupBox();
             this.menuStrip3 = new System.Windows.Forms.MenuStrip();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.bEnviar = new System.Windows.Forms.ToolStripMenuItem();
             this.guardarComoBorradorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.label2 = new System.Windows.Forms.Label();
-            this.combobDe = new System.Windows.Forms.ComboBox();
             this.menuStrip1.SuspendLayout();
             this.gbOpciones1.SuspendLayout();
             this.menuStrip2.SuspendLayout();
@@ -104,10 +104,10 @@
             // 
             this.tvCuentas.Location = new System.Drawing.Point(3, 3);
             this.tvCuentas.Name = "tvCuentas";
-            treeNode2.Name = "Nodo0";
-            treeNode2.Text = "Cuentas de Correo";
+            treeNode1.Name = "Nodo0";
+            treeNode1.Text = "Cuentas de Correo";
             this.tvCuentas.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode2});
+            treeNode1});
             this.tvCuentas.Size = new System.Drawing.Size(185, 378);
             this.tvCuentas.TabIndex = 1;
             // 
@@ -185,6 +185,23 @@
             this.gpNuevoMail.TabStop = false;
             this.gpNuevoMail.Text = "Nuevo Email";
             this.gpNuevoMail.Visible = false;
+            // 
+            // combobDe
+            // 
+            this.combobDe.FormattingEnabled = true;
+            this.combobDe.Location = new System.Drawing.Point(104, 30);
+            this.combobDe.Name = "combobDe";
+            this.combobDe.Size = new System.Drawing.Size(329, 21);
+            this.combobDe.TabIndex = 15;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(77, 33);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(21, 13);
+            this.label2.TabIndex = 14;
+            this.label2.Text = "De";
             // 
             // botonCCO
             // 
@@ -358,7 +375,7 @@
             // 
             this.menuStrip3.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripMenuItem1,
-            this.toolStripMenuItem2,
+            this.bEnviar,
             this.guardarComoBorradorToolStripMenuItem});
             this.menuStrip3.Location = new System.Drawing.Point(3, 16);
             this.menuStrip3.Name = "menuStrip3";
@@ -373,12 +390,13 @@
             this.toolStripMenuItem1.Text = "Administrador de Correo";
             this.toolStripMenuItem1.Click += new System.EventHandler(this.toolStripMenuAdministrarCorreo_Click);
             // 
-            // toolStripMenuItem2
+            // bEnviar
             // 
-            this.toolStripMenuItem2.Image = global::Trabajo_Final.Properties.Resources.mail_send;
-            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(67, 20);
-            this.toolStripMenuItem2.Text = "Enviar";
+            this.bEnviar.Image = global::Trabajo_Final.Properties.Resources.mail_send;
+            this.bEnviar.Name = "bEnviar";
+            this.bEnviar.Size = new System.Drawing.Size(67, 20);
+            this.bEnviar.Text = "Enviar";
+            this.bEnviar.Click += new System.EventHandler(this.toolStripMenubEnviar_Click);
             // 
             // guardarComoBorradorToolStripMenuItem
             // 
@@ -386,23 +404,6 @@
             this.guardarComoBorradorToolStripMenuItem.Name = "guardarComoBorradorToolStripMenuItem";
             this.guardarComoBorradorToolStripMenuItem.Size = new System.Drawing.Size(160, 20);
             this.guardarComoBorradorToolStripMenuItem.Text = "Guardar como borrador";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(77, 33);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(21, 13);
-            this.label2.TabIndex = 14;
-            this.label2.Text = "De";
-            // 
-            // combobDe
-            // 
-            this.combobDe.FormattingEnabled = true;
-            this.combobDe.Location = new System.Drawing.Point(104, 30);
-            this.combobDe.Name = "combobDe";
-            this.combobDe.Size = new System.Drawing.Size(329, 21);
-            this.combobDe.TabIndex = 15;
             // 
             // FormPrincipal
             // 
@@ -472,7 +473,7 @@
         private System.Windows.Forms.GroupBox gbEnviarMail;
         private System.Windows.Forms.MenuStrip menuStrip3;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem2;
+        private System.Windows.Forms.ToolStripMenuItem bEnviar;
         private System.Windows.Forms.ToolStripMenuItem guardarComoBorradorToolStripMenuItem;
         private System.Windows.Forms.DataGridViewTextBoxColumn nombre;
         private System.Windows.Forms.DataGridViewTextBoxColumn correo;

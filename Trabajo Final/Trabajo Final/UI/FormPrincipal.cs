@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using Trabajo_Final.Controladores;
 using Trabajo_Final.DTO;
 using Trabajo_Final.Dominio;
+using Trabajo_Final.Excepciones;
 
 namespace Trabajo_Final.UI
 {
@@ -58,7 +59,7 @@ namespace Trabajo_Final.UI
             if (!gpNuevoMail.Visible)
             {
                 combobDe.DataSource = Fachada.Instancia.ObtenerCuentas();
-                combobDe.ValueMember = "IdCuenta";
+                combobDe.ValueMember = "Nombre";
                 combobDe.DisplayMember = "Direccion";
                 gbOpciones1.Visible = false;
                 gbEnviarMail.Visible = true;
@@ -193,5 +194,25 @@ namespace Trabajo_Final.UI
                 return true;
             }
         }
+
+
+        private void toolStripMenubEnviar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                CuentaDTO cuenta = Fachada.Instancia.BuscarCuenta(combobDe.SelectedValue.ToString());
+                Fachada.Instancia.EnviarEmail(new EmailDTO(Convert.ToInt32(cuenta.IdCuenta), Convert.ToString(tbPara.Text), Convert.ToString(tbCuerpo.Text), Convert.ToString(tbAsunto.Text)), cuenta.Nombre);
+            }
+            catch (DAOExcepcion ex)
+            {
+                MessageBox.Show(ex.Message, "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (EmailExcepcion ex)
+            {
+                MessageBox.Show(ex.Message, "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            
+        }
+
     }
 }
