@@ -147,13 +147,17 @@ namespace Trabajo_Final.Controladores
         {
             try
             {
+                //creo una nueva lista ya que la lista de cuentas es un diccionario
+                IList<Cuenta> listaADevolver = new List<Cuenta>();
+                // Obtengo las cuentas de la base de datos
                 IList<CuentaDTO> listaCuentas = FachadaABMCuentas.Instancia.ListarCuentas();
+                // Para cada cuenta la agrego en la lista de cuentas pertenecientes al dominio de la aplicacion
                 foreach (CuentaDTO cuenta in listaCuentas)
                 {
                     Cuentas.Instancia.AgregarCuenta(new Cuenta(cuenta.Nombre, cuenta.Direccion, cuenta.NombreServicio, cuenta.Contraseña));
-                    
+                    listaADevolver.Add(new Cuenta(cuenta.Nombre, cuenta.Direccion, cuenta.NombreServicio, cuenta.Contraseña));
                 }
-                return Cuentas.Instancia.ListaCuentas;
+                return listaADevolver;
             }
             catch (DAOExcepcion ex)
             {
@@ -161,5 +165,29 @@ namespace Trabajo_Final.Controladores
             }
         }
 
+
+        /// <summary>
+        /// Permite enviar un Email
+        /// </summary>
+        /// <param name="pEmail">Email a enviar</param>
+        /// <param name="pCuenta">Cuenta con la que se quiere enviar el email</param>
+        /// <exception cref="EmailExcepcion"></exception>
+        public void EnviarEmail(EmailDTO pEmail,CuentaDTO pCuenta)
+        {
+            try
+            {
+                Cuenta cuenta = Cuentas.Instancia.GetCuenta(pCuenta.Nombre);
+                cuenta.Servicio.Cuenta = cuenta;
+                cuenta.Servicio.EnviarMail(pEmail);
+            }
+            catch(FormatException)
+            {
+                throw new FormatException("Se produjo un error interno, intente mas tarde");
+            }
+            catch(EmailExcepcion ex)
+            {
+                throw ex;
+            }
+        }
     }
 }

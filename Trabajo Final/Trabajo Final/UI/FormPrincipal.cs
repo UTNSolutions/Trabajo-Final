@@ -27,6 +27,7 @@ namespace Trabajo_Final.UI
             if (iFormAcercaDe == null)
             {
                 iFormAcercaDe = new FormAcercaDe();
+                iFormAcercaDe.Disposed += new EventHandler(form_Disposed);
             }
             iFormAcercaDe.Show();
         }
@@ -36,8 +37,15 @@ namespace Trabajo_Final.UI
             if (iFormAdminCuentas == null)
             {
                 iFormAdminCuentas = new FormAdministrarCuentas();
+                iFormAdminCuentas.Disposed += new EventHandler(form_Disposed);
             }
             iFormAdminCuentas.Show();
+        }
+
+        private void form_Disposed(object sender, EventArgs e)
+        {
+            iFormAdminCuentas = null;
+            iFormAcercaDe = null;
         }
 
         /// <summary>
@@ -155,8 +163,8 @@ namespace Trabajo_Final.UI
         {
             if (tbPara.Text != "" || tbCC.Text != "" || tbCCO.Text != "" || tbAsunto.Text != "" || tbAdjuntos.Text != "" || tbCuerpo.Text != "")
             {
-                DialogResult resultado = MessageBox.Show("Esta seguro que quiere eliminar este mail no enviado", "Advertencia", MessageBoxButtons.OKCancel);
-                if (resultado == DialogResult.OK)
+                DialogResult resultado = MessageBox.Show("¿Está seguro que quiere eliminar este mail no enviado ?", "Advertencia", MessageBoxButtons.YesNo,MessageBoxIcon.Question);
+                if (resultado == DialogResult.Yes)
                 {
                     tbPara.Text = "";
                     tbCC.Text = "";

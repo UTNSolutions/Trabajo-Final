@@ -11,13 +11,13 @@ namespace Trabajo_Final.Dominio
     /// </summary>
     class Cuentas
     {
-        private IList<Cuenta> iListaCuentas ;
+        private IDictionary<string,Cuenta> iListaCuentas ;
 
         private static Cuentas iInstanciaSingleton;
 
         private Cuentas()
         {
-            this.iListaCuentas = new List<Cuenta>();
+            this.iListaCuentas = new Dictionary<string,Cuenta>();
         }
 
         public static Cuentas Instancia
@@ -31,9 +31,28 @@ namespace Trabajo_Final.Dominio
                }
         }
 
-        public IList<Cuenta> ListaCuentas
+        public IDictionary<string,Cuenta> ListaCuentas
         {
             get { return this.iListaCuentas; }
+        }
+
+        /// <summary>
+        /// Devuelve una cuenta de correo electronico
+        /// </summary>
+        /// <param name="pNombreCuenta">Nombre de la cuenta por la cual se va a buscar</param>
+        /// <returns></returns>
+        /// <exception cref="FormatException"></exception>
+        public Cuenta GetCuenta(string pNombreCuenta)
+        {
+            //Verifico si dicho nombre pasado como parametro es clave del diccionario
+            if (this.iListaCuentas.ContainsKey(pNombreCuenta))
+            {
+              return this.iListaCuentas[pNombreCuenta];
+            }
+            else
+            {
+             throw new FormatException("El parametro no esta asociado a ningun servicio");
+            }
         }
 
         /// <summary>
@@ -42,7 +61,7 @@ namespace Trabajo_Final.Dominio
         /// <param name="pCuenta"></param>
         public void AgregarCuenta(Cuenta pCuenta)
         {
-            this.iListaCuentas.Add(pCuenta);
+            this.iListaCuentas.Add(pCuenta.Nombre,pCuenta);
         }
     }
 }

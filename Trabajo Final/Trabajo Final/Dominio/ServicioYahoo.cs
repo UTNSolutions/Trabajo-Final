@@ -8,6 +8,7 @@ using System.Net;
 using Trabajo_Final.Excepciones;
 using OpenPop.Pop3;
 using OpenPop.Mime;
+using Trabajo_Final.DTO;
 
 namespace Trabajo_Final.Dominio
 {
@@ -23,7 +24,7 @@ namespace Trabajo_Final.Dominio
             this.iCuenta = null;
         }
 
-        public override void EnviarMail(MailMessage pMail)
+        public override void EnviarMail(EmailDTO pMail)
         {
             if (this.iCuenta == null)
             {
@@ -38,9 +39,10 @@ namespace Trabajo_Final.Dominio
 
             client.Host = "smtp.mail.yahoo.com";
             client.EnableSsl = true;  //Esto es para que vaya a través de SSL que es obligatorio con Yahoo
+            MailMessage email = new MailMessage(this.Cuenta.Direccion, pMail.Destinatario, pMail.Asunto, pMail.Cuerpo);
             try
             {
-                client.Send(pMail);
+                client.Send(email);
             }
             catch (SmtpFailedRecipientsException)
             {
