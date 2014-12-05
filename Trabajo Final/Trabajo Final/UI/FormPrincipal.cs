@@ -50,7 +50,7 @@ namespace Trabajo_Final.UI
         }
 
         /// <summary>
-        /// Cambia la pantalla principal y abilita el panel para enviar un nuevo mail.
+        /// Cambia la pantalla principal y habilita el panel para enviar un nuevo mail.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -72,7 +72,7 @@ namespace Trabajo_Final.UI
         }
 
         /// <summary>
-        /// Cambia la pantalla principal y abilita el panel para mostrar los mail de una cuenta.
+        /// Cambia la pantalla principal y habilita el panel para mostrar los mail de una cuenta.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -83,7 +83,7 @@ namespace Trabajo_Final.UI
         }
 
         /// <summary>
-        /// Cambia la pantalla principal y abilita el panel para mostrar los mail de las cuentas.
+        /// Cambia la pantalla principal y habilita el panel para mostrar los mail de las cuentas.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -94,7 +94,7 @@ namespace Trabajo_Final.UI
         }
 
         /// <summary>
-        /// Abilita el TextBox que permita cargar el/las direcciones a los que se le envían una copia del mail. 
+        /// Habilita el TextBox que permita cargar el/las direcciones a los que se le envían una copia del mail. 
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -104,7 +104,7 @@ namespace Trabajo_Final.UI
         }
 
         /// <summary>
-        /// Abilita el TextBox que permita cargar el/las direcciones a los que se le envían una copia oculata del mail.
+        /// Habilita el TextBox que permita cargar el/las direcciones a los que se le envían una copia oculata del mail.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -135,7 +135,7 @@ namespace Trabajo_Final.UI
             CargarCuentasCorreo();
         }
 
-        private void CargarCuentasCorreo()
+        public void CargarCuentasCorreo()
         {
             IList<Cuenta> listaCuentas = Fachada.Instancia.CargarCuentasCorreo();
             foreach (Cuenta cuenta in listaCuentas)

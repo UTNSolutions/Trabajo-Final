@@ -127,6 +127,8 @@ namespace Trabajo_Final.UI
                         Fachada.Instancia.AltaCuenta(tbCuenta.Text, tbMail.Text, cbServicio.SelectedItem.ToString(), tbContraseña.Text);
                         MessageBox.Show("Cuenta agregada con exito", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         CargarDataGridCuentas();
+                        Fachada.Instancia.CargarCuentasCorreo();
+                        
                     }
                     catch (DAOExcepcion ex)
                     {
@@ -158,6 +160,7 @@ namespace Trabajo_Final.UI
                     Fachada.Instancia.ModificarCuenta(Convert.ToInt32(tbIdCuenta.Text),tbCuenta.Text, tbMail.Text, cbServicio.SelectedItem.ToString(), tbContraseña.Text);
                     MessageBox.Show("Datos de la cuenta modificados con exito", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     CargarDataGridCuentas();
+                    Fachada.Instancia.CargarCuentasCorreo();
                  }
                catch (DAOExcepcion ex)
                 {
@@ -191,6 +194,7 @@ namespace Trabajo_Final.UI
                         Fachada.Instancia.EliminarCuenta(Convert.ToInt32(tbIdCuenta.Text), tbCuenta.Text, tbMail.Text, cbServicio.SelectedItem.ToString(), tbContraseña.Text);
                         MessageBox.Show("La cuenta ha sido eliminada con éxito", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         CargarDataGridCuentas();
+                        Fachada.Instancia.CargarCuentasCorreo();
                     }
                     catch (DAOExcepcion ex)
                     {

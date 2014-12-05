@@ -154,7 +154,7 @@ namespace Trabajo_Final.Controladores
                 // Para cada cuenta la agrego en la lista de cuentas pertenecientes al dominio de la aplicacion
                 foreach (CuentaDTO cuenta in listaCuentas)
                 {
-                    Cuentas.Instancia.AgregarCuenta(new Cuenta(cuenta.Nombre, cuenta.Direccion, cuenta.NombreServicio, cuenta.Contraseña));
+                    Cuentas.Instancia.AgregarCuentaOActualizar(new Cuenta(cuenta.Nombre, cuenta.Direccion, cuenta.NombreServicio, cuenta.Contraseña));
                     listaADevolver.Add(new Cuenta(cuenta.Nombre, cuenta.Direccion, cuenta.NombreServicio, cuenta.Contraseña));
                 }
                 return listaADevolver;

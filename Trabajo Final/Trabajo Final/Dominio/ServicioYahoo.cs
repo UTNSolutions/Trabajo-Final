@@ -9,6 +9,7 @@ using Trabajo_Final.Excepciones;
 using OpenPop.Pop3;
 using OpenPop.Mime;
 using Trabajo_Final.DTO;
+using System.Text.RegularExpressions;
 
 namespace Trabajo_Final.Dominio
 {
@@ -30,7 +31,11 @@ namespace Trabajo_Final.Dominio
             {
                 throw new NullReferenceException("No hay una cuenta asociada para realizar la operación");
             }
-
+            String cadena = pMail.Destinatario;
+            if (!(Regex.IsMatch(cadena, "\\w+([-+.']\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*")))
+            {
+                throw new EmailExcepcion("El destinatario no posee la estructura correcta");
+            }
             SmtpClient client = new SmtpClient();
 
             client.Credentials = this.iCredenciales;
@@ -52,7 +57,10 @@ namespace Trabajo_Final.Dominio
             {
                 throw new EmailExcepcion("No se pudo enviar el mail, verifique los datos");
             }
-
+            catch (SmtpException)
+            {
+                throw new EmailExcepcion("Fallo la autenticación de la direccion de correo, verifique los datos de la cuenta");
+            }
         }
 
         public override IList<MailMessage> RecibirMail()

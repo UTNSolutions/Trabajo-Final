@@ -56,12 +56,20 @@ namespace Trabajo_Final.Dominio
         }
 
         /// <summary>
-        /// Agrega una cuenta de correo a la lista de cuentas
+        /// Agrega o actualiza una cuenta de correo a la lista de cuentas
         /// </summary>
         /// <param name="pCuenta"></param>
-        public void AgregarCuenta(Cuenta pCuenta)
+        public void AgregarCuentaOActualizar(Cuenta pCuenta)
         {
-            this.iListaCuentas.Add(pCuenta.Nombre,pCuenta);
+            if (this.iListaCuentas.ContainsKey(pCuenta.Nombre))
+            {             
+                //Sobreescribe la cuenta en la posicion del diccionario que coincide con la clave
+                this.iListaCuentas[pCuenta.Nombre] = pCuenta;
+            }
+            else
+            {
+                this.iListaCuentas.Add(pCuenta.Nombre,pCuenta);
+            }
         }
     }
 }
