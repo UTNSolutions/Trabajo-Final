@@ -292,7 +292,6 @@
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Administrar cuentas";
-            this.TopMost = true;
             this.Load += new System.EventHandler(this.FormAdministrarCuentas_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgCuentas)).EndInit();
             this.ResumeLayout(false);

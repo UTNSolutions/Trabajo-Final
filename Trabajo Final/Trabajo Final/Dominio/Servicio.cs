@@ -21,5 +21,7 @@ namespace Trabajo_Final.Dominio
 
         public abstract string Nombre { get; }
 
-    }
+        public abstract bool AccesoInternet();
+
+        }
 }

@@ -64,7 +64,7 @@
             this.menuStrip3 = new System.Windows.Forms.MenuStrip();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.bEnviar = new System.Windows.Forms.ToolStripMenuItem();
-            this.guardarComoBorradorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.bGuardarBorrador = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.gbOpciones1.SuspendLayout();
             this.menuStrip2.SuspendLayout();
@@ -353,9 +353,9 @@
             // 
             // panelCuentas
             // 
-            this.panelCuentas.Controls.Add(this.dgvCuentas);
             this.panelCuentas.Controls.Add(this.tvCuentas);
             this.panelCuentas.Controls.Add(this.textBox1);
+            this.panelCuentas.Controls.Add(this.dgvCuentas);
             this.panelCuentas.Location = new System.Drawing.Point(0, 78);
             this.panelCuentas.Name = "panelCuentas";
             this.panelCuentas.Size = new System.Drawing.Size(845, 384);
@@ -376,7 +376,7 @@
             this.menuStrip3.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripMenuItem1,
             this.bEnviar,
-            this.guardarComoBorradorToolStripMenuItem});
+            this.bGuardarBorrador});
             this.menuStrip3.Location = new System.Drawing.Point(3, 16);
             this.menuStrip3.Name = "menuStrip3";
             this.menuStrip3.Size = new System.Drawing.Size(839, 24);
@@ -398,12 +398,13 @@
             this.bEnviar.Text = "Enviar";
             this.bEnviar.Click += new System.EventHandler(this.toolStripMenubEnviar_Click);
             // 
-            // guardarComoBorradorToolStripMenuItem
+            // bGuardarBorrador
             // 
-            this.guardarComoBorradorToolStripMenuItem.Image = global::Trabajo_Final.Properties.Resources.filesave;
-            this.guardarComoBorradorToolStripMenuItem.Name = "guardarComoBorradorToolStripMenuItem";
-            this.guardarComoBorradorToolStripMenuItem.Size = new System.Drawing.Size(160, 20);
-            this.guardarComoBorradorToolStripMenuItem.Text = "Guardar como borrador";
+            this.bGuardarBorrador.Image = global::Trabajo_Final.Properties.Resources.filesave;
+            this.bGuardarBorrador.Name = "bGuardarBorrador";
+            this.bGuardarBorrador.Size = new System.Drawing.Size(160, 20);
+            this.bGuardarBorrador.Text = "Guardar como borrador";
+            this.bGuardarBorrador.Click += new System.EventHandler(this.guardarComoBorradorToolStripMenuItem_Click);
             // 
             // FormPrincipal
             // 
@@ -412,9 +413,9 @@
             this.ClientSize = new System.Drawing.Size(853, 462);
             this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.gbEnviarMail);
-            this.Controls.Add(this.gpNuevoMail);
             this.Controls.Add(this.gbOpciones1);
             this.Controls.Add(this.panelCuentas);
+            this.Controls.Add(this.gpNuevoMail);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MainMenuStrip = this.menuStrip1;
             this.MaximizeBox = false;
@@ -474,7 +475,7 @@
         private System.Windows.Forms.MenuStrip menuStrip3;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem bEnviar;
-        private System.Windows.Forms.ToolStripMenuItem guardarComoBorradorToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem bGuardarBorrador;
         private System.Windows.Forms.DataGridViewTextBoxColumn nombre;
         private System.Windows.Forms.DataGridViewTextBoxColumn correo;
         private System.Windows.Forms.DataGridViewTextBoxColumn asunto;

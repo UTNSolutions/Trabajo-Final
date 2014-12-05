@@ -49,8 +49,16 @@ namespace Trabajo_Final.UI
             {
                 iFormAdminCuentas = new FormAdministrarCuentas();
                 iFormAdminCuentas.Disposed += new EventHandler(form_Disposed);
+                iFormAdminCuentas.FormClosed += new FormClosedEventHandler(formAdminCuentas_FormClosed);
             }
             iFormAdminCuentas.Show();
+        }
+
+        private void formAdminCuentas_FormClosed(object sender, FormClosedEventArgs e)       
+        {              
+            //when child form is closed, this code is executed   
+            // Bind the Grid view       
+            CargarCuentasCorreo();     
         }
 
         /// <summary>
@@ -156,11 +164,13 @@ namespace Trabajo_Final.UI
         }
 
         /// <summary>
-        /// Carga las cuetas en el formulario principal.
+        /// Carga las cuentas en el formulario principal.
         /// </summary>
         public void CargarCuentasCorreo()
         {
             IList<Cuenta> listaCuentas = Fachada.Instancia.CargarCuentasCorreo();
+            tvCuentas.Nodes.Clear();
+            TreeNode raiz = tvCuentas.Nodes.Add("Cuentas");
             foreach (Cuenta cuenta in listaCuentas)
             {
                 TreeNode nodo = tvCuentas.Nodes.Add(cuenta.Nombre);
@@ -229,6 +239,7 @@ namespace Trabajo_Final.UI
             {
                 CuentaDTO cuenta = Fachada.Instancia.BuscarCuenta(combobDe.SelectedValue.ToString());
                 Fachada.Instancia.EnviarEmail(new EmailDTO(Convert.ToInt32(cuenta.IdCuenta), Convert.ToString(tbPara.Text), Convert.ToString(tbCuerpo.Text), Convert.ToString(tbAsunto.Text)), cuenta.Nombre);
+                
             }
             catch (DAOExcepcion ex)
             {
@@ -242,6 +253,11 @@ namespace Trabajo_Final.UI
             {
                 MessageBox.Show(ex.Message, "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+            
+        }
+
+        private void guardarComoBorradorToolStripMenuItem_Click(object sender, EventArgs e)
+        {
             
         }
 

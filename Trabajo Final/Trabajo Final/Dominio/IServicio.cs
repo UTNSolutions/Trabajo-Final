@@ -30,5 +30,7 @@ namespace Trabajo_Final.Dominio
 
         Cuenta Cuenta { get; set; }
 
+        bool AccesoInternet();
+
     }
 }

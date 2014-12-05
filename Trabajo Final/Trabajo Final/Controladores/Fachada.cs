@@ -106,7 +106,7 @@ namespace Trabajo_Final.Controladores
                 // y tambien el id de la cuenta encontrada si es igual al idCuenta pasado como parametro
                 // significa que hay otra cuenta con el nombre de cuenta que quiero modificar, 
                 //por lo que no puedo realizar la operacion
-                if (cuenta != null & cuenta.IdCuenta != pIdCuenta) 
+                if (cuenta != null && cuenta.IdCuenta != pIdCuenta) 
                 {
                     throw new NombreCuentaExcepcion("El nombre de la cuenta ya existe, utilize otro");
                 }

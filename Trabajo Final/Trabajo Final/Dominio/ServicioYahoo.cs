@@ -122,7 +122,7 @@ namespace Trabajo_Final.Dominio
         /// Verifica la conección a Internet.
         /// </summary>
         /// <returns></returns>
-        private bool AccesoInternet()
+        public override bool AccesoInternet()
         {
             try
             {
