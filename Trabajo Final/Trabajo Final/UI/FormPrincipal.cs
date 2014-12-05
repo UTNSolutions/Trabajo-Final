@@ -49,12 +49,16 @@ namespace Trabajo_Final.UI
         {
             if (!gpNuevoMail.Visible)
             {
+                combobDe.DataSource = Fachada.Instancia.ObtenerCuentas();
+                combobDe.ValueMember = "IdCuenta";
+                combobDe.DisplayMember = "Direccion";
                 gbOpciones1.Visible = false;
                 gbEnviarMail.Visible = true;
                 tbCCO.ReadOnly = true;
                 tbCC.ReadOnly = true;
                 panelCuentas.Visible = false;
                 gpNuevoMail.Visible = true;
+                
             }
         }
 
@@ -100,6 +104,11 @@ namespace Trabajo_Final.UI
             tbCCO.ReadOnly = false;
         }
 
+        /// <summary>
+        /// Abre una ventana que deja adjuntar archivos al mail.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void botonAdjuntar_Click(object sender, EventArgs e)
         {            
             OpenFileDialog file = new OpenFileDialog();
@@ -173,7 +182,7 @@ namespace Trabajo_Final.UI
             }
             else
             {
-                return false;
+                return true;
             }
         }
     }

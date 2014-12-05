@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Cuentas de Correo");
+            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Cuentas de Correo");
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.cuentasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.acercaDeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -63,6 +63,8 @@
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.guardarComoBorradorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.label2 = new System.Windows.Forms.Label();
+            this.combobDe = new System.Windows.Forms.ComboBox();
             this.menuStrip1.SuspendLayout();
             this.gbOpciones1.SuspendLayout();
             this.menuStrip2.SuspendLayout();
@@ -102,10 +104,10 @@
             // 
             this.tvCuentas.Location = new System.Drawing.Point(3, 3);
             this.tvCuentas.Name = "tvCuentas";
-            treeNode1.Name = "Nodo0";
-            treeNode1.Text = "Cuentas de Correo";
+            treeNode2.Name = "Nodo0";
+            treeNode2.Text = "Cuentas de Correo";
             this.tvCuentas.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode1});
+            treeNode2});
             this.tvCuentas.Size = new System.Drawing.Size(185, 378);
             this.tvCuentas.TabIndex = 1;
             // 
@@ -162,6 +164,8 @@
             // 
             // gpNuevoMail
             // 
+            this.gpNuevoMail.Controls.Add(this.combobDe);
+            this.gpNuevoMail.Controls.Add(this.label2);
             this.gpNuevoMail.Controls.Add(this.botonCCO);
             this.gpNuevoMail.Controls.Add(this.botonCC);
             this.gpNuevoMail.Controls.Add(this.bAdjuntar);
@@ -184,7 +188,7 @@
             // 
             // botonCCO
             // 
-            this.botonCCO.Location = new System.Drawing.Point(61, 135);
+            this.botonCCO.Location = new System.Drawing.Point(61, 186);
             this.botonCCO.Name = "botonCCO";
             this.botonCCO.Size = new System.Drawing.Size(37, 23);
             this.botonCCO.TabIndex = 13;
@@ -194,7 +198,7 @@
             // 
             // botonCC
             // 
-            this.botonCC.Location = new System.Drawing.Point(61, 76);
+            this.botonCC.Location = new System.Drawing.Point(61, 127);
             this.botonCC.Name = "botonCC";
             this.botonCC.Size = new System.Drawing.Size(37, 23);
             this.botonCC.TabIndex = 12;
@@ -205,7 +209,7 @@
             // bAdjuntar
             // 
             this.bAdjuntar.Image = global::Trabajo_Final.Properties.Resources.attach;
-            this.bAdjuntar.Location = new System.Drawing.Point(397, 238);
+            this.bAdjuntar.Location = new System.Drawing.Point(397, 289);
             this.bAdjuntar.Name = "bAdjuntar";
             this.bAdjuntar.Size = new System.Drawing.Size(36, 24);
             this.bAdjuntar.TabIndex = 11;
@@ -214,7 +218,7 @@
             // 
             // tbAsunto
             // 
-            this.tbAsunto.Location = new System.Drawing.Point(104, 191);
+            this.tbAsunto.Location = new System.Drawing.Point(104, 242);
             this.tbAsunto.Name = "tbAsunto";
             this.tbAsunto.Size = new System.Drawing.Size(329, 20);
             this.tbAsunto.TabIndex = 10;
@@ -222,7 +226,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(58, 194);
+            this.label5.Location = new System.Drawing.Point(58, 245);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(40, 13);
             this.label5.TabIndex = 9;
@@ -238,7 +242,7 @@
             // 
             // tbCC
             // 
-            this.tbCC.Location = new System.Drawing.Point(104, 78);
+            this.tbCC.Location = new System.Drawing.Point(104, 129);
             this.tbCC.Name = "tbCC";
             this.tbCC.ReadOnly = true;
             this.tbCC.Size = new System.Drawing.Size(329, 20);
@@ -246,7 +250,7 @@
             // 
             // tbCCO
             // 
-            this.tbCCO.Location = new System.Drawing.Point(104, 137);
+            this.tbCCO.Location = new System.Drawing.Point(104, 188);
             this.tbCCO.Name = "tbCCO";
             this.tbCCO.ReadOnly = true;
             this.tbCCO.Size = new System.Drawing.Size(329, 20);
@@ -254,7 +258,7 @@
             // 
             // tbAdjuntos
             // 
-            this.tbAdjuntos.Location = new System.Drawing.Point(104, 241);
+            this.tbAdjuntos.Location = new System.Drawing.Point(104, 292);
             this.tbAdjuntos.Name = "tbAdjuntos";
             this.tbAdjuntos.ReadOnly = true;
             this.tbAdjuntos.Size = new System.Drawing.Size(287, 20);
@@ -262,7 +266,7 @@
             // 
             // tbPara
             // 
-            this.tbPara.Location = new System.Drawing.Point(104, 24);
+            this.tbPara.Location = new System.Drawing.Point(104, 79);
             this.tbPara.Name = "tbPara";
             this.tbPara.Size = new System.Drawing.Size(329, 20);
             this.tbPara.TabIndex = 4;
@@ -270,7 +274,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(6, 243);
+            this.label4.Location = new System.Drawing.Point(6, 294);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(92, 13);
             this.label4.TabIndex = 3;
@@ -279,7 +283,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(69, 27);
+            this.label1.Location = new System.Drawing.Point(69, 82);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(29, 13);
             this.label1.TabIndex = 0;
@@ -383,16 +387,33 @@
             this.guardarComoBorradorToolStripMenuItem.Size = new System.Drawing.Size(160, 20);
             this.guardarComoBorradorToolStripMenuItem.Text = "Guardar como borrador";
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(77, 33);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(21, 13);
+            this.label2.TabIndex = 14;
+            this.label2.Text = "De";
+            // 
+            // combobDe
+            // 
+            this.combobDe.FormattingEnabled = true;
+            this.combobDe.Location = new System.Drawing.Point(104, 30);
+            this.combobDe.Name = "combobDe";
+            this.combobDe.Size = new System.Drawing.Size(329, 21);
+            this.combobDe.TabIndex = 15;
+            // 
             // FormPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(853, 462);
-            this.Controls.Add(this.gbOpciones1);
             this.Controls.Add(this.menuStrip1);
-            this.Controls.Add(this.panelCuentas);
             this.Controls.Add(this.gbEnviarMail);
             this.Controls.Add(this.gpNuevoMail);
+            this.Controls.Add(this.gbOpciones1);
+            this.Controls.Add(this.panelCuentas);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MainMenuStrip = this.menuStrip1;
             this.MaximizeBox = false;
@@ -459,6 +480,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn correo;
         private System.Windows.Forms.DataGridViewTextBoxColumn asunto;
         private System.Windows.Forms.DataGridViewTextBoxColumn fecha;
+        private System.Windows.Forms.ComboBox combobDe;
+        private System.Windows.Forms.Label label2;
     }
 }
 
