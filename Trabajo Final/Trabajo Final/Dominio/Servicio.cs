@@ -13,11 +13,11 @@ namespace Trabajo_Final.Dominio
         private  Cuenta iCuenta;
         private  string iNombre;
 
-        public abstract void EnviarMail(EmailDTO pMail);
+        public abstract void EnviarMail(Email pMail);
 
-        public abstract IList<MailMessage> RecibirMail();
+        public abstract IList<Email> RecibirMail();
 
-        public abstract Cuenta Cuenta { get; set; }
+        public abstract Cuenta Cuenta { set; }
 
         public abstract string Nombre { get; }
 

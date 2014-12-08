@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("Cuentas de Correo");
+            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("Cuentas de Correo");
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.cuentasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.acercaDeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -54,24 +54,25 @@
             this.tbPara = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.dgvCuentas = new System.Windows.Forms.DataGridView();
-            this.nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.correo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.asunto = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.fecha = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgEmails = new System.Windows.Forms.DataGridView();
             this.panelCuentas = new System.Windows.Forms.Panel();
+            this.tbNombreCuenta = new System.Windows.Forms.TextBox();
             this.gbEnviarMail = new System.Windows.Forms.GroupBox();
             this.menuStrip3 = new System.Windows.Forms.MenuStrip();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.bEnviar = new System.Windows.Forms.ToolStripMenuItem();
             this.bGuardarBorrador = new System.Windows.Forms.ToolStripMenuItem();
+            this.remitente = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.destinatario = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.asunto = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cuerpo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.progressBarEnviando = new System.Windows.Forms.ProgressBar();
             this.lEnviado = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.gbOpciones1.SuspendLayout();
             this.menuStrip2.SuspendLayout();
             this.gpNuevoMail.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvCuentas)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgEmails)).BeginInit();
             this.panelCuentas.SuspendLayout();
             this.gbEnviarMail.SuspendLayout();
             this.menuStrip3.SuspendLayout();
@@ -106,10 +107,11 @@
             // 
             this.tvCuentas.Location = new System.Drawing.Point(3, 3);
             this.tvCuentas.Name = "tvCuentas";
-            treeNode5.Name = "Nodo0";
-            treeNode5.Text = "Cuentas de Correo";
+            treeNode4.Checked = true;
+            treeNode4.Name = "Nodo0";
+            treeNode4.Text = "Cuentas de Correo";
             this.tvCuentas.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode5});
+            treeNode4});
             this.tvCuentas.Size = new System.Drawing.Size(185, 378);
             this.tvCuentas.TabIndex = 1;
             // 
@@ -146,7 +148,6 @@
             this.obtenerTodosToolStripMenuItem.Name = "obtenerTodosToolStripMenuItem";
             this.obtenerTodosToolStripMenuItem.Size = new System.Drawing.Size(98, 20);
             this.obtenerTodosToolStripMenuItem.Text = "Obtener Todos";
-            this.obtenerTodosToolStripMenuItem.Click += new System.EventHandler(this.obtenerTodosToolStripMenuItem_Click);
             // 
             // nuevoMeilToolStripMenuItem
             // 
@@ -309,22 +310,22 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Para";
             // 
-            // dgvCuentas
+            // dgEmails
             // 
-            this.dgvCuentas.AllowUserToAddRows = false;
-            this.dgvCuentas.AllowUserToDeleteRows = false;
-            this.dgvCuentas.BackgroundColor = System.Drawing.Color.LightGray;
-            this.dgvCuentas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvCuentas.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.nombre,
-            this.correo,
+            this.dgEmails.AllowUserToAddRows = false;
+            this.dgEmails.AllowUserToDeleteRows = false;
+            this.dgEmails.BackgroundColor = System.Drawing.Color.LightGray;
+            this.dgEmails.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgEmails.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.remitente,
+            this.destinatario,
             this.asunto,
             this.fecha});
             this.dgvCuentas.Location = new System.Drawing.Point(194, 33);
             this.dgvCuentas.Name = "dgvCuentas";
             this.dgvCuentas.ReadOnly = true;
             this.dgvCuentas.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.dgvCuentas.Size = new System.Drawing.Size(659, 348);
+            this.dgvCuentas.Size = new System.Drawing.Size(648, 348);
             this.dgvCuentas.TabIndex = 6;
             // 
             // nombre
@@ -342,27 +343,23 @@
             // 
             // asunto
             // 
-            this.asunto.HeaderText = "Asunto";
-            this.asunto.Name = "asunto";
-            this.asunto.ReadOnly = true;
-            this.asunto.Width = 250;
-            // 
-            // fecha
-            // 
-            this.fecha.HeaderText = "Fecha";
-            this.fecha.Name = "fecha";
-            this.fecha.ReadOnly = true;
-            this.fecha.Width = 90;
-            // 
             // panelCuentas
             // 
+            this.panelCuentas.Controls.Add(this.dgEmails);
+            this.panelCuentas.Controls.Add(this.tbNombreCuenta);
             this.panelCuentas.Controls.Add(this.tvCuentas);
             this.panelCuentas.Controls.Add(this.textBox1);
-            this.panelCuentas.Controls.Add(this.dgvCuentas);
             this.panelCuentas.Location = new System.Drawing.Point(0, 78);
             this.panelCuentas.Name = "panelCuentas";
             this.panelCuentas.Size = new System.Drawing.Size(853, 400);
             this.panelCuentas.TabIndex = 7;
+            // 
+            // tbNombreCuenta
+            // 
+            this.tbNombreCuenta.Location = new System.Drawing.Point(397, 6);
+            this.tbNombreCuenta.Name = "tbNombreCuenta";
+            this.tbNombreCuenta.Size = new System.Drawing.Size(130, 20);
+            this.tbNombreCuenta.TabIndex = 7;
             // 
             // gbEnviarMail
             // 
@@ -389,6 +386,7 @@
             // 
             // toolStripMenuItem1
             // 
+            this.toolStripMenuItem1.Enabled = false;
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
             this.toolStripMenuItem1.Size = new System.Drawing.Size(150, 20);
             this.toolStripMenuItem1.Text = "Administrador de Correo";
@@ -409,6 +407,35 @@
             this.bGuardarBorrador.Size = new System.Drawing.Size(160, 20);
             this.bGuardarBorrador.Text = "Guardar como borrador";
             this.bGuardarBorrador.Click += new System.EventHandler(this.guardarComoBorradorToolStripMenuItem_Click);
+            // 
+            // remitente
+            // 
+            this.remitente.DataPropertyName = "Remitente";
+            this.remitente.HeaderText = "Remitente";
+            this.remitente.Name = "remitente";
+            this.remitente.ReadOnly = true;
+            // 
+            // destinatario
+            // 
+            this.destinatario.DataPropertyName = "Destinatario";
+            this.destinatario.HeaderText = "Destinatario";
+            this.destinatario.Name = "destinatario";
+            this.destinatario.ReadOnly = true;
+            // 
+            // asunto
+            // 
+            this.asunto.DataPropertyName = "Asunto";
+            this.asunto.HeaderText = "Asunto";
+            this.asunto.Name = "asunto";
+            this.asunto.ReadOnly = true;
+            // 
+            // cuerpo
+            // 
+            this.cuerpo.DataPropertyName = "Cuerpo";
+            this.cuerpo.HeaderText = "Cuerpo";
+            this.cuerpo.Name = "cuerpo";
+            this.cuerpo.ReadOnly = true;
+            this.cuerpo.Visible = false;
             // 
             // progressBarEnviando
             // 
@@ -436,8 +463,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(854, 478);
             this.Controls.Add(this.menuStrip1);
-            this.Controls.Add(this.gbEnviarMail);
             this.Controls.Add(this.gbOpciones1);
+            this.Controls.Add(this.gbEnviarMail);
             this.Controls.Add(this.panelCuentas);
             this.Controls.Add(this.gpNuevoMail);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -457,7 +484,7 @@
             this.menuStrip2.PerformLayout();
             this.gpNuevoMail.ResumeLayout(false);
             this.gpNuevoMail.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvCuentas)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgEmails)).EndInit();
             this.panelCuentas.ResumeLayout(false);
             this.panelCuentas.PerformLayout();
             this.gbEnviarMail.ResumeLayout(false);
@@ -490,7 +517,7 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button bAdjuntar;
-        private System.Windows.Forms.DataGridView dgvCuentas;
+        private System.Windows.Forms.DataGridView dgEmails;
         private System.Windows.Forms.ToolStripMenuItem acercaDeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem nuevoMeilToolStripMenuItem;
         private System.Windows.Forms.Panel panelCuentas;
@@ -501,12 +528,13 @@
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem bEnviar;
         private System.Windows.Forms.ToolStripMenuItem bGuardarBorrador;
-        private System.Windows.Forms.DataGridViewTextBoxColumn nombre;
-        private System.Windows.Forms.DataGridViewTextBoxColumn correo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn asunto;
-        private System.Windows.Forms.DataGridViewTextBoxColumn fecha;
         private System.Windows.Forms.ComboBox combobDe;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox tbNombreCuenta;
+        private System.Windows.Forms.DataGridViewTextBoxColumn remitente;
+        private System.Windows.Forms.DataGridViewTextBoxColumn destinatario;
+        private System.Windows.Forms.DataGridViewTextBoxColumn asunto;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cuerpo;
         private System.Windows.Forms.ProgressBar progressBarEnviando;
         private System.Windows.Forms.Label lEnviado;
     }

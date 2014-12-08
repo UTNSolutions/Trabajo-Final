@@ -19,7 +19,7 @@ namespace Trabajo_Final.Dominio
 
         private String iContraseña;
 
-        private IServicio iServicio;
+        private IList<Email> iListaEmail;
 
         public Cuenta(String pNombre,String pDireccion, String pServicio, String pContraseña)
         {
@@ -27,7 +27,7 @@ namespace Trabajo_Final.Dominio
             this.iDireccion = pDireccion;
             this.iNombreServicio = pServicio;
             this.iContraseña = pContraseña;
-            this.iServicio = FabricaServicios.Instancia.GetServicio(pServicio);
+            this.iListaEmail = new List<Email>();
         }
 
         public String Nombre
@@ -50,9 +50,14 @@ namespace Trabajo_Final.Dominio
             get { return this.iContraseña; }
         }
 
-        public IServicio Servicio
+        public void AgregarEmail(Email pEmail)
         {
-            get { return this.iServicio; }
+            this.iListaEmail.Add(pEmail);
+        }
+
+        public void EliminarEmail(Email pEmail)
+        {
+            this.iListaEmail.Remove(pEmail);
         }
     }
 }

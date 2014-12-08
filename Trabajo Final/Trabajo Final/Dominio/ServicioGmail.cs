@@ -28,10 +28,6 @@ namespace Trabajo_Final.Dominio
 
         public override Cuenta Cuenta
         {
-            get
-            {
-                return this.iCuenta;
-            }
             set
             {
                 this.iCuenta = value;
@@ -44,7 +40,7 @@ namespace Trabajo_Final.Dominio
             get { return this.iNombre; }
         }
 
-        public override void EnviarMail(EmailDTO pMail)
+        public override void EnviarMail(Email pMail)
         {           
             if (this.iCuenta == null)
             {
@@ -67,7 +63,7 @@ namespace Trabajo_Final.Dominio
 
             client.Host = "smtp.gmail.com";
             client.EnableSsl = true;  //Esto es para que vaya a través de SSL que es obligatorio con GMail
-            MailMessage email = new MailMessage(this.Cuenta.Direccion, pMail.Destinatario, pMail.Asunto, pMail.Cuerpo);
+            MailMessage email = new MailMessage(this.iCuenta.Direccion, pMail.Destinatario, pMail.Asunto, pMail.Cuerpo);
             try
             {
                 client.Send(email);
@@ -86,23 +82,28 @@ namespace Trabajo_Final.Dominio
             }
         }
 
-        public override IList<MailMessage> RecibirMail()
+        public override IList<Email> RecibirMail()
         {
             if (this.iCuenta == null)
             {
                 throw new NullReferenceException("no hay una cuenta asociada para realizar la operacion");
+            }
+            if (!AccesoInternet())
+            {
+                throw new InternetExcepcion("Existe un problema con la conexión a Internet");
             }
             try
             {
                 Pop3Client client = new Pop3Client();
                 client.Connect("pop.gmail.com", 995, true);
                 client.Authenticate(this.iCuenta.Direccion, this.iCuenta.Contraseña);
-                int indice = 0;
-                IList<MailMessage> listaADevolver = new List<MailMessage>();
+                int indice = 1;
+                IList<Email> listaADevolver = new List<Email>();
                 while (indice <= client.GetMessageCount())
                 {
                    Message mail = client.GetMessage(indice);
-                    MailMessage msj = mail.ToMailMessage();
+                   MailMessage email = mail.ToMailMessage();
+                   Email msj = new Email(Convert.ToString(email.From),Convert.ToString(email.To),email.Body,email.Subject);
                     listaADevolver.Add(msj);
                     indice++;
                 }
@@ -119,10 +120,6 @@ namespace Trabajo_Final.Dominio
             }
         }
 
-        /// <summary>
-        /// Verifica la conección a Internet.
-        /// </summary>
-        /// <returns></returns>
         public override bool AccesoInternet() 
         {
             try

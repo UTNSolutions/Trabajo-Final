@@ -96,28 +96,6 @@ namespace Trabajo_Final.UI
         }
 
         /// <summary>
-        /// Cambia la pantalla principal y habilita el panel para mostrar los mail de una cuenta.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void obtenerMailsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            gpNuevoMail.Visible = false;
-            panelCuentas.Visible = true;
-        }
-
-        /// <summary>
-        /// Cambia la pantalla principal y habilita el panel para mostrar los mail de las cuentas.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void obtenerTodosToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            gpNuevoMail.Visible = false;
-            panelCuentas.Visible = true;
-        }
-
-        /// <summary>
         /// Habilita el TextBox que permita cargar el/las direcciones a los que se le envían una copia del mail. 
         /// </summary>
         /// <param name="sender"></param>
@@ -254,6 +232,8 @@ namespace Trabajo_Final.UI
                 progressBarEnviando.Value = 10;
                 lEnviado.Visible = true;
                 borrarMailEnviado(sender, e);
+                Fachada.Instancia.EnviarEmail(combobDe.SelectedValue.ToString(),Convert.ToString(tbPara.Text), Convert.ToString(tbAsunto.Text),Convert.ToString(tbCuerpo.Text), tbNombreCuenta.Text);
+                enviandoMail.Close();
             }
             catch (DAOExcepcion ex)
             {
@@ -276,7 +256,7 @@ namespace Trabajo_Final.UI
             }
             
         }
-
+            
         private void guardarComoBorradorToolStripMenuItem_Click(object sender, EventArgs e)
         {
             
@@ -300,6 +280,11 @@ namespace Trabajo_Final.UI
         private void BorrarLabelEnviado(object sender, MouseEventArgs e)
         {
             lEnviado.Visible = false;
+        }
+
+        private void obtenerMailsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+           dgEmails.DataSource = Fachada.Instancia.ObtenerEmail(tbNombreCuenta.Text);
         }
     }
 }

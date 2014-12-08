@@ -172,17 +172,19 @@ namespace Trabajo_Final.Controladores
         /// <param name="pEmail">Email a enviar</param>
         /// <param name="pCuenta">Cuenta con la que se quiere enviar el email</param>
         /// <exception cref="EmailExcepcion"></exception>
-        public void EnviarEmail(EmailDTO pEmail,string pNombreCuenta)
+        public void EnviarEmail(String pRemitente,String pDestinatario,String pAsunto,String pCuerpo,string pNombreCuenta)
         {
-            if (pEmail.Destinatario == null)
+            if (pDestinatario == null)
             {
                 throw new EmailExcepcion("Se debe ingresar un destinatario");
             }
             try
             {
                 Cuenta cuenta = Cuentas.Instancia.GetCuenta(pNombreCuenta);
-                cuenta.Servicio.Cuenta = cuenta;
-                cuenta.Servicio.EnviarMail(pEmail);
+                IServicio servicio = FabricaServicios.Instancia.GetServicio(cuenta.NombreServicio);
+                servicio.Cuenta = cuenta;
+                Email email = new Email(pRemitente, pDestinatario, pCuerpo, pAsunto);
+                servicio.EnviarMail(email);
             }
             catch (FormatException)
             {
@@ -208,6 +210,26 @@ namespace Trabajo_Final.Controladores
             {
                 throw ex;
             }
+        }
+
+        public IList<Email> ObtenerEmail(string pNombreCuenta)
+        {
+            try
+            {
+                Cuenta cuenta = Cuentas.Instancia.GetCuenta(pNombreCuenta);
+                IServicio servicio = FabricaServicios.Instancia.GetServicio(cuenta.NombreServicio);
+                servicio.Cuenta = cuenta;
+                return servicio.RecibirMail();
+            }
+            catch (InternetExcepcion ex)
+            {
+                 throw ex;
+            }
+            catch (EmailExcepcion ex)
+            {
+                throw ex;
+            }
+
         }
     }
 }
