@@ -11,6 +11,7 @@ using Trabajo_Final.Controladores;
 using Trabajo_Final.DTO;
 using Trabajo_Final.Dominio;
 using Trabajo_Final.Excepciones;
+using System.Threading;
 
 namespace Trabajo_Final.UI
 {
@@ -235,13 +236,24 @@ namespace Trabajo_Final.UI
         /// <param name="e"></param>
         private void toolStripMenubEnviar_Click(object sender, EventArgs e)
         {
-            FormEnviandoMail enviandoMail = new FormEnviandoMail();
-            enviandoMail.Show();
             try
             {
-                CuentaDTO cuenta = Fachada.Instancia.BuscarCuenta(combobDe.SelectedValue.ToString());
+                progressBarEnviando.Maximum = 10;
+                progressBarEnviando.Visible = true;
+                progressBarEnviando.Value = 3;
+                progressBarEnviando.Value = 4;
+                progressBarEnviando.Value = 5;
+                gpNuevoMail.Enabled = false;
+                gbEnviarMail.Enabled = false;
+                menuStrip1.Enabled = false;
+                CuentaDTO cuenta = Fachada.Instancia.BuscarCuenta(combobDe.SelectedValue.ToString());                
+                progressBarEnviando.Value = 6;
+                progressBarEnviando.Value = 7;
+                progressBarEnviando.Value = 8;
                 Fachada.Instancia.EnviarEmail(new EmailDTO(Convert.ToInt32(cuenta.IdCuenta), Convert.ToString(tbPara.Text), Convert.ToString(tbCuerpo.Text), Convert.ToString(tbAsunto.Text)), cuenta.Nombre);
-                enviandoMail.Close();
+                progressBarEnviando.Value = 10;
+                lEnviado.Visible = true;
+                borrarMailEnviado(sender, e);
             }
             catch (DAOExcepcion ex)
             {
@@ -255,12 +267,39 @@ namespace Trabajo_Final.UI
             {
                 MessageBox.Show(ex.Message, "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+            finally
+            {                
+                gpNuevoMail.Enabled = true;
+                gbEnviarMail.Enabled = true;
+                menuStrip1.Enabled = true;
+                progressBarEnviando.Visible = false;
+            }
             
         }
-            
+
         private void guardarComoBorradorToolStripMenuItem_Click(object sender, EventArgs e)
         {
             
+        }
+
+        private void borrarMailEnviado(object sender, EventArgs e)
+        {
+            tbPara.Text = "";
+            tbCuerpo.Text = "";
+            tbCC.Text = "";
+            tbCCO.Text = "";
+            tbAsunto.Text = "";
+            tbAdjuntos.Text = "";                
+        }
+
+        /// <summary>
+        /// Borra el label que notifica que se envio un mail.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void BorrarLabelEnviado(object sender, MouseEventArgs e)
+        {
+            lEnviado.Visible = false;
         }
     }
 }

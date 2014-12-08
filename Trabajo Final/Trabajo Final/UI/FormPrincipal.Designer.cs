@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Cuentas de Correo");
+            System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("Cuentas de Correo");
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.cuentasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.acercaDeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -65,6 +65,8 @@
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.bEnviar = new System.Windows.Forms.ToolStripMenuItem();
             this.bGuardarBorrador = new System.Windows.Forms.ToolStripMenuItem();
+            this.progressBarEnviando = new System.Windows.Forms.ProgressBar();
+            this.lEnviado = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.gbOpciones1.SuspendLayout();
             this.menuStrip2.SuspendLayout();
@@ -82,7 +84,7 @@
             this.acercaDeToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(853, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(854, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -104,10 +106,10 @@
             // 
             this.tvCuentas.Location = new System.Drawing.Point(3, 3);
             this.tvCuentas.Name = "tvCuentas";
-            treeNode1.Name = "Nodo0";
-            treeNode1.Text = "Cuentas de Correo";
+            treeNode5.Name = "Nodo0";
+            treeNode5.Text = "Cuentas de Correo";
             this.tvCuentas.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode1});
+            treeNode5});
             this.tvCuentas.Size = new System.Drawing.Size(185, 378);
             this.tvCuentas.TabIndex = 1;
             // 
@@ -116,7 +118,7 @@
             this.gbOpciones1.Controls.Add(this.menuStrip2);
             this.gbOpciones1.Location = new System.Drawing.Point(0, 27);
             this.gbOpciones1.Name = "gbOpciones1";
-            this.gbOpciones1.Size = new System.Drawing.Size(845, 45);
+            this.gbOpciones1.Size = new System.Drawing.Size(853, 45);
             this.gbOpciones1.TabIndex = 2;
             this.gbOpciones1.TabStop = false;
             // 
@@ -128,7 +130,7 @@
             this.nuevoMeilToolStripMenuItem});
             this.menuStrip2.Location = new System.Drawing.Point(3, 16);
             this.menuStrip2.Name = "menuStrip2";
-            this.menuStrip2.Size = new System.Drawing.Size(839, 24);
+            this.menuStrip2.Size = new System.Drawing.Size(847, 24);
             this.menuStrip2.TabIndex = 0;
             this.menuStrip2.Text = "menuStrip2";
             // 
@@ -165,6 +167,7 @@
             // gpNuevoMail
             // 
             this.gpNuevoMail.Controls.Add(this.combobDe);
+            this.gpNuevoMail.Controls.Add(this.progressBarEnviando);
             this.gpNuevoMail.Controls.Add(this.label2);
             this.gpNuevoMail.Controls.Add(this.botonCCO);
             this.gpNuevoMail.Controls.Add(this.botonCC);
@@ -180,7 +183,7 @@
             this.gpNuevoMail.Controls.Add(this.label1);
             this.gpNuevoMail.Location = new System.Drawing.Point(0, 78);
             this.gpNuevoMail.Name = "gpNuevoMail";
-            this.gpNuevoMail.Size = new System.Drawing.Size(845, 382);
+            this.gpNuevoMail.Size = new System.Drawing.Size(853, 400);
             this.gpNuevoMail.TabIndex = 5;
             this.gpNuevoMail.TabStop = false;
             this.gpNuevoMail.Text = "Nuevo Email";
@@ -189,7 +192,7 @@
             // combobDe
             // 
             this.combobDe.FormattingEnabled = true;
-            this.combobDe.Location = new System.Drawing.Point(104, 30);
+            this.combobDe.Location = new System.Drawing.Point(103, 41);
             this.combobDe.Name = "combobDe";
             this.combobDe.Size = new System.Drawing.Size(329, 21);
             this.combobDe.TabIndex = 15;
@@ -197,7 +200,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(77, 33);
+            this.label2.Location = new System.Drawing.Point(76, 44);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(21, 13);
             this.label2.TabIndex = 14;
@@ -205,7 +208,7 @@
             // 
             // botonCCO
             // 
-            this.botonCCO.Location = new System.Drawing.Point(61, 186);
+            this.botonCCO.Location = new System.Drawing.Point(60, 197);
             this.botonCCO.Name = "botonCCO";
             this.botonCCO.Size = new System.Drawing.Size(37, 23);
             this.botonCCO.TabIndex = 13;
@@ -215,7 +218,7 @@
             // 
             // botonCC
             // 
-            this.botonCC.Location = new System.Drawing.Point(61, 127);
+            this.botonCC.Location = new System.Drawing.Point(60, 138);
             this.botonCC.Name = "botonCC";
             this.botonCC.Size = new System.Drawing.Size(37, 23);
             this.botonCC.TabIndex = 12;
@@ -226,7 +229,7 @@
             // bAdjuntar
             // 
             this.bAdjuntar.Image = global::Trabajo_Final.Properties.Resources.attach;
-            this.bAdjuntar.Location = new System.Drawing.Point(397, 289);
+            this.bAdjuntar.Location = new System.Drawing.Point(396, 300);
             this.bAdjuntar.Name = "bAdjuntar";
             this.bAdjuntar.Size = new System.Drawing.Size(36, 24);
             this.bAdjuntar.TabIndex = 11;
@@ -235,7 +238,7 @@
             // 
             // tbAsunto
             // 
-            this.tbAsunto.Location = new System.Drawing.Point(104, 242);
+            this.tbAsunto.Location = new System.Drawing.Point(103, 253);
             this.tbAsunto.Name = "tbAsunto";
             this.tbAsunto.Size = new System.Drawing.Size(329, 20);
             this.tbAsunto.TabIndex = 10;
@@ -243,7 +246,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(58, 245);
+            this.label5.Location = new System.Drawing.Point(57, 256);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(40, 13);
             this.label5.TabIndex = 9;
@@ -251,7 +254,7 @@
             // 
             // tbCuerpo
             // 
-            this.tbCuerpo.Location = new System.Drawing.Point(442, 24);
+            this.tbCuerpo.Location = new System.Drawing.Point(441, 35);
             this.tbCuerpo.Name = "tbCuerpo";
             this.tbCuerpo.Size = new System.Drawing.Size(397, 341);
             this.tbCuerpo.TabIndex = 8;
@@ -259,7 +262,7 @@
             // 
             // tbCC
             // 
-            this.tbCC.Location = new System.Drawing.Point(104, 129);
+            this.tbCC.Location = new System.Drawing.Point(103, 140);
             this.tbCC.Name = "tbCC";
             this.tbCC.ReadOnly = true;
             this.tbCC.Size = new System.Drawing.Size(329, 20);
@@ -267,7 +270,7 @@
             // 
             // tbCCO
             // 
-            this.tbCCO.Location = new System.Drawing.Point(104, 188);
+            this.tbCCO.Location = new System.Drawing.Point(103, 199);
             this.tbCCO.Name = "tbCCO";
             this.tbCCO.ReadOnly = true;
             this.tbCCO.Size = new System.Drawing.Size(329, 20);
@@ -275,7 +278,7 @@
             // 
             // tbAdjuntos
             // 
-            this.tbAdjuntos.Location = new System.Drawing.Point(104, 292);
+            this.tbAdjuntos.Location = new System.Drawing.Point(103, 303);
             this.tbAdjuntos.Name = "tbAdjuntos";
             this.tbAdjuntos.ReadOnly = true;
             this.tbAdjuntos.Size = new System.Drawing.Size(287, 20);
@@ -283,7 +286,7 @@
             // 
             // tbPara
             // 
-            this.tbPara.Location = new System.Drawing.Point(104, 79);
+            this.tbPara.Location = new System.Drawing.Point(103, 90);
             this.tbPara.Name = "tbPara";
             this.tbPara.Size = new System.Drawing.Size(329, 20);
             this.tbPara.TabIndex = 4;
@@ -291,7 +294,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(6, 294);
+            this.label4.Location = new System.Drawing.Point(5, 305);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(92, 13);
             this.label4.TabIndex = 3;
@@ -300,7 +303,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(69, 82);
+            this.label1.Location = new System.Drawing.Point(68, 93);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(29, 13);
             this.label1.TabIndex = 0;
@@ -321,7 +324,7 @@
             this.dgvCuentas.Name = "dgvCuentas";
             this.dgvCuentas.ReadOnly = true;
             this.dgvCuentas.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.dgvCuentas.Size = new System.Drawing.Size(648, 348);
+            this.dgvCuentas.Size = new System.Drawing.Size(659, 348);
             this.dgvCuentas.TabIndex = 6;
             // 
             // nombre
@@ -358,15 +361,16 @@
             this.panelCuentas.Controls.Add(this.dgvCuentas);
             this.panelCuentas.Location = new System.Drawing.Point(0, 78);
             this.panelCuentas.Name = "panelCuentas";
-            this.panelCuentas.Size = new System.Drawing.Size(845, 384);
+            this.panelCuentas.Size = new System.Drawing.Size(853, 400);
             this.panelCuentas.TabIndex = 7;
             // 
             // gbEnviarMail
             // 
+            this.gbEnviarMail.Controls.Add(this.lEnviado);
             this.gbEnviarMail.Controls.Add(this.menuStrip3);
             this.gbEnviarMail.Location = new System.Drawing.Point(0, 27);
             this.gbEnviarMail.Name = "gbEnviarMail";
-            this.gbEnviarMail.Size = new System.Drawing.Size(845, 45);
+            this.gbEnviarMail.Size = new System.Drawing.Size(853, 45);
             this.gbEnviarMail.TabIndex = 8;
             this.gbEnviarMail.TabStop = false;
             this.gbEnviarMail.Visible = false;
@@ -379,7 +383,7 @@
             this.bGuardarBorrador});
             this.menuStrip3.Location = new System.Drawing.Point(3, 16);
             this.menuStrip3.Name = "menuStrip3";
-            this.menuStrip3.Size = new System.Drawing.Size(839, 24);
+            this.menuStrip3.Size = new System.Drawing.Size(847, 24);
             this.menuStrip3.TabIndex = 0;
             this.menuStrip3.Text = "menuStrip3";
             // 
@@ -406,11 +410,31 @@
             this.bGuardarBorrador.Text = "Guardar como borrador";
             this.bGuardarBorrador.Click += new System.EventHandler(this.guardarComoBorradorToolStripMenuItem_Click);
             // 
+            // progressBarEnviando
+            // 
+            this.progressBarEnviando.Location = new System.Drawing.Point(6, 17);
+            this.progressBarEnviando.Name = "progressBarEnviando";
+            this.progressBarEnviando.Size = new System.Drawing.Size(841, 12);
+            this.progressBarEnviando.TabIndex = 9;
+            this.progressBarEnviando.Visible = false;
+            // 
+            // lEnviado
+            // 
+            this.lEnviado.AutoSize = true;
+            this.lEnviado.BackColor = System.Drawing.Color.LightGreen;
+            this.lEnviado.ForeColor = System.Drawing.Color.Blue;
+            this.lEnviado.Location = new System.Drawing.Point(786, 26);
+            this.lEnviado.Name = "lEnviado";
+            this.lEnviado.Size = new System.Drawing.Size(61, 13);
+            this.lEnviado.TabIndex = 8;
+            this.lEnviado.Text = "Enviado.    ";
+            this.lEnviado.Visible = false;
+            // 
             // FormPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(853, 462);
+            this.ClientSize = new System.Drawing.Size(854, 478);
             this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.gbEnviarMail);
             this.Controls.Add(this.gbOpciones1);
@@ -424,6 +448,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Administrador de Correo";
             this.Load += new System.EventHandler(this.FormPrincipal_Load);
+            this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.BorrarLabelEnviado);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.gbOpciones1.ResumeLayout(false);
@@ -482,6 +507,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn fecha;
         private System.Windows.Forms.ComboBox combobDe;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.ProgressBar progressBarEnviando;
+        private System.Windows.Forms.Label lEnviado;
     }
 }
 
