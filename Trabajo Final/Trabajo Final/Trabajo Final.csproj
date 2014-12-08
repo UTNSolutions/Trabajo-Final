@@ -53,6 +53,7 @@
     <Compile Include="Controladores\FachadaABMEmail.cs" />
     <Compile Include="Dominio\Cuenta.cs" />
     <Compile Include="Dominio\Cuentas.cs" />
+    <Compile Include="Dominio\Email.cs" />
     <Compile Include="Excepciones\DAOExcepcion.cs" />
     <Compile Include="Excepciones\EmailExcepcion.cs" />
     <Compile Include="Excepciones\InternetExcepcion.cs" />

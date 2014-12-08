@@ -19,17 +19,26 @@ namespace Trabajo_Final.Dominio
         /// </summary>
         /// <exception cref="NullReferenceException"></exception>
         /// <exception cref="EmailExcepcion"></exception>
-        void EnviarMail(EmailDTO pMail);
+        /// <exception cref="InternetExcepcion"></exception>
+        void EnviarMail(Email pMail);
 
         /// <summary>
         /// Permite recibir emails
         /// </summary>
         /// <exception cref="NullReferenceException"></exception>
         /// <exception cref="EmailExcepcion"></exception>
-        IList<MailMessage> RecibirMail();
+        /// <exception cref="InternetExcepcion"></exception>
+        IList<Email> RecibirMail();
 
-        Cuenta Cuenta { get; set; }
+        /// <summary>
+        /// Setea una cuenta que al servicio de correo
+        /// </summary>
+        Cuenta Cuenta { set; }
 
+        /// <summary>
+        /// Verifica la conexion a Internet
+        /// </summary>
+        /// <returns></returns>
         bool AccesoInternet();
 
     }

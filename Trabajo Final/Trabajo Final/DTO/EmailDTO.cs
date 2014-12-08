@@ -7,10 +7,12 @@ using System.Threading.Tasks;
 namespace Trabajo_Final.DTO
 {
     /// <summary>
-    /// Representa un email
+    /// Representa un email DTO
     /// </summary>
     public class EmailDTO
     {
+        private String iRemitente;
+
         private String iDestinatario;
 
         private int iIdEmail;
@@ -21,21 +23,32 @@ namespace Trabajo_Final.DTO
 
         private String iAsunto;
 
-        public EmailDTO(int pIdCuenta,String pDestinatario,String pCuerpo, String pAsunto)
+        public EmailDTO(int pIdCuenta,String pRemitente,String pDestinatario,String pCuerpo, String pAsunto)
         {
+            this.iRemitente = pRemitente;
             this.iDestinatario = pDestinatario;
             this.iIdCuenta = pIdCuenta;
             this.iCuerpo = pCuerpo;
             this.iAsunto = pAsunto;
         }
 
-        public EmailDTO(int pIdEmail,int pIdCuenta, String pDestinatario, String pCuerpo, String pAsunto)
+        public EmailDTO(int pIdEmail,int pIdCuenta,String pRemitente, String pDestinatario, String pCuerpo, String pAsunto)
         {
+            this.iRemitente = pRemitente;
             this.iIdEmail = pIdEmail;
             this.iDestinatario = pDestinatario;
             this.iIdCuenta = pIdCuenta;
             this.iCuerpo = pCuerpo;
             this.iAsunto = pAsunto;
+        }
+
+        /// <summary>
+        /// Devuelve el componente remitente
+        /// </summary>
+        public String Remitente
+        {
+            get { return this.iRemitente; }
+            set { this.iRemitente = value; }
         }
 
         /// <summary>

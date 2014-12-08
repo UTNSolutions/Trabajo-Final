@@ -65,7 +65,7 @@ namespace Trabajo_Final.Persistencia
                 operacion.Fill(tabla);
                 foreach (DataRow fila in tabla.Rows)
                 {
-                    listaEmails.Add(new EmailDTO(Convert.ToInt32(fila["idEmail"]),Convert.ToInt32(fila["idCuenta"]),Convert.ToString(fila["destinatario"]),Convert.ToString(fila["cuerpo"]),Convert.ToString(fila["asunto"])));
+                    listaEmails.Add(new EmailDTO(Convert.ToInt32(fila["idEmail"]),Convert.ToInt32(fila["idCuenta"]),Convert.ToString(fila["remitente"]),Convert.ToString(fila["destinatario"]),Convert.ToString(fila["cuerpo"]),Convert.ToString(fila["asunto"])));
                 }
                 return listaEmails;
             }

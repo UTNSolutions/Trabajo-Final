@@ -25,7 +25,7 @@ namespace Trabajo_Final.Dominio
             this.iCuenta = null;
         }
                 
-        public override void EnviarMail(EmailDTO pMail)
+        public override void EnviarMail(Email pMail)
         {
             if (this.iCuenta == null)
             {
@@ -48,7 +48,7 @@ namespace Trabajo_Final.Dominio
 
             client.Host = "smtp.mail.yahoo.com";
             client.EnableSsl = true;  //Esto es para que vaya a través de SSL que es obligatorio con Yahoo
-            MailMessage email = new MailMessage(this.Cuenta.Direccion, pMail.Destinatario, pMail.Asunto, pMail.Cuerpo);
+            MailMessage email = new MailMessage(this.iCuenta.Direccion, pMail.Destinatario, pMail.Asunto, pMail.Cuerpo);
             try
             {
                 client.Send(email);
@@ -67,11 +67,15 @@ namespace Trabajo_Final.Dominio
             }
         }
 
-        public override IList<MailMessage> RecibirMail()
+        public override IList<Email> RecibirMail()
         {
             if (this.iCuenta == null)
             {
                 throw new NullReferenceException("No hay una cuenta asociada para realizar la operación");
+            }
+            if (!AccesoInternet())
+            {
+                throw new InternetExcepcion("Existe un problema con la conexión a Internet");
             }
             try
             {
@@ -79,11 +83,12 @@ namespace Trabajo_Final.Dominio
                 client.Connect("pop.mail.yahoo.com", 995, true);
                 client.Authenticate(this.iCuenta.Direccion, this.iCuenta.Contraseña);
                 int indice = 1;
-                IList<MailMessage> listaADevolver = new List<MailMessage>();
+                IList<Email> listaADevolver = new List<Email>();
                 while (indice <= client.GetMessageCount())
                 {
                     Message mail = client.GetMessage(indice);
-                    MailMessage msj = mail.ToMailMessage();
+                    MailMessage email = mail.ToMailMessage();
+                    Email msj = new Email(Convert.ToString(email.From),Convert.ToString(email.To), email.Body, email.Subject);
                     listaADevolver.Add(msj);
                     indice++;
                 }
@@ -102,10 +107,6 @@ namespace Trabajo_Final.Dominio
 
         public override Cuenta Cuenta
         {
-            get
-            {
-                return this.iCuenta;
-            }
             set
             {
                 this.iCuenta = value;
@@ -118,10 +119,6 @@ namespace Trabajo_Final.Dominio
             get { return this.iNombre; }
         }
 
-        /// <summary>
-        /// Verifica la conección a Internet.
-        /// </summary>
-        /// <returns></returns>
         public override bool AccesoInternet()
         {
             try

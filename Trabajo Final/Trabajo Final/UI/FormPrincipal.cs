@@ -95,28 +95,6 @@ namespace Trabajo_Final.UI
         }
 
         /// <summary>
-        /// Cambia la pantalla principal y habilita el panel para mostrar los mail de una cuenta.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void obtenerMailsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            gpNuevoMail.Visible = false;
-            panelCuentas.Visible = true;
-        }
-
-        /// <summary>
-        /// Cambia la pantalla principal y habilita el panel para mostrar los mail de las cuentas.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void obtenerTodosToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            gpNuevoMail.Visible = false;
-            panelCuentas.Visible = true;
-        }
-
-        /// <summary>
         /// Habilita el TextBox que permita cargar el/las direcciones a los que se le envían una copia del mail. 
         /// </summary>
         /// <param name="sender"></param>
@@ -239,8 +217,7 @@ namespace Trabajo_Final.UI
             enviandoMail.Show();
             try
             {
-                CuentaDTO cuenta = Fachada.Instancia.BuscarCuenta(combobDe.SelectedValue.ToString());
-                Fachada.Instancia.EnviarEmail(new EmailDTO(Convert.ToInt32(cuenta.IdCuenta), Convert.ToString(tbPara.Text), Convert.ToString(tbCuerpo.Text), Convert.ToString(tbAsunto.Text)), cuenta.Nombre);
+                Fachada.Instancia.EnviarEmail(combobDe.SelectedValue.ToString(),Convert.ToString(tbPara.Text), Convert.ToString(tbAsunto.Text),Convert.ToString(tbCuerpo.Text), tbNombreCuenta.Text);
                 enviandoMail.Close();
             }
             catch (DAOExcepcion ex)
@@ -261,6 +238,11 @@ namespace Trabajo_Final.UI
         private void guardarComoBorradorToolStripMenuItem_Click(object sender, EventArgs e)
         {
             
+        }
+
+        private void obtenerMailsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+           dgEmails.DataSource = Fachada.Instancia.ObtenerEmail(tbNombreCuenta.Text);
         }
     }
 }
