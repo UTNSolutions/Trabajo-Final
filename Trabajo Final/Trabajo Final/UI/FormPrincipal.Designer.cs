@@ -358,10 +358,10 @@
             // 
             // panelCuentas
             // 
-            this.panelCuentas.Controls.Add(this.dgEmails);
             this.panelCuentas.Controls.Add(this.tbNombreCuenta);
             this.panelCuentas.Controls.Add(this.tvCuentas);
             this.panelCuentas.Controls.Add(this.textBox1);
+            this.panelCuentas.Controls.Add(this.dgEmails);
             this.panelCuentas.Location = new System.Drawing.Point(0, 78);
             this.panelCuentas.Name = "panelCuentas";
             this.panelCuentas.Size = new System.Drawing.Size(853, 400);
@@ -447,9 +447,9 @@
             this.ClientSize = new System.Drawing.Size(854, 478);
             this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.gbEnviarMail);
-            this.Controls.Add(this.panelCuentas);
             this.Controls.Add(this.gpNuevoMail);
             this.Controls.Add(this.gbOpciones1);
+            this.Controls.Add(this.panelCuentas);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MainMenuStrip = this.menuStrip1;
             this.MaximizeBox = false;

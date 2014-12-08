@@ -223,16 +223,14 @@ namespace Trabajo_Final.UI
                 progressBarEnviando.Value = 5;
                 gpNuevoMail.Enabled = false;
                 gbEnviarMail.Enabled = false;
-                menuStrip1.Enabled = false;
-                CuentaDTO cuenta = Fachada.Instancia.BuscarCuenta(combobDe.SelectedValue.ToString());                
+                menuStrip1.Enabled = false;               
                 progressBarEnviando.Value = 6;
                 progressBarEnviando.Value = 7;
                 progressBarEnviando.Value = 8;
-                Fachada.Instancia.EnviarEmail(combobDe.SelectedValue.ToString(), Convert.ToString(tbPara.Text), Convert.ToString(tbCuerpo.Text), Convert.ToString(tbAsunto.Text), tbNombreCuenta.Text);
+                Fachada.Instancia.EnviarEmail(combobDe.SelectedItem.ToString(), Convert.ToString(tbPara.Text), Convert.ToString(tbCuerpo.Text), Convert.ToString(tbAsunto.Text), combobDe.SelectedValue.ToString());
                 progressBarEnviando.Value = 10;
                 lEnviado.Visible = true;
-                borrarMailEnviado(sender, e);
-                Fachada.Instancia.EnviarEmail(combobDe.SelectedValue.ToString(),Convert.ToString(tbPara.Text), Convert.ToString(tbAsunto.Text),Convert.ToString(tbCuerpo.Text), tbNombreCuenta.Text);
+                borrarMailEnviado(sender, e);             
             }
             catch (DAOExcepcion ex)
             {
