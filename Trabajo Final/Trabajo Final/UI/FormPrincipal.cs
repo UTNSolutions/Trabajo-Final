@@ -228,12 +228,11 @@ namespace Trabajo_Final.UI
                 progressBarEnviando.Value = 6;
                 progressBarEnviando.Value = 7;
                 progressBarEnviando.Value = 8;
-                Fachada.Instancia.EnviarEmail(new EmailDTO(Convert.ToInt32(cuenta.IdCuenta), Convert.ToString(tbPara.Text), Convert.ToString(tbCuerpo.Text), Convert.ToString(tbAsunto.Text)), cuenta.Nombre);
+                Fachada.Instancia.EnviarEmail(combobDe.SelectedValue.ToString(), Convert.ToString(tbPara.Text), Convert.ToString(tbCuerpo.Text), Convert.ToString(tbAsunto.Text), tbNombreCuenta.Text);
                 progressBarEnviando.Value = 10;
                 lEnviado.Visible = true;
                 borrarMailEnviado(sender, e);
                 Fachada.Instancia.EnviarEmail(combobDe.SelectedValue.ToString(),Convert.ToString(tbPara.Text), Convert.ToString(tbAsunto.Text),Convert.ToString(tbCuerpo.Text), tbNombreCuenta.Text);
-                enviandoMail.Close();
             }
             catch (DAOExcepcion ex)
             {
