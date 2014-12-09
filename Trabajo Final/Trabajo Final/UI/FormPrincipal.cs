@@ -12,6 +12,7 @@ using Trabajo_Final.DTO;
 using Trabajo_Final.Dominio;
 using Trabajo_Final.Excepciones;
 using System.Threading;
+using System.Text.RegularExpressions;
 
 namespace Trabajo_Final.UI
 {
@@ -227,10 +228,10 @@ namespace Trabajo_Final.UI
                 progressBarEnviando.Value = 6;
                 progressBarEnviando.Value = 7;
                 progressBarEnviando.Value = 8;
-                Fachada.Instancia.EnviarEmail(combobDe.SelectedItem.ToString(), Convert.ToString(tbPara.Text), Convert.ToString(tbCuerpo.Text), Convert.ToString(tbAsunto.Text), combobDe.SelectedValue.ToString());
+                Fachada.Instancia.EnviarEmail(combobDe.SelectedItem.ToString(), generarListaDestinatario(), generarListaConCopia(), generarListaConCopiaOculta(), Convert.ToString(tbAsunto.Text), Convert.ToString(tbCuerpo.Text), combobDe.SelectedValue.ToString());
                 progressBarEnviando.Value = 10;
                 lEnviado.Visible = true;
-                borrarMailEnviado(sender, e);             
+                borrarMailEnviado();             
             }
             catch (DAOExcepcion ex)
             {
@@ -253,20 +254,127 @@ namespace Trabajo_Final.UI
             }
             
         }
-            
+
+        /// <summary>
+        /// Genera una lista de string con los destinatarioas.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        /// <returns></returns>
+        private List<String>  generarListaDestinatario()
+        {
+            List<String> listaDestinatarios = new List<String>();
+            String cadena = "";
+            int ind = 0;
+            while (ind < tbPara.Text.Length)
+            {
+                if (tbPara.Text[ind].ToString() != ";" && ind != tbPara.Text.Length)
+                {
+                    cadena = cadena + tbPara.Text[ind].ToString();
+                    ind ++;
+                }
+                else 
+                {
+                    if (tbPara.Text[ind].ToString() == ";")
+                    {
+                        listaDestinatarios.Add(cadena);
+                        cadena = "";
+                        ind = ind + 2;
+                    }
+                    else
+                    {
+                        cadena = cadena + tbPara.Text[ind].ToString();
+                        listaDestinatarios.Add(cadena);
+                        cadena = "";
+                        ind++;
+                    }
+                }
+            }
+            return listaDestinatarios;
+        }
+
+        private List<String> generarListaConCopia()
+        {
+            List<String> listaDestinatarios = new List<String>();
+            String cadena = "";
+            int ind = 0;
+            while (ind < tbCC.Text.Length)
+            {
+                if (tbCC.Text[ind].ToString() != ";" && ind != tbCC.Text.Length)
+                {
+                    cadena = cadena + tbCC.Text[ind].ToString();
+                    ind++;
+                }
+                else
+                {
+                    if (tbCC.Text[ind].ToString() == ";")
+                    {
+                        listaDestinatarios.Add(cadena);
+                        cadena = "";
+                        ind = ind + 2;
+                    }
+                    else
+                    {
+                        cadena = cadena + tbCC.Text[ind].ToString();
+                        listaDestinatarios.Add(cadena);
+                        cadena = "";
+                        ind++;
+                    }
+                }
+            }
+            return listaDestinatarios;
+        }
+
+        private List<String> generarListaConCopiaOculta()
+        {
+            List<String> listaDestinatarios = new List<String>();
+            String cadena = "";
+            int ind = 0;
+            while (ind < tbCCO.Text.Length)
+            {
+                if (tbCCO.Text[ind].ToString() != ";" && ind != tbCCO.Text.Length)
+                {
+                    cadena = cadena + tbCCO.Text[ind].ToString();
+                    ind++;
+                }
+                else
+                {
+                    if (tbCCO.Text[ind].ToString() == ";")
+                    {
+                        listaDestinatarios.Add(cadena);
+                        cadena = "";
+                        ind = ind + 2;
+                    }
+                    else
+                    {
+                        cadena = cadena + tbCCO.Text[ind].ToString();
+                        listaDestinatarios.Add(cadena);
+                        cadena = "";
+                        ind++;
+                    }
+                }
+            }
+            return listaDestinatarios;
+        }
+
         private void guardarComoBorradorToolStripMenuItem_Click(object sender, EventArgs e)
         {
             
         }
 
-        private void borrarMailEnviado(object sender, EventArgs e)
+        /// <summary>
+        /// Luego que se envia un mail borra el panel y sus elementos.
+        /// </summary>
+        private void borrarMailEnviado()
         {
             tbPara.Text = "";
             tbCuerpo.Text = "";
             tbCC.Text = "";
             tbCCO.Text = "";
             tbAsunto.Text = "";
-            tbAdjuntos.Text = "";                
+            tbAdjuntos.Text = "";
+            tbCC.ReadOnly = true;
+            tbCCO.ReadOnly = true;              
         }
 
         /// <summary>
@@ -282,6 +390,34 @@ namespace Trabajo_Final.UI
         private void obtenerMailsToolStripMenuItem_Click(object sender, EventArgs e)
         {
            dgEmails.DataSource = Fachada.Instancia.ObtenerEmail(tbNombreCuenta.Text);
+        }
+
+
+        private void tbPara_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)13)
+            {
+                tbPara.Text = tbPara.Text + "; ";
+                tbPara.Select(tbPara.Location.X + tbPara.Text.Length, tbPara.Location.Y);
+            }
+        }
+
+        private void tbCC_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)13)
+            {
+                tbPara.Text = tbPara.Text + "; ";
+                tbPara.Select(tbPara.Location.X + tbPara.Text.Length, tbPara.Location.Y);
+            }
+        }
+
+        private void tbCCO_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)13)
+            {
+                tbPara.Text = tbPara.Text + "; ";
+                tbPara.Select(tbPara.Location.X + tbPara.Text.Length, tbPara.Location.Y);
+            }
         }
     }
 }

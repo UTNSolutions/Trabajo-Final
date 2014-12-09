@@ -172,7 +172,7 @@ namespace Trabajo_Final.Controladores
         /// <param name="pEmail">Email a enviar</param>
         /// <param name="pCuenta">Cuenta con la que se quiere enviar el email</param>
         /// <exception cref="EmailExcepcion"></exception>
-        public void EnviarEmail(String pRemitente,String pDestinatario,String pAsunto,String pCuerpo,string pNombreCuenta)
+        public void EnviarEmail(String pRemitente,List<String> pDestinatario,List<String> pConCopia,List<String> pConCopiaOculta, String pAsunto, String pCuerpo,string pNombreCuenta)
         {
             if (pDestinatario == null)
             {
@@ -183,7 +183,7 @@ namespace Trabajo_Final.Controladores
                 Cuenta cuenta = Cuentas.Instancia.GetCuenta(pNombreCuenta);
                 IServicio servicio = FabricaServicios.Instancia.GetServicio(cuenta.NombreServicio);
                 servicio.Cuenta = cuenta;
-                Email email = new Email(pRemitente, pDestinatario, pCuerpo, pAsunto);
+                Email email = new Email(pRemitente, pDestinatario, pConCopia, pConCopiaOculta, pCuerpo, pAsunto);
                 servicio.EnviarMail(email);
             }
             catch (FormatException)

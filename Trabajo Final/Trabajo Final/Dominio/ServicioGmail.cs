@@ -46,39 +46,42 @@ namespace Trabajo_Final.Dominio
             {
                 throw new NullReferenceException("No hay una cuenta asociada para realizar la operacion");
             }
-            String cadena = pMail.Destinatario;
-            if (!(Regex.IsMatch(cadena, "\\w+([-+.']\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*")))
+            foreach (string destinatario in pMail.Destinatario)
             {
-                throw new EmailExcepcion("El destinatario no posee la estructura correcta");
-            }
-            if (!AccesoInternet())
-            {
-                throw new InternetExcepcion("Existe un problema con la conexión a Internet");
-            }
-            SmtpClient client = new SmtpClient();
+                String cadena = destinatario;
+                if (!(Regex.IsMatch(cadena, "\\w+([-+.']\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*")))
+                {
+                    throw new EmailExcepcion("El destinatario no posee la estructura correcta");
+                }
+                if (!AccesoInternet())
+                {
+                    throw new InternetExcepcion("Existe un problema con la conexión a Internet");
+                }
+                SmtpClient client = new SmtpClient();
+                
+                client.Credentials = this.iCredenciales;
 
-            client.Credentials = this.iCredenciales;
+                client.Port = 587;
 
-            client.Port = 587;
-
-            client.Host = "smtp.gmail.com";
-            client.EnableSsl = true;  //Esto es para que vaya a través de SSL que es obligatorio con GMail
-            MailMessage email = new MailMessage(this.iCuenta.Direccion, pMail.Destinatario, pMail.Asunto, pMail.Cuerpo);
-            try
-            {
-                client.Send(email);
-            }
-            catch (SmtpFailedRecipientsException)
-            {
-                throw new EmailExcepcion("No se pudo enviar el E-mail a todos los destinatarios, verifique los datos");        
-            }
-            catch (SmtpFailedRecipientException)
-            {
-                throw new EmailExcepcion("No se pudo enviar el E-mail, verifique los datos");
-            }
-            catch (SmtpException)
-            {
-                throw new EmailExcepcion("Fallo la autenticación de la direccion de correo, verifique los datos de la cuenta");
+                client.Host = "smtp.gmail.com";
+                client.EnableSsl = true;  //Esto es para que vaya a través de SSL que es obligatorio con GMail
+                MailMessage email = new MailMessage(this.iCuenta.Direccion, destinatario, pMail.Asunto, pMail.Cuerpo);
+                try
+                {
+                    client.Send(email);
+                }
+                catch (SmtpFailedRecipientsException)
+                {
+                    throw new EmailExcepcion("No se pudo enviar el E-mail a todos los destinatarios, verifique los datos");        
+                }
+                catch (SmtpFailedRecipientException)
+                {
+                    throw new EmailExcepcion("No se pudo enviar el E-mail, verifique los datos");
+                }
+                catch (SmtpException)
+                {
+                    throw new EmailExcepcion("Fallo la autenticación de la direccion de correo, verifique los datos de la cuenta");
+                }
             }
         }
 
@@ -103,7 +106,20 @@ namespace Trabajo_Final.Dominio
                 {
                    Message mail = client.GetMessage(indice);
                    MailMessage email = mail.ToMailMessage();
-                   Email msj = new Email(Convert.ToString(email.From),Convert.ToString(email.To),email.Body,email.Subject);
+                   List<String> listaDestinatarios = new List<String>();
+                   listaDestinatarios.Add(email.To.ToString());
+                   List<String> listaConCopia = new List<String>();
+                   foreach (MailAddress cadenaCopia in email.CC)
+                   {
+                       listaConCopia.Add(cadenaCopia.ToString());
+                   }
+                   List<String> listaConCopiaOculta = new List<String>();
+                   foreach (MailAddress cadenaCopiaOculta in email.CC)
+                   {
+                       listaConCopiaOculta.Add(cadenaCopiaOculta.ToString());
+                   }
+                   listaDestinatarios.Add(Convert.ToString(email.To));
+                   Email msj = new Email(Convert.ToString(email.From), listaDestinatarios, listaConCopia, listaConCopiaOculta, email.Body, email.Subject);
                     listaADevolver.Add(msj);
                     indice++;
                 }
