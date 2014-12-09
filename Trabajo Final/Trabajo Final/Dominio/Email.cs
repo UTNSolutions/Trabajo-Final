@@ -17,20 +17,20 @@ namespace Trabajo_Final.Dominio
 
         private String iCuerpo;
 
-        private IList<String> iConCopia;
+       // private IList<String> iConCopia;
 
-        private IList<String> iConCopiaOculta;
+        //private IList<String> iConCopiaOculta;
 
         private String iAsunto;
 
-        public Email(String pRemitente,List<String> pDestinatario, List<String> pCC, List<String> pCCO, String pCuerpo, String pAsunto)
+        public Email(String pRemitente,IList<String> pDestinatario, String pCuerpo, String pAsunto)
         {
             this.iRemitente = pRemitente;
             this.iDestinatario = pDestinatario;
             this.iCuerpo = pCuerpo;
             this.iAsunto = pAsunto;
-            this.iConCopia = pCC;
-            this.iConCopiaOculta = pCCO;
+           // this.iConCopia = pCC;
+          //  this.iConCopiaOculta = pCCO;
         }
 
         /// <summary>
@@ -47,22 +47,6 @@ namespace Trabajo_Final.Dominio
         public IList<String> Destinatario
         {
             get { return this.iDestinatario; }
-        }
-
-        /// <summary>
-        /// Devuelve el componente Con Copia a.
-        /// </summary>
-        public IList<String> ConCopia
-        {
-            get { return this.iConCopia; }
-        }
-
-        /// <summary>
-        /// Devuelve el componente Con Copia Oculta a.
-        /// </summary>
-        public IList<String> ConCopiaOculta
-        {
-            get { return this.iConCopiaOculta; }
         }
 
         /// <summary>

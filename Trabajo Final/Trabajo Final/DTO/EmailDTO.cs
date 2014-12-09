@@ -13,7 +13,7 @@ namespace Trabajo_Final.DTO
     {
         private String iRemitente;
 
-        private String iDestinatario;
+        private IList<String> iDestinatario;
 
         private int iIdEmail;
 
@@ -23,20 +23,28 @@ namespace Trabajo_Final.DTO
 
         private String iAsunto;
 
-        public EmailDTO(int pIdCuenta,String pRemitente,String pDestinatario,String pCuerpo, String pAsunto)
+      //  private IList<String> iConCopia;
+
+       // private IList<String> iConCopiaOculta;
+
+        public EmailDTO(int pIdCuenta,String pRemitente,IList<String> pDestinatario,String pCuerpo, String pAsunto)
         {
             this.iRemitente = pRemitente;
             this.iDestinatario = pDestinatario;
+           // this.iConCopia = pConCopia;
+            //this.iConCopiaOculta = pConCopiaOculta;
             this.iIdCuenta = pIdCuenta;
             this.iCuerpo = pCuerpo;
             this.iAsunto = pAsunto;
         }
 
-        public EmailDTO(int pIdEmail,int pIdCuenta,String pRemitente, String pDestinatario, String pCuerpo, String pAsunto)
+        public EmailDTO(int pIdEmail, int pIdCuenta, String pRemitente, IList<String> pDestinatario, String pCuerpo, String pAsunto)
         {
             this.iRemitente = pRemitente;
             this.iIdEmail = pIdEmail;
             this.iDestinatario = pDestinatario;
+           // this.iConCopia = pConCopia;
+          //  this.iConCopiaOculta = pConCopiaOculta;
             this.iIdCuenta = pIdCuenta;
             this.iCuerpo = pCuerpo;
             this.iAsunto = pAsunto;
@@ -54,7 +62,7 @@ namespace Trabajo_Final.DTO
         /// <summary>
         /// Devuelve el componente Destinatario
         /// </summary>
-        public String Destinatario
+        public IList<String> Destinatario
         {
             get { return this.iDestinatario; }
             set { this.iDestinatario = value; }

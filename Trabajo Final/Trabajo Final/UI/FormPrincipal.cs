@@ -12,6 +12,7 @@ using Trabajo_Final.Excepciones;
 using Trabajo_Final.Dominio;
 using System.Threading;
 using System.Text.RegularExpressions;
+using Trabajo_Final.Utils;
 
 namespace Trabajo_Final.UI
 {
@@ -227,7 +228,6 @@ namespace Trabajo_Final.UI
                 progressBarEnviando.Value = 6;
                 progressBarEnviando.Value = 7;
                 progressBarEnviando.Value = 8;
-                Fachada.Instancia.EnviarEmail(combobDe.SelectedItem.ToString(), generarListaDestinatario(), generarListaConCopia(), generarListaConCopiaOculta(), Convert.ToString(tbAsunto.Text), Convert.ToString(tbCuerpo.Text), combobDe.SelectedValue.ToString());
                 progressBarEnviando.Value = 10;
                 lEnviado.Visible = true;
                 borrarMailEnviado();             
@@ -287,78 +287,14 @@ namespace Trabajo_Final.UI
             }
             return listaDestinatarios;
         }
-
-        private List<String> generarListaConCopia()
-        {
-            List<String> listaDestinatarios = new List<String>();
-            String cadena = "";
-            int ind = 0;
-            while (ind < tbCC.Text.Length)
-            {
-                if (tbCC.Text[ind].ToString() != ";" && ind != tbCC.Text.Length)
-                {
-                    cadena = cadena + tbCC.Text[ind].ToString();
-                    ind++;
-                }
-                else
-                {
-                    if (tbCC.Text[ind].ToString() == ";")
-                    {
-                        listaDestinatarios.Add(cadena);
-                        cadena = "";
-                        ind = ind + 2;
-                    }
-                    else
-                    {
-                        cadena = cadena + tbCC.Text[ind].ToString();
-                        listaDestinatarios.Add(cadena);
-                        cadena = "";
-                        ind++;
-                    }
-                }
-            }
-            return listaDestinatarios;
-        }
-            
-        private List<String> generarListaConCopiaOculta()
-        {
-            List<String> listaDestinatarios = new List<String>();
-            String cadena = "";
-            int ind = 0;
-            while (ind < tbCCO.Text.Length)
-            {
-                if (tbCCO.Text[ind].ToString() != ";" && ind != tbCCO.Text.Length)
-                {
-                    cadena = cadena + tbCCO.Text[ind].ToString();
-                    ind++;
-                }
-                else
-                {
-                    if (tbCCO.Text[ind].ToString() == ";")
-                    {
-                        listaDestinatarios.Add(cadena);
-                        cadena = "";
-                        ind = ind + 2;
-                    }
-                    else
-                    {
-                        cadena = cadena + tbCCO.Text[ind].ToString();
-                        listaDestinatarios.Add(cadena);
-                        cadena = "";
-                        ind++;
-                    }
-                }
-            }
-            return listaDestinatarios;
-        }
-            
+           
         /// <summary>
         /// Cargar el data grid con los datos de los emails de una cuenta teniendo en cuenta
         /// el nodo seleccionado
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void CargarDataGrid(object sender, TreeNodeMouseClickEventArgs e)
+        private void MostrarDatosDelNodo(object sender, TreeNodeMouseClickEventArgs e)
         {
             //verifico si el nodo esta en el nivel cero, si no esta en el nivel cero, significa
             //que es hijo de algun nodo, por lo que muestro el nombre del nodo padre
@@ -366,12 +302,26 @@ namespace Trabajo_Final.UI
             {
                 tbNombreCuenta.Text = e.Node.Parent.Name;
                 tbTipoCorreo.Text = e.Node.Name;
-                dgEmails.DataSource = Fachada.Instancia.GetEmails(e.Node.Parent.Name);
+                CargarDataGrid(e.Node.Parent.Name);
             }
             else
             {
                 tbNombreCuenta.Text = e.Node.Name;
             }
+        }
+
+        /// <summary>
+        /// Carga el data grid
+        /// </summary>
+        /// <param name="pNombreNodo"></param>
+        private void CargarDataGrid(String pNombreNodo)
+        {
+            IList<AdaptadorDataGrid> adaptador = new List<AdaptadorDataGrid>();
+                foreach(Email email in Fachada.Instancia.GetEmails(pNombreNodo))
+                {
+                    adaptador.Add(new AdaptadorDataGrid(email.Remitente, email.Destinatario[0], email.Asunto));
+                }
+                dgEmails.DataSource = adaptador;
         }
 
         private void guardarComoBorradorToolStripMenuItem_Click(object sender, EventArgs e)
@@ -414,8 +364,8 @@ namespace Trabajo_Final.UI
             try
             {
                 Fachada.Instancia.ObtenerEmail(tbNombreCuenta.Text);
-                dgEmails.DataSource = Fachada.Instancia.GetEmails(tbNombreCuenta.Text).ToList(); 
-            }
+                CargarDataGrid(tbNombreCuenta.Text);
+            }           
             catch(NombreCuentaExcepcion ex)
             {
                 MessageBox.Show(ex.Message, "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -428,6 +378,12 @@ namespace Trabajo_Final.UI
             {
                 MessageBox.Show(ex.Message, "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+            catch(DAOExcepcion ex)
+            {
+                MessageBox.Show(ex.Message, "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+
         }
 
         private void obtenerTodosToolStripMenuItem_Click(object sender, EventArgs e)

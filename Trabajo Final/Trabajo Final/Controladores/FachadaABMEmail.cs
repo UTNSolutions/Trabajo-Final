@@ -66,8 +66,8 @@ namespace Trabajo_Final.Controladores
         {
             DAOFactory factory = null;
 
-            try
-            {
+           // try
+          //  {
                 factory = DAOFactory.Instancia;
                 factory.IniciarConexion();
                 factory.ComenzarTransaccion();
@@ -76,8 +76,8 @@ namespace Trabajo_Final.Controladores
                     factory.MailDao.Insertar(email);
                 }             
                 factory.Commit();
-            }
-            catch (DAOExcepcion ex)
+           /* }
+           catch (DAOExcepcion ex)
             {
                 factory.RollBack();
                 throw ex;
@@ -85,7 +85,7 @@ namespace Trabajo_Final.Controladores
             finally
             {
                 factory.FinalizarConexion();
-            }
+            } */
         }
 
         /// <summary>

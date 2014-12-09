@@ -106,20 +106,9 @@ namespace Trabajo_Final.Dominio
                 {
                    Message mail = client.GetMessage(indice);
                    MailMessage email = mail.ToMailMessage();
-                   List<String> listaDestinatarios = new List<String>();
-                   listaDestinatarios.Add(email.To.ToString());
-                   List<String> listaConCopia = new List<String>();
-                   foreach (MailAddress cadenaCopia in email.CC)
-                   {
-                       listaConCopia.Add(cadenaCopia.ToString());
-                   }
-                   List<String> listaConCopiaOculta = new List<String>();
-                   foreach (MailAddress cadenaCopiaOculta in email.CC)
-                   {
-                       listaConCopiaOculta.Add(cadenaCopiaOculta.ToString());
-                   }
+                   IList<String> listaDestinatarios = new List<String>();                 
                    listaDestinatarios.Add(Convert.ToString(email.To));
-                   Email msj = new Email(Convert.ToString(email.From), listaDestinatarios, listaConCopia, listaConCopiaOculta, email.Body, email.Subject);
+                   Email msj = new Email(Convert.ToString(email.From), listaDestinatarios, email.Body, email.Subject);
                     listaADevolver.Add(msj);
                     indice++;
                 }

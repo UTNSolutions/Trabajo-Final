@@ -109,7 +109,7 @@
             this.tvCuentas.Name = "tvCuentas";
             this.tvCuentas.Size = new System.Drawing.Size(185, 378);
             this.tvCuentas.TabIndex = 1;
-            this.tvCuentas.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.CargarDataGrid);
+            this.tvCuentas.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.MostrarDatosDelNodo);
             // 
             // gbOpciones1
             // 
@@ -529,11 +529,11 @@
         private System.Windows.Forms.ProgressBar progressBarEnviando;
         private System.Windows.Forms.Label lEnviado;
         private System.Windows.Forms.DataGridView dgEmails;
+        private System.Windows.Forms.TextBox tbTipoCorreo;
         private System.Windows.Forms.DataGridViewTextBoxColumn remitente;
         private System.Windows.Forms.DataGridViewTextBoxColumn cuerpo;
         private System.Windows.Forms.DataGridViewTextBoxColumn destinatario;
         private System.Windows.Forms.DataGridViewTextBoxColumn asunto;
-        private System.Windows.Forms.TextBox tbTipoCorreo;
     }
 }
 
