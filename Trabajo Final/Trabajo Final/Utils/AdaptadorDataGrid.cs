@@ -11,11 +11,13 @@ namespace Trabajo_Final.Utils
         private String iRemitente;
         private String iDestinatario;
         private String iAsunto;
-        public AdaptadorDataGrid(String pRemitente,String pDestinatario,String pAsunto)
+        private String iCuerpo;
+        public AdaptadorDataGrid(String pRemitente,String pDestinatario,String pAsunto,String pCuerpo)
         {
             this.iRemitente = pRemitente;
             this.iDestinatario = pDestinatario;
             this.iAsunto = pAsunto;
+            this.iCuerpo = pCuerpo;
         }
 
         public String Remitente
@@ -31,6 +33,11 @@ namespace Trabajo_Final.Utils
         public String Asunto
         {
             get { return this.iAsunto; }
+        }
+
+        public String Cuerpo
+        {
+            get { return this.iCuerpo; }
         }
     }
 }

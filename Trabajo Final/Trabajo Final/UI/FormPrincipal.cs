@@ -319,7 +319,7 @@ namespace Trabajo_Final.UI
             IList<AdaptadorDataGrid> adaptador = new List<AdaptadorDataGrid>();
                 foreach(Email email in Fachada.Instancia.GetEmails(pNombreNodo))
                 {
-                    adaptador.Add(new AdaptadorDataGrid(email.Remitente, email.Destinatario[0], email.Asunto));
+                    adaptador.Add(new AdaptadorDataGrid(email.Remitente, email.Destinatario[0], email.Asunto,email.Cuerpo));
                 }
                 dgEmails.DataSource = adaptador;
         }
