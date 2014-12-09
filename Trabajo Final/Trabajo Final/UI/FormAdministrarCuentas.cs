@@ -11,7 +11,6 @@ using System.Windows.Forms;
 using Trabajo_Final.Controladores;
 using Trabajo_Final.Excepciones;
 using System.Text.RegularExpressions;
-using Trabajo_Final.Persistencia;
 using Trabajo_Final.DTO;
 
 namespace Trabajo_Final.UI
@@ -36,7 +35,7 @@ namespace Trabajo_Final.UI
         /// </summary>
         private void CargarDataGridCuentas()
         {
-            dgCuentas.DataSource = Fachada.Instancia.ObtenerCuentas();
+            dgCuentas.DataSource = FachadaABMCuentas.Instancia.ListarCuentas();
         }
 
         /// <summary>
@@ -126,9 +125,7 @@ namespace Trabajo_Final.UI
                     {
                         Fachada.Instancia.AltaCuenta(tbCuenta.Text, tbMail.Text, cbServicio.SelectedItem.ToString(), tbContraseña.Text);
                         MessageBox.Show("Cuenta agregada con exito", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        CargarDataGridCuentas();
-                        Fachada.Instancia.CargarCuentasCorreo();
-                        
+                        CargarDataGridCuentas();                                               
                     }
                     catch (DAOExcepcion ex)
                     {
@@ -160,7 +157,6 @@ namespace Trabajo_Final.UI
                     Fachada.Instancia.ModificarCuenta(Convert.ToInt32(tbIdCuenta.Text),tbCuenta.Text, tbMail.Text, cbServicio.SelectedItem.ToString(), tbContraseña.Text);
                     MessageBox.Show("Datos de la cuenta modificados con exito", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     CargarDataGridCuentas();
-                    Fachada.Instancia.CargarCuentasCorreo();
                  }
                catch (DAOExcepcion ex)
                 {
@@ -194,7 +190,6 @@ namespace Trabajo_Final.UI
                         Fachada.Instancia.EliminarCuenta(Convert.ToInt32(tbIdCuenta.Text), tbCuenta.Text, tbMail.Text, cbServicio.SelectedItem.ToString(), tbContraseña.Text);
                         MessageBox.Show("La cuenta ha sido eliminada con éxito", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         CargarDataGridCuentas();
-                        Fachada.Instancia.CargarCuentasCorreo();
                     }
                     catch (DAOExcepcion ex)
                     {

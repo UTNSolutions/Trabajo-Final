@@ -10,12 +10,14 @@ using Trabajo_Final.DTO;
 
 namespace Trabajo_Final.Controladores
 {
-    class Fachada
+    public class Fachada
     {
         private static Fachada iInstanciaSingleton;
 
         private Fachada()
-        { }
+        {
+            Inicializar();
+        }
 
         public static Fachada Instancia
         {
@@ -52,6 +54,7 @@ namespace Trabajo_Final.Controladores
                 if (cuenta == null)
                 {
                     FachadaABMCuentas.Instancia.CrearCuenta(new CuentaDTO(pNombre, pDireccion, pServicio, pContraseña));
+                    Cuentas.Instancia.AgregarCuentaOActualizar(new Cuenta(pNombre, pDireccion, pServicio, pContraseña));
                 }
                 else
                 {
@@ -68,14 +71,14 @@ namespace Trabajo_Final.Controladores
         /// Devuelve una lista de las cuentas de correo 
         /// </summary>
         /// <returns></returns>
-        /// <exception cref="DAOExcepcion"></exception>
-        public IList<CuentaDTO> ObtenerCuentas()
+        /// <exception cref="Exception"></exception>
+        public IList<Cuenta> ObtenerCuentas()
         {
             try
             {
-                return FachadaABMCuentas.Instancia.ListarCuentas();
+                return Cuentas.Instancia.ListaCuentas.Values.ToList<Cuenta>();
             }
-            catch (DAOExcepcion ex)
+            catch (Exception ex)
             {
                 throw ex;
             }
@@ -95,30 +98,31 @@ namespace Trabajo_Final.Controladores
         {
             try
             {
-                // Obtengo todas las cuentas de la base de datos para verificar que el nombre de la cuenta 
-                // sea unívoco
-                IList<CuentaDTO> listaCuentas = FachadaABMCuentas.Instancia.ListarCuentas();
-                CuentaDTO cuenta = (from c in listaCuentas
-                                    where c.Nombre == pNombre
-                                    select c).FirstOrDefault();
-                // si cuenta no es nula significa de que no existe ninguna cuenta en la base de datos
-                // que posea el nombre (pNombre) pasado como parametro, por lo que puedo modificar esa cuenta,
-                // y tambien el id de la cuenta encontrada si es igual al idCuenta pasado como parametro
-                // significa que hay otra cuenta con el nombre de cuenta que quiero modificar, 
-                //por lo que no puedo realizar la operacion
-                if (cuenta != null && cuenta.IdCuenta != pIdCuenta) 
-                {
-                    throw new NombreCuentaExcepcion("El nombre de la cuenta ya existe, utilize otro");
-                }
-                else
-                {
-                    FachadaABMCuentas.Instancia.ModificarCuenta(new CuentaDTO(pIdCuenta, pNombre, pDireccion, pServicio, pContraseña));
+                //actualiza la cuenta en la base de datos
+                FachadaABMCuentas.Instancia.ModificarCuenta(new CuentaDTO(pIdCuenta, pNombre, pDireccion, pServicio, pContraseña));
+                if (!(Cuentas.Instancia.GetCuenta(pNombre) == null))
+                {   
+                    //actualiza la cuenta en la lista de cuentas del dominio
+                    Cuentas.Instancia.AgregarCuentaOActualizar(new Cuenta(pNombre, pDireccion, pServicio, pContraseña));
                 }
             }
             catch (DAOExcepcion ex)
             {
                 throw ex;
-            }  
+            }
+            catch (NombreCuentaExcepcion)
+            {
+                throw new NombreCuentaExcepcion("El nombre de la cuenta no se puede cambiar");
+            }
+        }
+
+        /// <summary>
+        /// Inicializa las cuentas de correo y su emails
+        /// </summary>
+        private void Inicializar()
+        {
+            CargarCuentasCorreo();
+            CargarEmailsACadaCuenta();
         }
 
 
@@ -136,6 +140,7 @@ namespace Trabajo_Final.Controladores
             try
             {
                 FachadaABMCuentas.Instancia.EliminarCuenta(new CuentaDTO(pIdCuenta, pNombre, pDireccion, pServicio, pContraseña));
+                Cuentas.Instancia.EliminarCuenta(pNombre);
             }
             catch (DAOExcepcion ex)
             {
@@ -143,7 +148,13 @@ namespace Trabajo_Final.Controladores
             } 
         }
 
-        public IList<Cuenta> CargarCuentasCorreo()
+
+        /// <summary>
+        /// Obtiene las cuentas de correo de la base de datos y crea objetos de tipo Cuenta 
+        /// pertenicientes al dominio de la aplicacion
+        /// </summary>
+        /// <returns></returns>
+        private void CargarCuentasCorreo()
         {
             try
             {
@@ -154,10 +165,8 @@ namespace Trabajo_Final.Controladores
                 // Para cada cuenta la agrego en la lista de cuentas pertenecientes al dominio de la aplicacion
                 foreach (CuentaDTO cuenta in listaCuentas)
                 {
-                    Cuentas.Instancia.AgregarCuentaOActualizar(new Cuenta(cuenta.Nombre, cuenta.Direccion, cuenta.NombreServicio, cuenta.Contraseña));
-                    listaADevolver.Add(new Cuenta(cuenta.Nombre, cuenta.Direccion, cuenta.NombreServicio, cuenta.Contraseña));
+                    Cuentas.Instancia.AgregarCuentaOActualizar(new Cuenta(cuenta.Nombre, cuenta.Direccion, cuenta.NombreServicio, cuenta.Contraseña));                    
                 }
-                return listaADevolver;
             }
             catch (DAOExcepcion ex)
             {
@@ -166,6 +175,37 @@ namespace Trabajo_Final.Controladores
         }
 
 
+        /// <summary>
+        /// Obtiene los mails de la base de datos y se los asigna a cada Cuenta a la que cada email
+        /// pertence
+        /// </summary>
+        private void CargarEmailsACadaCuenta()
+        {
+            if (Cuentas.Instancia.ListaCuentas.Count == 0)
+            {
+                throw new CuentasExcepcion("No existen cuentas de correo");
+            }
+            try
+            {
+                //itera por cada Cuenta de correo perteneciente al dominio 
+                foreach(Cuenta cuenta in Cuentas.Instancia.ListaCuentas.Values)
+                {
+                    CuentaDTO cuentaDto = BuscarCuenta(cuenta.Nombre);
+                    //itera cada Email perteneciente a la cuenta buscada anteriormente para poder 
+                    //agregar dicho email a la cuenta de dominio Email
+                    foreach (EmailDTO emailDto in FachadaABMEmail.Instancia.ListarEmails(cuentaDto.IdCuenta)) 
+                    {
+                        Email email = new Email(emailDto.Remitente,emailDto.Destinatario,emailDto.Cuerpo,emailDto.Asunto);
+                        cuenta.AgregarEmail(email);
+                    }
+                }
+            }
+            catch (DAOExcepcion ex)
+            {
+                throw ex;
+            }
+        }
+               
         /// <summary>
         /// Permite enviar un Email
         /// </summary>
@@ -200,7 +240,7 @@ namespace Trabajo_Final.Controladores
             }
         }
 
-        public CuentaDTO BuscarCuenta(string pNombreCuenta)
+        private CuentaDTO BuscarCuenta(string pNombreCuenta)
         {
             try
             {
@@ -212,14 +252,47 @@ namespace Trabajo_Final.Controladores
             }
         }
 
-        public IList<Email> ObtenerEmail(string pNombreCuenta)
+        /// <summary>
+        /// Devuelve los emails de una cuenta
+        /// </summary>
+        /// <param name="pNombreCuenta"></param>
+        public IList<Email> GetEmails(String pNombreCuenta)
+        {
+            IList<Email> lista = Cuentas.Instancia.GetCuenta(pNombreCuenta).ListaEMails;
+            return lista ;
+        }
+
+        /// <summary>
+        /// Obtiene los emails de correspondiente a una cuenta en particular, descargandolos
+        /// del servidor correspondiente     
+        /// </summary>
+        /// <param name="pNombreCuenta"></param>
+        public void ObtenerEmail(string pNombreCuenta)
         {
             try
             {
                 Cuenta cuenta = Cuentas.Instancia.GetCuenta(pNombreCuenta);
                 IServicio servicio = FabricaServicios.Instancia.GetServicio(cuenta.NombreServicio);
                 servicio.Cuenta = cuenta;
-                return servicio.RecibirMail();
+                IList<Email> listaEmails = servicio.RecibirMail();
+                //obtengo la cuenta de correo que posee el nombre de cuenta pasado como parametro
+                //para poder asociarle los emails recibidos
+                CuentaDTO cuentaDto = BuscarCuenta(pNombreCuenta);
+                IList<EmailDTO> listaEmailDTO = new List<EmailDTO>();
+                //A cada email de la lista lo transformo a EmailDTO asociandole la cuenta de correo del 
+                //que el email corresponde
+                foreach (Email email in listaEmails)
+                {
+                    listaEmailDTO.Add(new EmailDTO(cuentaDto.IdCuenta, email.Remitente, email.Destinatario, email.Cuerpo, email.Asunto));
+                }
+                //Guardo la lista de emails en la base de datos
+                FachadaABMEmail.Instancia.InsertarEmails(listaEmailDTO);
+                //Actualizo la lista de emails de dicha cuenta de dominio
+                ActualizarListaEmails(cuenta, listaEmails);
+            }
+            catch (NombreCuentaExcepcion ex)
+            {
+                throw ex;
             }
             catch (InternetExcepcion ex)
             {
@@ -229,7 +302,49 @@ namespace Trabajo_Final.Controladores
             {
                 throw ex;
             }
+        }
 
+        /// <summary>
+        /// Obtiene los emails de todas las cuentas configuradas, descargandolos del servidor 
+        /// correspondiente 
+        /// </summary>
+        /// <param name="listaNombresCuentas"></param>
+        public void ObtenerTodosEmails(IList<String> listaNombresCuentas)
+        {
+            foreach (String nombreCuenta in listaNombresCuentas)
+            {
+                try
+                {
+                    ObtenerEmail(nombreCuenta);
+                }
+                catch (NombreCuentaExcepcion ex)
+                {
+                    throw ex;
+                }
+                catch (InternetExcepcion ex)
+                {
+                    throw ex;
+                }
+                catch (EmailExcepcion)
+                {                   
+                    listaNombresCuentas.Remove(nombreCuenta);
+                    ObtenerTodosEmails(listaNombresCuentas);
+                    throw new EmailExcepcion("La recepcion de todas las cuentas de correo finalizó con errores");
+                }
+            }            
+        }
+
+        /// <summary>
+        /// Actualiza la lista de emails de un cuenta del dominio
+        /// </summary>
+        /// <param name="pCuenta"></param>
+        /// <param name="?"></param>
+        private void ActualizarListaEmails(Cuenta pCuenta, IList<Email> pListaEmails)
+        {
+            foreach (Email email in pListaEmails)
+            {
+                pCuenta.AgregarEmail(email);
+            }
         }
     }
 }

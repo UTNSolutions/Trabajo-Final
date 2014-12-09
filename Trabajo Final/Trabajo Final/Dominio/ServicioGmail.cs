@@ -116,7 +116,7 @@ namespace Trabajo_Final.Dominio
             }
             catch (OpenPop.Pop3.Exceptions.InvalidLoginException)
             {
-                throw new EmailExcepcion("Error en el acceso a la cuenta, verifique los datos ingresados");
+                throw new EmailExcepcion("Error en el acceso a la cuenta, verifique la configuracion de la misma");
             }
         }
 

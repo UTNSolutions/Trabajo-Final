@@ -23,19 +23,20 @@ namespace Trabajo_Final.Persistencia
         }
         public void Insertar(EmailDTO pEmail)
         {
-            try
-            {
-                SqlCommand comando = new SqlCommand("insert into Email(idCuenta,destinatario,cuerpo,asunto) values(@idCuenta,@destinatario,@cuerpo,@asunto)", this.iConexion, this.iTransaccion);
+            //try
+           // {
+                SqlCommand comando = new SqlCommand("insert into Email(idCuenta,remitente,destinatario,cuerpo,asunto) values(@idCuenta,@remitente,@destinatario,@cuerpo,@asunto)", this.iConexion, this.iTransaccion);
                 comando.Parameters.AddWithValue("@idCuenta", pEmail.IdCuenta);
+                comando.Parameters.AddWithValue("@remitente", pEmail.Remitente);
                 comando.Parameters.AddWithValue("@destinatario", pEmail.Destinatario);
                 comando.Parameters.AddWithValue("@cuerpo", pEmail.Cuerpo);
                 comando.Parameters.AddWithValue("@asunto", pEmail.Asunto);
                 comando.ExecuteNonQuery();
-            }
-            catch (SqlException)
+           // }
+          /*  catch (SqlException)
             {
                 throw new DAOExcepcion("No se pudo insertar el email en la base de datos");
-            }
+            } */
 
         }
 
@@ -65,7 +66,7 @@ namespace Trabajo_Final.Persistencia
                 operacion.Fill(tabla);
                 foreach (DataRow fila in tabla.Rows)
                 {
-                    listaEmails.Add(new EmailDTO(Convert.ToInt32(fila["idEmail"]),Convert.ToInt32(fila["idCuenta"]),Convert.ToString(fila["remitente"]),Convert.ToString(fila["destinatario"]),Convert.ToString(fila["cuerpo"]),Convert.ToString(fila["asunto"])));
+                    listaEmails.Add(new EmailDTO(Convert.ToInt32(fila["idMail"]),Convert.ToInt32(fila["idCuenta"]),Convert.ToString(fila["remitente"]),Convert.ToString(fila["destinatario"]),Convert.ToString(fila["cuerpo"]),Convert.ToString(fila["asunto"])));
                 }
                 return listaEmails;
             }

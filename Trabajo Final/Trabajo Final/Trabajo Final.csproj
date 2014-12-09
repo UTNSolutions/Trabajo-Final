@@ -31,6 +31,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>icono-email11.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="OpenPop">
       <HintPath>H:\OpenPop.dll</HintPath>
@@ -54,6 +57,7 @@
     <Compile Include="Dominio\Cuenta.cs" />
     <Compile Include="Dominio\Cuentas.cs" />
     <Compile Include="Dominio\Email.cs" />
+    <Compile Include="Excepciones\CuentasExcepcion.cs" />
     <Compile Include="Excepciones\DAOExcepcion.cs" />
     <Compile Include="Excepciones\EmailExcepcion.cs" />
     <Compile Include="Excepciones\InternetExcepcion.cs" />
@@ -150,6 +154,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\icono-del-l_piz-y-del-cuaderno-7956808_ %281%29.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="icono-email11.ico" />
+    <None Include="Resources\icono-email11.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

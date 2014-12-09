@@ -8,9 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Trabajo_Final.Controladores;
-using Trabajo_Final.DTO;
-using Trabajo_Final.Dominio;
 using Trabajo_Final.Excepciones;
+using Trabajo_Final.Dominio;
 using System.Threading;
 
 namespace Trabajo_Final.UI
@@ -59,7 +58,7 @@ namespace Trabajo_Final.UI
         {              
             //when child form is closed, this code is executed   
             // Bind the Grid view       
-            CargarCuentasCorreo();     
+            CargarTreeView();         
         }
 
         /// <summary>
@@ -139,24 +138,24 @@ namespace Trabajo_Final.UI
         /// <param name="e"></param>
         private void FormPrincipal_Load(object sender, EventArgs e)
         {
-            CargarCuentasCorreo();
+            CargarTreeView();
         }
 
         /// <summary>
-        /// Carga las cuentas en el formulario principal.
+        /// Carga las cuentas en el treeView del formulario principal.
         /// </summary>
-        public void CargarCuentasCorreo()
+        public void CargarTreeView()
         {
-            IList<Cuenta> listaCuentas = Fachada.Instancia.CargarCuentasCorreo();
-            tvCuentas.Nodes.Clear();
-            TreeNode raiz = tvCuentas.Nodes.Add("Cuentas");
-            foreach (Cuenta cuenta in listaCuentas)
+            tvCuentas.Nodes.Clear();         
+            //cargo los nombres de las cuentas, y genero sus nodos de recibidos,enviados y borradores
+            foreach (Cuenta cuenta in Fachada.Instancia.ObtenerCuentas())
             {
-                TreeNode nodo = tvCuentas.Nodes.Add(cuenta.Nombre);
-                nodo.Nodes.Add("Recibidos");
-                nodo.Nodes.Add("Enviados");
-                nodo.Nodes.Add("Borradores");
+                TreeNode nodo = tvCuentas.Nodes.Add(cuenta.Nombre,cuenta.Nombre+ "("+cuenta.Direccion+")") ;
+                nodo.Nodes.Add("Rec","Recibidos");
+                nodo.Nodes.Add("Env","Enviados");
+                nodo.Nodes.Add("Bor","Borradores");
             }
+
         }
 
         /// <summary>
@@ -232,10 +231,6 @@ namespace Trabajo_Final.UI
                 lEnviado.Visible = true;
                 borrarMailEnviado(sender, e);             
             }
-            catch (DAOExcepcion ex)
-            {
-                MessageBox.Show(ex.Message, "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
             catch (EmailExcepcion ex)
             {
                 MessageBox.Show(ex.Message, "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -254,6 +249,28 @@ namespace Trabajo_Final.UI
             
         }
             
+        /// <summary>
+        /// Cargar el data grid con los datos de los emails de una cuenta teniendo en cuenta
+        /// el nodo seleccionado
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void CargarDataGrid(object sender, TreeNodeMouseClickEventArgs e)
+        {
+            //verifico si el nodo esta en el nivel cero, si no esta en el nivel cero, significa
+            //que es hijo de algun nodo, por lo que muestro el nombre del nodo padre
+            if (!(e.Node.Level == 0))
+            {
+                tbNombreCuenta.Text = e.Node.Parent.Name;
+                tbTipoCorreo.Text = e.Node.Name;
+                dgEmails.DataSource = Fachada.Instancia.GetEmails(e.Node.Parent.Name);
+            }
+            else
+            {
+                tbNombreCuenta.Text = e.Node.Name;
+            }
+        }
+
         private void guardarComoBorradorToolStripMenuItem_Click(object sender, EventArgs e)
         {
             
@@ -279,9 +296,55 @@ namespace Trabajo_Final.UI
             lEnviado.Visible = false;
         }
 
+        /// <summary>
+        /// Obtiene los Emails de una cuenta de correo
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void obtenerMailsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-           dgEmails.DataSource = Fachada.Instancia.ObtenerEmail(tbNombreCuenta.Text);
+            try
+            {
+                Fachada.Instancia.ObtenerEmail(tbNombreCuenta.Text);
+                dgEmails.DataSource = Fachada.Instancia.GetEmails(tbNombreCuenta.Text).ToList(); 
+            }
+            catch(NombreCuentaExcepcion ex)
+            {
+                MessageBox.Show(ex.Message, "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (EmailExcepcion ex)
+            {
+                MessageBox.Show(ex.Message, "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (InternetExcepcion ex)
+            {
+                MessageBox.Show(ex.Message, "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void obtenerTodosToolStripMenuItem_Click(object sender, EventArgs e)
+        {          
+           IList<String> listaNombreCuentas = new List<String>();
+           foreach (TreeNode tn in tvCuentas.Nodes)
+           {
+              listaNombreCuentas.Add(tn.Name);
+           }
+           try
+           {
+               Fachada.Instancia.ObtenerTodosEmails(listaNombreCuentas);
+           }
+           catch (NombreCuentaExcepcion ex)
+           {
+               MessageBox.Show(ex.Message, "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Error);
+           }
+           catch (EmailExcepcion ex)
+           {
+               MessageBox.Show(ex.Message, "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Error);
+           }
+           catch (InternetExcepcion ex)
+           {
+               MessageBox.Show(ex.Message, "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Error);
+           }
         }
     }
 }

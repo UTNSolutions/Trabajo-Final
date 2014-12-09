@@ -262,7 +262,6 @@
             this.tbIdCuenta.Size = new System.Drawing.Size(36, 20);
             this.tbIdCuenta.TabIndex = 12;
             this.tbIdCuenta.TabStop = false;
-            this.tbIdCuenta.Visible = false;
             // 
             // FormAdministrarCuentas
             // 

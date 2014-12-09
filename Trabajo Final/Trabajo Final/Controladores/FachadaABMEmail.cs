@@ -58,11 +58,11 @@ namespace Trabajo_Final.Controladores
         }
 
         /// <summary>
-        /// Inserta un nuevo email en la base de datos
+        /// Inserta una lista de emails en la base de datos correspondientes a una cuenta de correo
         /// </summary>
         /// <param name="pCuenta"></param>
         /// <exception cref="DAOExcepcion"></exception>
-        public void NuevoEmail(EmailDTO pEmail)
+        public void InsertarEmails(IList<EmailDTO> pListaEmail)
         {
             DAOFactory factory = null;
 
@@ -71,7 +71,10 @@ namespace Trabajo_Final.Controladores
                 factory = DAOFactory.Instancia;
                 factory.IniciarConexion();
                 factory.ComenzarTransaccion();
-                factory.MailDao.Insertar(pEmail);
+                foreach (EmailDTO email in pListaEmail)
+                {
+                    factory.MailDao.Insertar(email);
+                }             
                 factory.Commit();
             }
             catch (DAOExcepcion ex)
@@ -90,7 +93,7 @@ namespace Trabajo_Final.Controladores
         /// </summary>
         /// <param name="pCuenta"></param>
         /// <exception cref="DAOExcepcion"></exception>
-        public void EliminarCuenta(int pIdEmail)
+        public void EliminarEmail(int pIdEmail)
         {
             DAOFactory factory = null;
 

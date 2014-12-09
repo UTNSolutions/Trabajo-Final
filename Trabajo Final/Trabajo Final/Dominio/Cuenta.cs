@@ -50,6 +50,11 @@ namespace Trabajo_Final.Dominio
             get { return this.iContraseña; }
         }
 
+        public IList<Email> ListaEMails
+        {
+            get { return this.iListaEmail; }
+        }
+
         public void AgregarEmail(Email pEmail)
         {
             this.iListaEmail.Add(pEmail);

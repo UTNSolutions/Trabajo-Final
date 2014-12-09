@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Trabajo_Final.Excepciones;
 
 namespace Trabajo_Final.Dominio
 {
@@ -41,7 +42,7 @@ namespace Trabajo_Final.Dominio
         /// </summary>
         /// <param name="pNombreCuenta">Nombre de la cuenta por la cual se va a buscar</param>
         /// <returns></returns>
-        /// <exception cref="FormatException"></exception>
+        /// <exception cref="NombreCuentaExcepcion"></exception>
         public Cuenta GetCuenta(string pNombreCuenta)
         {
             //Verifico si dicho nombre pasado como parametro es clave del diccionario
@@ -51,7 +52,7 @@ namespace Trabajo_Final.Dominio
             }
             else
             {
-             throw new FormatException("El parametro no esta asociado a ningun servicio");
+                throw new NombreCuentaExcepcion("");
             }
         }
 
@@ -69,6 +70,22 @@ namespace Trabajo_Final.Dominio
             else
             {
                 this.iListaCuentas.Add(pCuenta.Nombre,pCuenta);
+            }
+        }
+
+        /// <summary>
+        /// Elimina una cuenta de correo de la lista de cuentas
+        /// </summary>
+        /// <param name="pNombreCuenta"></param>
+        public void EliminarCuenta(String pNombreCuenta)
+        {
+            if (this.iListaCuentas.ContainsKey(pNombreCuenta))
+            {
+                this.iListaCuentas.Remove(pNombreCuenta);
+            }
+            else
+            {
+                throw new ArgumentException("El nombre de cuenta no existe en la lista como clave de una cuenta");
             }
         }
     }
