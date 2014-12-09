@@ -265,6 +265,7 @@
             this.tbCC.ReadOnly = true;
             this.tbCC.Size = new System.Drawing.Size(329, 20);
             this.tbCC.TabIndex = 7;
+            this.tbCC.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbCC_KeyPress);
             // 
             // tbCCO
             // 
@@ -273,6 +274,7 @@
             this.tbCCO.ReadOnly = true;
             this.tbCCO.Size = new System.Drawing.Size(329, 20);
             this.tbCCO.TabIndex = 6;
+            this.tbCCO.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbCCO_KeyPress);
             // 
             // tbAdjuntos
             // 
@@ -288,6 +290,7 @@
             this.tbPara.Name = "tbPara";
             this.tbPara.Size = new System.Drawing.Size(329, 20);
             this.tbPara.TabIndex = 4;
+            this.tbPara.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbPara_KeyPress);
             // 
             // label4
             // 
@@ -460,6 +463,7 @@
             this.Controls.Add(this.panelCuentas);
             this.Controls.Add(this.gpNuevoMail);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.KeyPreview = true;
             this.MainMenuStrip = this.menuStrip1;
             this.MaximizeBox = false;
             this.Name = "FormPrincipal";
