@@ -36,6 +36,7 @@ namespace Trabajo_Final.UI
             if (iFormAcercaDe == null)
             {
                 iFormAcercaDe = new FormAcercaDe();
+                //iFormAcercaDe.MdiParent = this;
                 iFormAcercaDe.Disposed += new EventHandler(form_Disposed);
             }
             iFormAcercaDe.Show();
@@ -314,7 +315,7 @@ namespace Trabajo_Final.UI
         }
 
         /// <summary>
-        /// Carga el data grid
+        /// Carga el data grid.
         /// </summary>
         /// <param name="pNombreNodo"></param>
         private void CargarDataGrid(String pNombreNodo)

@@ -93,7 +93,15 @@ namespace Trabajo_Final.Dominio
                     Message mail = client.GetMessage(indice);
                     MailMessage email = mail.ToMailMessage();
                     IList<String> listaDestinatarios = new List<String>();
-                    listaDestinatarios.Add(Convert.ToString(email.To)); 
+                    listaDestinatarios.Add(Convert.ToString(email.To));
+                    //Si el cuerpo esta en HTML lo trasforma.
+                    if (email.IsBodyHtml)
+                    {
+                        //desace de las etiquetas HTML.
+                        email.Body = Regex.Replace(email.Body, "<[^>]*>", string.Empty);
+                        //get rid of multiple blank lines
+                        //email.Body = Regex.Replace(email.Body, @"^\s*$\n", string.Empty, RegexOptions.Multiline);
+                    }
                     Email msj = new Email(Convert.ToString(email.From),listaDestinatarios, email.Body, email.Subject);
                     listaADevolver.Add(msj);
                     indice++;

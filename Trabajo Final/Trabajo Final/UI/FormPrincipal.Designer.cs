@@ -76,12 +76,12 @@
             this.exportarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.acercaDeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panelLeerMail = new System.Windows.Forms.Panel();
-            this.tbAsuntoLeerMail = new System.Windows.Forms.TextBox();
-            this.tbDeLeerMail = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.tbParaLeerMail = new System.Windows.Forms.TextBox();
             this.tbCuerpoLeerMail = new System.Windows.Forms.TextBox();
+            this.tbParaLeerMail = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.tbDeLeerMail = new System.Windows.Forms.TextBox();
+            this.tbAsuntoLeerMail = new System.Windows.Forms.TextBox();
             this.gbOpciones1.SuspendLayout();
             this.menuStrip2.SuspendLayout();
             this.gpNuevoMail.SuspendLayout();
@@ -540,33 +540,20 @@
             this.panelLeerMail.TabIndex = 17;
             this.panelLeerMail.Visible = false;
             // 
-            // tbAsuntoLeerMail
+            // tbCuerpoLeerMail
             // 
-            this.tbAsuntoLeerMail.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbAsuntoLeerMail.ForeColor = System.Drawing.SystemColors.WindowFrame;
-            this.tbAsuntoLeerMail.Location = new System.Drawing.Point(8, 4);
-            this.tbAsuntoLeerMail.Name = "tbAsuntoLeerMail";
-            this.tbAsuntoLeerMail.Size = new System.Drawing.Size(839, 31);
-            this.tbAsuntoLeerMail.TabIndex = 0;
-            this.tbAsuntoLeerMail.Text = "Sin Asunto...";
+            this.tbCuerpoLeerMail.Location = new System.Drawing.Point(6, 109);
+            this.tbCuerpoLeerMail.Multiline = true;
+            this.tbCuerpoLeerMail.Name = "tbCuerpoLeerMail";
+            this.tbCuerpoLeerMail.Size = new System.Drawing.Size(841, 314);
+            this.tbCuerpoLeerMail.TabIndex = 6;
             // 
-            // tbDeLeerMail
+            // tbParaLeerMail
             // 
-            this.tbDeLeerMail.Location = new System.Drawing.Point(98, 46);
-            this.tbDeLeerMail.Name = "tbDeLeerMail";
-            this.tbDeLeerMail.Size = new System.Drawing.Size(749, 20);
-            this.tbDeLeerMail.TabIndex = 2;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(8, 49);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(75, 13);
-            this.label3.TabIndex = 3;
-            this.label3.Text = "            De:";
+            this.tbParaLeerMail.Location = new System.Drawing.Point(98, 77);
+            this.tbParaLeerMail.Name = "tbParaLeerMail";
+            this.tbParaLeerMail.Size = new System.Drawing.Size(749, 20);
+            this.tbParaLeerMail.TabIndex = 5;
             // 
             // label6
             // 
@@ -579,20 +566,33 @@
             this.label6.TabIndex = 4;
             this.label6.Text = "          Para:";
             // 
-            // tbParaLeerMail
+            // label3
             // 
-            this.tbParaLeerMail.Location = new System.Drawing.Point(98, 77);
-            this.tbParaLeerMail.Name = "tbParaLeerMail";
-            this.tbParaLeerMail.Size = new System.Drawing.Size(749, 20);
-            this.tbParaLeerMail.TabIndex = 5;
+            this.label3.AutoSize = true;
+            this.label3.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(8, 49);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(75, 13);
+            this.label3.TabIndex = 3;
+            this.label3.Text = "            De:";
             // 
-            // tbCuerpoLeerMail
+            // tbDeLeerMail
             // 
-            this.tbCuerpoLeerMail.Location = new System.Drawing.Point(6, 109);
-            this.tbCuerpoLeerMail.Multiline = true;
-            this.tbCuerpoLeerMail.Name = "tbCuerpoLeerMail";
-            this.tbCuerpoLeerMail.Size = new System.Drawing.Size(841, 314);
-            this.tbCuerpoLeerMail.TabIndex = 6;
+            this.tbDeLeerMail.Location = new System.Drawing.Point(98, 46);
+            this.tbDeLeerMail.Name = "tbDeLeerMail";
+            this.tbDeLeerMail.Size = new System.Drawing.Size(749, 20);
+            this.tbDeLeerMail.TabIndex = 2;
+            // 
+            // tbAsuntoLeerMail
+            // 
+            this.tbAsuntoLeerMail.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbAsuntoLeerMail.ForeColor = System.Drawing.SystemColors.WindowFrame;
+            this.tbAsuntoLeerMail.Location = new System.Drawing.Point(8, 4);
+            this.tbAsuntoLeerMail.Name = "tbAsuntoLeerMail";
+            this.tbAsuntoLeerMail.Size = new System.Drawing.Size(839, 31);
+            this.tbAsuntoLeerMail.TabIndex = 0;
+            this.tbAsuntoLeerMail.Text = "Sin Asunto...";
             // 
             // FormPrincipal
             // 
@@ -607,6 +607,7 @@
             this.Controls.Add(this.gbEnviarMail);
             this.Controls.Add(this.panelCuentas);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.IsMdiContainer = true;
             this.KeyPreview = true;
             this.MaximizeBox = false;
             this.Name = "FormPrincipal";
