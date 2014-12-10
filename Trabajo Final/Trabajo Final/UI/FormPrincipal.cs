@@ -21,6 +21,7 @@ namespace Trabajo_Final.UI
     {
         private static FormAdministrarCuentas iFormAdminCuentas;
         private static FormAcercaDe iFormAcercaDe;
+        private static FormExportar iFormExportar;
         public FormPrincipal()
         {
             InitializeComponent();
@@ -73,6 +74,7 @@ namespace Trabajo_Final.UI
         {
             iFormAdminCuentas = null;
             iFormAcercaDe = null;
+            iFormExportar = null;
         }
 
         /// <summary>
@@ -80,7 +82,7 @@ namespace Trabajo_Final.UI
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void nuevoMeilToolStripMenuItem_Click(object sender, EventArgs e)
+        private void redactarEmailToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (!gpNuevoMail.Visible)
             {
@@ -154,9 +156,9 @@ namespace Trabajo_Final.UI
             foreach (Cuenta cuenta in Fachada.Instancia.ObtenerCuentas())
             {
                 TreeNode nodo = tvCuentas.Nodes.Add(cuenta.Nombre,cuenta.Nombre+ "("+cuenta.Direccion+")") ;
-                nodo.Nodes.Add("Rec","Recibidos");
-                nodo.Nodes.Add("Env","Enviados");
-                nodo.Nodes.Add("Bor","Borradores");
+                nodo.Nodes.Add("R","Recibidos");
+                nodo.Nodes.Add("E","Enviados");
+                nodo.Nodes.Add("B","Borradores");
             }
 
         }
@@ -305,7 +307,7 @@ namespace Trabajo_Final.UI
             {
                 tbNombreCuenta.Text = e.Node.Parent.Name;
                 tbTipoCorreo.Text = e.Node.Name;
-                CargarDataGrid(e.Node.Parent.Name);
+                CargarDataGrid(e.Node.Parent.Name,Convert.ToChar(tbTipoCorreo.Text));
             }
             else
             {
@@ -314,17 +316,63 @@ namespace Trabajo_Final.UI
         }
 
         /// <summary>
-        /// Carga el data grid
+        /// Carga el Data grid
         /// </summary>
-        /// <param name="pNombreNodo"></param>
-        private void CargarDataGrid(String pNombreNodo)
+        /// <param name="pNombreCuenta">Nombre de la cuenta</param>
+        /// <param name="pTipoCorreo">Tipo de correo (recibidos,enviados,borradores)</param>
+        private void CargarDataGrid(String pNombreCuenta,Char pTipoCorreo)
+        {
+            switch (pTipoCorreo)
+            {
+                case 'R': { FiltarRecibidos(pNombreCuenta); }
+                    break;
+                case 'E': { FiltarEnviados(pNombreCuenta); }
+                    break;
+            }
+           
+        }
+
+        private void FiltarRecibidos(String pNombreCuenta)
         {
             IList<AdaptadorDataGrid> adaptador = new List<AdaptadorDataGrid>();
-                foreach(Email email in Fachada.Instancia.GetEmails(pNombreNodo))
+            
+            foreach (Email email in Fachada.Instancia.GetEmails(pNombreCuenta))
+            {
+                Cuenta cuenta = Fachada.Instancia.GetCuenta(pNombreCuenta);
+                String remitente = StringsUtils.ObtenerEmail(email.Remitente);             
+                if (remitente != cuenta.Direccion)
                 {
-                    adaptador.Add(new AdaptadorDataGrid(email.Remitente, email.Destinatario[0], email.Asunto,email.Cuerpo));
+                    adaptador.Add(new AdaptadorDataGrid(email.Remitente, email.Destinatario[0], email.Asunto, email.Cuerpo));
                 }
-                dgEmails.DataSource = adaptador;
+            }
+            dgEmails.DataSource = adaptador;
+            dgEmails.Columns["destinatario"].Visible = false;
+            dgEmails.Columns["remitente"].Visible = true;
+        }
+
+        private void FiltarEnviados(String pNombreCuenta)
+        {
+            IList<AdaptadorDataGrid> adaptador = new List<AdaptadorDataGrid>();
+
+            foreach (Email email in Fachada.Instancia.GetEmails(pNombreCuenta))
+            {
+                Cuenta cuenta = Fachada.Instancia.GetCuenta(pNombreCuenta);
+                String remitente = StringsUtils.ObtenerEmail(email.Remitente);
+                if (remitente == cuenta.Direccion)
+                {
+                    adaptador.Add(new AdaptadorDataGrid(email.Remitente, email.Destinatario[0], email.Asunto, email.Cuerpo));
+                }
+            }
+            dgEmails.DataSource = adaptador;
+            dgEmails.Columns["remitente"].Visible = false;
+            dgEmails.Columns["destinatario"].Visible = true;
+        }
+
+        private void FiltarBorradores(String pNombreCuenta)
+        {
+            dgEmails.DataSource = "";
+            dgEmails.Columns["remitente"].Visible = false;
+            dgEmails.Columns["destinatario"].Visible = true;
         }
 
         private void guardarComoBorradorToolStripMenuItem_Click(object sender, EventArgs e)
@@ -367,7 +415,7 @@ namespace Trabajo_Final.UI
             try
             {
                 Fachada.Instancia.ObtenerEmail(tbNombreCuenta.Text);
-                CargarDataGrid(tbNombreCuenta.Text);
+                CargarDataGrid(tbNombreCuenta.Text,Convert.ToChar(tbTipoCorreo.Text));
             }           
             catch(NombreCuentaExcepcion ex)
             {
@@ -389,6 +437,11 @@ namespace Trabajo_Final.UI
 
         }
 
+        /// <summary>
+        /// Obtiene los correos de todas las cuentas configuradas
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void obtenerTodosToolStripMenuItem_Click(object sender, EventArgs e)
         {          
            IList<String> listaNombreCuentas = new List<String>();
@@ -463,6 +516,17 @@ namespace Trabajo_Final.UI
                 tbParaLeerMail.Text = fila.Destinatario;
                 tbCuerpoLeerMail.Text = fila.Cuerpo;
             }
+        }
+
+        private void exportarToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (iFormExportar == null)
+            {
+                
+                iFormExportar = new FormExportar(tbDeLeerMail.Text,tbAsuntoLeerMail.Text,tbParaLeerMail.Text,tbCuerpoLeerMail.Text);
+                iFormExportar.Disposed += new EventHandler(form_Disposed);                
+            }
+            iFormExportar.Show();
         }
     }
 }

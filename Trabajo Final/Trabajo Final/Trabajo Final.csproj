@@ -86,6 +86,12 @@
     <Compile Include="UI\FormAdministrarCuentas.Designer.cs">
       <DependentUpon>FormAdministrarCuentas.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\FormExportar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\FormExportar.Designer.cs">
+      <DependentUpon>FormExportar.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\FormPrincipal.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -107,6 +113,7 @@
     <Compile Include="Dominio\ServicioYahoo.cs" />
     <Compile Include="Utils\AdaptadorDataGrid.cs" />
     <Compile Include="Utils\EncriptadorCesar.cs" />
+    <Compile Include="Utils\StringsUtils.cs" />
     <EmbeddedResource Include="UI\FormAcercaDe.resx">
       <DependentUpon>FormAcercaDe.cs</DependentUpon>
     </EmbeddedResource>
@@ -123,6 +130,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="UI\FormExportar.resx">
+      <DependentUpon>FormExportar.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\FormPrincipal.resx">
       <DependentUpon>FormPrincipal.cs</DependentUpon>
     </EmbeddedResource>
@@ -168,6 +178,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="icono-email11.ico" />
+    <None Include="Resources\descarga.ico" />
+    <None Include="Resources\Administrar.ico" />
+    <None Include="Resources\Help.ico" />
     <None Include="Resources\folder-icons-windows-7.ico" />
     <None Include="Resources\icono-del-l_piz-y-del-cuaderno-7956808_1.ico" />
     <None Include="Resources\icono-email11.ico" />

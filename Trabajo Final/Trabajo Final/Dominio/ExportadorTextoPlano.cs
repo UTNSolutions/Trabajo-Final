@@ -43,9 +43,13 @@ namespace Trabajo_Final.Dominio
                                   "Cuerpo: " + pEmail.Cuerpo);
                 archivo.Close();
             }
+            catch (UnauthorizedAccessException)
+            {
+                throw new ExportadorExcepcion("Seleccione un directorio donde almacenar el archivo");
+            }
             catch (DirectoryNotFoundException)
             {
-                throw new ExportadorExcepcion("No se ha encontrado el directorio donde se quiere alojar el archivo");
+                throw new ExportadorExcepcion("Ingrese un nombre de archivo");
             }
             
         }

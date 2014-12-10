@@ -16,7 +16,7 @@ namespace Trabajo_Final.Dominio
         private FabricaExportador()
         {
             this.iDiccionarioExportadores = new Dictionary<String, IExportador>();
-            IExportador expTextoPlano = new ExportadorTextoPlano("TextoPlano");
+            IExportador expTextoPlano = new ExportadorTextoPlano("Texto Plano");
             this.iDiccionarioExportadores.Add(expTextoPlano.Nombre, expTextoPlano);
         }
 
@@ -28,7 +28,7 @@ namespace Trabajo_Final.Dominio
                 {
                     iInstancia = new FabricaExportador();
                 }
-                return Instancia;                
+                return iInstancia;                
             }
         }
 

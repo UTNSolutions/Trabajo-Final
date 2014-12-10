@@ -263,6 +263,16 @@ namespace Trabajo_Final.Controladores
         }
 
         /// <summary>
+        /// Devuelve una cuenta 
+        /// </summary>
+        /// <param name="pNombreCuenta"></param>
+        /// <returns></returns>
+        public Cuenta GetCuenta(String pNombreCuenta)
+        {
+            return Cuentas.Instancia.GetCuenta(pNombreCuenta);
+        }
+
+        /// <summary>
         /// Obtiene los emails de correspondiente a una cuenta en particular, descargandolos
         /// del servidor correspondiente     
         /// </summary>
