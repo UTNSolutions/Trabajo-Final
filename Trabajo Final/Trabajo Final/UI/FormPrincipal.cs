@@ -174,6 +174,8 @@ namespace Trabajo_Final.UI
                 gbOpciones1.Visible = true;
                 gpNuevoMail.Visible = false;
                 panelCuentas.Visible = true;
+                panelLeerMail.Visible = false; //
+                gbLeerMail.Visible = false; //
             }
         }
 
@@ -437,6 +439,29 @@ namespace Trabajo_Final.UI
             {
                 tbPara.Text = tbPara.Text + "; ";
                 tbPara.Select(tbPara.Location.X + tbPara.Text.Length, tbPara.Location.Y);
+            }
+        }
+
+        private void LeerMail(object sender, EventArgs e)
+        {            
+            if (dgEmails.RowCount > 0)
+            {
+                panelLeerMail.Visible = true;
+                gbLeerMail.Visible = true;
+                gbOpciones1.Visible = false;
+                gbEnviarMail.Visible = false;
+                panelCuentas.Visible = false;
+                gpNuevoMail.Visible = false;
+                //Tomo la fila seleccionada del DataGridView y la cargo como un adaptador, para mostrarla.  
+                AdaptadorDataGrid fila = (AdaptadorDataGrid)dgEmails.CurrentRow.DataBoundItem;
+                //Veo si el mail posee asunto, para mostrarlo, sino muestro "Sin Asunto".
+                if (Convert.ToString(fila.Asunto) != "")
+                {
+                    tbAsuntoLeerMail.Text = Convert.ToString(fila.Asunto);
+                }
+                tbDeLeerMail.Text = fila.Remitente;
+                tbParaLeerMail.Text = fila.Destinatario;
+                tbCuerpoLeerMail.Text = fila.Cuerpo;
             }
         }
     }

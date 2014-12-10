@@ -11,6 +11,7 @@ using OpenPop.Mime;
 using Trabajo_Final.Persistencia;
 using Trabajo_Final.DTO;
 using System.Text.RegularExpressions;
+using System.Xml;
 
 
 
