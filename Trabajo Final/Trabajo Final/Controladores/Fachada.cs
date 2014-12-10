@@ -346,5 +346,34 @@ namespace Trabajo_Final.Controladores
                 pCuenta.AgregarEmail(email);
             }
         }
+
+
+        /// <summary>
+        /// Permite exportar un Email a un tipo de formato
+        /// </summary>
+        /// <param name="pRemitente"></param>
+        /// <param name="pDestinatarios"></param>
+        /// <param name="pAsunto"></param>
+        /// <param name="pCuerpo"></param>
+        /// <param name="pRuta">ruta donde se va a alojar el email exportado</param>
+        /// <param name="pNombreExportador">tipo de exportacion</param>
+        /// <exception cref="ArgumentNullException"></exception>
+        /// <exception cref="ExportadorExcepcion"></exception>
+        public void Exportar(String pRemitente,IList<String> pDestinatarios,String pAsunto,String pCuerpo,String pRuta,String pNombreExportador)
+        {
+            try
+            {
+                IExportador exportador = FabricaExportador.Instancia.GetExportador(pNombreExportador);
+                exportador.Exportar(pRuta, new Email(pRemitente, pDestinatarios, pCuerpo, pAsunto));
+            }
+            catch (ArgumentException ex)
+            {
+                throw ex;
+            }
+            catch (ExportadorExcepcion ex)
+            {
+                throw ex;
+            }
+        }
     }
 }

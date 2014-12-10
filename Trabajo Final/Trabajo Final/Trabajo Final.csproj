@@ -35,6 +35,10 @@
     <ApplicationIcon>icono-email11.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.Exchange.WebServices, Version=15.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Microsoft\Exchange\Web Services\2.1\Microsoft.Exchange.WebServices.dll</HintPath>
+    </Reference>
     <Reference Include="OpenPop">
       <HintPath>H:\OpenPop.dll</HintPath>
     </Reference>
@@ -57,9 +61,14 @@
     <Compile Include="Dominio\Cuenta.cs" />
     <Compile Include="Dominio\Cuentas.cs" />
     <Compile Include="Dominio\Email.cs" />
+    <Compile Include="Dominio\EMLExportador.cs" />
+    <Compile Include="Dominio\ExportadorTextoPlano.cs" />
+    <Compile Include="Dominio\FabricaExportador.cs" />
+    <Compile Include="Dominio\IExportador.cs" />
     <Compile Include="Excepciones\CuentasExcepcion.cs" />
     <Compile Include="Excepciones\DAOExcepcion.cs" />
     <Compile Include="Excepciones\EmailExcepcion.cs" />
+    <Compile Include="Excepciones\ExportadorExcepcion.cs" />
     <Compile Include="Excepciones\InternetExcepcion.cs" />
     <Compile Include="Excepciones\NombreCuentaExcepcion.cs" />
     <Compile Include="Dominio\FabricaServicios.cs" />

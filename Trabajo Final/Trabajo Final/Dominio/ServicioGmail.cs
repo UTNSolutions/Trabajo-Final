@@ -12,6 +12,8 @@ using Trabajo_Final.Persistencia;
 using Trabajo_Final.DTO;
 using System.Text.RegularExpressions;
 
+
+
 namespace Trabajo_Final.Dominio
 {
     public class ServicioGmail : Servicio
@@ -105,6 +107,7 @@ namespace Trabajo_Final.Dominio
                 while (indice <= client.GetMessageCount())
                 {
                    Message mail = client.GetMessage(indice);
+                  
                    MailMessage email = mail.ToMailMessage();
                    IList<String> listaDestinatarios = new List<String>();                 
                    listaDestinatarios.Add(Convert.ToString(email.To));

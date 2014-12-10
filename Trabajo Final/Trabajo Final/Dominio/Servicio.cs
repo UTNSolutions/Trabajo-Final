@@ -10,8 +10,6 @@ namespace Trabajo_Final.Dominio
 {
     public abstract class Servicio : IServicio
     {
-        private  Cuenta iCuenta;
-        private  string iNombre;
 
         public abstract void EnviarMail(Email pMail);
 
