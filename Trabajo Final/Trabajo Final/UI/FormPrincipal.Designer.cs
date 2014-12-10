@@ -82,13 +82,7 @@
             this.responderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exportarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.acercaDeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.panelLeerMail = new System.Windows.Forms.Panel();
-            this.tbCuerpoLeerMail = new System.Windows.Forms.TextBox();
-            this.tbParaLeerMail = new System.Windows.Forms.TextBox();
-            this.label6 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.tbDeLeerMail = new System.Windows.Forms.TextBox();
-            this.tbAsuntoLeerMail = new System.Windows.Forms.TextBox();
             this.gbOpciones1.SuspendLayout();
             this.menuStrip2.SuspendLayout();
             this.gpNuevoMail.SuspendLayout();
