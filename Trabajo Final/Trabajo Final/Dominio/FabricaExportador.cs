@@ -28,7 +28,7 @@ namespace Trabajo_Final.Dominio
                 {
                     iInstancia = new FabricaExportador();
                 }
-                return this.Instancia;                
+                return Instancia;                
             }
         }
 
