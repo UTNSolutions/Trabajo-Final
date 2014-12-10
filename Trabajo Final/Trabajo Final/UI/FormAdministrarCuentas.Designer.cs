@@ -45,9 +45,9 @@
             this.chbContraseña = new System.Windows.Forms.CheckBox();
             this.label5 = new System.Windows.Forms.Label();
             this.labelMailError = new System.Windows.Forms.Label();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.bEliminar = new System.Windows.Forms.Button();
+            this.bModificar = new System.Windows.Forms.Button();
+            this.bAgregar = new System.Windows.Forms.Button();
             this.tbIdCuenta = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgCuentas)).BeginInit();
             this.SuspendLayout();
@@ -182,6 +182,7 @@
             this.cbServicio.Name = "cbServicio";
             this.cbServicio.Size = new System.Drawing.Size(122, 21);
             this.cbServicio.TabIndex = 2;
+            this.cbServicio.SelectedIndexChanged += new System.EventHandler(this.cbServicio_TabIndexChanged);
             // 
             // chbContraseña
             // 
@@ -215,44 +216,46 @@
             this.labelMailError.Text = "E-Mail con estructura incorrecta";
             this.labelMailError.Visible = false;
             // 
-            // button3
+            // bEliminar
             // 
-            this.button3.Image = global::Trabajo_Final.Properties.Resources.editdelete;
-            this.button3.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button3.Location = new System.Drawing.Point(579, 250);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(75, 23);
-            this.button3.TabIndex = 7;
-            this.button3.Text = "Eliminar  ";
-            this.button3.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.EliminarCuenta);
+            this.bEliminar.Enabled = false;
+            this.bEliminar.Image = global::Trabajo_Final.Properties.Resources.editdelete;
+            this.bEliminar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.bEliminar.Location = new System.Drawing.Point(579, 250);
+            this.bEliminar.Name = "bEliminar";
+            this.bEliminar.Size = new System.Drawing.Size(75, 23);
+            this.bEliminar.TabIndex = 7;
+            this.bEliminar.Text = "Eliminar  ";
+            this.bEliminar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.bEliminar.UseVisualStyleBackColor = true;
+            this.bEliminar.Click += new System.EventHandler(this.EliminarCuenta);
             // 
-            // button2
+            // bModificar
             // 
-            this.button2.Image = global::Trabajo_Final.Properties.Resources.edit;
-            this.button2.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button2.Location = new System.Drawing.Point(474, 250);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 6;
-            this.button2.Text = "Modificar";
-            this.button2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.ModificarCuenta);
+            this.bModificar.Enabled = false;
+            this.bModificar.Image = global::Trabajo_Final.Properties.Resources.edit;
+            this.bModificar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.bModificar.Location = new System.Drawing.Point(474, 250);
+            this.bModificar.Name = "bModificar";
+            this.bModificar.Size = new System.Drawing.Size(75, 23);
+            this.bModificar.TabIndex = 6;
+            this.bModificar.Text = "Modificar";
+            this.bModificar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.bModificar.UseVisualStyleBackColor = true;
+            this.bModificar.Click += new System.EventHandler(this.ModificarCuenta);
             // 
-            // button1
+            // bAgregar
             // 
-            this.button1.Image = global::Trabajo_Final.Properties.Resources.apply;
-            this.button1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button1.Location = new System.Drawing.Point(369, 250);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 5;
-            this.button1.Text = "Agregar  ";
-            this.button1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.AltaCuenta);
+            this.bAgregar.Image = global::Trabajo_Final.Properties.Resources.apply;
+            this.bAgregar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.bAgregar.Location = new System.Drawing.Point(369, 250);
+            this.bAgregar.Name = "bAgregar";
+            this.bAgregar.Size = new System.Drawing.Size(75, 23);
+            this.bAgregar.TabIndex = 5;
+            this.bAgregar.Text = "Agregar  ";
+            this.bAgregar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.bAgregar.UseVisualStyleBackColor = true;
+            this.bAgregar.Click += new System.EventHandler(this.AltaCuenta);
             // 
             // tbIdCuenta
             // 
@@ -262,6 +265,7 @@
             this.tbIdCuenta.Size = new System.Drawing.Size(36, 20);
             this.tbIdCuenta.TabIndex = 12;
             this.tbIdCuenta.TabStop = false;
+            this.tbIdCuenta.Visible = false;
             // 
             // FormAdministrarCuentas
             // 
@@ -271,9 +275,9 @@
             this.Controls.Add(this.tbIdCuenta);
             this.Controls.Add(this.labelMailError);
             this.Controls.Add(this.label5);
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.bEliminar);
+            this.Controls.Add(this.bModificar);
+            this.Controls.Add(this.bAgregar);
             this.Controls.Add(this.chbContraseña);
             this.Controls.Add(this.cbServicio);
             this.Controls.Add(this.tbMail);
@@ -291,6 +295,7 @@
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Administrar cuentas";
+            this.TopMost = true;
             this.Load += new System.EventHandler(this.FormAdministrarCuentas_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgCuentas)).EndInit();
             this.ResumeLayout(false);
@@ -310,9 +315,9 @@
         private System.Windows.Forms.TextBox tbMail;
         private System.Windows.Forms.ComboBox cbServicio;
         private System.Windows.Forms.CheckBox chbContraseña;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button bAgregar;
+        private System.Windows.Forms.Button bModificar;
+        private System.Windows.Forms.Button bEliminar;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label labelMailError;
         private System.Windows.Forms.TextBox tbIdCuenta;

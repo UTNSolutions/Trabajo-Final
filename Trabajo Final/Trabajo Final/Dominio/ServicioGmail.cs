@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Net;
+using System.Web;
 using System.Net.Mail;
 using Trabajo_Final.Excepciones;
 using OpenPop.Pop3;
@@ -11,7 +12,6 @@ using OpenPop.Mime;
 using Trabajo_Final.Persistencia;
 using Trabajo_Final.DTO;
 using System.Text.RegularExpressions;
-using System.Xml;
 
 
 
@@ -107,12 +107,21 @@ namespace Trabajo_Final.Dominio
                 IList<Email> listaADevolver = new List<Email>();
                 while (indice <= client.GetMessageCount())
                 {
-                   Message mail = client.GetMessage(indice);
-                  
-                   MailMessage email = mail.ToMailMessage();
-                   IList<String> listaDestinatarios = new List<String>();                 
-                   listaDestinatarios.Add(Convert.ToString(email.To));
-                   Email msj = new Email(Convert.ToString(email.From), listaDestinatarios, email.Body, email.Subject);
+                    Message mail = client.GetMessage(indice);
+                    MailMessage email = mail.ToMailMessage();
+                    IList<String> listaDestinatarios = new List<String>();                     
+                    listaDestinatarios.Add(Convert.ToString(email.To));
+                    //Si el cuerpo esta en HTML lo trasforma.
+                    if (email.IsBodyHtml)
+                    {
+                        //desace de las etiquetas HTML.
+                        email.Body = Regex.Replace(email.Body, "<[^>]*>", string.Empty);
+                        //get rid of multiple blank lines
+                        //email.Body = Regex.Replace(email.Body, @"^\s*$\n", string.Empty, RegexOptions.Multiline);
+                    }
+
+
+                    Email msj = new Email(Convert.ToString(email.From), listaDestinatarios, email.Body, email.Subject);
                     listaADevolver.Add(msj);
                     indice++;
                 }

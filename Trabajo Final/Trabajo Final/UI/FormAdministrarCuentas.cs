@@ -22,6 +22,11 @@ namespace Trabajo_Final.UI
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Evento que se ejecuta cuando se inicia el formulario.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void FormAdministrarCuentas_Load(object sender, EventArgs e)
         {
             cbServicio.SelectedIndex = 0;
@@ -44,9 +49,32 @@ namespace Trabajo_Final.UI
         /// <returns></returns>
         private bool MailCorrecto()
         {
-            String servicio = cbServicio.SelectedItem.ToString();
-            String cadena = tbMail.Text;
-            return Regex.IsMatch(tbMail.Text, "\\w+([-+.']\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*");
+            if (cbServicio.SelectedItem.ToString() == "Yahoo")
+            {
+                if (Regex.IsMatch(tbMail.Text, "\\w+([-+.']\\w+)*@yahoo([.])\\w+([-.]\\w+)*"))
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                if (Regex.IsMatch(tbMail.Text, "\\w+([-+.']\\w+)*@gmail([.])\\w+([-.]\\w+)*"))
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+
+            //String servicio = cbServicio.SelectedItem.ToString();
+            //String cadena = tbMail.Text;
+            //return Regex.IsMatch(tbMail.Text, "\\w+([-+.']\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*");
         }
 
         /// <summary>
@@ -56,7 +84,14 @@ namespace Trabajo_Final.UI
         /// <param name="e"></param>
         private void ValidarMail(object sender, EventArgs e)
         {
-
+            if (!MailCorrecto())
+            {
+                labelMailError.Visible = true;
+            }
+            else
+            {
+                labelMailError.Visible = false;
+            }
         }
 
         /// <summary>
@@ -85,6 +120,8 @@ namespace Trabajo_Final.UI
         {
             if (dgCuentas.RowCount > 0)
             {
+                bModificar.Enabled = true;
+                bEliminar.Enabled = true;                
                 CuentaDTO fila = (CuentaDTO)dgCuentas.CurrentRow.DataBoundItem;
                 tbIdCuenta.Text = Convert.ToString(fila.IdCuenta);
                 tbCuenta.Text = fila.Nombre;
@@ -92,12 +129,14 @@ namespace Trabajo_Final.UI
                 tbContraseña.Text = fila.Contraseña;
                 cbServicio.SelectedItem = fila.NombreServicio;
             }
-        }
+        }        
 
         private void MostrarDatos(object sender, KeyEventArgs k )
         {
             if (dgCuentas.RowCount > 0)
             {
+                bModificar.Enabled = true;
+                bEliminar.Enabled = true;
                 CuentaDTO fila = (CuentaDTO)dgCuentas.CurrentRow.DataBoundItem;
                 tbIdCuenta.Text = Convert.ToString(fila.IdCuenta);
                 tbCuenta.Text = fila.Nombre;
@@ -196,6 +235,15 @@ namespace Trabajo_Final.UI
                         MessageBox.Show(ex.Message, "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
+            }
+        }
+
+        //Ocurre cuando cambia el valor del indice de cbServicio.
+        private void cbServicio_TabIndexChanged(object sender, EventArgs e)
+        {
+            if (tbMail.Text != "")
+            {
+                ValidarMail(sender, e);
             }
         }
     

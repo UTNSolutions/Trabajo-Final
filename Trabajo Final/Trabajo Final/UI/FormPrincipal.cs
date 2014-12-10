@@ -37,6 +37,7 @@ namespace Trabajo_Final.UI
             if (iFormAcercaDe == null)
             {
                 iFormAcercaDe = new FormAcercaDe();
+                //iFormAcercaDe.MdiParent = this;
                 iFormAcercaDe.Disposed += new EventHandler(form_Disposed);
             }
             iFormAcercaDe.Show();
@@ -316,7 +317,7 @@ namespace Trabajo_Final.UI
         }
 
         /// <summary>
-        /// Carga el Data grid
+        /// Carga el data grid.
         /// </summary>
         /// <param name="pNombreCuenta">Nombre de la cuenta</param>
         /// <param name="pTipoCorreo">Tipo de correo (recibidos,enviados,borradores)</param>
@@ -362,8 +363,8 @@ namespace Trabajo_Final.UI
                 {
                     adaptador.Add(new AdaptadorDataGrid(email.Remitente, email.Destinatario[0], email.Asunto, email.Cuerpo));
                 }
-            }
-            dgEmails.DataSource = adaptador;
+                }
+                dgEmails.DataSource = adaptador;
             dgEmails.Columns["remitente"].Visible = false;
             dgEmails.Columns["destinatario"].Visible = true;
         }
