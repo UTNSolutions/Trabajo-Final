@@ -40,7 +40,7 @@ namespace Trabajo_Final.UI
                 //iFormAcercaDe.MdiParent = this;
                 iFormAcercaDe.Disposed += new EventHandler(form_Disposed);
             }
-            iFormAcercaDe.Show();
+            iFormAcercaDe.ShowDialog();
         }
 
         /// <summary>

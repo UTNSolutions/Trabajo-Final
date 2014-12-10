@@ -14,7 +14,6 @@ using Trabajo_Final.DTO;
 using System.Text.RegularExpressions;
 
 
-
 namespace Trabajo_Final.Dominio
 {
     public class ServicioGmail : Servicio
