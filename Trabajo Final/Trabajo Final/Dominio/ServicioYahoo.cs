@@ -10,28 +10,36 @@ using OpenPop.Pop3;
 using OpenPop.Mime;
 using Trabajo_Final.DTO;
 using System.Text.RegularExpressions;
+using System.IO;
 
 namespace Trabajo_Final.Dominio
 {
     public class ServicioYahoo : Servicio
     {
         private string iNombre;
-        private Cuenta iCuenta;
+        //Representa las credenciales de una cuenta de correo que se necesitan para 
+        //realizar el envio de una Email
         private NetworkCredential iCredenciales;
 
         public ServicioYahoo(string pNombre)
         {
             this.iNombre = pNombre;
-            this.iCuenta = null;
+        }
+
+        public override string Nombre
+        {
+            get { return this.iNombre; }
         }
                 
-        public override void EnviarMail(Email pMail)
+        public override void EnviarMail(Email pMail,Cuenta pCuenta)
         {
             
-            if (this.iCuenta == null)
+            if (pCuenta == null)
             {
                 throw new NullReferenceException("No hay una cuenta asociada para realizar la operación");
             }
+            //Configuro las credenciales de la cuenta para poder establecer la conexion
+            this.iCredenciales = new NetworkCredential(pCuenta.Direccion, pCuenta.Contraseña);
             foreach (string destinatario in pMail.Destinatario)
             {
                 String cadena = destinatario;
@@ -51,7 +59,7 @@ namespace Trabajo_Final.Dominio
 
                 client.Host = "smtp.mail.yahoo.com";
                 client.EnableSsl = true;  //Esto es para que vaya a través de SSL que es obligatorio con Yahoo
-                MailMessage email = new MailMessage(this.iCuenta.Direccion, destinatario, pMail.Asunto, pMail.Cuerpo);
+                MailMessage email = new MailMessage(pCuenta.Direccion, destinatario, pMail.Asunto, pMail.Cuerpo);
                 try
                 {
                     client.Send(email);
@@ -68,12 +76,16 @@ namespace Trabajo_Final.Dominio
                 {
                     throw new EmailExcepcion("Fallo la autenticación de la direccion de correo, verifique los datos de la cuenta");
                 }
+                catch (IOException)
+                {
+                    throw new EmailExcepcion("Error en el servidor, no responde");
+                }
             }
         }
 
-        public override IList<Email> RecibirMail()
+        public override IList<Email> RecibirMail(Cuenta pCuenta)
         {
-            if (this.iCuenta == null)
+            if (pCuenta == null)
             {
                 throw new NullReferenceException("No hay una cuenta asociada para realizar la operación");
             }
@@ -85,7 +97,7 @@ namespace Trabajo_Final.Dominio
             {
                 Pop3Client client = new Pop3Client();
                 client.Connect("pop.mail.yahoo.com", 995, true);
-                client.Authenticate(this.iCuenta.Direccion, this.iCuenta.Contraseña);
+                client.Authenticate(pCuenta.Direccion, pCuenta.Contraseña);
                 int indice = 1;
                 IList<Email> listaADevolver = new List<Email>();
                 while (indice <= client.GetMessageCount())
@@ -102,7 +114,8 @@ namespace Trabajo_Final.Dominio
                         //get rid of multiple blank lines
                         //email.Body = Regex.Replace(email.Body, @"^\s*$\n", string.Empty, RegexOptions.Multiline);
                     }
-                    Email msj = new Email(Convert.ToString(email.From),listaDestinatarios, email.Body, email.Subject);
+                    DateTime fecha = mail.Headers.DateSent;
+                    Email msj = new Email(Convert.ToString(email.From),listaDestinatarios, email.Body, email.Subject,fecha);
                     listaADevolver.Add(msj);
                     indice++;
                 }
@@ -117,21 +130,12 @@ namespace Trabajo_Final.Dominio
             {
                 throw new EmailExcepcion("Error en el acceso a la cuenta, verifique los datos ingresados");
             }
-        }
-
-        public override Cuenta Cuenta
-        {
-            set
+            catch(IOException)
             {
-                this.iCuenta = value;
-                this.iCredenciales = new NetworkCredential(iCuenta.Direccion, iCuenta.Contraseña);
+                throw new EmailExcepcion("Error en el servidor, no responde");
             }
         }
 
-        public override string Nombre
-        {
-            get { return this.iNombre; }
-        }
 
         public override bool AccesoInternet()
         {

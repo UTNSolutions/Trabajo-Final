@@ -26,11 +26,12 @@ namespace Trabajo_Final.Persistencia
           //  try
            // {
                 //inserto el email en la base de datos
-                SqlCommand comando = new SqlCommand("insert into Email(idCuenta,remitente,cuerpo,asunto) values(@idCuenta,@remitente,@cuerpo,@asunto)", this.iConexion, this.iTransaccion);
+                SqlCommand comando = new SqlCommand("insert into Email(idCuenta,remitente,cuerpo,asunto,fecha) values(@idCuenta,@remitente,@cuerpo,@asunto,@fecha)", this.iConexion, this.iTransaccion);
                 comando.Parameters.AddWithValue("@idCuenta", pEmail.IdCuenta);
                 comando.Parameters.AddWithValue("@remitente", pEmail.Remitente);          
                 comando.Parameters.AddWithValue("@asunto", pEmail.Asunto);
                 comando.Parameters.AddWithValue("@cuerpo", pEmail.Cuerpo);
+                comando.Parameters.AddWithValue("@fecha", pEmail.Fecha);
                 comando.ExecuteNonQuery();
                 SqlCommand cmd = new SqlCommand("select Max(idMail) from Email",this.iConexion,this.iTransaccion);
                 int idMail = Convert.ToInt32(cmd.ExecuteScalar());
@@ -67,7 +68,7 @@ namespace Trabajo_Final.Persistencia
 
         public IList<EmailDTO> Obtener(int pIdCuenta)
         {
-            SqlCommand comando = new SqlCommand("select * from Email where idCuenta= @idCuenta", this.iConexion);
+            SqlCommand comando = new SqlCommand("select * from Email where idCuenta= @idCuenta order by fecha desc", this.iConexion);
             comando.Parameters.AddWithValue("@idCuenta", pIdCuenta);
             DataTable tabla = new DataTable();
             IList<EmailDTO> listaEmails = new List<EmailDTO>();
@@ -89,7 +90,7 @@ namespace Trabajo_Final.Persistencia
                     {
                         listaDestinatarios.Add(Convert.ToString(fila1["direccion"]));
                     }
-                    listaEmails.Add(new EmailDTO(Convert.ToInt32(fila["idMail"]), Convert.ToInt32(fila["idCuenta"]), Convert.ToString(fila["remitente"]), listaDestinatarios, Convert.ToString(fila["cuerpo"]), Convert.ToString(fila["asunto"])));
+                    listaEmails.Add(new EmailDTO(Convert.ToInt32(fila["idMail"]), Convert.ToInt32(fila["idCuenta"]), Convert.ToString(fila["remitente"]), listaDestinatarios, Convert.ToString(fila["cuerpo"]), Convert.ToString(fila["asunto"]),Convert.ToDateTime(fila["fecha"])));
                 }
                 return listaEmails;
             }

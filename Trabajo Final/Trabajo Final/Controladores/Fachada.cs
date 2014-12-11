@@ -195,7 +195,7 @@ namespace Trabajo_Final.Controladores
                     //agregar dicho email a la cuenta de dominio Email
                     foreach (EmailDTO emailDto in FachadaABMEmail.Instancia.ListarEmails(cuentaDto.IdCuenta)) 
                     {
-                        Email email = new Email(emailDto.Remitente,emailDto.Destinatario,emailDto.Cuerpo,emailDto.Asunto);
+                        Email email = new Email(emailDto.Remitente,emailDto.Destinatario,emailDto.Cuerpo,emailDto.Asunto,emailDto.Fecha);
                         cuenta.AgregarEmail(email);
                     }
                 }
@@ -221,10 +221,9 @@ namespace Trabajo_Final.Controladores
             try
             {
                 Cuenta cuenta = Cuentas.Instancia.GetCuenta(pNombreCuenta);
+                Email email = new Email(pRemitente, pDestinatario, pCuerpo, pAsunto,DateTime.Today);
                 IServicio servicio = FabricaServicios.Instancia.GetServicio(cuenta.NombreServicio);
-                servicio.Cuenta = cuenta;
-                Email email = new Email(pRemitente, pDestinatario, pCuerpo, pAsunto);
-                servicio.EnviarMail(email);
+                servicio.EnviarMail(email,cuenta);
             }
             catch (FormatException)
             {
@@ -283,8 +282,7 @@ namespace Trabajo_Final.Controladores
             {
                 Cuenta cuenta = Cuentas.Instancia.GetCuenta(pNombreCuenta);
                 IServicio servicio = FabricaServicios.Instancia.GetServicio(cuenta.NombreServicio);
-                servicio.Cuenta = cuenta;
-                IList<Email> listaEmails = servicio.RecibirMail();
+                IList<Email> listaEmails = servicio.RecibirMail(cuenta);
                 //obtengo la cuenta de correo que posee el nombre de cuenta pasado como parametro
                 //para poder asociarle los emails recibidos
                 CuentaDTO cuentaDto = BuscarCuenta(pNombreCuenta);
@@ -293,7 +291,7 @@ namespace Trabajo_Final.Controladores
                 //que el email corresponde
                 foreach (Email email in listaEmails)
                 {
-                    listaEmailDTO.Add(new EmailDTO(cuentaDto.IdCuenta, email.Remitente, email.Destinatario, email.Cuerpo, email.Asunto));
+                    listaEmailDTO.Add(new EmailDTO(cuentaDto.IdCuenta, email.Remitente, email.Destinatario, email.Cuerpo, email.Asunto,email.Fecha));
                 }
                 //Guardo la lista de emails en la base de datos
                 FachadaABMEmail.Instancia.InsertarEmails(listaEmailDTO);
@@ -369,12 +367,12 @@ namespace Trabajo_Final.Controladores
         /// <param name="pNombreExportador">tipo de exportacion</param>
         /// <exception cref="ArgumentNullException"></exception>
         /// <exception cref="ExportadorExcepcion"></exception>
-        public void Exportar(String pRemitente,IList<String> pDestinatarios,String pAsunto,String pCuerpo,String pRuta,String pNombreExportador)
+        public void Exportar(String pRemitente,IList<String> pDestinatarios,String pAsunto,String pCuerpo,String pRuta,String pNombreExportador,DateTime pFecha)
         {
             try
             {
                 IExportador exportador = FabricaExportador.Instancia.GetExportador(pNombreExportador);
-                exportador.Exportar(pRuta, new Email(pRemitente, pDestinatarios, pCuerpo, pAsunto));
+                exportador.Exportar(pRuta, new Email(pRemitente, pDestinatarios, pCuerpo, pAsunto,pFecha));
             }
             catch (ArgumentException ex)
             {

@@ -23,11 +23,12 @@ namespace Trabajo_Final.DTO
 
         private String iAsunto;
 
+        private DateTime iFecha;
       //  private IList<String> iConCopia;
 
        // private IList<String> iConCopiaOculta;
 
-        public EmailDTO(int pIdCuenta,String pRemitente,IList<String> pDestinatario,String pCuerpo, String pAsunto)
+        public EmailDTO(int pIdCuenta,String pRemitente,IList<String> pDestinatario,String pCuerpo, String pAsunto,DateTime pFecha)
         {
             this.iRemitente = pRemitente;
             this.iDestinatario = pDestinatario;
@@ -36,9 +37,10 @@ namespace Trabajo_Final.DTO
             this.iIdCuenta = pIdCuenta;
             this.iCuerpo = pCuerpo;
             this.iAsunto = pAsunto;
+            this.iFecha = pFecha;
         }
 
-        public EmailDTO(int pIdEmail, int pIdCuenta, String pRemitente, IList<String> pDestinatario, String pCuerpo, String pAsunto)
+        public EmailDTO(int pIdEmail, int pIdCuenta, String pRemitente, IList<String> pDestinatario, String pCuerpo, String pAsunto,DateTime pFecha)
         {
             this.iRemitente = pRemitente;
             this.iIdEmail = pIdEmail;
@@ -48,10 +50,11 @@ namespace Trabajo_Final.DTO
             this.iIdCuenta = pIdCuenta;
             this.iCuerpo = pCuerpo;
             this.iAsunto = pAsunto;
+            this.iFecha = pFecha;
         }
 
         /// <summary>
-        /// Devuelve el componente remitente
+        /// Devuelve o establece el componente remitente
         /// </summary>
         public String Remitente
         {
@@ -60,7 +63,7 @@ namespace Trabajo_Final.DTO
         }
 
         /// <summary>
-        /// Devuelve el componente Destinatario
+        /// Devuelve o establece el componente Destinatario
         /// </summary>
         public IList<String> Destinatario
         {
@@ -69,7 +72,7 @@ namespace Trabajo_Final.DTO
         }
 
         /// <summary>
-        /// Devuelve la componente IdCuenta a la que pertenece dicho Email
+        /// Devuelve o establece la componente IdCuenta a la que pertenece dicho Email
         /// </summary>
         public int IdCuenta
         {
@@ -78,7 +81,7 @@ namespace Trabajo_Final.DTO
         }
 
         /// <summary>
-        /// Devuelve la componente IdEmail de dicho mail
+        /// Devuelve o establece la componente IdEmail de dicho mail
         /// </summary>
         public int IdEmail
         {
@@ -87,7 +90,7 @@ namespace Trabajo_Final.DTO
         }
 
         /// <summary>
-        /// Devuelve el cuerpo del Email
+        /// Devuelve o establece el cuerpo del Email
         /// </summary>
         public String Cuerpo
         {
@@ -96,12 +99,21 @@ namespace Trabajo_Final.DTO
         }
 
         /// <summary>
-        /// Devuelve el asunto del Email
+        /// Devuelve o establece el asunto del Email
         /// </summary>
         public String Asunto
         {
             get { return this.iAsunto; }
             set { this.iAsunto = value; }
+        }
+
+        /// <summary>
+        /// Devuelve o establece la fecha del Email
+        /// </summary>
+        public DateTime Fecha
+        {
+            get { return this.iFecha; }
+            set { this.iFecha = value; }
         }
     }
 }

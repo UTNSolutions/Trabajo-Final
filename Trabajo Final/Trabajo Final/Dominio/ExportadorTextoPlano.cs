@@ -38,6 +38,7 @@ namespace Trabajo_Final.Dominio
                 }
                 archivo.WriteLine("De: " + pEmail.Remitente + Environment.NewLine +
                                   "Para: " + destinatarios + Environment.NewLine +
+                                  "Fecha: " + pEmail.Fecha + Environment.NewLine +
                                   "Asunto: " + pEmail.Asunto + Environment.NewLine +
                                    Environment.NewLine +
                                   "Cuerpo: " + pEmail.Cuerpo);

@@ -18,14 +18,16 @@ namespace Trabajo_Final.UI
         private String iAsunto;
         private String iCuerpo;
         private String iDestinatario;
+        private DateTime iFecha;
 
-        public FormExportar(String pRemitente, String pAsunto, String pDestinatario, String pCuerpo)
+        public FormExportar(String pRemitente, String pAsunto, String pDestinatario, String pCuerpo,DateTime pFecha)
         {
             InitializeComponent();
             this.iRemitente = pRemitente;
             this.iAsunto = pAsunto;
             this.iDestinatario = pDestinatario;
             this.iCuerpo = pCuerpo;
+            this.iFecha = pFecha;
         }
 
         /// <summary>
@@ -71,7 +73,7 @@ namespace Trabajo_Final.UI
                     IList<String> destinatarios = new List<String>();
                     destinatarios.Add(this.iDestinatario);
                     String ruta = tbRutaDirectorio.Text + @"\" + tbNombreArchivo.Text;
-                    Fachada.Instancia.Exportar(this.iRemitente, destinatarios, this.iAsunto, this.iCuerpo, ruta, cbTipoExportador.SelectedItem.ToString());
+                    Fachada.Instancia.Exportar(this.iRemitente, destinatarios, this.iAsunto, this.iCuerpo, ruta, cbTipoExportador.SelectedItem.ToString(),this.iFecha);
                     MessageBox.Show("Se ha exportado el Email con éxito", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     this.Close();
                 }
