@@ -37,7 +37,7 @@ namespace Trabajo_Final.Dominio
             cliente.Port = 587;
             cliente.EnableSsl = true;
             cliente.Credentials = new NetworkCredential("matiadr13@gmail.com", "utnsist14");
-            cliente.PickupDirectoryLocation = @"C:\Users\Brian\Desktop\Mail";
+            //cliente.PickupDirectoryLocation = @"C:\Users\Brian\Desktop\Mail";
             cliente.Send(mail);
         }
     }

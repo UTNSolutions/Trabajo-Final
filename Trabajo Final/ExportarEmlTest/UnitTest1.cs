@@ -15,7 +15,7 @@ namespace ExportarEmlTest
             IList<string> destinos = new List<string>();
             destinos.Add("mati.gmail.com");
             destinos.Add("hola.yahoo.es");
-            Email email = new Email("mati.d@live.com.ar",destinos,"hola como andas?","consulta");
+            //Email email = new Email("mati.d@live.com.ar",destinos,"hola como andas?","consulta");
             //ExportadorTextoPlano.Exportar(@"C:\export\email.txt",email);
 
         }

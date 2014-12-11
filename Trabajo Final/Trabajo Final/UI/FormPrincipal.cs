@@ -15,13 +15,11 @@ using System.Text.RegularExpressions;
 using Trabajo_Final.Utils;
 
 
+
 namespace Trabajo_Final.UI
 {
     public partial class FormPrincipal : Form
     {
-        private static FormAdministrarCuentas iFormAdminCuentas;
-        private static FormAcercaDe iFormAcercaDe;
-        private static FormExportar iFormExportar;
         public FormPrincipal()
         {
             InitializeComponent();
@@ -34,12 +32,7 @@ namespace Trabajo_Final.UI
         /// <param name="e"></param>
         private void acercaDeToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (iFormAcercaDe == null)
-            {
-                iFormAcercaDe = new FormAcercaDe();
-                //iFormAcercaDe.MdiParent = this;
-                iFormAcercaDe.Disposed += new EventHandler(form_Disposed);
-            }
+            FormAcercaDe iFormAcercaDe = new FormAcercaDe();            
             iFormAcercaDe.ShowDialog();
         }
 
@@ -50,13 +43,8 @@ namespace Trabajo_Final.UI
         /// <param name="e"></param>
         private void cuentasToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (iFormAdminCuentas == null)
-            {
-                iFormAdminCuentas = new FormAdministrarCuentas();
-                iFormAdminCuentas.Disposed += new EventHandler(form_Disposed);
-                iFormAdminCuentas.FormClosed += new FormClosedEventHandler(formAdminCuentas_FormClosed);
-            }
-            iFormAdminCuentas.Show();
+            FormAdministrarCuentas iFormAdminCuentas = new FormAdministrarCuentas();
+            iFormAdminCuentas.ShowDialog();
         }
 
         private void formAdminCuentas_FormClosed(object sender, FormClosedEventArgs e)       
@@ -64,18 +52,6 @@ namespace Trabajo_Final.UI
             //when child form is closed, this code is executed   
             // Bind the Grid view       
             CargarTreeView();         
-        }
-
-        /// <summary>
-        /// Le asigna null a los formularios para que no se puedan abrir de nuevo.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void form_Disposed(object sender, EventArgs e)
-        {
-            iFormAdminCuentas = null;
-            iFormAcercaDe = null;
-            iFormExportar = null;
         }
 
         /// <summary>
@@ -92,8 +68,8 @@ namespace Trabajo_Final.UI
                 combobDe.DisplayMember = "Direccion";
                 gbOpciones1.Visible = false;
                 gbEnviarMail.Visible = true;
-                tbCCO.ReadOnly = true;
-                tbCC.ReadOnly = true;
+                tbCCOROnly.ReadOnly = true;
+                tbCCROnly.ReadOnly = true;
                 panelCuentas.Visible = false;
                 gpNuevoMail.Visible = true;
                 
@@ -101,23 +77,61 @@ namespace Trabajo_Final.UI
         }
 
         /// <summary>
-        /// Habilita el TextBox que permita cargar el/las direcciones a los que se le envían una copia del mail. 
+        /// Habilita la carga de la/las direcciones a los que se le envían una copia carbono del mail. 
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void botonCC_Click(object sender, EventArgs e)
         {
-            tbCC.ReadOnly = false;
+                botonCC.Visible = false;
+                botonCCAtras.Visible = true;
+                tbCC.Visible = true;
+                botonAgregarCC.Visible = true;
+                botonBorrarUltimoCC.Visible = true;
         }
 
         /// <summary>
-        /// Habilita el TextBox que permita cargar el/las direcciones a los que se le envían una copia oculata del mail.
+        /// Deshabilita la carga de la/las direcciones a los que se le envían una copia carbono del mail.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void botonCCAtras_Click(object sender, EventArgs e)
+        {
+                botonCCAtras.Visible = false;
+                botonCC.Visible = true;
+                tbCC.Visible = false;
+                botonAgregarCC.Visible = false;
+                botonBorrarUltimoCC.Visible = false;
+                tbCCROnly.Text = "";
+        }
+
+        /// <summary>
+        /// Habilita la carga de la/las direcciones a los que se le envían una copia carbono oculta del mail.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void botonCCO_Click(object sender, EventArgs e)
         {
-            tbCCO.ReadOnly = false;
+            botonCCO.Visible = false;
+            botonCCOAtras.Visible = true;
+            tbCCO.Visible = true;
+            botonAgregarCCO.Visible = true;
+            botonBorrarUltimoCCO.Visible = true;
+        }
+
+        /// <summary>
+        /// Deshabilita la carga de la/las direcciones a los que se le envían una copia carbono del mail.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void botonCCOAtras_Click(object sender, EventArgs e)
+        {
+            botonCCOAtras.Visible = false;
+            botonCCO.Visible = true;
+            tbCCO.Visible = false;
+            botonAgregarCCO.Visible = false;
+            botonBorrarUltimoCCO.Visible = false;
+            tbCCOROnly.Text = "";
         }
 
         /// <summary>
@@ -190,14 +204,14 @@ namespace Trabajo_Final.UI
         /// <returns></returns>
         private bool VaciarDatosEnviarMail_TextChanged(object sender, EventArgs e)
         {
-            if (tbPara.Text != "" || tbCC.Text != "" || tbCCO.Text != "" || tbAsunto.Text != "" || tbAdjuntos.Text != "" || tbCuerpo.Text != "")
+            if (tbPara.Text != "" || tbCCROnly.Text != "" || tbCCOROnly.Text != "" || tbAsunto.Text != "" || tbAdjuntos.Text != "" || tbCuerpo.Text != "")
             {
                 DialogResult resultado = MessageBox.Show("¿Está seguro que quiere eliminar este mail no enviado ?", "Advertencia", MessageBoxButtons.YesNo,MessageBoxIcon.Question);
                 if (resultado == DialogResult.Yes)
                 {
                     tbPara.Text = "";
-                    tbCC.Text = "";
-                    tbCCO.Text = "";
+                    tbCCROnly.Text = "";
+                    tbCCOROnly.Text = "";
                     tbAsunto.Text = "";
                     tbAdjuntos.Text = "";
                     tbCuerpo.Text = "";
@@ -211,6 +225,76 @@ namespace Trabajo_Final.UI
             else
             {
                 return true;
+            }
+        }
+
+        /// <summary>
+        /// Agrega una dirección al textbox de destinatarios.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void botonAgregarPara_Click(object sender, EventArgs e)
+        {
+            if (tbPara.Text != "")
+            {
+                if (!(Regex.IsMatch(tbPara.Text, "\\w+([-+.']\\w+)*@\\w+([-.]\\w+)*\\.\\w+(a-z)*")))
+                {
+                    labelDNValida.Visible = true;
+                }
+                else
+                {
+                    labelDNValida.Visible = false;
+                    if (tbParaROnly.Text == "")
+                    {
+                        tbParaROnly.Text = tbPara.Text + "; ";
+                        tbPara.Text = "";
+                        botonBorrarUltimoPara.Enabled = true;
+                    }
+                    else
+                    {
+                        tbParaROnly.Text = tbParaROnly.Text + tbPara.Text + "; ";
+                        tbPara.Text = "";
+                    }
+                }
+                if (tbParaROnly.Text.Length > 50)
+                {
+                    tbParaROnly.Multiline = true;
+                    tbParaROnly.Location = new Point(103, 80);
+                    tbParaROnly.Size = new Size(298, 47);
+                }
+            }
+            else
+            {
+                labelDNValida.Visible = false;
+            }
+        }
+
+        private void botonBorrarUltimoPara_Click(object sender, EventArgs e)
+        {
+            int indice = tbParaROnly.Text.Length - 2;
+            bool control = true;
+            while (indice > 0 && control)
+            {
+                if (tbParaROnly.Text[indice] == ' ' && tbParaROnly.Text[indice - 1] == ';')
+                {
+                    tbParaROnly.Text = tbParaROnly.Text.Substring(0, indice + 1);
+                    control = false;
+                }
+                else
+                {
+                    indice--;
+                }                
+            }
+            if (indice == 0)
+            {
+                tbParaROnly.Text = "";
+                botonBorrarUltimoPara.Enabled = false;
+            }
+            if (tbParaROnly.Text.Length < 50)
+            {
+                tbParaROnly.Multiline = false;
+                tbParaROnly.Location = new Point(103, 107);
+                tbParaROnly.Size = new Size(298, 20);
             }
         }
 
@@ -389,12 +473,12 @@ namespace Trabajo_Final.UI
         {
             tbPara.Text = "";
             tbCuerpo.Text = "";
-            tbCC.Text = "";
-            tbCCO.Text = "";
+            tbCCROnly.Text = "";
+            tbCCOROnly.Text = "";
             tbAsunto.Text = "";
             tbAdjuntos.Text = "";                
-            tbCC.ReadOnly = true;
-            tbCCO.ReadOnly = true;              
+            tbCCROnly.ReadOnly = true;
+            tbCCOROnly.ReadOnly = true;              
         }
 
         /// <summary>
@@ -468,35 +552,13 @@ namespace Trabajo_Final.UI
                MessageBox.Show(ex.Message, "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Error);
            }
         }
+        
 
-
-        private void tbPara_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (e.KeyChar == (char)13)
-            {
-                tbPara.Text = tbPara.Text + "; ";
-                tbPara.Select(tbPara.Location.X + tbPara.Text.Length, tbPara.Location.Y);
-            }
-        }
-
-        private void tbCC_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (e.KeyChar == (char)13)
-            {
-                tbPara.Text = tbPara.Text + "; ";
-                tbPara.Select(tbPara.Location.X + tbPara.Text.Length, tbPara.Location.Y);
-            }
-        }
-
-        private void tbCCO_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (e.KeyChar == (char)13)
-            {
-                tbPara.Text = tbPara.Text + "; ";
-                tbPara.Select(tbPara.Location.X + tbPara.Text.Length, tbPara.Location.Y);
-            }
-        }
-
+        /// <summary>
+        /// Extrae un mail del DataGrilView y lo muestra.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void LeerMail(object sender, EventArgs e)
         {            
             if (dgEmails.RowCount > 0)
@@ -523,12 +585,8 @@ namespace Trabajo_Final.UI
 
         private void exportarToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (iFormExportar == null)
-            {                
-                iFormExportar = new FormExportar(tbDeLeerMail.Text,tbAsuntoLeerMail.Text,tbParaLeerMail.Text,tbCuerpoLeerMail.Text,Convert.ToDateTime(tbFechaLeerMail.Text));
-                iFormExportar.Disposed += new EventHandler(form_Disposed);                
-            }
-            iFormExportar.Show();
+            FormExportar iFormExportar = new FormExportar(tbDeLeerMail.Text,tbAsuntoLeerMail.Text,tbParaLeerMail.Text,tbCuerpoLeerMail.Text,Convert.ToDateTime(tbFechaLeerMail.Text));                
+            iFormExportar.ShowDialog();
         }
     }
 }

@@ -55,7 +55,7 @@ namespace Trabajo_Final.Dominio
                 }
                 SmtpClient client = new SmtpClient();
 
-                //client.PickupDirectoryLocation = @"C:\Users\Brian\Desktop\Mail";
+                client.PickupDirectoryLocation = @"C:\Users\Brian\Desktop\Mail";
                 client.Credentials = this.iCredenciales;
 
                 client.Port = 587;

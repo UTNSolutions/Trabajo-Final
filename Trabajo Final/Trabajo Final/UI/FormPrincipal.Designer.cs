@@ -39,26 +39,44 @@
             this.acercaDeToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.gpNuevoMail = new System.Windows.Forms.GroupBox();
+            this.labelDNValida = new System.Windows.Forms.Label();
+            this.botonBorrarUltimoCC = new System.Windows.Forms.Button();
+            this.botonBorrarUltimoCCO = new System.Windows.Forms.Button();
+            this.botonBorrarUltimoPara = new System.Windows.Forms.Button();
+            this.botonAgregarCCO = new System.Windows.Forms.Button();
+            this.tbCCO = new System.Windows.Forms.TextBox();
+            this.botonAgregarCC = new System.Windows.Forms.Button();
+            this.tbCC = new System.Windows.Forms.TextBox();
+            this.botonAgregarPara = new System.Windows.Forms.Button();
             this.combobDe = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.botonCCO = new System.Windows.Forms.Button();
-            this.botonCC = new System.Windows.Forms.Button();
             this.bAdjuntar = new System.Windows.Forms.Button();
             this.tbAsunto = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.tbCuerpo = new System.Windows.Forms.RichTextBox();
-            this.tbCC = new System.Windows.Forms.TextBox();
-            this.tbCCO = new System.Windows.Forms.TextBox();
+            this.tbCCROnly = new System.Windows.Forms.TextBox();
+            this.tbCCOROnly = new System.Windows.Forms.TextBox();
             this.tbAdjuntos = new System.Windows.Forms.TextBox();
             this.tbPara = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.progressBarEnviando = new System.Windows.Forms.ProgressBar();
+            this.tbParaROnly = new System.Windows.Forms.TextBox();
+            this.botonCC = new System.Windows.Forms.Button();
+            this.botonCCAtras = new System.Windows.Forms.Button();
+            this.botonCCO = new System.Windows.Forms.Button();
+            this.botonCCOAtras = new System.Windows.Forms.Button();
             this.panelCuentas = new System.Windows.Forms.Panel();
             this.tbTipoCorreo = new System.Windows.Forms.TextBox();
             this.tbNombreCuenta = new System.Windows.Forms.TextBox();
             this.dgEmails = new System.Windows.Forms.DataGridView();
+            this.remitente = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cuerpo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.destinatario = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.asunto = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.fecha = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panelLeerMail = new System.Windows.Forms.Panel();
+            this.tbFechaLeerMail = new System.Windows.Forms.TextBox();
             this.tbCuerpoLeerMail = new System.Windows.Forms.TextBox();
             this.tbParaLeerMail = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
@@ -78,12 +96,6 @@
             this.responderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exportarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.acercaDeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.tbFechaLeerMail = new System.Windows.Forms.TextBox();
-            this.remitente = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cuerpo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.destinatario = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.asunto = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.fecha = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.gbOpciones1.SuspendLayout();
             this.menuStrip2.SuspendLayout();
             this.gpNuevoMail.SuspendLayout();
@@ -184,21 +196,33 @@
             // 
             // gpNuevoMail
             // 
+            this.gpNuevoMail.Controls.Add(this.labelDNValida);
+            this.gpNuevoMail.Controls.Add(this.botonBorrarUltimoCC);
+            this.gpNuevoMail.Controls.Add(this.botonBorrarUltimoCCO);
+            this.gpNuevoMail.Controls.Add(this.botonBorrarUltimoPara);
+            this.gpNuevoMail.Controls.Add(this.botonAgregarCCO);
+            this.gpNuevoMail.Controls.Add(this.tbCCO);
+            this.gpNuevoMail.Controls.Add(this.botonAgregarCC);
+            this.gpNuevoMail.Controls.Add(this.tbCC);
+            this.gpNuevoMail.Controls.Add(this.botonAgregarPara);
             this.gpNuevoMail.Controls.Add(this.combobDe);
             this.gpNuevoMail.Controls.Add(this.label2);
-            this.gpNuevoMail.Controls.Add(this.botonCCO);
-            this.gpNuevoMail.Controls.Add(this.botonCC);
             this.gpNuevoMail.Controls.Add(this.bAdjuntar);
             this.gpNuevoMail.Controls.Add(this.tbAsunto);
             this.gpNuevoMail.Controls.Add(this.label5);
             this.gpNuevoMail.Controls.Add(this.tbCuerpo);
-            this.gpNuevoMail.Controls.Add(this.tbCC);
-            this.gpNuevoMail.Controls.Add(this.tbCCO);
+            this.gpNuevoMail.Controls.Add(this.tbCCROnly);
+            this.gpNuevoMail.Controls.Add(this.tbCCOROnly);
             this.gpNuevoMail.Controls.Add(this.tbAdjuntos);
             this.gpNuevoMail.Controls.Add(this.tbPara);
             this.gpNuevoMail.Controls.Add(this.label4);
             this.gpNuevoMail.Controls.Add(this.label1);
             this.gpNuevoMail.Controls.Add(this.progressBarEnviando);
+            this.gpNuevoMail.Controls.Add(this.tbParaROnly);
+            this.gpNuevoMail.Controls.Add(this.botonCC);
+            this.gpNuevoMail.Controls.Add(this.botonCCAtras);
+            this.gpNuevoMail.Controls.Add(this.botonCCO);
+            this.gpNuevoMail.Controls.Add(this.botonCCOAtras);
             this.gpNuevoMail.Location = new System.Drawing.Point(0, 49);
             this.gpNuevoMail.Name = "gpNuevoMail";
             this.gpNuevoMail.Size = new System.Drawing.Size(853, 429);
@@ -207,11 +231,102 @@
             this.gpNuevoMail.Text = "Nuevo Email";
             this.gpNuevoMail.Visible = false;
             // 
+            // labelDNValida
+            // 
+            this.labelDNValida.AutoSize = true;
+            this.labelDNValida.ForeColor = System.Drawing.Color.Red;
+            this.labelDNValida.Location = new System.Drawing.Point(268, 156);
+            this.labelDNValida.Name = "labelDNValida";
+            this.labelDNValida.Size = new System.Drawing.Size(104, 13);
+            this.labelDNValida.TabIndex = 27;
+            this.labelDNValida.Text = "¡Dirección no válida!";
+            this.labelDNValida.Visible = false;
+            // 
+            // botonBorrarUltimoCC
+            // 
+            this.botonBorrarUltimoCC.Enabled = false;
+            this.botonBorrarUltimoCC.Location = new System.Drawing.Point(407, 196);
+            this.botonBorrarUltimoCC.Name = "botonBorrarUltimoCC";
+            this.botonBorrarUltimoCC.Size = new System.Drawing.Size(24, 23);
+            this.botonBorrarUltimoCC.TabIndex = 24;
+            this.botonBorrarUltimoCC.Text = "X";
+            this.botonBorrarUltimoCC.UseVisualStyleBackColor = true;
+            this.botonBorrarUltimoCC.Visible = false;
+            // 
+            // botonBorrarUltimoCCO
+            // 
+            this.botonBorrarUltimoCCO.Enabled = false;
+            this.botonBorrarUltimoCCO.Location = new System.Drawing.Point(407, 288);
+            this.botonBorrarUltimoCCO.Name = "botonBorrarUltimoCCO";
+            this.botonBorrarUltimoCCO.Size = new System.Drawing.Size(24, 23);
+            this.botonBorrarUltimoCCO.TabIndex = 23;
+            this.botonBorrarUltimoCCO.Text = "X";
+            this.botonBorrarUltimoCCO.UseVisualStyleBackColor = true;
+            this.botonBorrarUltimoCCO.Visible = false;
+            // 
+            // botonBorrarUltimoPara
+            // 
+            this.botonBorrarUltimoPara.Enabled = false;
+            this.botonBorrarUltimoPara.Location = new System.Drawing.Point(407, 104);
+            this.botonBorrarUltimoPara.Name = "botonBorrarUltimoPara";
+            this.botonBorrarUltimoPara.Size = new System.Drawing.Size(24, 23);
+            this.botonBorrarUltimoPara.TabIndex = 22;
+            this.botonBorrarUltimoPara.Text = "X";
+            this.botonBorrarUltimoPara.UseVisualStyleBackColor = true;
+            this.botonBorrarUltimoPara.Click += new System.EventHandler(this.botonBorrarUltimoPara_Click);
+            // 
+            // botonAgregarCCO
+            // 
+            this.botonAgregarCCO.Location = new System.Drawing.Point(378, 315);
+            this.botonAgregarCCO.Name = "botonAgregarCCO";
+            this.botonAgregarCCO.Size = new System.Drawing.Size(54, 23);
+            this.botonAgregarCCO.TabIndex = 21;
+            this.botonAgregarCCO.Text = "Agregar";
+            this.botonAgregarCCO.UseVisualStyleBackColor = true;
+            this.botonAgregarCCO.Visible = false;
+            // 
+            // tbCCO
+            // 
+            this.tbCCO.Location = new System.Drawing.Point(103, 318);
+            this.tbCCO.Name = "tbCCO";
+            this.tbCCO.Size = new System.Drawing.Size(269, 20);
+            this.tbCCO.TabIndex = 20;
+            this.tbCCO.Visible = false;
+            // 
+            // botonAgregarCC
+            // 
+            this.botonAgregarCC.Location = new System.Drawing.Point(378, 223);
+            this.botonAgregarCC.Name = "botonAgregarCC";
+            this.botonAgregarCC.Size = new System.Drawing.Size(54, 23);
+            this.botonAgregarCC.TabIndex = 19;
+            this.botonAgregarCC.Text = "Agregar";
+            this.botonAgregarCC.UseVisualStyleBackColor = true;
+            this.botonAgregarCC.Visible = false;
+            // 
+            // tbCC
+            // 
+            this.tbCC.Location = new System.Drawing.Point(103, 225);
+            this.tbCC.Name = "tbCC";
+            this.tbCC.Size = new System.Drawing.Size(269, 20);
+            this.tbCC.TabIndex = 18;
+            this.tbCC.Visible = false;
+            // 
+            // botonAgregarPara
+            // 
+            this.botonAgregarPara.Location = new System.Drawing.Point(378, 131);
+            this.botonAgregarPara.Name = "botonAgregarPara";
+            this.botonAgregarPara.Size = new System.Drawing.Size(54, 23);
+            this.botonAgregarPara.TabIndex = 17;
+            this.botonAgregarPara.Text = "Agregar";
+            this.botonAgregarPara.UseVisualStyleBackColor = true;
+            this.botonAgregarPara.Click += new System.EventHandler(this.botonAgregarPara_Click);
+            // 
             // combobDe
             // 
+            this.combobDe.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
             this.combobDe.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.combobDe.FormattingEnabled = true;
-            this.combobDe.Location = new System.Drawing.Point(103, 41);
+            this.combobDe.Location = new System.Drawing.Point(103, 50);
             this.combobDe.Name = "combobDe";
             this.combobDe.Size = new System.Drawing.Size(329, 21);
             this.combobDe.TabIndex = 15;
@@ -219,36 +334,16 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(76, 44);
+            this.label2.Location = new System.Drawing.Point(76, 53);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(21, 13);
             this.label2.TabIndex = 14;
             this.label2.Text = "De";
             // 
-            // botonCCO
-            // 
-            this.botonCCO.Location = new System.Drawing.Point(60, 197);
-            this.botonCCO.Name = "botonCCO";
-            this.botonCCO.Size = new System.Drawing.Size(37, 23);
-            this.botonCCO.TabIndex = 13;
-            this.botonCCO.Text = "CCO";
-            this.botonCCO.UseVisualStyleBackColor = true;
-            this.botonCCO.Click += new System.EventHandler(this.botonCCO_Click);
-            // 
-            // botonCC
-            // 
-            this.botonCC.Location = new System.Drawing.Point(60, 138);
-            this.botonCC.Name = "botonCC";
-            this.botonCC.Size = new System.Drawing.Size(37, 23);
-            this.botonCC.TabIndex = 12;
-            this.botonCC.Text = "CC";
-            this.botonCC.UseVisualStyleBackColor = true;
-            this.botonCC.Click += new System.EventHandler(this.botonCC_Click);
-            // 
             // bAdjuntar
             // 
             this.bAdjuntar.Image = global::Trabajo_Final.Properties.Resources.attach;
-            this.bAdjuntar.Location = new System.Drawing.Point(396, 300);
+            this.bAdjuntar.Location = new System.Drawing.Point(399, 387);
             this.bAdjuntar.Name = "bAdjuntar";
             this.bAdjuntar.Size = new System.Drawing.Size(36, 24);
             this.bAdjuntar.TabIndex = 11;
@@ -257,7 +352,7 @@
             // 
             // tbAsunto
             // 
-            this.tbAsunto.Location = new System.Drawing.Point(103, 253);
+            this.tbAsunto.Location = new System.Drawing.Point(103, 351);
             this.tbAsunto.Name = "tbAsunto";
             this.tbAsunto.Size = new System.Drawing.Size(329, 20);
             this.tbAsunto.TabIndex = 10;
@@ -265,7 +360,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(57, 256);
+            this.label5.Location = new System.Drawing.Point(57, 354);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(40, 13);
             this.label5.TabIndex = 9;
@@ -279,27 +374,31 @@
             this.tbCuerpo.TabIndex = 8;
             this.tbCuerpo.Text = "";
             // 
-            // tbCC
+            // tbCCROnly
             // 
-            this.tbCC.Location = new System.Drawing.Point(103, 140);
-            this.tbCC.Name = "tbCC";
-            this.tbCC.ReadOnly = true;
-            this.tbCC.Size = new System.Drawing.Size(329, 20);
-            this.tbCC.TabIndex = 7;
-            this.tbCC.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbCC_KeyPress);
+            this.tbCCROnly.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.tbCCROnly.Location = new System.Drawing.Point(103, 172);
+            this.tbCCROnly.Multiline = true;
+            this.tbCCROnly.Name = "tbCCROnly";
+            this.tbCCROnly.ReadOnly = true;
+            this.tbCCROnly.Size = new System.Drawing.Size(298, 47);
+            this.tbCCROnly.TabIndex = 7;
             // 
-            // tbCCO
+            // tbCCOROnly
             // 
-            this.tbCCO.Location = new System.Drawing.Point(103, 199);
-            this.tbCCO.Name = "tbCCO";
-            this.tbCCO.ReadOnly = true;
-            this.tbCCO.Size = new System.Drawing.Size(329, 20);
-            this.tbCCO.TabIndex = 6;
-            this.tbCCO.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbCCO_KeyPress);
+            this.tbCCOROnly.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.tbCCOROnly.Location = new System.Drawing.Point(103, 264);
+            this.tbCCOROnly.Multiline = true;
+            this.tbCCOROnly.Name = "tbCCOROnly";
+            this.tbCCOROnly.ReadOnly = true;
+            this.tbCCOROnly.Size = new System.Drawing.Size(298, 47);
+            this.tbCCOROnly.TabIndex = 6;
             // 
             // tbAdjuntos
             // 
-            this.tbAdjuntos.Location = new System.Drawing.Point(103, 303);
+            this.tbAdjuntos.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.tbAdjuntos.Location = new System.Drawing.Point(103, 390);
+            this.tbAdjuntos.Multiline = true;
             this.tbAdjuntos.Name = "tbAdjuntos";
             this.tbAdjuntos.ReadOnly = true;
             this.tbAdjuntos.Size = new System.Drawing.Size(287, 20);
@@ -307,16 +406,15 @@
             // 
             // tbPara
             // 
-            this.tbPara.Location = new System.Drawing.Point(103, 90);
+            this.tbPara.Location = new System.Drawing.Point(103, 133);
             this.tbPara.Name = "tbPara";
-            this.tbPara.Size = new System.Drawing.Size(329, 20);
+            this.tbPara.Size = new System.Drawing.Size(269, 20);
             this.tbPara.TabIndex = 4;
-            this.tbPara.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbPara_KeyPress);
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(5, 305);
+            this.label4.Location = new System.Drawing.Point(8, 393);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(92, 13);
             this.label4.TabIndex = 3;
@@ -325,7 +423,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(68, 93);
+            this.label1.Location = new System.Drawing.Point(68, 110);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(29, 13);
             this.label1.TabIndex = 0;
@@ -338,6 +436,58 @@
             this.progressBarEnviando.Size = new System.Drawing.Size(841, 12);
             this.progressBarEnviando.TabIndex = 9;
             this.progressBarEnviando.Visible = false;
+            // 
+            // tbParaROnly
+            // 
+            this.tbParaROnly.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.tbParaROnly.Location = new System.Drawing.Point(103, 107);
+            this.tbParaROnly.Name = "tbParaROnly";
+            this.tbParaROnly.ReadOnly = true;
+            this.tbParaROnly.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.tbParaROnly.Size = new System.Drawing.Size(298, 20);
+            this.tbParaROnly.TabIndex = 16;
+            // 
+            // botonCC
+            // 
+            this.botonCC.Location = new System.Drawing.Point(60, 196);
+            this.botonCC.Name = "botonCC";
+            this.botonCC.Size = new System.Drawing.Size(37, 23);
+            this.botonCC.TabIndex = 12;
+            this.botonCC.Text = "CC";
+            this.botonCC.UseVisualStyleBackColor = true;
+            this.botonCC.Click += new System.EventHandler(this.botonCC_Click);
+            // 
+            // botonCCAtras
+            // 
+            this.botonCCAtras.Image = global::Trabajo_Final.Properties.Resources.up;
+            this.botonCCAtras.Location = new System.Drawing.Point(60, 196);
+            this.botonCCAtras.Name = "botonCCAtras";
+            this.botonCCAtras.Size = new System.Drawing.Size(37, 23);
+            this.botonCCAtras.TabIndex = 25;
+            this.botonCCAtras.UseVisualStyleBackColor = true;
+            this.botonCCAtras.Visible = false;
+            this.botonCCAtras.Click += new System.EventHandler(this.botonCCAtras_Click);
+            // 
+            // botonCCO
+            // 
+            this.botonCCO.Location = new System.Drawing.Point(60, 288);
+            this.botonCCO.Name = "botonCCO";
+            this.botonCCO.Size = new System.Drawing.Size(37, 23);
+            this.botonCCO.TabIndex = 13;
+            this.botonCCO.Text = "CCO";
+            this.botonCCO.UseVisualStyleBackColor = true;
+            this.botonCCO.Click += new System.EventHandler(this.botonCCO_Click);
+            // 
+            // botonCCOAtras
+            // 
+            this.botonCCOAtras.Image = global::Trabajo_Final.Properties.Resources.up;
+            this.botonCCOAtras.Location = new System.Drawing.Point(60, 288);
+            this.botonCCOAtras.Name = "botonCCOAtras";
+            this.botonCCOAtras.Size = new System.Drawing.Size(37, 23);
+            this.botonCCOAtras.TabIndex = 26;
+            this.botonCCOAtras.UseVisualStyleBackColor = true;
+            this.botonCCOAtras.Visible = false;
+            this.botonCCOAtras.Click += new System.EventHandler(this.botonCCOAtras_Click);
             // 
             // panelCuentas
             // 
@@ -387,6 +537,45 @@
             this.dgEmails.TabIndex = 6;
             this.dgEmails.DoubleClick += new System.EventHandler(this.LeerMail);
             // 
+            // remitente
+            // 
+            this.remitente.DataPropertyName = "Remitente";
+            this.remitente.HeaderText = "Remitente";
+            this.remitente.Name = "remitente";
+            this.remitente.ReadOnly = true;
+            this.remitente.Width = 250;
+            // 
+            // cuerpo
+            // 
+            this.cuerpo.DataPropertyName = "Cuerpo";
+            this.cuerpo.HeaderText = "Cuerpo";
+            this.cuerpo.Name = "cuerpo";
+            this.cuerpo.ReadOnly = true;
+            this.cuerpo.Visible = false;
+            // 
+            // destinatario
+            // 
+            this.destinatario.DataPropertyName = "Destinatario";
+            this.destinatario.HeaderText = "Destinatario";
+            this.destinatario.Name = "destinatario";
+            this.destinatario.ReadOnly = true;
+            this.destinatario.Width = 250;
+            // 
+            // asunto
+            // 
+            this.asunto.DataPropertyName = "Asunto";
+            this.asunto.HeaderText = "Asunto";
+            this.asunto.Name = "asunto";
+            this.asunto.ReadOnly = true;
+            this.asunto.Width = 250;
+            // 
+            // fecha
+            // 
+            this.fecha.DataPropertyName = "Fecha";
+            this.fecha.HeaderText = "Fecha";
+            this.fecha.Name = "fecha";
+            this.fecha.ReadOnly = true;
+            // 
             // panelLeerMail
             // 
             this.panelLeerMail.BackColor = System.Drawing.SystemColors.ButtonHighlight;
@@ -402,6 +591,16 @@
             this.panelLeerMail.Size = new System.Drawing.Size(853, 429);
             this.panelLeerMail.TabIndex = 17;
             this.panelLeerMail.Visible = false;
+            // 
+            // tbFechaLeerMail
+            // 
+            this.tbFechaLeerMail.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.tbFechaLeerMail.Location = new System.Drawing.Point(741, 4);
+            this.tbFechaLeerMail.Multiline = true;
+            this.tbFechaLeerMail.Name = "tbFechaLeerMail";
+            this.tbFechaLeerMail.ReadOnly = true;
+            this.tbFechaLeerMail.Size = new System.Drawing.Size(106, 31);
+            this.tbFechaLeerMail.TabIndex = 7;
             // 
             // tbCuerpoLeerMail
             // 
@@ -597,55 +796,6 @@
             this.acercaDeToolStripMenuItem.Text = "Acerca de...";
             this.acercaDeToolStripMenuItem.Click += new System.EventHandler(this.acercaDeToolStripMenuItem_Click);
             // 
-            // tbFechaLeerMail
-            // 
-            this.tbFechaLeerMail.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.tbFechaLeerMail.Location = new System.Drawing.Point(741, 4);
-            this.tbFechaLeerMail.Multiline = true;
-            this.tbFechaLeerMail.Name = "tbFechaLeerMail";
-            this.tbFechaLeerMail.ReadOnly = true;
-            this.tbFechaLeerMail.Size = new System.Drawing.Size(106, 31);
-            this.tbFechaLeerMail.TabIndex = 7;
-            // 
-            // remitente
-            // 
-            this.remitente.DataPropertyName = "Remitente";
-            this.remitente.HeaderText = "Remitente";
-            this.remitente.Name = "remitente";
-            this.remitente.ReadOnly = true;
-            this.remitente.Width = 250;
-            // 
-            // cuerpo
-            // 
-            this.cuerpo.DataPropertyName = "Cuerpo";
-            this.cuerpo.HeaderText = "Cuerpo";
-            this.cuerpo.Name = "cuerpo";
-            this.cuerpo.ReadOnly = true;
-            this.cuerpo.Visible = false;
-            // 
-            // destinatario
-            // 
-            this.destinatario.DataPropertyName = "Destinatario";
-            this.destinatario.HeaderText = "Destinatario";
-            this.destinatario.Name = "destinatario";
-            this.destinatario.ReadOnly = true;
-            this.destinatario.Width = 250;
-            // 
-            // asunto
-            // 
-            this.asunto.DataPropertyName = "Asunto";
-            this.asunto.HeaderText = "Asunto";
-            this.asunto.Name = "asunto";
-            this.asunto.ReadOnly = true;
-            this.asunto.Width = 250;
-            // 
-            // fecha
-            // 
-            this.fecha.DataPropertyName = "Fecha";
-            this.fecha.HeaderText = "Fecha";
-            this.fecha.Name = "fecha";
-            this.fecha.ReadOnly = true;
-            // 
             // FormPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -702,8 +852,8 @@
         private System.Windows.Forms.TextBox tbAsunto;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.RichTextBox tbCuerpo;
-        private System.Windows.Forms.TextBox tbCC;
-        private System.Windows.Forms.TextBox tbCCO;
+        private System.Windows.Forms.TextBox tbCCROnly;
+        private System.Windows.Forms.TextBox tbCCOROnly;
         private System.Windows.Forms.TextBox tbAdjuntos;
         private System.Windows.Forms.TextBox tbPara;
         private System.Windows.Forms.Label label4;
@@ -747,6 +897,18 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn destinatario;
         private System.Windows.Forms.DataGridViewTextBoxColumn asunto;
         private System.Windows.Forms.DataGridViewTextBoxColumn fecha;
+        private System.Windows.Forms.Button botonAgregarCCO;
+        private System.Windows.Forms.TextBox tbCCO;
+        private System.Windows.Forms.Button botonAgregarCC;
+        private System.Windows.Forms.TextBox tbCC;
+        private System.Windows.Forms.Button botonAgregarPara;
+        private System.Windows.Forms.TextBox tbParaROnly;
+        private System.Windows.Forms.Button botonBorrarUltimoCC;
+        private System.Windows.Forms.Button botonBorrarUltimoCCO;
+        private System.Windows.Forms.Button botonBorrarUltimoPara;
+        private System.Windows.Forms.Button botonCCAtras;
+        private System.Windows.Forms.Button botonCCOAtras;
+        private System.Windows.Forms.Label labelDNValida;
     }
 }
 
