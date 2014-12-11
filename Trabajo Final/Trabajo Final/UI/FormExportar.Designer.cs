@@ -45,7 +45,7 @@
             this.cbTipoExportador.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbTipoExportador.FormattingEnabled = true;
             this.cbTipoExportador.Items.AddRange(new object[] {
-            "EML\t",
+            "EML",
             "Texto Plano"});
             this.cbTipoExportador.Location = new System.Drawing.Point(122, 28);
             this.cbTipoExportador.Name = "cbTipoExportador";

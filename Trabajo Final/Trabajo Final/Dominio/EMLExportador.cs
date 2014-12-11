@@ -6,40 +6,40 @@ using System.Threading.Tasks;
 using Microsoft.Exchange.WebServices.Data;
 using System.IO;
 using System.Net.Mail;
+using System.Net;
 
 namespace Trabajo_Final.Dominio
 {
-    public class EMLExportador
+    public class EMLExportador : IExportador
     {
+        private String iNombre;
 
-        public static void ExportMIMEEmail(ExchangeService service)
+        public EMLExportador(String pNombre)
         {
- /*            Folder inbox = Folder.Bind(service, WellKnownFolderName.Inbox);
-            ItemView view = new ItemView(1);
-            view.PropertySet = new PropertySet(BasePropertySet.IdOnly);
+            this.iNombre = pNombre;
+        }
 
-            // This results in a FindItem call to EWS.
-            FindItemsResults<Item> results = inbox.FindItems(view); 
+        public string Nombre
+        {
+            get { return this.iNombre; }
+        }
 
-            foreach (var item in results)
+        public void Exportar(string pRuta, Email pEMail)
+        {
+            SmtpClient cliente = new SmtpClient();            
+            String cadenaTo = "";
+            foreach(String destinatario in pEMail.Destinatario)
             {
-                PropertySet props = new PropertySet(EmailMessageSchema.MimeContent); */
-
-                // This results in a GetItem call to EWS.
-            EmailMessage email = new EmailMessage(service);
-            email.Body = "hola como andas";
-            email.From = "mati.d@live.com.ar";
-
-                string emlFileName = @"C:\export\email.eml";
-
-                // Save as .eml.
-                using (FileStream fs = new FileStream(emlFileName, FileMode.Create, FileAccess.Write))
-                {
-                    fs.Write(email.MimeContent.Content, 0, email.MimeContent.Content.Length);
-                }
-
+                cadenaTo = destinatario;
             }
+            MailMessage mail = new MailMessage(pEMail.Remitente, cadenaTo,pEMail.Asunto,pEMail.Cuerpo);
+            cliente.Host = "stmp.gmail.com";
+            cliente.Port = 587;
+            cliente.EnableSsl = true;
+            cliente.Credentials = new NetworkCredential("matiadr13@gmail.com", "utnsist14");
+            cliente.PickupDirectoryLocation = @"C:\Users\Brian\Desktop\Mail";
+            cliente.Send(mail);
         }
     }
-
+}
     

@@ -12,7 +12,7 @@ namespace Trabajo_Final.Dominio
         /// <summary>
         /// Obtiene el Nombre del Exportador
         /// </summary>
-        String Nombre {get; set;}
+        String Nombre { get; }
 
         /// <summary>
         /// Exporta un email a Texto Plano

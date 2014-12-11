@@ -60,7 +60,8 @@ namespace Trabajo_Final.Dominio
                     throw new InternetExcepcion("Existe un problema con la conexión a Internet");
                 }
                 SmtpClient client = new SmtpClient();
-                
+
+                //client.PickupDirectoryLocation = @"C:\Users\Brian\Desktop\Mail";
                 client.Credentials = this.iCredenciales;
 
                 client.Port = 587;

@@ -63,10 +63,6 @@ namespace Trabajo_Final.Dominio
             {
                 { return this.iNombre; }
             }
-            set
-            {
-                { this.iNombre = value; };
-            }
         }
     }
 }
