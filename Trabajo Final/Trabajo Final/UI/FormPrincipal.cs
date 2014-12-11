@@ -232,11 +232,12 @@ namespace Trabajo_Final.UI
                 gbEnviarMail.Enabled = false;
                 menuStrip1.Enabled = false;               
                 progressBarEnviando.Value = 6;
+                Fachada.Instancia.EnviarEmail(combobDe.Text, generarListaDestinatario(), tbAsunto.Text, tbCuerpo.Text, combobDe.SelectedValue.ToString());
                 progressBarEnviando.Value = 7;
                 progressBarEnviando.Value = 8;
                 progressBarEnviando.Value = 10;
                 lEnviado.Visible = true;
-                borrarMailEnviado();             
+                borrarMailEnviado();                           
             }
             catch (EmailExcepcion ex)
             {
@@ -262,9 +263,9 @@ namespace Trabajo_Final.UI
         /// <param name="sender"></param>
         /// <param name="e"></param>
         /// <returns></returns>
-        private List<String>  generarListaDestinatario()
+        private IList<String>  generarListaDestinatario()
         {
-            List<String> listaDestinatarios = new List<String>();
+            IList<String> listaDestinatarios = new List<String>();
             String cadena = "";
             int ind = 0;
             while (ind < tbPara.Text.Length)
@@ -343,7 +344,7 @@ namespace Trabajo_Final.UI
                 String remitente = StringsUtils.ObtenerEmail(email.Remitente);             
                 if (remitente != cuenta.Direccion)
                 {
-                    adaptador.Add(new AdaptadorDataGrid(email.Remitente, email.Destinatario[0], email.Asunto, email.Cuerpo));
+                    adaptador.Add(new AdaptadorDataGrid(email.Remitente, email.Destinatario[0], email.Asunto, email.Cuerpo,email.Fecha));
                 }
             }
             dgEmails.DataSource = adaptador;
@@ -361,7 +362,7 @@ namespace Trabajo_Final.UI
                 String remitente = StringsUtils.ObtenerEmail(email.Remitente);
                 if (remitente == cuenta.Direccion)
                 {
-                    adaptador.Add(new AdaptadorDataGrid(email.Remitente, email.Destinatario[0], email.Asunto, email.Cuerpo));
+                    adaptador.Add(new AdaptadorDataGrid(email.Remitente, email.Destinatario[0], email.Asunto, email.Cuerpo,email.Fecha));
                 }
                 }
                 dgEmails.DataSource = adaptador;
@@ -516,15 +517,15 @@ namespace Trabajo_Final.UI
                 tbDeLeerMail.Text = fila.Remitente;
                 tbParaLeerMail.Text = fila.Destinatario;
                 tbCuerpoLeerMail.Text = fila.Cuerpo;
+                tbFechaLeerMail.Text = Convert.ToString(fila.Fecha);
             }
         }
 
         private void exportarToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (iFormExportar == null)
-            {
-                
-                iFormExportar = new FormExportar(tbDeLeerMail.Text,tbAsuntoLeerMail.Text,tbParaLeerMail.Text,tbCuerpoLeerMail.Text);
+            {                
+                iFormExportar = new FormExportar(tbDeLeerMail.Text,tbAsuntoLeerMail.Text,tbParaLeerMail.Text,tbCuerpoLeerMail.Text,Convert.ToDateTime(tbFechaLeerMail.Text));
                 iFormExportar.Disposed += new EventHandler(form_Disposed);                
             }
             iFormExportar.Show();

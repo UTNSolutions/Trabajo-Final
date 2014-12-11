@@ -23,7 +23,9 @@ namespace Trabajo_Final.Dominio
 
         private String iAsunto;
 
-        public Email(String pRemitente,IList<String> pDestinatario, String pCuerpo, String pAsunto)
+        private DateTime iFecha;
+
+        public Email(String pRemitente,IList<String> pDestinatario, String pCuerpo, String pAsunto,DateTime pFecha)
         {
             this.iRemitente = pRemitente;
             this.iDestinatario = pDestinatario;
@@ -31,6 +33,7 @@ namespace Trabajo_Final.Dominio
             this.iAsunto = pAsunto;
            // this.iConCopia = pCC;
           //  this.iConCopiaOculta = pCCO;
+            this.iFecha = pFecha;
         }
 
         /// <summary>
@@ -63,6 +66,14 @@ namespace Trabajo_Final.Dominio
         public String Asunto
         {
             get { return this.iAsunto; }
+        }
+
+        /// <summary>
+        /// Devuelve la fecha del Email
+        /// </summary>
+        public DateTime Fecha
+        {
+            get { return this.iFecha; }
         }
     }
 }

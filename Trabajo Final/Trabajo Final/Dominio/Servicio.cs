@@ -11,15 +11,12 @@ namespace Trabajo_Final.Dominio
     public abstract class Servicio : IServicio
     {
 
-        public abstract void EnviarMail(Email pMail);
+        public abstract void EnviarMail(Email pMail, Cuenta pCuenta);
 
-        public abstract IList<Email> RecibirMail();
-
-        public abstract Cuenta Cuenta { set; }
+        public abstract IList<Email> RecibirMail(Cuenta pCuenta);
 
         public abstract string Nombre { get; }
 
-        public abstract bool AccesoInternet();
-
-        }
+        public abstract bool AccesoInternet();     
+    }
 }

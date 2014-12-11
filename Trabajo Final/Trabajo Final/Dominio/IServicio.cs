@@ -15,25 +15,25 @@ namespace Trabajo_Final.Dominio
     public interface IServicio
     {
         /// <summary>
-        /// Permite enviar un mail
+        /// Permite enviar un mail       
         /// </summary>
+        /// <param name="pMail">Email a enviar</param>
+        /// <param name="pCuenta">Cuenta con la que se quiere enviar el Email</param>
         /// <exception cref="NullReferenceException"></exception>
         /// <exception cref="EmailExcepcion"></exception>
         /// <exception cref="InternetExcepcion"></exception>
-        void EnviarMail(Email pMail);
+        void EnviarMail(Email pMail,Cuenta pCuenta);
 
         /// <summary>
         /// Permite recibir emails
         /// </summary>
+        /// <param name="pCuenta">Cuenta de la que se quiere recibir los Emails</param>
+        /// <returns></returns>
         /// <exception cref="NullReferenceException"></exception>
         /// <exception cref="EmailExcepcion"></exception>
         /// <exception cref="InternetExcepcion"></exception>
-        IList<Email> RecibirMail();
+        IList<Email> RecibirMail(Cuenta pCuenta);
 
-        /// <summary>
-        /// Setea una cuenta que al servicio de correo
-        /// </summary>
-        Cuenta Cuenta { set; }
 
         /// <summary>
         /// Verifica la conexion a Internet

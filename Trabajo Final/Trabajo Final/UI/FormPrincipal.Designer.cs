@@ -58,10 +58,6 @@
             this.tbTipoCorreo = new System.Windows.Forms.TextBox();
             this.tbNombreCuenta = new System.Windows.Forms.TextBox();
             this.dgEmails = new System.Windows.Forms.DataGridView();
-            this.remitente = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cuerpo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.destinatario = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.asunto = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panelLeerMail = new System.Windows.Forms.Panel();
             this.tbCuerpoLeerMail = new System.Windows.Forms.TextBox();
             this.tbParaLeerMail = new System.Windows.Forms.TextBox();
@@ -82,6 +78,12 @@
             this.responderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exportarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.acercaDeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tbFechaLeerMail = new System.Windows.Forms.TextBox();
+            this.remitente = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cuerpo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.destinatario = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.asunto = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.fecha = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.gbOpciones1.SuspendLayout();
             this.menuStrip2.SuspendLayout();
             this.gpNuevoMail.SuspendLayout();
@@ -207,6 +209,7 @@
             // 
             // combobDe
             // 
+            this.combobDe.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.combobDe.FormattingEnabled = true;
             this.combobDe.Location = new System.Drawing.Point(103, 41);
             this.combobDe.Name = "combobDe";
@@ -374,51 +377,20 @@
             this.remitente,
             this.cuerpo,
             this.destinatario,
-            this.asunto});
+            this.asunto,
+            this.fecha});
             this.dgEmails.Location = new System.Drawing.Point(194, 33);
             this.dgEmails.Name = "dgEmails";
             this.dgEmails.ReadOnly = true;
-            this.dgEmails.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.dgEmails.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgEmails.Size = new System.Drawing.Size(653, 407);
             this.dgEmails.TabIndex = 6;
             this.dgEmails.DoubleClick += new System.EventHandler(this.LeerMail);
             // 
-            // remitente
-            // 
-            this.remitente.DataPropertyName = "Remitente";
-            this.remitente.HeaderText = "Remitente";
-            this.remitente.Name = "remitente";
-            this.remitente.ReadOnly = true;
-            this.remitente.Width = 300;
-            // 
-            // cuerpo
-            // 
-            this.cuerpo.DataPropertyName = "Cuerpo";
-            this.cuerpo.HeaderText = "Cuerpo";
-            this.cuerpo.Name = "cuerpo";
-            this.cuerpo.ReadOnly = true;
-            this.cuerpo.Visible = false;
-            // 
-            // destinatario
-            // 
-            this.destinatario.DataPropertyName = "Destinatario";
-            this.destinatario.HeaderText = "Destinatario";
-            this.destinatario.Name = "destinatario";
-            this.destinatario.ReadOnly = true;
-            this.destinatario.Width = 300;
-            // 
-            // asunto
-            // 
-            this.asunto.DataPropertyName = "Asunto";
-            this.asunto.HeaderText = "Asunto";
-            this.asunto.Name = "asunto";
-            this.asunto.ReadOnly = true;
-            this.asunto.Width = 300;
-            // 
             // panelLeerMail
             // 
             this.panelLeerMail.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.panelLeerMail.Controls.Add(this.tbFechaLeerMail);
             this.panelLeerMail.Controls.Add(this.tbCuerpoLeerMail);
             this.panelLeerMail.Controls.Add(this.tbParaLeerMail);
             this.panelLeerMail.Controls.Add(this.label6);
@@ -489,7 +461,7 @@
             this.tbAsuntoLeerMail.Location = new System.Drawing.Point(8, 4);
             this.tbAsuntoLeerMail.Name = "tbAsuntoLeerMail";
             this.tbAsuntoLeerMail.ReadOnly = true;
-            this.tbAsuntoLeerMail.Size = new System.Drawing.Size(839, 31);
+            this.tbAsuntoLeerMail.Size = new System.Drawing.Size(728, 31);
             this.tbAsuntoLeerMail.TabIndex = 0;
             this.tbAsuntoLeerMail.Text = "Sin Asunto...";
             // 
@@ -625,74 +597,54 @@
             this.acercaDeToolStripMenuItem.Text = "Acerca de...";
             this.acercaDeToolStripMenuItem.Click += new System.EventHandler(this.acercaDeToolStripMenuItem_Click);
             // 
-            // panelLeerMail
+            // tbFechaLeerMail
             // 
-            this.panelLeerMail.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.panelLeerMail.Controls.Add(this.tbCuerpoLeerMail);
-            this.panelLeerMail.Controls.Add(this.tbParaLeerMail);
-            this.panelLeerMail.Controls.Add(this.label6);
-            this.panelLeerMail.Controls.Add(this.label3);
-            this.panelLeerMail.Controls.Add(this.tbDeLeerMail);
-            this.panelLeerMail.Controls.Add(this.tbAsuntoLeerMail);
-            this.panelLeerMail.Location = new System.Drawing.Point(0, 49);
-            this.panelLeerMail.Name = "panelLeerMail";
-            this.panelLeerMail.Size = new System.Drawing.Size(853, 429);
-            this.panelLeerMail.TabIndex = 17;
-            this.panelLeerMail.Visible = false;
+            this.tbFechaLeerMail.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.tbFechaLeerMail.Location = new System.Drawing.Point(741, 4);
+            this.tbFechaLeerMail.Multiline = true;
+            this.tbFechaLeerMail.Name = "tbFechaLeerMail";
+            this.tbFechaLeerMail.ReadOnly = true;
+            this.tbFechaLeerMail.Size = new System.Drawing.Size(106, 31);
+            this.tbFechaLeerMail.TabIndex = 7;
             // 
-            // tbCuerpoLeerMail
+            // remitente
             // 
-            this.tbCuerpoLeerMail.Location = new System.Drawing.Point(6, 109);
-            this.tbCuerpoLeerMail.Multiline = true;
-            this.tbCuerpoLeerMail.Name = "tbCuerpoLeerMail";
-            this.tbCuerpoLeerMail.Size = new System.Drawing.Size(841, 314);
-            this.tbCuerpoLeerMail.TabIndex = 6;
+            this.remitente.DataPropertyName = "Remitente";
+            this.remitente.HeaderText = "Remitente";
+            this.remitente.Name = "remitente";
+            this.remitente.ReadOnly = true;
+            this.remitente.Width = 250;
             // 
-            // tbParaLeerMail
+            // cuerpo
             // 
-            this.tbParaLeerMail.Location = new System.Drawing.Point(98, 77);
-            this.tbParaLeerMail.Name = "tbParaLeerMail";
-            this.tbParaLeerMail.Size = new System.Drawing.Size(749, 20);
-            this.tbParaLeerMail.TabIndex = 5;
+            this.cuerpo.DataPropertyName = "Cuerpo";
+            this.cuerpo.HeaderText = "Cuerpo";
+            this.cuerpo.Name = "cuerpo";
+            this.cuerpo.ReadOnly = true;
+            this.cuerpo.Visible = false;
             // 
-            // label6
+            // destinatario
             // 
-            this.label6.AutoSize = true;
-            this.label6.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(6, 80);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(77, 13);
-            this.label6.TabIndex = 4;
-            this.label6.Text = "          Para:";
+            this.destinatario.DataPropertyName = "Destinatario";
+            this.destinatario.HeaderText = "Destinatario";
+            this.destinatario.Name = "destinatario";
+            this.destinatario.ReadOnly = true;
+            this.destinatario.Width = 250;
             // 
-            // label3
+            // asunto
             // 
-            this.label3.AutoSize = true;
-            this.label3.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(8, 49);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(75, 13);
-            this.label3.TabIndex = 3;
-            this.label3.Text = "            De:";
+            this.asunto.DataPropertyName = "Asunto";
+            this.asunto.HeaderText = "Asunto";
+            this.asunto.Name = "asunto";
+            this.asunto.ReadOnly = true;
+            this.asunto.Width = 250;
             // 
-            // tbDeLeerMail
+            // fecha
             // 
-            this.tbDeLeerMail.Location = new System.Drawing.Point(98, 46);
-            this.tbDeLeerMail.Name = "tbDeLeerMail";
-            this.tbDeLeerMail.Size = new System.Drawing.Size(749, 20);
-            this.tbDeLeerMail.TabIndex = 2;
-            // 
-            // tbAsuntoLeerMail
-            // 
-            this.tbAsuntoLeerMail.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbAsuntoLeerMail.ForeColor = System.Drawing.SystemColors.WindowFrame;
-            this.tbAsuntoLeerMail.Location = new System.Drawing.Point(8, 4);
-            this.tbAsuntoLeerMail.Name = "tbAsuntoLeerMail";
-            this.tbAsuntoLeerMail.Size = new System.Drawing.Size(839, 31);
-            this.tbAsuntoLeerMail.TabIndex = 0;
-            this.tbAsuntoLeerMail.Text = "Sin Asunto...";
+            this.fecha.DataPropertyName = "Fecha";
+            this.fecha.HeaderText = "Fecha";
+            this.fecha.Name = "fecha";
+            this.fecha.ReadOnly = true;
             // 
             // FormPrincipal
             // 
@@ -700,12 +652,12 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(851, 481);
-            this.Controls.Add(this.panelCuentas);
             this.Controls.Add(this.gbEnviarMail);
             this.Controls.Add(this.gbLeerMail);
             this.Controls.Add(this.gbOpciones1);
             this.Controls.Add(this.gpNuevoMail);
             this.Controls.Add(this.panelLeerMail);
+            this.Controls.Add(this.panelCuentas);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
@@ -789,10 +741,12 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox tbDeLeerMail;
+        private System.Windows.Forms.TextBox tbFechaLeerMail;
         private System.Windows.Forms.DataGridViewTextBoxColumn remitente;
         private System.Windows.Forms.DataGridViewTextBoxColumn cuerpo;
         private System.Windows.Forms.DataGridViewTextBoxColumn destinatario;
         private System.Windows.Forms.DataGridViewTextBoxColumn asunto;
+        private System.Windows.Forms.DataGridViewTextBoxColumn fecha;
     }
 }
 
