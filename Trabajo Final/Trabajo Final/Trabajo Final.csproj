@@ -178,6 +178,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="icono-email11.ico" />
+    <None Include="Resources\up.ico" />
     <None Include="Resources\descarga.ico" />
     <None Include="Resources\Administrar.ico" />
     <None Include="Resources\Help.ico" />

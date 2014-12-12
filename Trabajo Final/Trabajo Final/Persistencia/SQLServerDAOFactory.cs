@@ -16,6 +16,7 @@ namespace Trabajo_Final.Persistencia
         private SqlConnection iConexion;
         private SqlTransaction iTransaccion;
         private String conexion = "Data Source=MATI-D; INITIAL Catalog=CuentasCorreo; Persist Security Info=True;User ID=sa;Password=06qiad";
+        //private String conexion = "Data Source=BRIAN-PC; INITIAL Catalog=CuentasCorreo; Persist Security Info=True;User ID=sa;Password=brianfellin";
 
 
         public override ICuentaDAO CuentaDAO

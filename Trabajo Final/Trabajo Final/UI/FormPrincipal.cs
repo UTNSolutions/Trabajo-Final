@@ -15,6 +15,7 @@ using System.Text.RegularExpressions;
 using Trabajo_Final.Utils;
 
 
+
 namespace Trabajo_Final.UI
 {
     public partial class FormPrincipal : Form
@@ -36,12 +37,7 @@ namespace Trabajo_Final.UI
         /// <param name="e"></param>
         private void acercaDeToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (iFormAcercaDe == null)
-            {
-                iFormAcercaDe = new FormAcercaDe();
-                //iFormAcercaDe.MdiParent = this;
-                iFormAcercaDe.Disposed += new EventHandler(form_Disposed);
-            }
+            FormAcercaDe iFormAcercaDe = new FormAcercaDe();            
             iFormAcercaDe.ShowDialog();
         }
 
@@ -52,13 +48,8 @@ namespace Trabajo_Final.UI
         /// <param name="e"></param>
         private void cuentasToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (iFormAdminCuentas == null)
-            {
-                iFormAdminCuentas = new FormAdministrarCuentas();
-                iFormAdminCuentas.Disposed += new EventHandler(form_Disposed);
-                iFormAdminCuentas.FormClosed += new FormClosedEventHandler(formAdminCuentas_FormClosed);
-            }
-            iFormAdminCuentas.Show();
+            FormAdministrarCuentas iFormAdminCuentas = new FormAdministrarCuentas();
+            iFormAdminCuentas.ShowDialog();
         }
 
         private void formAdminCuentas_FormClosed(object sender, FormClosedEventArgs e)       
@@ -66,18 +57,6 @@ namespace Trabajo_Final.UI
             //when child form is closed, this code is executed   
             // Bind the Grid view       
             CargarTreeView();         
-        }
-
-        /// <summary>
-        /// Le asigna null a los formularios para que no se puedan abrir de nuevo.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void form_Disposed(object sender, EventArgs e)
-        {
-            iFormAdminCuentas = null;
-            iFormAcercaDe = null;
-            iFormExportar = null;
         }
 
         /// <summary>
@@ -94,8 +73,8 @@ namespace Trabajo_Final.UI
                 combobDe.DisplayMember = "Direccion";
                 gbOpciones1.Visible = false;
                 gbEnviarMail.Visible = true;
-                tbCCO.ReadOnly = true;
-                tbCC.ReadOnly = true;
+                tbCCOROnly.ReadOnly = true;
+                tbCCROnly.ReadOnly = true;
                 panelCuentas.Visible = false;
                 gpNuevoMail.Visible = true;
                 
@@ -103,23 +82,67 @@ namespace Trabajo_Final.UI
         }
 
         /// <summary>
-        /// Habilita el TextBox que permita cargar el/las direcciones a los que se le envían una copia del mail. 
+        /// Habilita la carga de la/las direcciones a los que se le envían una copia carbono del mail. 
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void botonCC_Click(object sender, EventArgs e)
         {
-            tbCC.ReadOnly = false;
+                botonCC.Visible = false;
+                botonCCAtras.Visible = true;
+                tbCC.Visible = true;
+                botonAgregarCC.Visible = true;
+                botonBorrarUltimoCC.Visible = true;
         }
 
         /// <summary>
-        /// Habilita el TextBox que permita cargar el/las direcciones a los que se le envían una copia oculata del mail.
+        /// Deshabilita la carga de la/las direcciones a los que se le envían una copia carbono del mail.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void botonCCAtras_Click(object sender, EventArgs e)
+        {
+                botonCCAtras.Visible = false;
+                botonCC.Visible = true;
+                tbCC.Visible = false;
+                botonAgregarCC.Visible = false;
+                botonBorrarUltimoCC.Visible = false;
+                tbCCROnly.Text = "";
+                tbCCROnly.Multiline = false;
+                tbCCROnly.Location = new Point(103, 196);
+                tbCCROnly.Size = new Size(298, 20);
+        }
+
+        /// <summary>
+        /// Habilita la carga de la/las direcciones a los que se le envían una copia carbono oculta del mail.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void botonCCO_Click(object sender, EventArgs e)
         {
-            tbCCO.ReadOnly = false;
+            botonCCO.Visible = false;
+            botonCCOAtras.Visible = true;
+            tbCCO.Visible = true;
+            botonAgregarCCO.Visible = true;
+            botonBorrarUltimoCCO.Visible = true;
+        }
+
+        /// <summary>
+        /// Deshabilita la carga de la/las direcciones a los que se le envían una copia carbono del mail.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void botonCCOAtras_Click(object sender, EventArgs e)
+        {
+            botonCCOAtras.Visible = false;
+            botonCCO.Visible = true;
+            tbCCO.Visible = false;
+            botonAgregarCCO.Visible = false;
+            botonBorrarUltimoCCO.Visible = false;
+            tbCCOROnly.Text = "";
+            tbCCOROnly.Multiline = false;
+            tbCCOROnly.Location = new Point(103, 290);
+            tbCCOROnly.Size = new Size(298, 20);
         }
 
         /// <summary>
@@ -179,8 +202,8 @@ namespace Trabajo_Final.UI
                 gbOpciones1.Visible = true;
                 gpNuevoMail.Visible = false;
                 panelCuentas.Visible = true;
-                panelLeerMail.Visible = false; //
-                gbLeerMail.Visible = false; //
+                panelLeerMail.Visible = false; 
+                gbLeerMail.Visible = false; 
             }
         }
 
@@ -192,14 +215,14 @@ namespace Trabajo_Final.UI
         /// <returns></returns>
         private bool VaciarDatosEnviarMail_TextChanged(object sender, EventArgs e)
         {
-            if (tbPara.Text != "" || tbCC.Text != "" || tbCCO.Text != "" || tbAsunto.Text != "" || tbAdjuntos.Text != "" || tbCuerpo.Text != "")
+            if (tbParaROnly.Text != "" || tbCCROnly.Text != "" || tbCCOROnly.Text != "" || tbAsunto.Text != "" || tbAdjuntos.Text != "" || tbCuerpo.Text != "")
             {
                 DialogResult resultado = MessageBox.Show("¿Está seguro que quiere eliminar este mail no enviado ?", "Advertencia", MessageBoxButtons.YesNo,MessageBoxIcon.Question);
                 if (resultado == DialogResult.Yes)
                 {
                     tbPara.Text = "";
-                    tbCC.Text = "";
-                    tbCCO.Text = "";
+                    tbCCROnly.Text = "";
+                    tbCCOROnly.Text = "";
                     tbAsunto.Text = "";
                     tbAdjuntos.Text = "";
                     tbCuerpo.Text = "";
@@ -213,6 +236,261 @@ namespace Trabajo_Final.UI
             else
             {
                 return true;
+            }
+        }
+
+        /// <summary>
+        /// Agrega una dirección al textbox de destinatarios.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void botonAgregarPara_Click(object sender, EventArgs e)
+        {
+            if (tbPara.Text != "")
+            {
+                //Para ver si seesta poniendo una cedena valida como dirección de correo.
+                if (!(Regex.IsMatch(tbPara.Text, "\\w+([-+.']\\w+)*@\\w+([-.]\\w+)*\\.\\w+(a-z)*")))
+                {
+                    labelDNValidaPara.Visible = true;
+                }
+                else
+                {
+                    labelDNValidaPara.Visible = false;
+                    if (tbParaROnly.Text == "")
+                    {
+                        tbParaROnly.Text = tbPara.Text + "; ";
+                        tbPara.Text = "";
+                        botonBorrarUltimoPara.Enabled = true;
+                    }
+                    else
+                    {
+                        tbParaROnly.Text = tbParaROnly.Text + tbPara.Text + "; ";
+                        tbPara.Text = "";
+                    }
+                }
+                //pasando esa cantidad de elementos en el textbox habilito el multiline.
+                if (tbParaROnly.Text.Length > 50)
+                {
+                    tbParaROnly.Multiline = true;
+                    tbParaROnly.Location = new Point(103, 80);
+                    tbParaROnly.Size = new Size(298, 47);
+                }
+            }
+            //En caso de que no escriba nada para que no me muestre el label.
+            else
+            {
+                labelDNValidaPara.Visible = false;
+            }
+        }
+
+        /// <summary>
+        /// Borra la última direccion de correo que se escribio como destinatario del mail.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void botonBorrarUltimoPara_Click(object sender, EventArgs e)
+        {
+            //Le saco dos porque se que la última cadena tiene un "; " (punto y coma seguido de un espacio),
+            //y no me interezan para ciclar.
+            int indice = tbParaROnly.Text.Length - 2;
+            bool control = true;
+            //Recorro la cadena hacia atras hasta encontrar un "; " (punto y coma seguido de un espacio)
+            //para eliminar la última cadena. 
+            while (indice > 0 && control)
+            {
+                //Elimino la última cadena.
+                if (tbParaROnly.Text[indice] == ' ' && tbParaROnly.Text[indice - 1] == ';')
+                {
+                    tbParaROnly.Text = tbParaROnly.Text.Substring(0, indice + 1);
+                    control = false;
+                }
+                else
+                {
+                    indice--;
+                }                
+            }
+            //En caso de que salga del while por la condición de la sig. linea es porque es la última cadena.
+            if (indice == 0)
+            {
+                tbParaROnly.Text = "";
+                botonBorrarUltimoPara.Enabled = false;
+            }
+            //Para desabilitar el multiline en caso que la cadena posea menos de 50 elemenetos.
+            if (tbParaROnly.Text.Length < 50)
+            {
+                tbParaROnly.Multiline = false;
+                tbParaROnly.Location = new Point(103, 107);
+                tbParaROnly.Size = new Size(298, 20);
+            }
+        }
+
+        /// <summary>
+        /// Agrega una dirección al textbox de direcciones con copia carbono.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void botonAgregarCC_Click(object sender, EventArgs e)
+        {
+            if (tbCC.Text != "")
+            {
+                //Para ver si seesta poniendo una cedena valida como dirección de correo.
+                if (!(Regex.IsMatch(tbCC.Text, "\\w+([-+.']\\w+)*@\\w+([-.]\\w+)*\\.\\w+(a-z)*")))
+                {
+                    labelDNValidaCC.Visible = true;
+                }
+                else
+                {
+                    labelDNValidaCC.Visible = false;
+                    if (tbCCROnly.Text == "")
+                    {
+                        tbCCROnly.Text = tbCC.Text + "; ";
+                        tbCC.Text = "";
+                        botonBorrarUltimoCC.Enabled = true;
+                    }
+                    else
+                    {
+                        tbCCROnly.Text = tbCCROnly.Text + tbCC.Text + "; ";
+                        tbCC.Text = "";
+                    }
+                }
+                //pasando esa cantidad de elementos en el textbox habilito el multiline.
+                if (tbCCROnly.Text.Length > 50)
+                {
+                    tbCCROnly.Multiline = true;
+                    tbCCROnly.Location = new Point(103, 172);
+                    tbCCROnly.Size = new Size(298, 47);
+                }
+            }
+            //En caso de que no escriba nada para que no me muestre el label.
+            else
+            {
+                labelDNValidaCC.Visible = false;
+            }
+        }
+
+        /// <summary>
+        /// Borra la última direccion de correo que se escribio como copia carbono del mail.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void botonBorrarUltimoCC_Click(object sender, EventArgs e)
+        {
+            //Le saco dos porque se que la última cadena tiene un "; " (punto y coma seguido de un espacio),
+            //y no me interezan para ciclar.
+            int indice = tbCCROnly.Text.Length - 2;
+            bool control = true;
+            //Recorro la cadena hacia atras hasta encontrar un "; " (punto y coma seguido de un espacio)
+            //para eliminar la última cadena. 
+            while (indice > 0 && control)
+            {
+                //Elimino la última cadena.
+                if (tbCCROnly.Text[indice] == ' ' && tbCCROnly.Text[indice - 1] == ';')
+                {
+                    tbCCROnly.Text = tbCCROnly.Text.Substring(0, indice + 1);
+                    control = false;
+                }
+                else
+                {
+                    indice--;
+                }
+            }
+            //En caso de que salga del while por la condición de la sig. linea es porque es la última cadena.
+            if (indice == 0)
+            {
+                tbCCROnly.Text = "";
+                botonBorrarUltimoCC.Enabled = false;
+            }
+            //Para desabilitar el multiline en caso que la cadena posea menos de 50 elemenetos.
+            if (tbCCROnly.Text.Length < 50)
+            {
+                tbCCROnly.Multiline = false;
+                tbCCROnly.Location = new Point(103, 196);
+                tbCCROnly.Size = new Size(298, 20);
+            }
+        }
+
+        /// <summary>
+        /// Agrega una dirección al textbox de direcciones con copia carbono oculta.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void botonAgregarCCO_Click(object sender, EventArgs e)
+        {
+             if (tbCCO.Text != "")
+            {
+                //Para ver si seesta poniendo una cedena valida como dirección de correo.
+                if (!(Regex.IsMatch(tbCCO.Text, "\\w+([-+.']\\w+)*@\\w+([-.]\\w+)*\\.\\w+(a-z)*")))
+                {
+                    labelDNValidaCCO.Visible = true;
+                }
+                else
+                {
+                    labelDNValidaCCO.Visible = false;
+                    if (tbCCOROnly.Text == "")
+                    {
+                        tbCCOROnly.Text = tbCCO.Text + "; ";
+                        tbCCO.Text = "";
+                        botonBorrarUltimoCCO.Enabled = true;
+                    }
+                    else
+                    {
+                        tbCCOROnly.Text = tbCCOROnly.Text + tbCCO.Text + "; ";
+                        tbCCO.Text = "";
+                    }
+                }
+                //pasando esa cantidad de elementos en el textbox habilito el multiline.
+                if (tbCCOROnly.Text.Length > 50)
+                {
+                    tbCCOROnly.Multiline = true;
+                    tbCCOROnly.Location = new Point(103, 264);
+                    tbCCOROnly.Size = new Size(298, 47);
+                }
+            }
+            //En caso de que no escriba nada para que no me muestre el label.
+            else
+            {
+                labelDNValidaCCO.Visible = false;
+            }
+        }
+
+        /// <summary>
+        /// Borra la última direccion de correo que se escribio como copia carbono oculta del mail.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void botonBorrarUltimoCCO_Click(object sender, EventArgs e)
+        {
+            //Le saco dos porque se que la última cadena tiene un "; " (punto y coma seguido de un espacio),
+            //y no me interezan para ciclar.
+            int indice = tbCCOROnly.Text.Length - 2;
+            bool control = true;
+            //Recorro la cadena hacia atras hasta encontrar un "; " (punto y coma seguido de un espacio)
+            //para eliminar la última cadena. 
+            while (indice > 0 && control)
+            {
+                //Elimino la última cadena.
+                if (tbCCOROnly.Text[indice] == ' ' && tbCCOROnly.Text[indice - 1] == ';')
+                {
+                    tbCCOROnly.Text = tbCCOROnly.Text.Substring(0, indice + 1);
+                    control = false;
+                }
+                else
+                {
+                    indice--;
+                }
+            }
+            //En caso de que salga del while por la condición de la sig. linea es porque es la última cadena.
+            if (indice == 0)
+            {
+                tbCCOROnly.Text = "";
+                botonBorrarUltimoCCO.Enabled = false;
+            }
+            //Para desabilitar el multiline en caso que la cadena posea menos de 50 elemenetos.
+            if (tbCCOROnly.Text.Length < 50)
+            {
+                tbCCOROnly.Multiline = false;
+                tbCCOROnly.Location = new Point(103, 290);
+                tbCCOROnly.Size = new Size(298, 20);
             }
         }
 
@@ -364,7 +642,7 @@ namespace Trabajo_Final.UI
             }
             else
             {
-                dgEmails.DataSource = adaptador;
+            dgEmails.DataSource = adaptador;
             }
             
             dgEmails.Columns["destinatario"].Visible = false;
@@ -383,7 +661,7 @@ namespace Trabajo_Final.UI
                 {
                     adaptador.Add(new AdaptadorDataGrid(email.Remitente, email.Destinatario[0], email.Asunto, email.Cuerpo, email.Fecha));
                 }
-            }
+                }
             //ordeno por fecha
             adaptador = (from e in adaptador
                            orderby e.Fecha descending
@@ -395,7 +673,7 @@ namespace Trabajo_Final.UI
             {
                 AddItemCallBack d = new AddItemCallBack(FiltarEnviados);
                 this.Invoke(d, pNombreCuenta);
-            }
+                }
             else
             {
                 dgEmails.DataSource = adaptador;
@@ -423,12 +701,12 @@ namespace Trabajo_Final.UI
         {
             tbPara.Text = "";
             tbCuerpo.Text = "";
-            tbCC.Text = "";
-            tbCCO.Text = "";
+            tbCCROnly.Text = "";
+            tbCCOROnly.Text = "";
             tbAsunto.Text = "";
             tbAdjuntos.Text = "";                
-            tbCC.ReadOnly = true;
-            tbCCO.ReadOnly = true;              
+            tbCCROnly.ReadOnly = true;
+            tbCCOROnly.ReadOnly = true;              
         }
 
         /// <summary>
@@ -447,7 +725,7 @@ namespace Trabajo_Final.UI
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void obtenerMailsToolStripMenuItem_Click(object sender, EventArgs e)
-        {                        
+        {
                 BackgroundWorker hilo = new BackgroundWorker();
                 hilo.WorkerReportsProgress = true;
                 hilo.ReportProgress(40);
@@ -473,27 +751,27 @@ namespace Trabajo_Final.UI
 
         private void ObtenerMailDeUnaCuenta(object sender, DoWorkEventArgs e)
         {         
-          try
-          {  
-            Fachada.Instancia.ObtenerEmail(tbNombreCuenta.Text);
+            try
+            {
+                Fachada.Instancia.ObtenerEmail(tbNombreCuenta.Text);
             CargarDataGrid(tbNombreCuenta.Text, Convert.ToChar(tbTipoCorreo.Text));
-          }
+            }           
           catch (NombreCuentaExcepcion ex)
-          {
-              MessageBox.Show(ex.Message, "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Error);
-          }
-          catch (EmailExcepcion ex)
-          {
-              MessageBox.Show(ex.Message, "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Error);
-          }
-          catch (InternetExcepcion ex)
-          {
-              MessageBox.Show(ex.Message, "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Error);
-          }
+            {
+                MessageBox.Show(ex.Message, "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (EmailExcepcion ex)
+            {
+                MessageBox.Show(ex.Message, "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (InternetExcepcion ex)
+            {
+                MessageBox.Show(ex.Message, "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
           catch (DAOExcepcion ex)
-          {
-              MessageBox.Show(ex.Message, "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Error);
-          }
+            {
+                MessageBox.Show(ex.Message, "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
 
@@ -503,7 +781,7 @@ namespace Trabajo_Final.UI
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void obtenerTodosToolStripMenuItem_Click(object sender, EventArgs e)
-        {                     
+        {          
            try
            {
                //Obtiene los emails por cada una de las cuentas que estan en el tree view
@@ -541,33 +819,11 @@ namespace Trabajo_Final.UI
         }
 
 
-        private void tbPara_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (e.KeyChar == (char)13)
-            {
-                tbPara.Text = tbPara.Text + "; ";
-                tbPara.Select(tbPara.Location.X + tbPara.Text.Length, tbPara.Location.Y);
-            }
-        }
-
-        private void tbCC_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (e.KeyChar == (char)13)
-            {
-                tbPara.Text = tbPara.Text + "; ";
-                tbPara.Select(tbPara.Location.X + tbPara.Text.Length, tbPara.Location.Y);
-            }
-        }
-
-        private void tbCCO_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (e.KeyChar == (char)13)
-            {
-                tbPara.Text = tbPara.Text + "; ";
-                tbPara.Select(tbPara.Location.X + tbPara.Text.Length, tbPara.Location.Y);
-            }
-        }
-
+        /// <summary>
+        /// Extrae un mail del DataGrilView y lo muestra.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void LeerMail(object sender, EventArgs e)
         {            
             if (dgEmails.RowCount > 0)
@@ -594,12 +850,8 @@ namespace Trabajo_Final.UI
 
         private void exportarToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (iFormExportar == null)
-            {                
-                iFormExportar = new FormExportar(tbDeLeerMail.Text,tbAsuntoLeerMail.Text,tbParaLeerMail.Text,tbCuerpoLeerMail.Text,Convert.ToDateTime(tbFechaLeerMail.Text));
-                iFormExportar.Disposed += new EventHandler(form_Disposed);                
-            }
-            iFormExportar.Show();
+            FormExportar iFormExportar = new FormExportar(tbDeLeerMail.Text,tbAsuntoLeerMail.Text,tbParaLeerMail.Text,tbCuerpoLeerMail.Text,Convert.ToDateTime(tbFechaLeerMail.Text));                
+            iFormExportar.ShowDialog();
         }
     }
 }

@@ -28,7 +28,7 @@ namespace Trabajo_Final.Dominio
                 { return this.iNombre; }
             }
         }
-
+       
         public void Exportar(String pRuta,Email pEmail)
         {
             if (pRuta == null)

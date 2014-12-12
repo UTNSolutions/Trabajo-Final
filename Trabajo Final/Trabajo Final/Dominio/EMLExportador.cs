@@ -6,10 +6,11 @@ using System.Threading.Tasks;
 using Microsoft.Exchange.WebServices.Data;
 using System.IO;
 using System.Net.Mail;
+using System.Net;
 
 namespace Trabajo_Final.Dominio
 {
-    public class EMLExportador : IExportador 
+    public class EMLExportador : IExportador
     {
         private String iNombre;
 
@@ -27,19 +28,18 @@ namespace Trabajo_Final.Dominio
         }
 
         public void Exportar(string pRuta, Email pEMail)
-        {       
-            if (pRuta == null)
             {
+            if (pRuta == null)
+                {
                 throw new ArgumentNullException("La ruta pasada es nula");
-            }
+                }
             SmtpClient client = new SmtpClient();
             client.DeliveryMethod = SmtpDeliveryMethod.SpecifiedPickupDirectory;
             MailMessage email = new MailMessage(pEMail.Remitente, pEMail.Destinatario[0], pEMail.Asunto, pEMail.Cuerpo);
             client.PickupDirectoryLocation = pRuta;
             client.DeliveryFormat = SmtpDeliveryFormat.International;
             client.Send(email);
+            }
         }
     }
-}
 
-    

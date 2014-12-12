@@ -39,21 +39,33 @@
             this.acercaDeToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.gpNuevoMail = new System.Windows.Forms.GroupBox();
+            this.labelDNValidaPara = new System.Windows.Forms.Label();
+            this.botonBorrarUltimoCC = new System.Windows.Forms.Button();
+            this.botonBorrarUltimoCCO = new System.Windows.Forms.Button();
+            this.botonBorrarUltimoPara = new System.Windows.Forms.Button();
+            this.botonAgregarCCO = new System.Windows.Forms.Button();
+            this.tbCCO = new System.Windows.Forms.TextBox();
+            this.botonAgregarCC = new System.Windows.Forms.Button();
+            this.tbCC = new System.Windows.Forms.TextBox();
+            this.botonAgregarPara = new System.Windows.Forms.Button();
             this.combobDe = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.botonCCO = new System.Windows.Forms.Button();
-            this.botonCC = new System.Windows.Forms.Button();
             this.bAdjuntar = new System.Windows.Forms.Button();
             this.tbAsunto = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.tbCuerpo = new System.Windows.Forms.RichTextBox();
-            this.tbCC = new System.Windows.Forms.TextBox();
-            this.tbCCO = new System.Windows.Forms.TextBox();
+            this.tbCCROnly = new System.Windows.Forms.TextBox();
+            this.tbCCOROnly = new System.Windows.Forms.TextBox();
             this.tbAdjuntos = new System.Windows.Forms.TextBox();
             this.tbPara = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.progressBarEnviando = new System.Windows.Forms.ProgressBar();
+            this.tbParaROnly = new System.Windows.Forms.TextBox();
+            this.botonCC = new System.Windows.Forms.Button();
+            this.botonCCAtras = new System.Windows.Forms.Button();
+            this.botonCCO = new System.Windows.Forms.Button();
+            this.botonCCOAtras = new System.Windows.Forms.Button();
             this.panelCuentas = new System.Windows.Forms.Panel();
             this.tbTipoCorreo = new System.Windows.Forms.TextBox();
             this.tbNombreCuenta = new System.Windows.Forms.TextBox();
@@ -84,6 +96,8 @@
             this.responderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exportarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.acercaDeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.labelDNValidaCCO = new System.Windows.Forms.Label();
+            this.labelDNValidaCC = new System.Windows.Forms.Label();
             this.progressBar = new System.Windows.Forms.ProgressBar();
             this.label7 = new System.Windows.Forms.Label();
             this.gbOpciones1.SuspendLayout();
@@ -186,34 +200,143 @@
             // 
             // gpNuevoMail
             // 
+            this.gpNuevoMail.Controls.Add(this.labelDNValidaCC);
+            this.gpNuevoMail.Controls.Add(this.labelDNValidaCCO);
+            this.gpNuevoMail.Controls.Add(this.labelDNValidaPara);
+            this.gpNuevoMail.Controls.Add(this.botonBorrarUltimoCC);
+            this.gpNuevoMail.Controls.Add(this.botonBorrarUltimoCCO);
+            this.gpNuevoMail.Controls.Add(this.botonBorrarUltimoPara);
+            this.gpNuevoMail.Controls.Add(this.botonAgregarCCO);
+            this.gpNuevoMail.Controls.Add(this.tbCCO);
+            this.gpNuevoMail.Controls.Add(this.botonAgregarCC);
+            this.gpNuevoMail.Controls.Add(this.tbCC);
+            this.gpNuevoMail.Controls.Add(this.botonAgregarPara);
             this.gpNuevoMail.Controls.Add(this.combobDe);
             this.gpNuevoMail.Controls.Add(this.label2);
-            this.gpNuevoMail.Controls.Add(this.botonCCO);
-            this.gpNuevoMail.Controls.Add(this.botonCC);
             this.gpNuevoMail.Controls.Add(this.bAdjuntar);
             this.gpNuevoMail.Controls.Add(this.tbAsunto);
             this.gpNuevoMail.Controls.Add(this.label5);
             this.gpNuevoMail.Controls.Add(this.tbCuerpo);
-            this.gpNuevoMail.Controls.Add(this.tbCC);
-            this.gpNuevoMail.Controls.Add(this.tbCCO);
+            this.gpNuevoMail.Controls.Add(this.tbCCROnly);
+            this.gpNuevoMail.Controls.Add(this.tbCCOROnly);
             this.gpNuevoMail.Controls.Add(this.tbAdjuntos);
             this.gpNuevoMail.Controls.Add(this.tbPara);
             this.gpNuevoMail.Controls.Add(this.label4);
             this.gpNuevoMail.Controls.Add(this.label1);
             this.gpNuevoMail.Controls.Add(this.progressBarEnviando);
+            this.gpNuevoMail.Controls.Add(this.tbParaROnly);
+            this.gpNuevoMail.Controls.Add(this.botonCC);
+            this.gpNuevoMail.Controls.Add(this.botonCCAtras);
+            this.gpNuevoMail.Controls.Add(this.botonCCO);
+            this.gpNuevoMail.Controls.Add(this.botonCCOAtras);
             this.gpNuevoMail.Location = new System.Drawing.Point(0, 49);
             this.gpNuevoMail.Name = "gpNuevoMail";
-            this.gpNuevoMail.Size = new System.Drawing.Size(853, 429);
+            this.gpNuevoMail.Size = new System.Drawing.Size(853, 432);
             this.gpNuevoMail.TabIndex = 5;
             this.gpNuevoMail.TabStop = false;
             this.gpNuevoMail.Text = "Nuevo Email";
             this.gpNuevoMail.Visible = false;
             // 
+            // labelDNValidaPara
+            // 
+            this.labelDNValidaPara.AutoSize = true;
+            this.labelDNValidaPara.ForeColor = System.Drawing.Color.Red;
+            this.labelDNValidaPara.Location = new System.Drawing.Point(268, 156);
+            this.labelDNValidaPara.Name = "labelDNValidaPara";
+            this.labelDNValidaPara.Size = new System.Drawing.Size(104, 13);
+            this.labelDNValidaPara.TabIndex = 27;
+            this.labelDNValidaPara.Text = "¡Dirección no válida!";
+            this.labelDNValidaPara.Visible = false;
+            // 
+            // botonBorrarUltimoCC
+            // 
+            this.botonBorrarUltimoCC.Enabled = false;
+            this.botonBorrarUltimoCC.Location = new System.Drawing.Point(407, 196);
+            this.botonBorrarUltimoCC.Name = "botonBorrarUltimoCC";
+            this.botonBorrarUltimoCC.Size = new System.Drawing.Size(24, 23);
+            this.botonBorrarUltimoCC.TabIndex = 24;
+            this.botonBorrarUltimoCC.Text = "X";
+            this.botonBorrarUltimoCC.UseVisualStyleBackColor = true;
+            this.botonBorrarUltimoCC.Visible = false;
+            this.botonBorrarUltimoCC.Click += new System.EventHandler(this.botonBorrarUltimoCC_Click);
+            // 
+            // botonBorrarUltimoCCO
+            // 
+            this.botonBorrarUltimoCCO.Enabled = false;
+            this.botonBorrarUltimoCCO.Location = new System.Drawing.Point(407, 288);
+            this.botonBorrarUltimoCCO.Name = "botonBorrarUltimoCCO";
+            this.botonBorrarUltimoCCO.Size = new System.Drawing.Size(24, 23);
+            this.botonBorrarUltimoCCO.TabIndex = 23;
+            this.botonBorrarUltimoCCO.Text = "X";
+            this.botonBorrarUltimoCCO.UseVisualStyleBackColor = true;
+            this.botonBorrarUltimoCCO.Visible = false;
+            this.botonBorrarUltimoCCO.Click += new System.EventHandler(this.botonBorrarUltimoCCO_Click);
+            // 
+            // botonBorrarUltimoPara
+            // 
+            this.botonBorrarUltimoPara.Enabled = false;
+            this.botonBorrarUltimoPara.Location = new System.Drawing.Point(407, 104);
+            this.botonBorrarUltimoPara.Name = "botonBorrarUltimoPara";
+            this.botonBorrarUltimoPara.Size = new System.Drawing.Size(24, 23);
+            this.botonBorrarUltimoPara.TabIndex = 22;
+            this.botonBorrarUltimoPara.Text = "X";
+            this.botonBorrarUltimoPara.UseVisualStyleBackColor = true;
+            this.botonBorrarUltimoPara.Click += new System.EventHandler(this.botonBorrarUltimoPara_Click);
+            // 
+            // botonAgregarCCO
+            // 
+            this.botonAgregarCCO.Location = new System.Drawing.Point(378, 315);
+            this.botonAgregarCCO.Name = "botonAgregarCCO";
+            this.botonAgregarCCO.Size = new System.Drawing.Size(54, 23);
+            this.botonAgregarCCO.TabIndex = 21;
+            this.botonAgregarCCO.Text = "Agregar";
+            this.botonAgregarCCO.UseVisualStyleBackColor = true;
+            this.botonAgregarCCO.Visible = false;
+            this.botonAgregarCCO.Click += new System.EventHandler(this.botonAgregarCCO_Click);
+            // 
+            // tbCCO
+            // 
+            this.tbCCO.Location = new System.Drawing.Point(103, 318);
+            this.tbCCO.Name = "tbCCO";
+            this.tbCCO.Size = new System.Drawing.Size(269, 20);
+            this.tbCCO.TabIndex = 20;
+            this.tbCCO.Visible = false;
+            // 
+            // botonAgregarCC
+            // 
+            this.botonAgregarCC.Location = new System.Drawing.Point(378, 223);
+            this.botonAgregarCC.Name = "botonAgregarCC";
+            this.botonAgregarCC.Size = new System.Drawing.Size(54, 23);
+            this.botonAgregarCC.TabIndex = 19;
+            this.botonAgregarCC.Text = "Agregar";
+            this.botonAgregarCC.UseVisualStyleBackColor = true;
+            this.botonAgregarCC.Visible = false;
+            this.botonAgregarCC.Click += new System.EventHandler(this.botonAgregarCC_Click);
+            // 
+            // tbCC
+            // 
+            this.tbCC.Location = new System.Drawing.Point(103, 225);
+            this.tbCC.Name = "tbCC";
+            this.tbCC.Size = new System.Drawing.Size(269, 20);
+            this.tbCC.TabIndex = 18;
+            this.tbCC.Visible = false;
+            // 
+            // botonAgregarPara
+            // 
+            this.botonAgregarPara.Location = new System.Drawing.Point(378, 131);
+            this.botonAgregarPara.Name = "botonAgregarPara";
+            this.botonAgregarPara.Size = new System.Drawing.Size(54, 23);
+            this.botonAgregarPara.TabIndex = 17;
+            this.botonAgregarPara.Text = "Agregar";
+            this.botonAgregarPara.UseVisualStyleBackColor = true;
+            this.botonAgregarPara.Click += new System.EventHandler(this.botonAgregarPara_Click);
+            // 
             // combobDe
             // 
+            this.combobDe.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
             this.combobDe.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.combobDe.FormattingEnabled = true;
-            this.combobDe.Location = new System.Drawing.Point(103, 41);
+            this.combobDe.Location = new System.Drawing.Point(103, 50);
             this.combobDe.Name = "combobDe";
             this.combobDe.Size = new System.Drawing.Size(329, 21);
             this.combobDe.TabIndex = 15;
@@ -221,36 +344,16 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(76, 44);
+            this.label2.Location = new System.Drawing.Point(76, 53);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(21, 13);
             this.label2.TabIndex = 14;
             this.label2.Text = "De";
             // 
-            // botonCCO
-            // 
-            this.botonCCO.Location = new System.Drawing.Point(60, 197);
-            this.botonCCO.Name = "botonCCO";
-            this.botonCCO.Size = new System.Drawing.Size(37, 23);
-            this.botonCCO.TabIndex = 13;
-            this.botonCCO.Text = "CCO";
-            this.botonCCO.UseVisualStyleBackColor = true;
-            this.botonCCO.Click += new System.EventHandler(this.botonCCO_Click);
-            // 
-            // botonCC
-            // 
-            this.botonCC.Location = new System.Drawing.Point(60, 138);
-            this.botonCC.Name = "botonCC";
-            this.botonCC.Size = new System.Drawing.Size(37, 23);
-            this.botonCC.TabIndex = 12;
-            this.botonCC.Text = "CC";
-            this.botonCC.UseVisualStyleBackColor = true;
-            this.botonCC.Click += new System.EventHandler(this.botonCC_Click);
-            // 
             // bAdjuntar
             // 
             this.bAdjuntar.Image = global::Trabajo_Final.Properties.Resources.attach;
-            this.bAdjuntar.Location = new System.Drawing.Point(396, 300);
+            this.bAdjuntar.Location = new System.Drawing.Point(399, 391);
             this.bAdjuntar.Name = "bAdjuntar";
             this.bAdjuntar.Size = new System.Drawing.Size(36, 24);
             this.bAdjuntar.TabIndex = 11;
@@ -259,7 +362,7 @@
             // 
             // tbAsunto
             // 
-            this.tbAsunto.Location = new System.Drawing.Point(103, 253);
+            this.tbAsunto.Location = new System.Drawing.Point(103, 357);
             this.tbAsunto.Name = "tbAsunto";
             this.tbAsunto.Size = new System.Drawing.Size(329, 20);
             this.tbAsunto.TabIndex = 10;
@@ -267,7 +370,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(57, 256);
+            this.label5.Location = new System.Drawing.Point(57, 360);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(40, 13);
             this.label5.TabIndex = 9;
@@ -281,27 +384,31 @@
             this.tbCuerpo.TabIndex = 8;
             this.tbCuerpo.Text = "";
             // 
-            // tbCC
+            // tbCCROnly
             // 
-            this.tbCC.Location = new System.Drawing.Point(103, 140);
-            this.tbCC.Name = "tbCC";
-            this.tbCC.ReadOnly = true;
-            this.tbCC.Size = new System.Drawing.Size(329, 20);
-            this.tbCC.TabIndex = 7;
-            this.tbCC.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbCC_KeyPress);
+            this.tbCCROnly.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.tbCCROnly.Location = new System.Drawing.Point(103, 197);
+            this.tbCCROnly.Name = "tbCCROnly";
+            this.tbCCROnly.ReadOnly = true;
+            this.tbCCROnly.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.tbCCROnly.Size = new System.Drawing.Size(298, 20);
+            this.tbCCROnly.TabIndex = 7;
             // 
-            // tbCCO
+            // tbCCOROnly
             // 
-            this.tbCCO.Location = new System.Drawing.Point(103, 199);
-            this.tbCCO.Name = "tbCCO";
-            this.tbCCO.ReadOnly = true;
-            this.tbCCO.Size = new System.Drawing.Size(329, 20);
-            this.tbCCO.TabIndex = 6;
-            this.tbCCO.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbCCO_KeyPress);
+            this.tbCCOROnly.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.tbCCOROnly.Location = new System.Drawing.Point(103, 290);
+            this.tbCCOROnly.Name = "tbCCOROnly";
+            this.tbCCOROnly.ReadOnly = true;
+            this.tbCCOROnly.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.tbCCOROnly.Size = new System.Drawing.Size(298, 20);
+            this.tbCCOROnly.TabIndex = 6;
             // 
             // tbAdjuntos
             // 
-            this.tbAdjuntos.Location = new System.Drawing.Point(103, 303);
+            this.tbAdjuntos.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.tbAdjuntos.Location = new System.Drawing.Point(103, 395);
+            this.tbAdjuntos.Multiline = true;
             this.tbAdjuntos.Name = "tbAdjuntos";
             this.tbAdjuntos.ReadOnly = true;
             this.tbAdjuntos.Size = new System.Drawing.Size(287, 20);
@@ -309,16 +416,15 @@
             // 
             // tbPara
             // 
-            this.tbPara.Location = new System.Drawing.Point(103, 90);
+            this.tbPara.Location = new System.Drawing.Point(103, 133);
             this.tbPara.Name = "tbPara";
-            this.tbPara.Size = new System.Drawing.Size(329, 20);
+            this.tbPara.Size = new System.Drawing.Size(269, 20);
             this.tbPara.TabIndex = 4;
-            this.tbPara.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbPara_KeyPress);
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(5, 305);
+            this.label4.Location = new System.Drawing.Point(5, 398);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(92, 13);
             this.label4.TabIndex = 3;
@@ -327,7 +433,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(68, 93);
+            this.label1.Location = new System.Drawing.Point(68, 110);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(29, 13);
             this.label1.TabIndex = 0;
@@ -340,6 +446,58 @@
             this.progressBarEnviando.Size = new System.Drawing.Size(841, 12);
             this.progressBarEnviando.TabIndex = 9;
             this.progressBarEnviando.Visible = false;
+            // 
+            // tbParaROnly
+            // 
+            this.tbParaROnly.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.tbParaROnly.Location = new System.Drawing.Point(103, 107);
+            this.tbParaROnly.Name = "tbParaROnly";
+            this.tbParaROnly.ReadOnly = true;
+            this.tbParaROnly.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.tbParaROnly.Size = new System.Drawing.Size(298, 20);
+            this.tbParaROnly.TabIndex = 16;
+            // 
+            // botonCC
+            // 
+            this.botonCC.Location = new System.Drawing.Point(60, 196);
+            this.botonCC.Name = "botonCC";
+            this.botonCC.Size = new System.Drawing.Size(37, 23);
+            this.botonCC.TabIndex = 12;
+            this.botonCC.Text = "CC";
+            this.botonCC.UseVisualStyleBackColor = true;
+            this.botonCC.Click += new System.EventHandler(this.botonCC_Click);
+            // 
+            // botonCCAtras
+            // 
+            this.botonCCAtras.Image = global::Trabajo_Final.Properties.Resources.up;
+            this.botonCCAtras.Location = new System.Drawing.Point(60, 196);
+            this.botonCCAtras.Name = "botonCCAtras";
+            this.botonCCAtras.Size = new System.Drawing.Size(37, 23);
+            this.botonCCAtras.TabIndex = 25;
+            this.botonCCAtras.UseVisualStyleBackColor = true;
+            this.botonCCAtras.Visible = false;
+            this.botonCCAtras.Click += new System.EventHandler(this.botonCCAtras_Click);
+            // 
+            // botonCCO
+            // 
+            this.botonCCO.Location = new System.Drawing.Point(60, 288);
+            this.botonCCO.Name = "botonCCO";
+            this.botonCCO.Size = new System.Drawing.Size(37, 23);
+            this.botonCCO.TabIndex = 13;
+            this.botonCCO.Text = "CCO";
+            this.botonCCO.UseVisualStyleBackColor = true;
+            this.botonCCO.Click += new System.EventHandler(this.botonCCO_Click);
+            // 
+            // botonCCOAtras
+            // 
+            this.botonCCOAtras.Image = global::Trabajo_Final.Properties.Resources.up;
+            this.botonCCOAtras.Location = new System.Drawing.Point(60, 288);
+            this.botonCCOAtras.Name = "botonCCOAtras";
+            this.botonCCOAtras.Size = new System.Drawing.Size(37, 23);
+            this.botonCCOAtras.TabIndex = 26;
+            this.botonCCOAtras.UseVisualStyleBackColor = true;
+            this.botonCCOAtras.Visible = false;
+            this.botonCCOAtras.Click += new System.EventHandler(this.botonCCOAtras_Click);
             // 
             // panelCuentas
             // 
@@ -651,29 +809,34 @@
             this.acercaDeToolStripMenuItem.Text = "Acerca de...";
             this.acercaDeToolStripMenuItem.Click += new System.EventHandler(this.acercaDeToolStripMenuItem_Click);
             // 
-            // progressBar
+            // labelDNValidaCCO
             // 
-            this.progressBar.Location = new System.Drawing.Point(42, 225);
-            this.progressBar.Name = "progressBar";
-            this.progressBar.Size = new System.Drawing.Size(100, 23);
-            this.progressBar.TabIndex = 9;
+            this.labelDNValidaCCO.AutoSize = true;
+            this.labelDNValidaCCO.ForeColor = System.Drawing.Color.Red;
+            this.labelDNValidaCCO.Location = new System.Drawing.Point(268, 341);
+            this.labelDNValidaCCO.Name = "labelDNValidaCCO";
+            this.labelDNValidaCCO.Size = new System.Drawing.Size(104, 13);
+            this.labelDNValidaCCO.TabIndex = 28;
+            this.labelDNValidaCCO.Text = "¡Dirección no válida!";
+            this.labelDNValidaCCO.Visible = false;
             // 
-            // label7
+            // labelDNValidaCC
             // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(39, 260);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(103, 13);
-            this.label7.TabIndex = 10;
-            this.label7.Text = "Obtencion Completa";
-            this.label7.Visible = false;
+            this.labelDNValidaCC.AutoSize = true;
+            this.labelDNValidaCC.ForeColor = System.Drawing.Color.Red;
+            this.labelDNValidaCC.Location = new System.Drawing.Point(268, 248);
+            this.labelDNValidaCC.Name = "labelDNValidaCC";
+            this.labelDNValidaCC.Size = new System.Drawing.Size(104, 13);
+            this.labelDNValidaCC.TabIndex = 29;
+            this.labelDNValidaCC.Text = "¡Dirección no válida!";
+            this.labelDNValidaCC.Visible = false;
             // 
             // FormPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(851, 481);
+            this.ClientSize = new System.Drawing.Size(851, 482);
             this.Controls.Add(this.gbEnviarMail);
             this.Controls.Add(this.gbLeerMail);
             this.Controls.Add(this.gbOpciones1);
@@ -724,8 +887,8 @@
         private System.Windows.Forms.TextBox tbAsunto;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.RichTextBox tbCuerpo;
-        private System.Windows.Forms.TextBox tbCC;
-        private System.Windows.Forms.TextBox tbCCO;
+        private System.Windows.Forms.TextBox tbCCROnly;
+        private System.Windows.Forms.TextBox tbCCOROnly;
         private System.Windows.Forms.TextBox tbAdjuntos;
         private System.Windows.Forms.TextBox tbPara;
         private System.Windows.Forms.Label label4;
@@ -771,6 +934,20 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn fecha;
         private System.Windows.Forms.ProgressBar progressBar;
         private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Button botonAgregarCCO;
+        private System.Windows.Forms.TextBox tbCCO;
+        private System.Windows.Forms.Button botonAgregarCC;
+        private System.Windows.Forms.TextBox tbCC;
+        private System.Windows.Forms.Button botonAgregarPara;
+        private System.Windows.Forms.TextBox tbParaROnly;
+        private System.Windows.Forms.Button botonBorrarUltimoCC;
+        private System.Windows.Forms.Button botonBorrarUltimoCCO;
+        private System.Windows.Forms.Button botonBorrarUltimoPara;
+        private System.Windows.Forms.Button botonCCAtras;
+        private System.Windows.Forms.Button botonCCOAtras;
+        private System.Windows.Forms.Label labelDNValidaPara;
+        private System.Windows.Forms.Label labelDNValidaCC;
+        private System.Windows.Forms.Label labelDNValidaCCO;
     }
 }
 
