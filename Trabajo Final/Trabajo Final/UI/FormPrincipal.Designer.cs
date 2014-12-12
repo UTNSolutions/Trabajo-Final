@@ -223,10 +223,10 @@
             this.gpNuevoMail.Controls.Add(this.label1);
             this.gpNuevoMail.Controls.Add(this.progressBarEnviando);
             this.gpNuevoMail.Controls.Add(this.tbParaROnly);
-            this.gpNuevoMail.Controls.Add(this.botonCC);
-            this.gpNuevoMail.Controls.Add(this.botonCCAtras);
             this.gpNuevoMail.Controls.Add(this.botonCCO);
             this.gpNuevoMail.Controls.Add(this.botonCCOAtras);
+            this.gpNuevoMail.Controls.Add(this.botonCC);
+            this.gpNuevoMail.Controls.Add(this.botonCCAtras);
             this.gpNuevoMail.Location = new System.Drawing.Point(0, 49);
             this.gpNuevoMail.Name = "gpNuevoMail";
             this.gpNuevoMail.Size = new System.Drawing.Size(853, 432);

@@ -13,6 +13,7 @@ using Trabajo_Final.DTO;
 using System.Threading;
 using System.Text.RegularExpressions;
 using Trabajo_Final.Utils;
+using System.IO;
 
 
 namespace Trabajo_Final.UI
@@ -98,15 +99,20 @@ namespace Trabajo_Final.UI
         /// <param name="e"></param>
         private void botonCCAtras_Click(object sender, EventArgs e)
         {
-                botonCCAtras.Visible = false;
-                botonCC.Visible = true;
-                tbCC.Visible = false;
-                botonAgregarCC.Visible = false;
-                botonBorrarUltimoCC.Visible = false;
-                tbCCROnly.Text = "";
-                tbCCROnly.Multiline = false;
-                tbCCROnly.Location = new Point(103, 196);
-                tbCCROnly.Size = new Size(298, 20);
+            botonCCAtras.Visible = false;
+            botonCC.Visible = true;
+            tbCC.Visible = false;
+            botonAgregarCC.Visible = false;
+            botonBorrarUltimoCC.Visible = false;
+            tbCCROnly.Text = "";
+            labelDNValidaCC.Visible = false;
+            tbCCROnly.Multiline = false;
+            tbCCROnly.Location = new Point(103, 196);
+            tbCCROnly.Size = new Size(298, 20);
+            if (botonBorrarUltimoCC.Enabled)
+            {
+                botonBorrarUltimoCC.Enabled = false;
+            }
         }
 
         /// <summary>
@@ -136,9 +142,14 @@ namespace Trabajo_Final.UI
             botonAgregarCCO.Visible = false;
             botonBorrarUltimoCCO.Visible = false;
             tbCCOROnly.Text = "";
+            labelDNValidaCCO.Visible = false;
             tbCCOROnly.Multiline = false;
             tbCCOROnly.Location = new Point(103, 290);
             tbCCOROnly.Size = new Size(298, 20);
+            if (botonBorrarUltimoCCO.Enabled)
+            {
+                botonBorrarUltimoCCO.Enabled = false;
+            }
         }
 
         /// <summary>
@@ -155,7 +166,8 @@ namespace Trabajo_Final.UI
             file.FilterIndex = 1;
             file.RestoreDirectory = true;
             file.ShowDialog();
-            tbAdjuntos.Text = file.SafeFileName;
+
+            tbAdjuntos.Text = file.InitialDirectory;
         }
 
         /// <summary>
@@ -218,17 +230,23 @@ namespace Trabajo_Final.UI
         /// <returns></returns>
         private bool VaciarDatosEnviarMail_TextChanged(object sender, EventArgs e)
         {
+            botonCCOAtras_Click(sender, e);
+            botonCCAtras_Click(sender, e);
             if (tbParaROnly.Text != "" || tbCCROnly.Text != "" || tbCCOROnly.Text != "" || tbAsunto.Text != "" || tbAdjuntos.Text != "" || tbCuerpo.Text != "")
             {
                 DialogResult resultado = MessageBox.Show("¿Está seguro que quiere eliminar este mail no enviado ?", "Advertencia", MessageBoxButtons.YesNo,MessageBoxIcon.Question);
                 if (resultado == DialogResult.Yes)
-                {
-                    tbPara.Text = "";
+                {                    
+                    tbParaROnly.Text = "";
                     tbCCROnly.Text = "";
                     tbCCOROnly.Text = "";
                     tbAsunto.Text = "";
                     tbAdjuntos.Text = "";
                     tbCuerpo.Text = "";
+                    tbParaROnly.Multiline = false;
+                    tbParaROnly.Location = new Point(103, 107);
+                    tbParaROnly.Size = new Size(298, 20);
+                    botonBorrarUltimoPara.Enabled = false;
                     return true;
                 }
                 else
@@ -515,7 +533,7 @@ namespace Trabajo_Final.UI
                 gbEnviarMail.Enabled = false;
                 menuStrip1.Enabled = false;               
                 progressBarEnviando.Value = 6;
-                Fachada.Instancia.EnviarEmail(combobDe.Text, generarListaDestinatario(), tbAsunto.Text, tbCuerpo.Text, combobDe.SelectedValue.ToString());
+                Fachada.Instancia.EnviarEmail(combobDe.Text, generarListaDestinatario(tbParaROnly.Text), tbAsunto.Text, tbCuerpo.Text, combobDe.SelectedValue.ToString());
                 progressBarEnviando.Value = 7;
                 progressBarEnviando.Value = 8;
                 progressBarEnviando.Value = 10;
@@ -546,21 +564,21 @@ namespace Trabajo_Final.UI
         /// <param name="sender"></param>
         /// <param name="e"></param>
         /// <returns></returns>
-        private IList<String>  generarListaDestinatario()
+        private IList<String>  generarListaDestinatario(String pCadena)
         {
             IList<String> listaDestinatarios = new List<String>();
             String cadena = "";
             int ind = 0;
-            while (ind < tbPara.Text.Length)
+            while (ind < pCadena.Length)
             {
-                if (tbPara.Text[ind].ToString() != ";" && ind != tbPara.Text.Length)
+                if (pCadena[ind] != ';' && ind != pCadena.Length)
                 {
-                    cadena = cadena + tbPara.Text[ind].ToString();
+                    cadena = cadena + pCadena[ind].ToString();
                     ind ++;
                 }
                 else 
                 {
-                    if (tbPara.Text[ind].ToString() == ";")
+                    if (pCadena[ind] == ';')
                     {
                         listaDestinatarios.Add(cadena);
                         cadena = "";
@@ -568,7 +586,7 @@ namespace Trabajo_Final.UI
                     }
                     else
                     {
-                        cadena = cadena + tbPara.Text[ind].ToString();
+                        cadena = cadena + pCadena[ind].ToString();
                         listaDestinatarios.Add(cadena);
                         cadena = "";
                         ind++;
@@ -702,14 +720,12 @@ namespace Trabajo_Final.UI
         /// </summary>
         private void borrarMailEnviado()
         {
-            tbPara.Text = "";
+            tbParaROnly.Text = "";
             tbCuerpo.Text = "";
             tbCCROnly.Text = "";
             tbCCOROnly.Text = "";
             tbAsunto.Text = "";
-            tbAdjuntos.Text = "";                
-            tbCCROnly.ReadOnly = true;
-            tbCCOROnly.ReadOnly = true;              
+            tbAdjuntos.Text = "";
         }
 
         /// <summary>
