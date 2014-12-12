@@ -9,11 +9,10 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Trabajo_Final.Controladores;
 using Trabajo_Final.Excepciones;
-using Trabajo_Final.Dominio;
+using Trabajo_Final.DTO;
 using System.Threading;
 using System.Text.RegularExpressions;
 using Trabajo_Final.Utils;
-
 
 
 namespace Trabajo_Final.UI
@@ -22,9 +21,7 @@ namespace Trabajo_Final.UI
     {
         delegate void AddItemCallBack(string p);
 
-        private static FormAdministrarCuentas iFormAdminCuentas;
-        private static FormAcercaDe iFormAcercaDe;
-        private static FormExportar iFormExportar;
+        private FormBarraProgreso iFormBarraProgreso;
         public FormPrincipal()
         {
             InitializeComponent();
@@ -54,8 +51,8 @@ namespace Trabajo_Final.UI
 
         private void formAdminCuentas_FormClosed(object sender, FormClosedEventArgs e)       
         {              
-            //when child form is closed, this code is executed   
-            // Bind the Grid view       
+            //Cuando cierro el formulario de administrar las cuentas, cargo nuevamente
+            //el tree view para que se actualize
             CargarTreeView();         
         }
 
@@ -76,8 +73,7 @@ namespace Trabajo_Final.UI
                 tbCCOROnly.ReadOnly = true;
                 tbCCROnly.ReadOnly = true;
                 panelCuentas.Visible = false;
-                gpNuevoMail.Visible = true;
-                
+                gpNuevoMail.Visible = true;              
             }
         }
 
@@ -169,7 +165,14 @@ namespace Trabajo_Final.UI
         /// <param name="e"></param>
         private void FormPrincipal_Load(object sender, EventArgs e)
         {
-            CargarTreeView();
+            try
+            {
+                CargarTreeView();
+            }
+            catch (DAOExcepcion ex)
+            {
+                MessageBox.Show(ex.Message, "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         /// <summary>
@@ -179,7 +182,7 @@ namespace Trabajo_Final.UI
         {
             tvCuentas.Nodes.Clear();
             //cargo los nombres de las cuentas, y genero sus nodos de recibidos,enviados y borradores
-            foreach (Cuenta cuenta in Fachada.Instancia.ObtenerCuentas())
+            foreach (CuentaDTO cuenta in Fachada.Instancia.ObtenerCuentas())
             {
                 TreeNode nodo = tvCuentas.Nodes.Add(cuenta.Nombre,cuenta.Nombre+ "("+cuenta.Direccion+")") ;
                 nodo.Nodes.Add("R","Recibidos");
@@ -618,9 +621,9 @@ namespace Trabajo_Final.UI
         {
             IList<AdaptadorDataGrid> adaptador = new List<AdaptadorDataGrid>();
             
-            foreach (Email email in Fachada.Instancia.GetEmails(pNombreCuenta))
+            foreach (EmailDTO email in Fachada.Instancia.GetEmails(pNombreCuenta))
             {
-                Cuenta cuenta = Fachada.Instancia.GetCuenta(pNombreCuenta);
+                CuentaDTO cuenta = Fachada.Instancia.GetCuenta(pNombreCuenta);
                 String remitente = StringsUtils.ObtenerEmail(email.Remitente);             
                 if (remitente != cuenta.Direccion)
                 {
@@ -653,9 +656,9 @@ namespace Trabajo_Final.UI
         {
             IList<AdaptadorDataGrid> adaptador = new List<AdaptadorDataGrid>();
 
-            foreach (Email email in Fachada.Instancia.GetEmails(pNombreCuenta))
+            foreach (EmailDTO email in Fachada.Instancia.GetEmails(pNombreCuenta))
             {
-                Cuenta cuenta = Fachada.Instancia.GetCuenta(pNombreCuenta);
+                CuentaDTO cuenta = Fachada.Instancia.GetCuenta(pNombreCuenta);
                 String remitente = StringsUtils.ObtenerEmail(email.Remitente);
                 if (remitente == cuenta.Direccion)
                 {
@@ -726,35 +729,48 @@ namespace Trabajo_Final.UI
         /// <param name="e"></param>
         private void obtenerMailsToolStripMenuItem_Click(object sender, EventArgs e)
         {
+
+            if (tbNombreCuenta.Text == "")
+            {
+                MessageBox.Show("Seleccione una cuenta antes de obtener los Correos", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
+            {
+                this.iFormBarraProgreso = new FormBarraProgreso();
+                this.iFormBarraProgreso.Show();
                 BackgroundWorker hilo = new BackgroundWorker();
                 hilo.WorkerReportsProgress = true;
+                hilo.ReportProgress(0);           
                 hilo.ReportProgress(40);
                 hilo.DoWork += new DoWorkEventHandler(ObtenerMailDeUnaCuenta);
-                hilo.RunWorkerAsync();
                 hilo.ProgressChanged += new ProgressChangedEventHandler(ProgressChanged);
-                hilo.ReportProgress(60);
-                hilo.RunWorkerCompleted += new RunWorkerCompletedEventHandler(ProgressCompleted);                                                                
+                hilo.RunWorkerCompleted += new RunWorkerCompletedEventHandler(ProgressCompleted);
+                hilo.RunWorkerAsync();
+ 
+                hilo.ReportProgress(60);                
+            }
         }
 
         private void ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
             //Cambia el valor del progressBar segun el progreso de BackgroundWorker
-            progressBar.Value = e.ProgressPercentage;
+            this.iFormBarraProgreso.SetValorProgreso(e.ProgressPercentage);
         }
 
         private void ProgressCompleted(object sender,RunWorkerCompletedEventArgs e)
         {
             //Establezco el progressBar en 100 ya que la operacion se completo
-            progressBar.Value = 100;
-            label7.Visible = true;
+            this.iFormBarraProgreso.SetValorProgreso(100);
+            this.iFormBarraProgreso.Close();    
+            Thread.Sleep(2000);
         }
 
         private void ObtenerMailDeUnaCuenta(object sender, DoWorkEventArgs e)
         {         
             try
-            {
+            {               
                 Fachada.Instancia.ObtenerEmail(tbNombreCuenta.Text);
-            CargarDataGrid(tbNombreCuenta.Text, Convert.ToChar(tbTipoCorreo.Text));
+                CargarDataGrid(tbNombreCuenta.Text, Convert.ToChar(tbTipoCorreo.Text));
             }           
           catch (NombreCuentaExcepcion ex)
             {
@@ -782,40 +798,55 @@ namespace Trabajo_Final.UI
         /// <param name="e"></param>
         private void obtenerTodosToolStripMenuItem_Click(object sender, EventArgs e)
         {          
-           try
-           {
-               //Obtiene los emails por cada una de las cuentas que estan en el tree view
-               BackgroundWorker hilo1 = new BackgroundWorker();
-               hilo1.DoWork += new DoWorkEventHandler(ObtenerTodos);
-
-               hilo1.RunWorkerAsync();
+           
+               this.iFormBarraProgreso = new FormBarraProgreso();
+               this.iFormBarraProgreso.Show();
+               BackgroundWorker hilo = new BackgroundWorker();
+               hilo.DoWork += new DoWorkEventHandler(ObtenerTodos);
+               hilo.WorkerReportsProgress = true;               
+               hilo.ProgressChanged += new ProgressChangedEventHandler(ProgressChanged);
+               hilo.RunWorkerCompleted += new RunWorkerCompletedEventHandler(ProgressCompleted);
+               hilo.RunWorkerAsync();
                
-           }
-           catch (NombreCuentaExcepcion ex)
-           {
-               MessageBox.Show(ex.Message, "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Error);
-           }
-           catch (EmailExcepcion ex)
-           {
-               MessageBox.Show(ex.Message, "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Error);
-           }
-           catch (InternetExcepcion ex)
-           {
-               MessageBox.Show(ex.Message, "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Error);
-           }
+               hilo.ReportProgress(0);
+     
+               hilo.ReportProgress(20);
+            
+               hilo.ReportProgress(30);
+               
+               hilo.ReportProgress(50);
+            
+               hilo.ReportProgress(70); 
+          
         }
 
         private void ObtenerTodos(object sender, DoWorkEventArgs e)
         {
+          try
+          {
+            //Obtiene los emails por cada una de las cuentas que estan en el tree view
             IList<String> listaNombreCuentas = new List<String>();
             //itera los nodos principales del tree view para obtener las cuentas configuradas
             //para poder extraer sus emails
             foreach (TreeNode tn in tvCuentas.Nodes)
-            {
+            {               
                 listaNombreCuentas.Add(tn.Name);
             }
             Fachada.Instancia.ObtenerTodosEmails(listaNombreCuentas);
             CargarDataGrid(tbNombreCuenta.Text, Convert.ToChar(tbTipoCorreo.Text));
+          }
+          catch (NombreCuentaExcepcion ex)
+          {
+            MessageBox.Show(ex.Message, "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Error);
+          }
+          catch (EmailExcepcion ex)
+          {
+            MessageBox.Show(ex.Message, "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Error);
+          }
+          catch (InternetExcepcion ex)
+          {
+            MessageBox.Show(ex.Message, "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Error);
+          }
         }
 
 

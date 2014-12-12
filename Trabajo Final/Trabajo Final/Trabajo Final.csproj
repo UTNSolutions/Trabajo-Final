@@ -86,6 +86,12 @@
     <Compile Include="UI\FormAdministrarCuentas.Designer.cs">
       <DependentUpon>FormAdministrarCuentas.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\FormBarraProgreso.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\FormBarraProgreso.Designer.cs">
+      <DependentUpon>FormBarraProgreso.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\FormExportar.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -130,6 +136,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="UI\FormBarraProgreso.resx">
+      <DependentUpon>FormBarraProgreso.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\FormExportar.resx">
       <DependentUpon>FormExportar.cs</DependentUpon>
     </EmbeddedResource>

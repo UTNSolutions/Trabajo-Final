@@ -81,7 +81,7 @@ namespace Trabajo_Final.Dominio
                 }
                 catch (IOException)
                 {
-                    throw new EmailExcepcion("Error en el servidor, no responde");
+                    throw new EmailExcepcion("Error en el servidor de " + pCuenta.NombreServicio + ", no responde");
                 }
             }
         }
@@ -126,19 +126,19 @@ namespace Trabajo_Final.Dominio
             }
             catch(OpenPop.Pop3.Exceptions.PopServerNotFoundException)
             {
-                throw new EmailExcepcion("Error en el servidor, no responde");
+                throw new EmailExcepcion("Error en el servidor de " + pCuenta.NombreServicio + ", no responde");
             }
             catch(OpenPop.Pop3.Exceptions.PopServerException)
             {
-                throw new EmailExcepcion("Error en el servidor, no responde");
+                throw new EmailExcepcion("Error en el servidor de " + pCuenta.NombreServicio + ", no responde");
             }
             catch (OpenPop.Pop3.Exceptions.InvalidLoginException)
             {
-                throw new EmailExcepcion("Error en el acceso a la cuenta, verifique la configuracion de la misma");
+                throw new EmailExcepcion("Error en el acceso a la cuenta " + pCuenta.Nombre + ", verifique la configuracion de la misma");
             }
             catch (IOException)
             {
-                throw new EmailExcepcion("Error en el servidor, no responde");
+                throw new EmailExcepcion("Error en el servidor de " + pCuenta.NombreServicio + ", no responde");
             }
         }
 

@@ -16,7 +16,14 @@ namespace Trabajo_Final.Controladores
 
         private Fachada()
         {
-            Inicializar();
+            try
+            {
+                Inicializar();
+            }
+            catch (DAOExcepcion ex)
+            {
+                throw ex;
+            }
         }
 
         public static Fachada Instancia
@@ -72,11 +79,16 @@ namespace Trabajo_Final.Controladores
         /// </summary>
         /// <returns></returns>
         /// <exception cref="Exception"></exception>
-        public IList<Cuenta> ObtenerCuentas()
+        public IList<CuentaDTO> ObtenerCuentas()
         {
             try
             {
-                return Cuentas.Instancia.ListaCuentas.Values.ToList<Cuenta>();
+                IList<CuentaDTO> lista = new List<CuentaDTO>();
+                foreach (Cuenta cuenta in Cuentas.Instancia.ListaCuentas.Values)
+                {
+                    lista.Add(new CuentaDTO(cuenta.Nombre, cuenta.Direccion, cuenta.NombreServicio, cuenta.Contraseña));
+                }
+                return lista;
             }
             catch (Exception ex)
             {
@@ -121,8 +133,15 @@ namespace Trabajo_Final.Controladores
         /// </summary>
         private void Inicializar()
         {
-            CargarCuentasCorreo();
-            CargarEmailsACadaCuenta();
+            try
+            {
+                CargarCuentasCorreo();
+                CargarEmailsACadaCuenta();
+            }
+            catch (DAOExcepcion ex)
+            {
+                throw ex;
+            }
         }
 
 
@@ -251,6 +270,12 @@ namespace Trabajo_Final.Controladores
             }
         }
 
+        /// <summary>
+        /// Devuelve una cuenta identificada con su nombre, y tambien devuelve
+        /// el Id de esa cuenta 
+        /// </summary>
+        /// <param name="pNombreCuenta"></param>
+        /// <returns></returns>
         private CuentaDTO BuscarCuenta(string pNombreCuenta)
         {
             try
@@ -267,10 +292,14 @@ namespace Trabajo_Final.Controladores
         /// Devuelve los emails de una cuenta
         /// </summary>
         /// <param name="pNombreCuenta"></param>
-        public IList<Email> GetEmails(String pNombreCuenta)
+        public IList<EmailDTO> GetEmails(String pNombreCuenta)
         {
-            IList<Email> lista = Cuentas.Instancia.GetCuenta(pNombreCuenta).ListaEMails;
-            return lista ;
+            IList<EmailDTO> lista = new List<EmailDTO>();
+            foreach (Email email in Cuentas.Instancia.GetCuenta(pNombreCuenta).ListaEMails) 
+            {
+                lista.Add(new EmailDTO(email.Remitente, email.Destinatario, email.Asunto, email.Asunto, email.Fecha));
+            }
+            return lista;
         }
 
         /// <summary>
@@ -278,9 +307,10 @@ namespace Trabajo_Final.Controladores
         /// </summary>
         /// <param name="pNombreCuenta"></param>
         /// <returns></returns>
-        public Cuenta GetCuenta(String pNombreCuenta)
+        public CuentaDTO GetCuenta(String pNombreCuenta)
         {
-            return Cuentas.Instancia.GetCuenta(pNombreCuenta);
+            Cuenta cuenta = Cuentas.Instancia.GetCuenta(pNombreCuenta);
+            return new CuentaDTO(cuenta.Nombre, cuenta.Direccion, cuenta.NombreServicio, cuenta.Contraseña);
         }
 
         /// <summary>
@@ -384,13 +414,14 @@ namespace Trabajo_Final.Controladores
                 {
                     throw ex;
                 }
-                catch (EmailExcepcion)
+                catch (EmailExcepcion ex)
                 {                   
                     listaNombresCuentas.Remove(nombreCuenta);
                     ObtenerTodosEmails(listaNombresCuentas);
-                    throw new EmailExcepcion("La recepcion de todas las cuentas de correo finalizó con errores");
+                    throw ex;
+                    //new EmailExcepcion("La recepcion de todas las cuentas de correo finalizó con errores");
                 }
-            }            
+            }             
         }
 
         /// <summary>

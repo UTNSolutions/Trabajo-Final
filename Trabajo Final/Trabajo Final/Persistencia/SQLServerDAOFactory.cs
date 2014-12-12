@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
 using System.Configuration;
+using Trabajo_Final.Excepciones;
 
 namespace Trabajo_Final.Persistencia
 {
@@ -41,7 +42,16 @@ namespace Trabajo_Final.Persistencia
             {
                 if (this.iConexion.State == System.Data.ConnectionState.Closed)
                 {
-                    this.iConexion.Open();
+                    try
+                    {
+                        this.iConexion.Open();
+                    }
+                    catch (SqlException)
+                    {
+                        throw new DAOExcepcion("No se pudo realizar la conexión a la base de datos, reintente mas tarde");
+                    }
+
+
                 }
                 return this.iConexion;
             }

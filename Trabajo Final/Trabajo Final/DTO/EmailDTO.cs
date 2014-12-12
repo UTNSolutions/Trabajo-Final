@@ -53,6 +53,17 @@ namespace Trabajo_Final.DTO
             this.iFecha = pFecha;
         }
 
+        public EmailDTO(String pRemitente, IList<String> pDestinatario, String pCuerpo, String pAsunto, DateTime pFecha)
+        {
+            this.iRemitente = pRemitente;
+            this.iDestinatario = pDestinatario;
+            // this.iConCopia = pConCopia;
+            //  this.iConCopiaOculta = pConCopiaOculta;
+            this.iCuerpo = pCuerpo;
+            this.iAsunto = pAsunto;
+            this.iFecha = pFecha;
+        }
+
         /// <summary>
         /// Devuelve o establece el componente remitente
         /// </summary>
