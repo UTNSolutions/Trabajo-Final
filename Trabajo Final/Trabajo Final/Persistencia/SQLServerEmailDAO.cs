@@ -23,15 +23,16 @@ namespace Trabajo_Final.Persistencia
         }
         public void Insertar(EmailDTO pEmail)
         {
-          //  try
-           // {
+           try
+           {
                 //inserto el email en la base de datos
-                SqlCommand comando = new SqlCommand("insert into Email(idCuenta,remitente,cuerpo,asunto,fecha) values(@idCuenta,@remitente,@cuerpo,@asunto,@fecha)", this.iConexion, this.iTransaccion);
+                SqlCommand comando = new SqlCommand("insert into Email(idCuenta,remitente,cuerpo,asunto,fecha,leido) values(@idCuenta,@remitente,@cuerpo,@asunto,@fecha,@leido)", this.iConexion, this.iTransaccion);
                 comando.Parameters.AddWithValue("@idCuenta", pEmail.IdCuenta);
                 comando.Parameters.AddWithValue("@remitente", pEmail.Remitente);          
                 comando.Parameters.AddWithValue("@asunto", pEmail.Asunto);
                 comando.Parameters.AddWithValue("@cuerpo", pEmail.Cuerpo);
                 comando.Parameters.AddWithValue("@fecha", pEmail.Fecha);
+                comando.Parameters.AddWithValue("@leido", pEmail.Leido);
                 comando.ExecuteNonQuery();
                 SqlCommand cmd = new SqlCommand("select Max(idMail) from Email",this.iConexion,this.iTransaccion);
                 int idMail = Convert.ToInt32(cmd.ExecuteScalar());
@@ -44,13 +45,27 @@ namespace Trabajo_Final.Persistencia
                     com.Parameters.AddWithValue("@tipo", "D");
                     com.ExecuteNonQuery();
                 }
-         /*   }
+           }
            catch (SqlException)
             {
                 throw new DAOExcepcion("No se pudo insertar el email en la base de datos");
-            } */
-
+            }
         }
+
+        public void MarcarLeido(int pIdEmail)
+        {
+            SqlCommand comando = new SqlCommand("update Email set leido='true' where idMail=@idEmail", this.iConexion, this.iTransaccion);
+            comando.Parameters.AddWithValue("@idEmail", pIdEmail);
+            try
+            {
+                comando.ExecuteNonQuery();
+            }
+            catch (SqlException)
+            {
+                throw new DAOExcepcion("No se pudo realizar la operacion");
+            }
+        }
+
 
         public void Eliminar(int pIdEmail)
         {
@@ -90,7 +105,7 @@ namespace Trabajo_Final.Persistencia
                     {
                         listaDestinatarios.Add(Convert.ToString(fila1["direccion"]));
                     }
-                    listaEmails.Add(new EmailDTO(Convert.ToInt32(fila["idMail"]), Convert.ToInt32(fila["idCuenta"]), Convert.ToString(fila["remitente"]), listaDestinatarios, Convert.ToString(fila["cuerpo"]), Convert.ToString(fila["asunto"]),Convert.ToDateTime(fila["fecha"])));
+                    listaEmails.Add(new EmailDTO(Convert.ToInt32(fila["idMail"]), Convert.ToInt32(fila["idCuenta"]), Convert.ToString(fila["remitente"]), listaDestinatarios, Convert.ToString(fila["cuerpo"]), Convert.ToString(fila["asunto"]),Convert.ToDateTime(fila["fecha"]),Convert.ToBoolean(fila["leido"])));
                 }
                 return listaEmails;
             }

@@ -50,8 +50,6 @@ namespace Trabajo_Final.Persistencia
                     {
                         throw new DAOExcepcion("No se pudo realizar la conexión a la base de datos, reintente mas tarde");
                     }
-
-
                 }
                 return this.iConexion;
             }

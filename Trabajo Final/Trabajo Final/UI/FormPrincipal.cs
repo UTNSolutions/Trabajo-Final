@@ -66,7 +66,14 @@ namespace Trabajo_Final.UI
         {
             if (!gpNuevoMail.Visible)
             {
-                combobDe.DataSource = Fachada.Instancia.ObtenerCuentas();
+                try
+                {
+                    combobDe.DataSource = Fachada.Instancia.ObtenerCuentas();
+                }
+                catch(DAOExcepcion ex)
+                {
+                    MessageBox.Show(ex.Message, "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
                 combobDe.ValueMember = "Nombre";
                 combobDe.DisplayMember = "Direccion";
                 gbOpciones1.Visible = false;
@@ -199,7 +206,6 @@ namespace Trabajo_Final.UI
                 TreeNode nodo = tvCuentas.Nodes.Add(cuenta.Nombre,cuenta.Nombre+ "("+cuenta.Direccion+")") ;
                 nodo.Nodes.Add("R","Recibidos");
                 nodo.Nodes.Add("E","Enviados");
-                nodo.Nodes.Add("B","Borradores");
             }
 
         }
@@ -540,6 +546,10 @@ namespace Trabajo_Final.UI
                 lEnviado.Visible = true;
                 borrarMailEnviado();                           
             }
+            catch (DAOExcepcion ex)
+            {
+                MessageBox.Show(ex.Message, "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
             catch (EmailExcepcion ex)
             {
                 MessageBox.Show(ex.Message, "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -631,8 +641,7 @@ namespace Trabajo_Final.UI
                     break;
                 case 'E': { FiltarEnviados(pNombreCuenta); }
                     break;
-            }
-           
+            }          
         }
 
         private void FiltarRecibidos(String pNombreCuenta)
@@ -645,7 +654,7 @@ namespace Trabajo_Final.UI
                 String remitente = StringsUtils.ObtenerEmail(email.Remitente);             
                 if (remitente != cuenta.Direccion)
                 {
-                    adaptador.Add(new AdaptadorDataGrid(email.Remitente, email.Destinatario[0], email.Asunto, email.Cuerpo,email.Fecha));
+                    adaptador.Add(new AdaptadorDataGrid(email.IdEmail,email.Remitente, email.Destinatario[0], email.Asunto, email.Cuerpo,email.Fecha,email.Leido));
                 }
             }
             //ordeno por fecha                         
@@ -663,9 +672,18 @@ namespace Trabajo_Final.UI
             }
             else
             {
-            dgEmails.DataSource = adaptador;
-            }
-            
+                dgEmails.DataSource = adaptador;
+                //itera cada fila del data grid para saber si el email fue leido o no
+                //y asi poder colorear los emails que fueron leidos
+                foreach (DataGridViewRow fila in dgEmails.Rows)
+                {
+                    DataGridViewTextBoxCell celda = (DataGridViewTextBoxCell)fila.Cells["leido"];
+                    if (!(bool)celda.Value)
+                    {
+                        fila.DefaultCellStyle.BackColor = Color.Wheat;
+                    }
+                }
+            }         
             dgEmails.Columns["destinatario"].Visible = false;
             dgEmails.Columns["remitente"].Visible = true;
         }
@@ -680,9 +698,9 @@ namespace Trabajo_Final.UI
                 String remitente = StringsUtils.ObtenerEmail(email.Remitente);
                 if (remitente == cuenta.Direccion)
                 {
-                    adaptador.Add(new AdaptadorDataGrid(email.Remitente, email.Destinatario[0], email.Asunto, email.Cuerpo, email.Fecha));
+                    adaptador.Add(new AdaptadorDataGrid(email.IdEmail, email.Remitente, email.Destinatario[0], email.Asunto, email.Cuerpo, email.Fecha, email.Leido));
                 }
-                }
+            }
             //ordeno por fecha
             adaptador = (from e in adaptador
                            orderby e.Fecha descending
@@ -698,6 +716,16 @@ namespace Trabajo_Final.UI
             else
             {
                 dgEmails.DataSource = adaptador;
+                //itera cada fila del data grid para saber si el email fue leido o no
+                //y asi poder colorear los emails que fueron leidos
+                foreach (DataGridViewRow fila in dgEmails.Rows)
+                {
+                    DataGridViewTextBoxCell celda = (DataGridViewTextBoxCell) fila.Cells["leido"];
+                    if (!(bool)celda.Value)
+                    {
+                        fila.DefaultCellStyle.BackColor = Color.Wheat;
+                    }
+                }
             }
             dgEmails.Columns["remitente"].Visible = false;
             dgEmails.Columns["destinatario"].Visible = true;
@@ -788,7 +816,7 @@ namespace Trabajo_Final.UI
                 Fachada.Instancia.ObtenerEmail(tbNombreCuenta.Text);
                 CargarDataGrid(tbNombreCuenta.Text, Convert.ToChar(tbTipoCorreo.Text));
             }           
-          catch (NombreCuentaExcepcion ex)
+            catch (NombreCuentaExcepcion ex)
             {
                 MessageBox.Show(ex.Message, "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -832,8 +860,7 @@ namespace Trabajo_Final.UI
                
                hilo.ReportProgress(50);
             
-               hilo.ReportProgress(70); 
-          
+               hilo.ReportProgress(70);           
         }
 
         private void ObtenerTodos(object sender, DoWorkEventArgs e)
@@ -850,6 +877,10 @@ namespace Trabajo_Final.UI
             }
             Fachada.Instancia.ObtenerTodosEmails(listaNombreCuentas);
             CargarDataGrid(tbNombreCuenta.Text, Convert.ToChar(tbTipoCorreo.Text));
+          }
+          catch(DAOExcepcion ex)
+          {
+            MessageBox.Show(ex.Message, "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Error);
           }
           catch (NombreCuentaExcepcion ex)
           {
@@ -892,6 +923,17 @@ namespace Trabajo_Final.UI
                 tbParaLeerMail.Text = fila.Destinatario;
                 tbCuerpoLeerMail.Text = fila.Cuerpo;
                 tbFechaLeerMail.Text = Convert.ToString(fila.Fecha);
+                //pinto en blanco la fila ya que el email ha sido leido
+                dgEmails.CurrentRow.DefaultCellStyle.BackColor = Color.White;
+                //Cambio el estado del email a leido en la base de datos y en en el Email del dominio
+                try
+                {
+                    Fachada.Instancia.MarcarComoLeido(tbNombreCuenta.Text, fila.IdEmail);
+                }
+                catch (DAOExcepcion ex)
+                {
+                    MessageBox.Show(ex.Message, "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
         }
 
@@ -899,6 +941,17 @@ namespace Trabajo_Final.UI
         {
             FormExportar iFormExportar = new FormExportar(tbDeLeerMail.Text,tbAsuntoLeerMail.Text,tbParaLeerMail.Text,tbCuerpoLeerMail.Text,Convert.ToDateTime(tbFechaLeerMail.Text));                
             iFormExportar.ShowDialog();
+        }
+
+        private void responderToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            tbPara.Text = tbParaLeerMail.Text;
+            tbAsunto.Text = "Re: " + tbAsuntoLeerMail.Text;
+            panelLeerMail.Visible = false;
+            gbEnviarMail.Visible = true;
+            tbCCOROnly.ReadOnly = true;
+            tbCCROnly.ReadOnly = true;
+            gpNuevoMail.Visible = true;   
         }
     }
 }

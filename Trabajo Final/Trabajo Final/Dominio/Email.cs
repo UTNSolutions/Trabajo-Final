@@ -11,6 +11,8 @@ namespace Trabajo_Final.Dominio
     /// </summary>
     public class Email
     {
+        private int iIdEmail;
+
         private String iRemitente;
 
         private IList<String> iDestinatario;
@@ -25,7 +27,9 @@ namespace Trabajo_Final.Dominio
 
         private DateTime iFecha;
 
-        public Email(String pRemitente,IList<String> pDestinatario, String pCuerpo, String pAsunto,DateTime pFecha)
+        private bool iLeido;
+
+        public Email(String pRemitente,IList<String> pDestinatario, String pCuerpo, String pAsunto,DateTime pFecha,bool pLeido)
         {
             this.iRemitente = pRemitente;
             this.iDestinatario = pDestinatario;
@@ -34,6 +38,28 @@ namespace Trabajo_Final.Dominio
            // this.iConCopia = pCC;
           //  this.iConCopiaOculta = pCCO;
             this.iFecha = pFecha;
+            this.iLeido = pLeido;
+        }
+
+        public Email(int pIdEmail,String pRemitente, IList<String> pDestinatario, String pCuerpo, String pAsunto, DateTime pFecha, bool pLeido)
+        {
+            this.iIdEmail = pIdEmail;
+            this.iRemitente = pRemitente;
+            this.iDestinatario = pDestinatario;
+            this.iCuerpo = pCuerpo;
+            this.iAsunto = pAsunto;
+            // this.iConCopia = pCC;
+            //  this.iConCopiaOculta = pCCO;
+            this.iFecha = pFecha;
+            this.iLeido = pLeido;
+        }
+
+        /// <summary>
+        /// Devuelve la componente IdEmail
+        /// </summary>
+        public int IdEmail
+        {
+            get { return this.iIdEmail; }
         }
 
         /// <summary>
@@ -74,6 +100,15 @@ namespace Trabajo_Final.Dominio
         public DateTime Fecha
         {
             get { return this.iFecha; }
+        }
+
+        /// <summary>
+        /// Devuelve o establece si el email fue leido o no
+        /// </summary>
+        public bool Leido
+        {
+            get { return this.iLeido; }
+            set { this.iLeido = value; }
         }
     }
 }

@@ -115,7 +115,7 @@ namespace Trabajo_Final.Dominio
                         //email.Body = Regex.Replace(email.Body, @"^\s*$\n", string.Empty, RegexOptions.Multiline);
                     }
                     DateTime fecha = mail.Headers.DateSent;
-                    Email msj = new Email(Convert.ToString(email.From),listaDestinatarios, email.Body, email.Subject,fecha);
+                    Email msj = new Email(Convert.ToString(email.From),listaDestinatarios, email.Body, email.Subject,fecha,false);
                     listaADevolver.Add(msj);
                     indice++;
                 }

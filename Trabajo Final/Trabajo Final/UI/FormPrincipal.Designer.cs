@@ -64,19 +64,14 @@
             this.label1 = new System.Windows.Forms.Label();
             this.progressBarEnviando = new System.Windows.Forms.ProgressBar();
             this.tbParaROnly = new System.Windows.Forms.TextBox();
-            this.botonCC = new System.Windows.Forms.Button();
-            this.botonCCAtras = new System.Windows.Forms.Button();
             this.botonCCO = new System.Windows.Forms.Button();
             this.botonCCOAtras = new System.Windows.Forms.Button();
+            this.botonCC = new System.Windows.Forms.Button();
+            this.botonCCAtras = new System.Windows.Forms.Button();
             this.panelCuentas = new System.Windows.Forms.Panel();
             this.tbTipoCorreo = new System.Windows.Forms.TextBox();
             this.tbNombreCuenta = new System.Windows.Forms.TextBox();
             this.dgEmails = new System.Windows.Forms.DataGridView();
-            this.remitente = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cuerpo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.destinatario = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.asunto = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.fecha = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panelLeerMail = new System.Windows.Forms.Panel();
             this.tbFechaLeerMail = new System.Windows.Forms.TextBox();
             this.tbCuerpoLeerMail = new System.Windows.Forms.TextBox();
@@ -98,6 +93,13 @@
             this.responderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exportarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.acercaDeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.remitente = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cuerpo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.destinatario = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.asunto = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.fecha = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.leido = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.idEmail = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.gbOpciones1.SuspendLayout();
             this.menuStrip2.SuspendLayout();
             this.gpNuevoMail.SuspendLayout();
@@ -477,27 +479,6 @@
             this.tbParaROnly.Size = new System.Drawing.Size(298, 20);
             this.tbParaROnly.TabIndex = 16;
             // 
-            // botonCC
-            // 
-            this.botonCC.Location = new System.Drawing.Point(60, 196);
-            this.botonCC.Name = "botonCC";
-            this.botonCC.Size = new System.Drawing.Size(37, 23);
-            this.botonCC.TabIndex = 12;
-            this.botonCC.Text = "CC";
-            this.botonCC.UseVisualStyleBackColor = true;
-            this.botonCC.Click += new System.EventHandler(this.botonCC_Click);
-            // 
-            // botonCCAtras
-            // 
-            this.botonCCAtras.Image = global::Trabajo_Final.Properties.Resources.up;
-            this.botonCCAtras.Location = new System.Drawing.Point(60, 196);
-            this.botonCCAtras.Name = "botonCCAtras";
-            this.botonCCAtras.Size = new System.Drawing.Size(37, 23);
-            this.botonCCAtras.TabIndex = 25;
-            this.botonCCAtras.UseVisualStyleBackColor = true;
-            this.botonCCAtras.Visible = false;
-            this.botonCCAtras.Click += new System.EventHandler(this.botonCCAtras_Click);
-            // 
             // botonCCO
             // 
             this.botonCCO.Location = new System.Drawing.Point(60, 288);
@@ -518,6 +499,27 @@
             this.botonCCOAtras.UseVisualStyleBackColor = true;
             this.botonCCOAtras.Visible = false;
             this.botonCCOAtras.Click += new System.EventHandler(this.botonCCOAtras_Click);
+            // 
+            // botonCC
+            // 
+            this.botonCC.Location = new System.Drawing.Point(60, 196);
+            this.botonCC.Name = "botonCC";
+            this.botonCC.Size = new System.Drawing.Size(37, 23);
+            this.botonCC.TabIndex = 12;
+            this.botonCC.Text = "CC";
+            this.botonCC.UseVisualStyleBackColor = true;
+            this.botonCC.Click += new System.EventHandler(this.botonCC_Click);
+            // 
+            // botonCCAtras
+            // 
+            this.botonCCAtras.Image = global::Trabajo_Final.Properties.Resources.up;
+            this.botonCCAtras.Location = new System.Drawing.Point(60, 196);
+            this.botonCCAtras.Name = "botonCCAtras";
+            this.botonCCAtras.Size = new System.Drawing.Size(37, 23);
+            this.botonCCAtras.TabIndex = 25;
+            this.botonCCAtras.UseVisualStyleBackColor = true;
+            this.botonCCAtras.Visible = false;
+            this.botonCCAtras.Click += new System.EventHandler(this.botonCCAtras_Click);
             // 
             // panelCuentas
             // 
@@ -561,7 +563,9 @@
             this.cuerpo,
             this.destinatario,
             this.asunto,
-            this.fecha});
+            this.fecha,
+            this.leido,
+            this.idEmail});
             this.dgEmails.Location = new System.Drawing.Point(194, 33);
             this.dgEmails.Name = "dgEmails";
             this.dgEmails.ReadOnly = true;
@@ -569,45 +573,6 @@
             this.dgEmails.Size = new System.Drawing.Size(653, 407);
             this.dgEmails.TabIndex = 6;
             this.dgEmails.DoubleClick += new System.EventHandler(this.LeerMail);
-            // 
-            // remitente
-            // 
-            this.remitente.DataPropertyName = "Remitente";
-            this.remitente.HeaderText = "Remitente";
-            this.remitente.Name = "remitente";
-            this.remitente.ReadOnly = true;
-            this.remitente.Width = 250;
-            // 
-            // cuerpo
-            // 
-            this.cuerpo.DataPropertyName = "Cuerpo";
-            this.cuerpo.HeaderText = "Cuerpo";
-            this.cuerpo.Name = "cuerpo";
-            this.cuerpo.ReadOnly = true;
-            this.cuerpo.Visible = false;
-            // 
-            // destinatario
-            // 
-            this.destinatario.DataPropertyName = "Destinatario";
-            this.destinatario.HeaderText = "Destinatario";
-            this.destinatario.Name = "destinatario";
-            this.destinatario.ReadOnly = true;
-            this.destinatario.Width = 250;
-            // 
-            // asunto
-            // 
-            this.asunto.DataPropertyName = "Asunto";
-            this.asunto.HeaderText = "Asunto";
-            this.asunto.Name = "asunto";
-            this.asunto.ReadOnly = true;
-            this.asunto.Width = 250;
-            // 
-            // fecha
-            // 
-            this.fecha.DataPropertyName = "Fecha";
-            this.fecha.HeaderText = "Fecha";
-            this.fecha.Name = "fecha";
-            this.fecha.ReadOnly = true;
             // 
             // panelLeerMail
             // 
@@ -810,6 +775,7 @@
             this.responderToolStripMenuItem.Name = "responderToolStripMenuItem";
             this.responderToolStripMenuItem.Size = new System.Drawing.Size(102, 23);
             this.responderToolStripMenuItem.Text = "Responder";
+            this.responderToolStripMenuItem.Click += new System.EventHandler(this.responderToolStripMenuItem_Click);
             // 
             // exportarToolStripMenuItem
             // 
@@ -829,18 +795,73 @@
             this.acercaDeToolStripMenuItem.Text = "Acerca de...";
             this.acercaDeToolStripMenuItem.Click += new System.EventHandler(this.acercaDeToolStripMenuItem_Click);
             // 
+            // remitente
+            // 
+            this.remitente.DataPropertyName = "Remitente";
+            this.remitente.HeaderText = "Remitente";
+            this.remitente.Name = "remitente";
+            this.remitente.ReadOnly = true;
+            this.remitente.Width = 250;
+            // 
+            // cuerpo
+            // 
+            this.cuerpo.DataPropertyName = "Cuerpo";
+            this.cuerpo.HeaderText = "Cuerpo";
+            this.cuerpo.Name = "cuerpo";
+            this.cuerpo.ReadOnly = true;
+            this.cuerpo.Visible = false;
+            // 
+            // destinatario
+            // 
+            this.destinatario.DataPropertyName = "Destinatario";
+            this.destinatario.HeaderText = "Destinatario";
+            this.destinatario.Name = "destinatario";
+            this.destinatario.ReadOnly = true;
+            this.destinatario.Width = 250;
+            // 
+            // asunto
+            // 
+            this.asunto.DataPropertyName = "Asunto";
+            this.asunto.HeaderText = "Asunto";
+            this.asunto.Name = "asunto";
+            this.asunto.ReadOnly = true;
+            this.asunto.Width = 250;
+            // 
+            // fecha
+            // 
+            this.fecha.DataPropertyName = "Fecha";
+            this.fecha.HeaderText = "Fecha";
+            this.fecha.Name = "fecha";
+            this.fecha.ReadOnly = true;
+            // 
+            // leido
+            // 
+            this.leido.DataPropertyName = "Leido";
+            this.leido.HeaderText = "Leido";
+            this.leido.Name = "leido";
+            this.leido.ReadOnly = true;
+            this.leido.Visible = false;
+            // 
+            // idEmail
+            // 
+            this.idEmail.DataPropertyName = "IdEmail";
+            this.idEmail.HeaderText = "idEmail";
+            this.idEmail.Name = "idEmail";
+            this.idEmail.ReadOnly = true;
+            this.idEmail.Visible = false;
+            // 
             // FormPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(851, 482);
-            this.Controls.Add(this.gbEnviarMail);
             this.Controls.Add(this.gbLeerMail);
             this.Controls.Add(this.gbOpciones1);
+            this.Controls.Add(this.panelLeerMail);
             this.Controls.Add(this.panelCuentas);
             this.Controls.Add(this.gpNuevoMail);
-            this.Controls.Add(this.panelLeerMail);
+            this.Controls.Add(this.gbEnviarMail);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
@@ -925,11 +946,6 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox tbDeLeerMail;
         private System.Windows.Forms.TextBox tbFechaLeerMail;
-        private System.Windows.Forms.DataGridViewTextBoxColumn remitente;
-        private System.Windows.Forms.DataGridViewTextBoxColumn cuerpo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn destinatario;
-        private System.Windows.Forms.DataGridViewTextBoxColumn asunto;
-        private System.Windows.Forms.DataGridViewTextBoxColumn fecha;
         private System.Windows.Forms.Button botonAgregarCCO;
         private System.Windows.Forms.TextBox tbCCO;
         private System.Windows.Forms.Button botonAgregarCC;
@@ -944,6 +960,13 @@
         private System.Windows.Forms.Label labelDNValidaPara;
         private System.Windows.Forms.Label labelDNValidaCC;
         private System.Windows.Forms.Label labelDNValidaCCO;
+        private System.Windows.Forms.DataGridViewTextBoxColumn remitente;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cuerpo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn destinatario;
+        private System.Windows.Forms.DataGridViewTextBoxColumn asunto;
+        private System.Windows.Forms.DataGridViewTextBoxColumn fecha;
+        private System.Windows.Forms.DataGridViewTextBoxColumn leido;
+        private System.Windows.Forms.DataGridViewTextBoxColumn idEmail;
     }
 }
 

@@ -65,9 +65,8 @@ namespace Trabajo_Final.Controladores
         public void InsertarEmails(IList<EmailDTO> pListaEmail)
         {
             DAOFactory factory = null;
-
-           // try
-          //  {
+           try
+           {
                 factory = DAOFactory.Instancia;
                 factory.IniciarConexion();
                 factory.ComenzarTransaccion();
@@ -76,16 +75,16 @@ namespace Trabajo_Final.Controladores
                     factory.MailDao.Insertar(email);
                 }             
                 factory.Commit();
-           /* }
+           }
            catch (DAOExcepcion ex)
-            {
+           {
                 factory.RollBack();
                 throw ex;
-            }
-            finally
-            {
+           }
+           finally
+           {
                 factory.FinalizarConexion();
-            } */
+           } 
         }
 
         /// <summary>
@@ -103,6 +102,34 @@ namespace Trabajo_Final.Controladores
                 factory.IniciarConexion();
                 factory.ComenzarTransaccion();
                 factory.MailDao.Eliminar(pIdEmail);
+                factory.Commit();
+            }
+            catch (DAOExcepcion ex)
+            {
+                factory.RollBack();
+                throw ex;
+            }
+            finally
+            {
+                factory.FinalizarConexion();
+            }
+        }
+
+        /// <summary>
+        /// Marca como leido un Email identificado como por su Id
+        /// </summary>
+        /// <param name="pIdEmail"></param>
+        /// <exception cref="DAOExcepcion"></exception>
+        public void MarcarComoLeido(int pIdEmail)
+        {
+            DAOFactory factory = null;
+
+            try
+            {
+                factory = DAOFactory.Instancia;
+                factory.IniciarConexion();
+                factory.ComenzarTransaccion();
+                factory.MailDao.MarcarLeido(pIdEmail);
                 factory.Commit();
             }
             catch (DAOExcepcion ex)
