@@ -38,6 +38,8 @@
             this.tbNombreArchivo = new System.Windows.Forms.TextBox();
             this.bAceptar = new System.Windows.Forms.Button();
             this.bCancelar = new System.Windows.Forms.Button();
+            this.panelNombreArchivo = new System.Windows.Forms.Panel();
+            this.panelNombreArchivo.SuspendLayout();
             this.SuspendLayout();
             // 
             // cbTipoExportador
@@ -45,12 +47,13 @@
             this.cbTipoExportador.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbTipoExportador.FormattingEnabled = true;
             this.cbTipoExportador.Items.AddRange(new object[] {
-            "EML\t",
+            "EML",
             "Texto Plano"});
             this.cbTipoExportador.Location = new System.Drawing.Point(122, 28);
             this.cbTipoExportador.Name = "cbTipoExportador";
             this.cbTipoExportador.Size = new System.Drawing.Size(99, 21);
             this.cbTipoExportador.TabIndex = 0;
+            this.cbTipoExportador.SelectedIndexChanged += new System.EventHandler(this.ActivarODesactivarPanel);
             // 
             // label1
             // 
@@ -91,7 +94,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(23, 105);
+            this.label3.Location = new System.Drawing.Point(10, 9);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(83, 13);
             this.label3.TabIndex = 5;
@@ -99,7 +102,7 @@
             // 
             // tbNombreArchivo
             // 
-            this.tbNombreArchivo.Location = new System.Drawing.Point(122, 102);
+            this.tbNombreArchivo.Location = new System.Drawing.Point(109, 6);
             this.tbNombreArchivo.Name = "tbNombreArchivo";
             this.tbNombreArchivo.Size = new System.Drawing.Size(233, 20);
             this.tbNombreArchivo.TabIndex = 6;
@@ -124,16 +127,25 @@
             this.bCancelar.UseVisualStyleBackColor = true;
             this.bCancelar.Click += new System.EventHandler(this.bCancelar_Click);
             // 
+            // panelNombreArchivo
+            // 
+            this.panelNombreArchivo.Controls.Add(this.label3);
+            this.panelNombreArchivo.Controls.Add(this.tbNombreArchivo);
+            this.panelNombreArchivo.Location = new System.Drawing.Point(13, 103);
+            this.panelNombreArchivo.Name = "panelNombreArchivo";
+            this.panelNombreArchivo.Size = new System.Drawing.Size(361, 39);
+            this.panelNombreArchivo.TabIndex = 10;
+            this.panelNombreArchivo.Visible = false;
+            // 
             // FormExportar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnablePreventFocusChange;
             this.ClientSize = new System.Drawing.Size(404, 198);
+            this.Controls.Add(this.panelNombreArchivo);
             this.Controls.Add(this.bCancelar);
             this.Controls.Add(this.bAceptar);
-            this.Controls.Add(this.tbNombreArchivo);
-            this.Controls.Add(this.label3);
             this.Controls.Add(this.bBuscarDirectorio);
             this.Controls.Add(this.tbRutaDirectorio);
             this.Controls.Add(this.label2);
@@ -147,6 +159,8 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Exportar";
             this.Load += new System.EventHandler(this.FormExportar_Load);
+            this.panelNombreArchivo.ResumeLayout(false);
+            this.panelNombreArchivo.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -163,5 +177,6 @@
         private System.Windows.Forms.TextBox tbNombreArchivo;
         private System.Windows.Forms.Button bAceptar;
         private System.Windows.Forms.Button bCancelar;
+        private System.Windows.Forms.Panel panelNombreArchivo;
     }
 }

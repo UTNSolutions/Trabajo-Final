@@ -52,7 +52,7 @@ namespace Trabajo_Final.Dominio
             }
             else
             {
-                throw new NombreCuentaExcepcion("");
+                throw new NombreCuentaExcepcion("Seleccione una Cuenta");
             }
         }
 

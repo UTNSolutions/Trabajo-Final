@@ -49,6 +49,23 @@ namespace Trabajo_Final.UI
             cbTipoExportador.SelectedIndex = 0;
         }
 
+        /// <summary>
+        /// Activa o desactiva el panel de nombre de archivo segun 
+        /// el tipo de exportador seleccionado
+        /// </summary>
+        private void ActivarODesactivarPanel(object sender, EventArgs e)
+        {
+            if (cbTipoExportador.SelectedItem.ToString() =="EML")
+            {
+                panelNombreArchivo.Visible = false;
+                tbNombreArchivo.Text = "";
+            }
+            else
+            {
+                panelNombreArchivo.Visible = true;
+            }
+        }
+
 
         /// <summary>
         /// Cierra el formulario

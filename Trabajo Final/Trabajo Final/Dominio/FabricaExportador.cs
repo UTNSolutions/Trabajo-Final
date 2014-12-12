@@ -18,6 +18,8 @@ namespace Trabajo_Final.Dominio
             this.iDiccionarioExportadores = new Dictionary<String, IExportador>();
             IExportador expTextoPlano = new ExportadorTextoPlano("Texto Plano");
             this.iDiccionarioExportadores.Add(expTextoPlano.Nombre, expTextoPlano);
+            IExportador expEML = new EMLExportador("EML");
+            this.iDiccionarioExportadores.Add(expEML.Nombre, expEML);
         }
 
         public static FabricaExportador Instancia

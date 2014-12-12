@@ -68,7 +68,7 @@ namespace Trabajo_Final.Persistencia
 
         public IList<EmailDTO> Obtener(int pIdCuenta)
         {
-            SqlCommand comando = new SqlCommand("select * from Email where idCuenta= @idCuenta order by fecha desc", this.iConexion);
+            SqlCommand comando = new SqlCommand("select * from Email where idCuenta= @idCuenta", this.iConexion);
             comando.Parameters.AddWithValue("@idCuenta", pIdCuenta);
             DataTable tabla = new DataTable();
             IList<EmailDTO> listaEmails = new List<EmailDTO>();

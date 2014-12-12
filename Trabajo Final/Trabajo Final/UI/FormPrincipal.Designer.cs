@@ -58,7 +58,13 @@
             this.tbTipoCorreo = new System.Windows.Forms.TextBox();
             this.tbNombreCuenta = new System.Windows.Forms.TextBox();
             this.dgEmails = new System.Windows.Forms.DataGridView();
+            this.remitente = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cuerpo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.destinatario = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.asunto = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.fecha = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panelLeerMail = new System.Windows.Forms.Panel();
+            this.tbFechaLeerMail = new System.Windows.Forms.TextBox();
             this.tbCuerpoLeerMail = new System.Windows.Forms.TextBox();
             this.tbParaLeerMail = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
@@ -78,12 +84,8 @@
             this.responderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exportarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.acercaDeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.tbFechaLeerMail = new System.Windows.Forms.TextBox();
-            this.remitente = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cuerpo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.destinatario = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.asunto = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.fecha = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.progressBar = new System.Windows.Forms.ProgressBar();
+            this.label7 = new System.Windows.Forms.Label();
             this.gbOpciones1.SuspendLayout();
             this.menuStrip2.SuspendLayout();
             this.gpNuevoMail.SuspendLayout();
@@ -341,6 +343,8 @@
             // 
             // panelCuentas
             // 
+            this.panelCuentas.Controls.Add(this.label7);
+            this.panelCuentas.Controls.Add(this.progressBar);
             this.panelCuentas.Controls.Add(this.tvCuentas);
             this.panelCuentas.Controls.Add(this.tbTipoCorreo);
             this.panelCuentas.Controls.Add(this.tbNombreCuenta);
@@ -358,6 +362,7 @@
             this.tbTipoCorreo.ReadOnly = true;
             this.tbTipoCorreo.Size = new System.Drawing.Size(77, 20);
             this.tbTipoCorreo.TabIndex = 8;
+            this.tbTipoCorreo.Text = " ";
             // 
             // tbNombreCuenta
             // 
@@ -387,6 +392,45 @@
             this.dgEmails.TabIndex = 6;
             this.dgEmails.DoubleClick += new System.EventHandler(this.LeerMail);
             // 
+            // remitente
+            // 
+            this.remitente.DataPropertyName = "Remitente";
+            this.remitente.HeaderText = "Remitente";
+            this.remitente.Name = "remitente";
+            this.remitente.ReadOnly = true;
+            this.remitente.Width = 250;
+            // 
+            // cuerpo
+            // 
+            this.cuerpo.DataPropertyName = "Cuerpo";
+            this.cuerpo.HeaderText = "Cuerpo";
+            this.cuerpo.Name = "cuerpo";
+            this.cuerpo.ReadOnly = true;
+            this.cuerpo.Visible = false;
+            // 
+            // destinatario
+            // 
+            this.destinatario.DataPropertyName = "Destinatario";
+            this.destinatario.HeaderText = "Destinatario";
+            this.destinatario.Name = "destinatario";
+            this.destinatario.ReadOnly = true;
+            this.destinatario.Width = 250;
+            // 
+            // asunto
+            // 
+            this.asunto.DataPropertyName = "Asunto";
+            this.asunto.HeaderText = "Asunto";
+            this.asunto.Name = "asunto";
+            this.asunto.ReadOnly = true;
+            this.asunto.Width = 250;
+            // 
+            // fecha
+            // 
+            this.fecha.DataPropertyName = "Fecha";
+            this.fecha.HeaderText = "Fecha";
+            this.fecha.Name = "fecha";
+            this.fecha.ReadOnly = true;
+            // 
             // panelLeerMail
             // 
             this.panelLeerMail.BackColor = System.Drawing.SystemColors.ButtonHighlight;
@@ -402,6 +446,16 @@
             this.panelLeerMail.Size = new System.Drawing.Size(853, 429);
             this.panelLeerMail.TabIndex = 17;
             this.panelLeerMail.Visible = false;
+            // 
+            // tbFechaLeerMail
+            // 
+            this.tbFechaLeerMail.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.tbFechaLeerMail.Location = new System.Drawing.Point(741, 4);
+            this.tbFechaLeerMail.Multiline = true;
+            this.tbFechaLeerMail.Name = "tbFechaLeerMail";
+            this.tbFechaLeerMail.ReadOnly = true;
+            this.tbFechaLeerMail.Size = new System.Drawing.Size(106, 31);
+            this.tbFechaLeerMail.TabIndex = 7;
             // 
             // tbCuerpoLeerMail
             // 
@@ -597,54 +651,22 @@
             this.acercaDeToolStripMenuItem.Text = "Acerca de...";
             this.acercaDeToolStripMenuItem.Click += new System.EventHandler(this.acercaDeToolStripMenuItem_Click);
             // 
-            // tbFechaLeerMail
+            // progressBar
             // 
-            this.tbFechaLeerMail.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.tbFechaLeerMail.Location = new System.Drawing.Point(741, 4);
-            this.tbFechaLeerMail.Multiline = true;
-            this.tbFechaLeerMail.Name = "tbFechaLeerMail";
-            this.tbFechaLeerMail.ReadOnly = true;
-            this.tbFechaLeerMail.Size = new System.Drawing.Size(106, 31);
-            this.tbFechaLeerMail.TabIndex = 7;
+            this.progressBar.Location = new System.Drawing.Point(42, 225);
+            this.progressBar.Name = "progressBar";
+            this.progressBar.Size = new System.Drawing.Size(100, 23);
+            this.progressBar.TabIndex = 9;
             // 
-            // remitente
+            // label7
             // 
-            this.remitente.DataPropertyName = "Remitente";
-            this.remitente.HeaderText = "Remitente";
-            this.remitente.Name = "remitente";
-            this.remitente.ReadOnly = true;
-            this.remitente.Width = 250;
-            // 
-            // cuerpo
-            // 
-            this.cuerpo.DataPropertyName = "Cuerpo";
-            this.cuerpo.HeaderText = "Cuerpo";
-            this.cuerpo.Name = "cuerpo";
-            this.cuerpo.ReadOnly = true;
-            this.cuerpo.Visible = false;
-            // 
-            // destinatario
-            // 
-            this.destinatario.DataPropertyName = "Destinatario";
-            this.destinatario.HeaderText = "Destinatario";
-            this.destinatario.Name = "destinatario";
-            this.destinatario.ReadOnly = true;
-            this.destinatario.Width = 250;
-            // 
-            // asunto
-            // 
-            this.asunto.DataPropertyName = "Asunto";
-            this.asunto.HeaderText = "Asunto";
-            this.asunto.Name = "asunto";
-            this.asunto.ReadOnly = true;
-            this.asunto.Width = 250;
-            // 
-            // fecha
-            // 
-            this.fecha.DataPropertyName = "Fecha";
-            this.fecha.HeaderText = "Fecha";
-            this.fecha.Name = "fecha";
-            this.fecha.ReadOnly = true;
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(39, 260);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(103, 13);
+            this.label7.TabIndex = 10;
+            this.label7.Text = "Obtencion Completa";
+            this.label7.Visible = false;
             // 
             // FormPrincipal
             // 
@@ -655,9 +677,9 @@
             this.Controls.Add(this.gbEnviarMail);
             this.Controls.Add(this.gbLeerMail);
             this.Controls.Add(this.gbOpciones1);
+            this.Controls.Add(this.panelCuentas);
             this.Controls.Add(this.gpNuevoMail);
             this.Controls.Add(this.panelLeerMail);
-            this.Controls.Add(this.panelCuentas);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
@@ -747,6 +769,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn destinatario;
         private System.Windows.Forms.DataGridViewTextBoxColumn asunto;
         private System.Windows.Forms.DataGridViewTextBoxColumn fecha;
+        private System.Windows.Forms.ProgressBar progressBar;
+        private System.Windows.Forms.Label label7;
     }
 }
 

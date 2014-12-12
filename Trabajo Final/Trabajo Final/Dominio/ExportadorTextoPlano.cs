@@ -21,7 +21,14 @@ namespace Trabajo_Final.Dominio
             this.iNombre = pNombre;
         }
 
-       
+        public string Nombre
+        {
+            get
+            {
+                { return this.iNombre; }
+            }
+        }
+
         public void Exportar(String pRuta,Email pEmail)
         {
             if (pRuta == null)
@@ -53,21 +60,6 @@ namespace Trabajo_Final.Dominio
                 throw new ExportadorExcepcion("Ingrese un nombre de archivo");
             }
             
-        }
-
-        /// <summary>
-        /// Devuelve la componente Nombre del Exportador
-        /// </summary>
-        public string Nombre
-        {
-            get
-            {
-                { return this.iNombre; }
-            }
-            set
-            {
-                { this.iNombre = value; };
-            }
         }
     }
 }

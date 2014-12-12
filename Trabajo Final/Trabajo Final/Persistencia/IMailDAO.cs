@@ -27,5 +27,8 @@ namespace Trabajo_Final.Persistencia
         /// </summary>
         /// <returns></returns>
         IList<EmailDTO> Obtener(int pIdCuenta);
+
+        
+
     }
 }

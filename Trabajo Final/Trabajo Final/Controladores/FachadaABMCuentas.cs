@@ -141,7 +141,12 @@ namespace Trabajo_Final.Controladores
             }
         }
 
-        public CuentaDTO BuscarCuenta(String pnombreCuenta)
+        /// <summary>
+        /// Permite buscar una Cuenta identificada por su nombre
+        /// </summary>
+        /// <param name="pnombreCuenta"></param>
+        /// <returns></returns>
+        public CuentaDTO BuscarCuenta(String pNombreCuenta)
         {
             DAOFactory factory = null;
 
@@ -149,7 +154,60 @@ namespace Trabajo_Final.Controladores
             {
                 factory = DAOFactory.Instancia;
                 factory.IniciarConexion();
-                return factory.CuentaDAO.BuscarCuenta(pnombreCuenta);
+                return factory.CuentaDAO.BuscarCuenta(pNombreCuenta);
+            }
+            catch (DAOExcepcion ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                factory.FinalizarConexion();
+            }
+        }
+
+        /// <summary>
+        /// Establece la fecha y hora del ultimo correo recibido del servidor de correo de la cuenta         
+        /// </summary>
+        /// <param name="pUltimaConexion"></param>
+        /// <param name="pIdCuenta"></param>
+        public void EstablecerUltimaConexion(DateTime pUltimaConexion, string pNombreCuenta)
+        {
+            DAOFactory factory = null;
+
+            try
+            {
+                factory = DAOFactory.Instancia;
+                factory.IniciarConexion();
+                factory.ComenzarTransaccion();
+                factory.CuentaDAO.EstablecerUltimaConexion(pUltimaConexion, pNombreCuenta);
+                factory.Commit();
+            }
+            catch (DAOExcepcion ex)
+            {
+                factory.RollBack();
+                throw ex;
+            }
+            finally
+            {
+                factory.FinalizarConexion();
+            }
+        }
+
+        /// <summary>
+        /// Devuelve la fecha y hora del ultimo correo descargado desde el servidor de la cuenta pasada como parametro
+        /// </summary>
+        /// <param name="pNombreCuenta"></param>
+        /// <returns></returns>
+        public DateTime GetUltimaConexion(String pNombreCuenta)
+        {
+            DAOFactory factory = null;
+
+            try
+            {
+                factory = DAOFactory.Instancia;
+                factory.IniciarConexion();
+                return factory.CuentaDAO.ObtenerUltimaConexion(pNombreCuenta);
             }
             catch (DAOExcepcion ex)
             {

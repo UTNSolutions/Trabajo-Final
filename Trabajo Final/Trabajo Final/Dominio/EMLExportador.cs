@@ -9,37 +9,37 @@ using System.Net.Mail;
 
 namespace Trabajo_Final.Dominio
 {
-    public class EMLExportador
+    public class EMLExportador : IExportador 
     {
+        private String iNombre;
 
-        public static void ExportMIMEEmail(ExchangeService service)
+        public EMLExportador(String pNombre)
         {
- /*            Folder inbox = Folder.Bind(service, WellKnownFolderName.Inbox);
-            ItemView view = new ItemView(1);
-            view.PropertySet = new PropertySet(BasePropertySet.IdOnly);
+            this.iNombre = pNombre;
+        }
 
-            // This results in a FindItem call to EWS.
-            FindItemsResults<Item> results = inbox.FindItems(view); 
-
-            foreach (var item in results)
+        public string Nombre
+        {
+            get
             {
-                PropertySet props = new PropertySet(EmailMessageSchema.MimeContent); */
-
-                // This results in a GetItem call to EWS.
-            EmailMessage email = new EmailMessage(service);
-            email.Body = "hola como andas";
-            email.From = "mati.d@live.com.ar";
-
-                string emlFileName = @"C:\export\email.eml";
-
-                // Save as .eml.
-                using (FileStream fs = new FileStream(emlFileName, FileMode.Create, FileAccess.Write))
-                {
-                    fs.Write(email.MimeContent.Content, 0, email.MimeContent.Content.Length);
-                }
-
+                return this.iNombre;
             }
         }
+
+        public void Exportar(string pRuta, Email pEMail)
+        {       
+            if (pRuta == null)
+            {
+                throw new ArgumentNullException("La ruta pasada es nula");
+            }
+            SmtpClient client = new SmtpClient();
+            client.DeliveryMethod = SmtpDeliveryMethod.SpecifiedPickupDirectory;
+            MailMessage email = new MailMessage(pEMail.Remitente, pEMail.Destinatario[0], pEMail.Asunto, pEMail.Cuerpo);
+            client.PickupDirectoryLocation = pRuta;
+            client.DeliveryFormat = SmtpDeliveryFormat.International;
+            client.Send(email);
+        }
     }
+}
 
     
