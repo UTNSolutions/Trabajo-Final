@@ -103,6 +103,9 @@ namespace Trabajo_Final.UI
                 botonAgregarCC.Visible = false;
                 botonBorrarUltimoCC.Visible = false;
                 tbCCROnly.Text = "";
+                tbCCROnly.Multiline = false;
+                tbCCROnly.Location = new Point(103, 196);
+                tbCCROnly.Size = new Size(298, 20);
         }
 
         /// <summary>
@@ -132,6 +135,9 @@ namespace Trabajo_Final.UI
             botonAgregarCCO.Visible = false;
             botonBorrarUltimoCCO.Visible = false;
             tbCCOROnly.Text = "";
+            tbCCOROnly.Multiline = false;
+            tbCCOROnly.Location = new Point(103, 290);
+            tbCCOROnly.Size = new Size(298, 20);
         }
 
         /// <summary>
@@ -191,8 +197,8 @@ namespace Trabajo_Final.UI
                 gbOpciones1.Visible = true;
                 gpNuevoMail.Visible = false;
                 panelCuentas.Visible = true;
-                panelLeerMail.Visible = false; //
-                gbLeerMail.Visible = false; //
+                panelLeerMail.Visible = false; 
+                gbLeerMail.Visible = false; 
             }
         }
 
@@ -204,7 +210,7 @@ namespace Trabajo_Final.UI
         /// <returns></returns>
         private bool VaciarDatosEnviarMail_TextChanged(object sender, EventArgs e)
         {
-            if (tbPara.Text != "" || tbCCROnly.Text != "" || tbCCOROnly.Text != "" || tbAsunto.Text != "" || tbAdjuntos.Text != "" || tbCuerpo.Text != "")
+            if (tbParaROnly.Text != "" || tbCCROnly.Text != "" || tbCCOROnly.Text != "" || tbAsunto.Text != "" || tbAdjuntos.Text != "" || tbCuerpo.Text != "")
             {
                 DialogResult resultado = MessageBox.Show("¿Está seguro que quiere eliminar este mail no enviado ?", "Advertencia", MessageBoxButtons.YesNo,MessageBoxIcon.Question);
                 if (resultado == DialogResult.Yes)
@@ -237,13 +243,14 @@ namespace Trabajo_Final.UI
         {
             if (tbPara.Text != "")
             {
+                //Para ver si seesta poniendo una cedena valida como dirección de correo.
                 if (!(Regex.IsMatch(tbPara.Text, "\\w+([-+.']\\w+)*@\\w+([-.]\\w+)*\\.\\w+(a-z)*")))
                 {
-                    labelDNValida.Visible = true;
+                    labelDNValidaPara.Visible = true;
                 }
                 else
                 {
-                    labelDNValida.Visible = false;
+                    labelDNValidaPara.Visible = false;
                     if (tbParaROnly.Text == "")
                     {
                         tbParaROnly.Text = tbPara.Text + "; ";
@@ -256,6 +263,7 @@ namespace Trabajo_Final.UI
                         tbPara.Text = "";
                     }
                 }
+                //pasando esa cantidad de elementos en el textbox habilito el multiline.
                 if (tbParaROnly.Text.Length > 50)
                 {
                     tbParaROnly.Multiline = true;
@@ -263,18 +271,29 @@ namespace Trabajo_Final.UI
                     tbParaROnly.Size = new Size(298, 47);
                 }
             }
+            //En caso de que no escriba nada para que no me muestre el label.
             else
             {
-                labelDNValida.Visible = false;
+                labelDNValidaPara.Visible = false;
             }
         }
 
+        /// <summary>
+        /// Borra la última direccion de correo que se escribio como destinatario del mail.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void botonBorrarUltimoPara_Click(object sender, EventArgs e)
         {
+            //Le saco dos porque se que la última cadena tiene un "; " (punto y coma seguido de un espacio),
+            //y no me interezan para ciclar.
             int indice = tbParaROnly.Text.Length - 2;
             bool control = true;
+            //Recorro la cadena hacia atras hasta encontrar un "; " (punto y coma seguido de un espacio)
+            //para eliminar la última cadena. 
             while (indice > 0 && control)
             {
+                //Elimino la última cadena.
                 if (tbParaROnly.Text[indice] == ' ' && tbParaROnly.Text[indice - 1] == ';')
                 {
                     tbParaROnly.Text = tbParaROnly.Text.Substring(0, indice + 1);
@@ -285,16 +304,188 @@ namespace Trabajo_Final.UI
                     indice--;
                 }                
             }
+            //En caso de que salga del while por la condición de la sig. linea es porque es la última cadena.
             if (indice == 0)
             {
                 tbParaROnly.Text = "";
                 botonBorrarUltimoPara.Enabled = false;
             }
+            //Para desabilitar el multiline en caso que la cadena posea menos de 50 elemenetos.
             if (tbParaROnly.Text.Length < 50)
             {
                 tbParaROnly.Multiline = false;
                 tbParaROnly.Location = new Point(103, 107);
                 tbParaROnly.Size = new Size(298, 20);
+            }
+        }
+
+        /// <summary>
+        /// Agrega una dirección al textbox de direcciones con copia carbono.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void botonAgregarCC_Click(object sender, EventArgs e)
+        {
+            if (tbCC.Text != "")
+            {
+                //Para ver si seesta poniendo una cedena valida como dirección de correo.
+                if (!(Regex.IsMatch(tbCC.Text, "\\w+([-+.']\\w+)*@\\w+([-.]\\w+)*\\.\\w+(a-z)*")))
+                {
+                    labelDNValidaCC.Visible = true;
+                }
+                else
+                {
+                    labelDNValidaCC.Visible = false;
+                    if (tbCCROnly.Text == "")
+                    {
+                        tbCCROnly.Text = tbCC.Text + "; ";
+                        tbCC.Text = "";
+                        botonBorrarUltimoCC.Enabled = true;
+                    }
+                    else
+                    {
+                        tbCCROnly.Text = tbCCROnly.Text + tbCC.Text + "; ";
+                        tbCC.Text = "";
+                    }
+                }
+                //pasando esa cantidad de elementos en el textbox habilito el multiline.
+                if (tbCCROnly.Text.Length > 50)
+                {
+                    tbCCROnly.Multiline = true;
+                    tbCCROnly.Location = new Point(103, 172);
+                    tbCCROnly.Size = new Size(298, 47);
+                }
+            }
+            //En caso de que no escriba nada para que no me muestre el label.
+            else
+            {
+                labelDNValidaCC.Visible = false;
+            }
+        }
+
+        /// <summary>
+        /// Borra la última direccion de correo que se escribio como copia carbono del mail.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void botonBorrarUltimoCC_Click(object sender, EventArgs e)
+        {
+            //Le saco dos porque se que la última cadena tiene un "; " (punto y coma seguido de un espacio),
+            //y no me interezan para ciclar.
+            int indice = tbCCROnly.Text.Length - 2;
+            bool control = true;
+            //Recorro la cadena hacia atras hasta encontrar un "; " (punto y coma seguido de un espacio)
+            //para eliminar la última cadena. 
+            while (indice > 0 && control)
+            {
+                //Elimino la última cadena.
+                if (tbCCROnly.Text[indice] == ' ' && tbCCROnly.Text[indice - 1] == ';')
+                {
+                    tbCCROnly.Text = tbCCROnly.Text.Substring(0, indice + 1);
+                    control = false;
+                }
+                else
+                {
+                    indice--;
+                }
+            }
+            //En caso de que salga del while por la condición de la sig. linea es porque es la última cadena.
+            if (indice == 0)
+            {
+                tbCCROnly.Text = "";
+                botonBorrarUltimoCC.Enabled = false;
+            }
+            //Para desabilitar el multiline en caso que la cadena posea menos de 50 elemenetos.
+            if (tbCCROnly.Text.Length < 50)
+            {
+                tbCCROnly.Multiline = false;
+                tbCCROnly.Location = new Point(103, 196);
+                tbCCROnly.Size = new Size(298, 20);
+            }
+        }
+
+        /// <summary>
+        /// Agrega una dirección al textbox de direcciones con copia carbono oculta.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void botonAgregarCCO_Click(object sender, EventArgs e)
+        {
+             if (tbCCO.Text != "")
+            {
+                //Para ver si seesta poniendo una cedena valida como dirección de correo.
+                if (!(Regex.IsMatch(tbCCO.Text, "\\w+([-+.']\\w+)*@\\w+([-.]\\w+)*\\.\\w+(a-z)*")))
+                {
+                    labelDNValidaCCO.Visible = true;
+                }
+                else
+                {
+                    labelDNValidaCCO.Visible = false;
+                    if (tbCCOROnly.Text == "")
+                    {
+                        tbCCOROnly.Text = tbCCO.Text + "; ";
+                        tbCCO.Text = "";
+                        botonBorrarUltimoCCO.Enabled = true;
+                    }
+                    else
+                    {
+                        tbCCOROnly.Text = tbCCOROnly.Text + tbCCO.Text + "; ";
+                        tbCCO.Text = "";
+                    }
+                }
+                //pasando esa cantidad de elementos en el textbox habilito el multiline.
+                if (tbCCOROnly.Text.Length > 50)
+                {
+                    tbCCOROnly.Multiline = true;
+                    tbCCOROnly.Location = new Point(103, 264);
+                    tbCCOROnly.Size = new Size(298, 47);
+                }
+            }
+            //En caso de que no escriba nada para que no me muestre el label.
+            else
+            {
+                labelDNValidaCCO.Visible = false;
+            }
+        }
+
+        /// <summary>
+        /// Borra la última direccion de correo que se escribio como copia carbono oculta del mail.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void botonBorrarUltimoCCO_Click(object sender, EventArgs e)
+        {
+            //Le saco dos porque se que la última cadena tiene un "; " (punto y coma seguido de un espacio),
+            //y no me interezan para ciclar.
+            int indice = tbCCOROnly.Text.Length - 2;
+            bool control = true;
+            //Recorro la cadena hacia atras hasta encontrar un "; " (punto y coma seguido de un espacio)
+            //para eliminar la última cadena. 
+            while (indice > 0 && control)
+            {
+                //Elimino la última cadena.
+                if (tbCCOROnly.Text[indice] == ' ' && tbCCOROnly.Text[indice - 1] == ';')
+                {
+                    tbCCOROnly.Text = tbCCOROnly.Text.Substring(0, indice + 1);
+                    control = false;
+                }
+                else
+                {
+                    indice--;
+                }
+            }
+            //En caso de que salga del while por la condición de la sig. linea es porque es la última cadena.
+            if (indice == 0)
+            {
+                tbCCOROnly.Text = "";
+                botonBorrarUltimoCCO.Enabled = false;
+            }
+            //Para desabilitar el multiline en caso que la cadena posea menos de 50 elemenetos.
+            if (tbCCOROnly.Text.Length < 50)
+            {
+                tbCCOROnly.Multiline = false;
+                tbCCOROnly.Location = new Point(103, 290);
+                tbCCOROnly.Size = new Size(298, 20);
             }
         }
 
