@@ -39,6 +39,8 @@
             this.acercaDeToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.gpNuevoMail = new System.Windows.Forms.GroupBox();
+            this.labelDNValidaCC = new System.Windows.Forms.Label();
+            this.labelDNValidaCCO = new System.Windows.Forms.Label();
             this.labelDNValidaPara = new System.Windows.Forms.Label();
             this.botonBorrarUltimoCC = new System.Windows.Forms.Button();
             this.botonBorrarUltimoCCO = new System.Windows.Forms.Button();
@@ -67,6 +69,8 @@
             this.botonCCO = new System.Windows.Forms.Button();
             this.botonCCOAtras = new System.Windows.Forms.Button();
             this.panelCuentas = new System.Windows.Forms.Panel();
+            this.label7 = new System.Windows.Forms.Label();
+            this.progressBar = new System.Windows.Forms.ProgressBar();
             this.tbTipoCorreo = new System.Windows.Forms.TextBox();
             this.tbNombreCuenta = new System.Windows.Forms.TextBox();
             this.dgEmails = new System.Windows.Forms.DataGridView();
@@ -96,10 +100,6 @@
             this.responderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exportarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.acercaDeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.labelDNValidaCCO = new System.Windows.Forms.Label();
-            this.labelDNValidaCC = new System.Windows.Forms.Label();
-            this.progressBar = new System.Windows.Forms.ProgressBar();
-            this.label7 = new System.Windows.Forms.Label();
             this.gbOpciones1.SuspendLayout();
             this.menuStrip2.SuspendLayout();
             this.gpNuevoMail.SuspendLayout();
@@ -236,6 +236,28 @@
             this.gpNuevoMail.TabStop = false;
             this.gpNuevoMail.Text = "Nuevo Email";
             this.gpNuevoMail.Visible = false;
+            // 
+            // labelDNValidaCC
+            // 
+            this.labelDNValidaCC.AutoSize = true;
+            this.labelDNValidaCC.ForeColor = System.Drawing.Color.Red;
+            this.labelDNValidaCC.Location = new System.Drawing.Point(268, 248);
+            this.labelDNValidaCC.Name = "labelDNValidaCC";
+            this.labelDNValidaCC.Size = new System.Drawing.Size(104, 13);
+            this.labelDNValidaCC.TabIndex = 29;
+            this.labelDNValidaCC.Text = "¡Dirección no válida!";
+            this.labelDNValidaCC.Visible = false;
+            // 
+            // labelDNValidaCCO
+            // 
+            this.labelDNValidaCCO.AutoSize = true;
+            this.labelDNValidaCCO.ForeColor = System.Drawing.Color.Red;
+            this.labelDNValidaCCO.Location = new System.Drawing.Point(268, 341);
+            this.labelDNValidaCCO.Name = "labelDNValidaCCO";
+            this.labelDNValidaCCO.Size = new System.Drawing.Size(104, 13);
+            this.labelDNValidaCCO.TabIndex = 28;
+            this.labelDNValidaCCO.Text = "¡Dirección no válida!";
+            this.labelDNValidaCCO.Visible = false;
             // 
             // labelDNValidaPara
             // 
@@ -512,6 +534,20 @@
             this.panelCuentas.Name = "panelCuentas";
             this.panelCuentas.Size = new System.Drawing.Size(853, 432);
             this.panelCuentas.TabIndex = 7;
+            // 
+            // label7
+            // 
+            this.label7.Location = new System.Drawing.Point(40, 264);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(100, 23);
+            this.label7.TabIndex = 0;
+            // 
+            // progressBar
+            // 
+            this.progressBar.Location = new System.Drawing.Point(43, 222);
+            this.progressBar.Name = "progressBar";
+            this.progressBar.Size = new System.Drawing.Size(100, 23);
+            this.progressBar.TabIndex = 1;
             // 
             // tbTipoCorreo
             // 
@@ -808,28 +844,6 @@
             this.acercaDeToolStripMenuItem.Size = new System.Drawing.Size(105, 23);
             this.acercaDeToolStripMenuItem.Text = "Acerca de...";
             this.acercaDeToolStripMenuItem.Click += new System.EventHandler(this.acercaDeToolStripMenuItem_Click);
-            // 
-            // labelDNValidaCCO
-            // 
-            this.labelDNValidaCCO.AutoSize = true;
-            this.labelDNValidaCCO.ForeColor = System.Drawing.Color.Red;
-            this.labelDNValidaCCO.Location = new System.Drawing.Point(268, 341);
-            this.labelDNValidaCCO.Name = "labelDNValidaCCO";
-            this.labelDNValidaCCO.Size = new System.Drawing.Size(104, 13);
-            this.labelDNValidaCCO.TabIndex = 28;
-            this.labelDNValidaCCO.Text = "¡Dirección no válida!";
-            this.labelDNValidaCCO.Visible = false;
-            // 
-            // labelDNValidaCC
-            // 
-            this.labelDNValidaCC.AutoSize = true;
-            this.labelDNValidaCC.ForeColor = System.Drawing.Color.Red;
-            this.labelDNValidaCC.Location = new System.Drawing.Point(268, 248);
-            this.labelDNValidaCC.Name = "labelDNValidaCC";
-            this.labelDNValidaCC.Size = new System.Drawing.Size(104, 13);
-            this.labelDNValidaCC.TabIndex = 29;
-            this.labelDNValidaCC.Text = "¡Dirección no válida!";
-            this.labelDNValidaCC.Visible = false;
             // 
             // FormPrincipal
             // 
