@@ -124,6 +124,10 @@ namespace Trabajo_Final.Dominio
                 client.Disconnect();
                 return listaADevolver;
             }
+            catch(OpenPop.Pop3.Exceptions.PopServerNotFoundException)
+            {
+                throw new EmailExcepcion("Error en el servidor, no responde");
+            }
             catch(OpenPop.Pop3.Exceptions.PopServerException)
             {
                 throw new EmailExcepcion("Error en el servidor, no responde");

@@ -31,6 +31,11 @@ namespace Trabajo_Final.Utils
                 email += pCadena[indice];
                 indice++;
             }
+            //si no encontro el email entre '< >' entonces devuelvo la cadena original
+            if (email == "")
+            {
+                email = pCadena;
+            }
             return email;
         }
     }

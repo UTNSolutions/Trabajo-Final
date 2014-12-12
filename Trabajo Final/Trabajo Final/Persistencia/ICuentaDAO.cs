@@ -41,7 +41,20 @@ namespace Trabajo_Final.Persistencia
         /// </summary>
         /// <param name="pNombreCuenta"></param>
         /// <returns></returns>
-        CuentaDTO BuscarCuenta(string pNombreCuenta);      
+        CuentaDTO BuscarCuenta(string pNombreCuenta);
+
+        /// <summary>
+        /// Permite establecer la hora del ultimo correo recibido del servidor de correo de dicha cuenta
+        /// </summary>
+        /// <param name="pUltimaConexion"></param>
+        void EstablecerUltimaConexion(DateTime pUltimaConexion, string pNombreCuenta);
+
+        /// <summary>
+        /// Obtiene la hora del ultimo correo recibido (fecha y hora) del servidor de correo de la cuenta 
+        /// </summary>
+        /// <param name="pIdCuenta"></param>
+        /// <returns></returns>
+        DateTime ObtenerUltimaConexion(string pNombreCuenta);
 
     }
 }

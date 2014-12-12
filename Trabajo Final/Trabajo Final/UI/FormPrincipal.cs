@@ -21,6 +21,11 @@ namespace Trabajo_Final.UI
 {
     public partial class FormPrincipal : Form
     {
+        delegate void AddItemCallBack(string p);
+
+        private static FormAdministrarCuentas iFormAdminCuentas;
+        private static FormAcercaDe iFormAcercaDe;
+        private static FormExportar iFormExportar;
         public FormPrincipal()
         {
             InitializeComponent();
@@ -640,7 +645,24 @@ namespace Trabajo_Final.UI
                     adaptador.Add(new AdaptadorDataGrid(email.Remitente, email.Destinatario[0], email.Asunto, email.Cuerpo,email.Fecha));
                 }
             }
+            //ordeno por fecha                         
+            adaptador = (from e in adaptador
+                         orderby e.Fecha descending
+                         select e).ToList();
+
+            //controlo si otro hilo de ejecucion requiere hacer uso del data grid
+            //entonces creo un delegado para cederle la tarea de actualizar el data grid,
+            //sino directamente le asigno los datos al data grid
+            if (dgEmails.InvokeRequired) 
+            {
+                AddItemCallBack d = new AddItemCallBack( FiltarRecibidos);
+                    this.Invoke(d,pNombreCuenta);
+            }
+            else
+            {
             dgEmails.DataSource = adaptador;
+            }
+            
             dgEmails.Columns["destinatario"].Visible = false;
             dgEmails.Columns["remitente"].Visible = true;
         }
@@ -655,10 +677,25 @@ namespace Trabajo_Final.UI
                 String remitente = StringsUtils.ObtenerEmail(email.Remitente);
                 if (remitente == cuenta.Direccion)
                 {
-                    adaptador.Add(new AdaptadorDataGrid(email.Remitente, email.Destinatario[0], email.Asunto, email.Cuerpo,email.Fecha));
+                    adaptador.Add(new AdaptadorDataGrid(email.Remitente, email.Destinatario[0], email.Asunto, email.Cuerpo, email.Fecha));
                 }
                 }
+            //ordeno por fecha
+            adaptador = (from e in adaptador
+                           orderby e.Fecha descending
+                           select e).ToList();
+            //controlo si otro hilo de ejecucion requiere hacer uso del data grid
+            //entonces creo un delegado para cederle la tarea de actualizar el data grid,
+            //sino directamente le asigno los datos al data grid
+            if (dgEmails.InvokeRequired)
+            {
+                AddItemCallBack d = new AddItemCallBack(FiltarEnviados);
+                this.Invoke(d, pNombreCuenta);
+                }
+            else
+            {
                 dgEmails.DataSource = adaptador;
+            }
             dgEmails.Columns["remitente"].Visible = false;
             dgEmails.Columns["destinatario"].Visible = true;
         }
@@ -705,12 +742,37 @@ namespace Trabajo_Final.UI
         /// <param name="e"></param>
         private void obtenerMailsToolStripMenuItem_Click(object sender, EventArgs e)
         {
+                BackgroundWorker hilo = new BackgroundWorker();
+                hilo.WorkerReportsProgress = true;
+                hilo.ReportProgress(40);
+                hilo.DoWork += new DoWorkEventHandler(ObtenerMailDeUnaCuenta);
+                hilo.RunWorkerAsync();
+                hilo.ProgressChanged += new ProgressChangedEventHandler(ProgressChanged);
+                hilo.ReportProgress(60);
+                hilo.RunWorkerCompleted += new RunWorkerCompletedEventHandler(ProgressCompleted);                                                                
+        }
+
+        private void ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            //Cambia el valor del progressBar segun el progreso de BackgroundWorker
+            progressBar.Value = e.ProgressPercentage;
+        }
+
+        private void ProgressCompleted(object sender,RunWorkerCompletedEventArgs e)
+        {
+            //Establezco el progressBar en 100 ya que la operacion se completo
+            progressBar.Value = 100;
+            label7.Visible = true;
+        }
+
+        private void ObtenerMailDeUnaCuenta(object sender, DoWorkEventArgs e)
+        {         
             try
             {
                 Fachada.Instancia.ObtenerEmail(tbNombreCuenta.Text);
-                CargarDataGrid(tbNombreCuenta.Text,Convert.ToChar(tbTipoCorreo.Text));
+            CargarDataGrid(tbNombreCuenta.Text, Convert.ToChar(tbTipoCorreo.Text));
             }           
-            catch(NombreCuentaExcepcion ex)
+          catch (NombreCuentaExcepcion ex)
             {
                 MessageBox.Show(ex.Message, "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -722,13 +784,12 @@ namespace Trabajo_Final.UI
             {
                 MessageBox.Show(ex.Message, "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            catch(DAOExcepcion ex)
+          catch (DAOExcepcion ex)
             {
                 MessageBox.Show(ex.Message, "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-
-
         }
+
 
         /// <summary>
         /// Obtiene los correos de todas las cuentas configuradas
@@ -737,14 +798,14 @@ namespace Trabajo_Final.UI
         /// <param name="e"></param>
         private void obtenerTodosToolStripMenuItem_Click(object sender, EventArgs e)
         {          
-           IList<String> listaNombreCuentas = new List<String>();
-           foreach (TreeNode tn in tvCuentas.Nodes)
-           {
-              listaNombreCuentas.Add(tn.Name);
-           }
            try
            {
-               Fachada.Instancia.ObtenerTodosEmails(listaNombreCuentas);
+               //Obtiene los emails por cada una de las cuentas que estan en el tree view
+               BackgroundWorker hilo1 = new BackgroundWorker();
+               hilo1.DoWork += new DoWorkEventHandler(ObtenerTodos);
+
+               hilo1.RunWorkerAsync();
+               
            }
            catch (NombreCuentaExcepcion ex)
            {
@@ -759,7 +820,20 @@ namespace Trabajo_Final.UI
                MessageBox.Show(ex.Message, "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Error);
            }
         }
-        
+
+        private void ObtenerTodos(object sender, DoWorkEventArgs e)
+        {
+            IList<String> listaNombreCuentas = new List<String>();
+            //itera los nodos principales del tree view para obtener las cuentas configuradas
+            //para poder extraer sus emails
+            foreach (TreeNode tn in tvCuentas.Nodes)
+            {
+                listaNombreCuentas.Add(tn.Name);
+            }
+            Fachada.Instancia.ObtenerTodosEmails(listaNombreCuentas);
+            CargarDataGrid(tbNombreCuenta.Text, Convert.ToChar(tbTipoCorreo.Text));
+        }
+
 
         /// <summary>
         /// Extrae un mail del DataGrilView y lo muestra.

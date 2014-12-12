@@ -120,5 +120,45 @@ namespace Trabajo_Final.Persistencia
                 throw new DAOExcepcion("No se pudo obtener los datos de las cuentas");
             }
         }
+
+        public void EstablecerUltimaConexion(DateTime pUltimaConexion, String pNombreCuenta)
+        {
+            SqlCommand comando = new SqlCommand("update Cuenta set ultimaConexion=@ultimaConexion where nombre=@nombreCuenta", this.iConexion, this.iTransaccion);
+            comando.Parameters.AddWithValue("@nombreCuenta", pNombreCuenta);
+            comando.Parameters.AddWithValue("@ultimaConexion", pUltimaConexion);
+            try
+            {
+                comando.ExecuteNonQuery();
+            }
+            catch (SqlException)
+            {
+                throw new DAOExcepcion("Ocurrio un error en base de datos, no se pudo realizar la operacion");
+            }
+        }
+
+
+        public DateTime ObtenerUltimaConexion(String pNombreCuenta)
+        {
+            SqlCommand comando = new SqlCommand("select ultimaConexion from Cuenta where nombre =@nombreCuenta", this.iConexion);
+            comando.Parameters.AddWithValue("@nombreCuenta", pNombreCuenta);
+            try
+            {  
+                object consulta = comando.ExecuteScalar();
+                DateTime ultimaConexion;
+                if (consulta == DBNull.Value)
+                { 
+                    ultimaConexion = new DateTime();
+                }
+                else
+                {
+                    ultimaConexion = Convert.ToDateTime(consulta);
+                }
+                return ultimaConexion;
+            }
+            catch (SqlException)
+            {
+                throw new DAOExcepcion("No se pudo obtener la ultima conexion de dicha cuenta");
+            }
+        }
     }
 }

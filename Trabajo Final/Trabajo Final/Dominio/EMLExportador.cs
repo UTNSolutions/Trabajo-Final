@@ -21,25 +21,25 @@ namespace Trabajo_Final.Dominio
 
         public string Nombre
         {
-            get { return this.iNombre; }
+            get
+            {
+                return this.iNombre;
+            }
         }
 
         public void Exportar(string pRuta, Email pEMail)
-        {
-            SmtpClient cliente = new SmtpClient();            
-            String cadenaTo = "";
-            foreach(String destinatario in pEMail.Destinatario)
             {
-                cadenaTo = destinatario;
+            if (pRuta == null)
+                {
+                throw new ArgumentNullException("La ruta pasada es nula");
+                }
+            SmtpClient client = new SmtpClient();
+            client.DeliveryMethod = SmtpDeliveryMethod.SpecifiedPickupDirectory;
+            MailMessage email = new MailMessage(pEMail.Remitente, pEMail.Destinatario[0], pEMail.Asunto, pEMail.Cuerpo);
+            client.PickupDirectoryLocation = pRuta;
+            client.DeliveryFormat = SmtpDeliveryFormat.International;
+            client.Send(email);
             }
-            MailMessage mail = new MailMessage(pEMail.Remitente, cadenaTo,pEMail.Asunto,pEMail.Cuerpo);
-            cliente.Host = "stmp.gmail.com";
-            cliente.Port = 587;
-            cliente.EnableSsl = true;
-            cliente.Credentials = new NetworkCredential("matiadr13@gmail.com", "utnsist14");
-            //cliente.PickupDirectoryLocation = @"C:\Users\Brian\Desktop\Mail";
-            cliente.Send(mail);
         }
     }
-}
-    
+

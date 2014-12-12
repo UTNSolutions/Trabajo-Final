@@ -69,6 +69,8 @@
             this.botonCCO = new System.Windows.Forms.Button();
             this.botonCCOAtras = new System.Windows.Forms.Button();
             this.panelCuentas = new System.Windows.Forms.Panel();
+            this.label7 = new System.Windows.Forms.Label();
+            this.progressBar = new System.Windows.Forms.ProgressBar();
             this.tbTipoCorreo = new System.Windows.Forms.TextBox();
             this.tbNombreCuenta = new System.Windows.Forms.TextBox();
             this.dgEmails = new System.Windows.Forms.DataGridView();
@@ -521,6 +523,8 @@
             // 
             // panelCuentas
             // 
+            this.panelCuentas.Controls.Add(this.label7);
+            this.panelCuentas.Controls.Add(this.progressBar);
             this.panelCuentas.Controls.Add(this.tvCuentas);
             this.panelCuentas.Controls.Add(this.tbTipoCorreo);
             this.panelCuentas.Controls.Add(this.tbNombreCuenta);
@@ -531,6 +535,20 @@
             this.panelCuentas.Size = new System.Drawing.Size(853, 432);
             this.panelCuentas.TabIndex = 7;
             // 
+            // label7
+            // 
+            this.label7.Location = new System.Drawing.Point(40, 264);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(100, 23);
+            this.label7.TabIndex = 0;
+            // 
+            // progressBar
+            // 
+            this.progressBar.Location = new System.Drawing.Point(43, 222);
+            this.progressBar.Name = "progressBar";
+            this.progressBar.Size = new System.Drawing.Size(100, 23);
+            this.progressBar.TabIndex = 1;
+            // 
             // tbTipoCorreo
             // 
             this.tbTipoCorreo.Location = new System.Drawing.Point(487, 7);
@@ -538,6 +556,7 @@
             this.tbTipoCorreo.ReadOnly = true;
             this.tbTipoCorreo.Size = new System.Drawing.Size(77, 20);
             this.tbTipoCorreo.TabIndex = 8;
+            this.tbTipoCorreo.Text = " ";
             // 
             // tbNombreCuenta
             // 
@@ -835,9 +854,9 @@
             this.Controls.Add(this.gbEnviarMail);
             this.Controls.Add(this.gbLeerMail);
             this.Controls.Add(this.gbOpciones1);
+            this.Controls.Add(this.panelCuentas);
             this.Controls.Add(this.gpNuevoMail);
             this.Controls.Add(this.panelLeerMail);
-            this.Controls.Add(this.panelCuentas);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
@@ -927,6 +946,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn destinatario;
         private System.Windows.Forms.DataGridViewTextBoxColumn asunto;
         private System.Windows.Forms.DataGridViewTextBoxColumn fecha;
+        private System.Windows.Forms.ProgressBar progressBar;
+        private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Button botonAgregarCCO;
         private System.Windows.Forms.TextBox tbCCO;
         private System.Windows.Forms.Button botonAgregarCC;

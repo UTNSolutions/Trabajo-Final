@@ -221,9 +221,21 @@ namespace Trabajo_Final.Controladores
             try
             {
                 Cuenta cuenta = Cuentas.Instancia.GetCuenta(pNombreCuenta);
-                Email email = new Email(pRemitente, pDestinatario, pCuerpo, pAsunto,DateTime.Today);
+                Email email = new Email(pRemitente, pDestinatario, pCuerpo, pAsunto,DateTime.Now);
                 IServicio servicio = FabricaServicios.Instancia.GetServicio(cuenta.NombreServicio);
                 servicio.EnviarMail(email,cuenta);
+                
+                //busco la cuenta en la base de datos con la que envie el email
+                //para poder asociar el email enviado a la cuenta en la base de datos
+                CuentaDTO cuentaDto = FachadaABMCuentas.Instancia.BuscarCuenta(cuenta.Nombre);
+                IList<EmailDTO> lEmail = new List<EmailDTO>();
+                lEmail.Add(new EmailDTO(cuentaDto.IdCuenta,email.Remitente,email.Destinatario,email.Cuerpo,email.Asunto,email.Fecha));
+                //inserto el email enviado en la base de datos
+                FachadaABMEmail.Instancia.InsertarEmails(lEmail);
+                //Actualizo la lista de emails de dicha cuenta de dominio
+                IList<Email> emailEnviado = new List<Email>();
+                emailEnviado.Add(email);
+                ActualizarListaEmails(cuenta, emailEnviado);
             }
             catch (FormatException)
             {
@@ -283,20 +295,33 @@ namespace Trabajo_Final.Controladores
                 Cuenta cuenta = Cuentas.Instancia.GetCuenta(pNombreCuenta);
                 IServicio servicio = FabricaServicios.Instancia.GetServicio(cuenta.NombreServicio);
                 IList<Email> listaEmails = servicio.RecibirMail(cuenta);
+                //filtro los Emails que descargue para no insertar los emails repetidos en la base de datos
+                IList<Email> listaEmailsFiltrados = FiltrarEmailsRepetidos(listaEmails, cuenta.Nombre);
                 //obtengo la cuenta de correo que posee el nombre de cuenta pasado como parametro
                 //para poder asociarle los emails recibidos
                 CuentaDTO cuentaDto = BuscarCuenta(pNombreCuenta);
                 IList<EmailDTO> listaEmailDTO = new List<EmailDTO>();
                 //A cada email de la lista lo transformo a EmailDTO asociandole la cuenta de correo del 
                 //que el email corresponde
-                foreach (Email email in listaEmails)
+                foreach (Email email in listaEmailsFiltrados)
                 {
                     listaEmailDTO.Add(new EmailDTO(cuentaDto.IdCuenta, email.Remitente, email.Destinatario, email.Cuerpo, email.Asunto,email.Fecha));
                 }
                 //Guardo la lista de emails en la base de datos
                 FachadaABMEmail.Instancia.InsertarEmails(listaEmailDTO);
                 //Actualizo la lista de emails de dicha cuenta de dominio
-                ActualizarListaEmails(cuenta, listaEmails);
+                ActualizarListaEmails(cuenta, listaEmailsFiltrados);
+                //actualizo la ultima conexion de dicha cuenta en el servidor con la fecha y hora
+                //del ultimo email recibidoo del servidor. Hago esto siempre y cuando 
+                //halla recibibo al menos un Email.
+
+                if (listaEmails.Count > 0)
+                {
+                    listaEmails = (from e in listaEmails
+                                                              orderby e.Fecha descending    
+                                                                select e).ToList();
+                    FachadaABMCuentas.Instancia.EstablecerUltimaConexion(listaEmails[0].Fecha, cuenta.Nombre);
+                }
             }
             catch (NombreCuentaExcepcion ex)
             {
@@ -310,6 +335,32 @@ namespace Trabajo_Final.Controladores
             {
                 throw ex;
             }
+        }
+
+        /// <summary>
+        /// Filtra los Emails descargados del servidor contra los emails que estan en la 
+        /// base de datos para que no se repitan
+        /// </summary>
+        /// <param name="?"></param>
+        /// <param name="?"></param>
+        /// <returns></returns>
+        private IList<Email> FiltrarEmailsRepetidos(IList<Email> pListaEmail, String pNombreCuenta)
+        {
+            //Obtengo la ultima conexion (fecha y hora) de la cuenta de correo
+            DateTime ultimaConexion = FachadaABMCuentas.Instancia.GetUltimaConexion(pNombreCuenta);
+            IList<Email> listaEmailsFiltrados = new List<Email>();
+            //itera por cada email en la lista pasada como parametro para hacer el filtro
+            foreach (Email email in pListaEmail)
+            {
+                //si la fecha del email es mayor que la ultima conexion de la cuenta al servidor
+                //significa que ese email no esta persistido en la base de datos, por lo que debo
+                //agregarlo a la lista para que se agregue
+                if (email.Fecha > ultimaConexion)
+                {
+                    listaEmailsFiltrados.Add(email);
+                }
+            }
+            return listaEmailsFiltrados;
         }
 
         /// <summary>
