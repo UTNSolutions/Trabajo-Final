@@ -83,6 +83,7 @@ namespace Trabajo_Final.Persistencia
             {
                 SqlDataAdapter operacion = new SqlDataAdapter(comando);
                 operacion.Fill(tabla);
+                //creo un encriptador para desencriptar la contraseña de cada cuenta de correo
                 EncriptadorCesar encriptador = new EncriptadorCesar(4);
                 foreach (DataRow fila in tabla.Rows)
                 {
@@ -145,14 +146,7 @@ namespace Trabajo_Final.Persistencia
             {  
                 object consulta = comando.ExecuteScalar();
                 DateTime ultimaConexion;
-                if (consulta == DBNull.Value)
-                { 
-                    ultimaConexion = new DateTime();
-                }
-                else
-                {
-                    ultimaConexion = Convert.ToDateTime(consulta);
-                }
+                ultimaConexion = Convert.ToDateTime(consulta);
                 return ultimaConexion;
             }
             catch (SqlException)

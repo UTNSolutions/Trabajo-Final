@@ -30,31 +30,51 @@ namespace Trabajo_Final.Dominio
             this.iListaEmail = new List<Email>();
         }
 
+        /// <summary>
+        /// Devuelve la componente Nombre 
+        /// </summary>
         public String Nombre
         {
             get { return this.iNombre;}
         }
 
+        /// <summary>
+        /// Devuelve la componente direccion
+        /// </summary>
         public String Direccion
         {
             get { return this.iDireccion; }
         }
 
+        /// <summary>
+        /// Devuelve la componente Nombre de servicio
+        /// </summary>
         public String NombreServicio
         {
             get { return this.iNombreServicio; }
         }
 
+        /// <summary>
+        /// Devuelve la componente contraseña
+        /// </summary>
         public String Contraseña
         {
             get { return this.iContraseña; }
         }
 
+        /// <summary>
+        /// Devuelve la lista de Emails de dicha cuenta
+        /// </summary>
         public IList<Email> ListaEMails
         {
             get { return this.iListaEmail; }
         }
 
+        /// <summary>
+        /// Devuelve una email de dicha cuenta identificado por su Id
+        /// </summary>
+        /// <param name="pIdEmail"></param>
+        /// <returns></returns>
         public Email BuscarEmail(int pIdEmail)
         {
             if (pIdEmail == 0)
@@ -64,6 +84,10 @@ namespace Trabajo_Final.Dominio
             return (from c in this.iListaEmail where c.IdEmail == pIdEmail select c).FirstOrDefault();            
         }
 
+        /// <summary>
+        /// Agrega un Email a dicha cuenta
+        /// </summary>
+        /// <param name="pEmail"></param>
         public void AgregarEmail(Email pEmail)
         {
             if (pEmail == null)
@@ -73,6 +97,10 @@ namespace Trabajo_Final.Dominio
             this.iListaEmail.Add(pEmail);
         }
 
+        /// <summary>
+        /// Elimina un Email de la cuenta
+        /// </summary>
+        /// <param name="pEmail"></param>
         public void EliminarEmail(Email pEmail)
         {
             if (pEmail == null)

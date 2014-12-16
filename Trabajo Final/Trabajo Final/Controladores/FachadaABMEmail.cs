@@ -58,23 +58,29 @@ namespace Trabajo_Final.Controladores
         }
 
         /// <summary>
-        /// Inserta una lista de emails en la base de datos correspondientes a una cuenta de correo
+        /// Inserta una lista de emails en la base de datos correspondientes a una cuenta de correo 
+        /// y devuelve una lista de los Ids de los emails para su posterior uso
         /// </summary>
         /// <param name="pCuenta"></param>
         /// <exception cref="DAOExcepcion"></exception>
-        public void InsertarEmails(IList<EmailDTO> pListaEmail)
+        public IList<int> InsertarEmails(IList<EmailDTO> pListaEmail)
         {
             DAOFactory factory = null;
            try
            {
+                //creo una lista para almacenar los Ids 
+                IList<int> listaIds = new List<int>();
                 factory = DAOFactory.Instancia;
                 factory.IniciarConexion();
                 factory.ComenzarTransaccion();
                 foreach (EmailDTO email in pListaEmail)
                 {
-                    factory.MailDao.Insertar(email);
+                    //por cada email insertado en la base de datos obtengo su Id que la base de datos
+                    //le asigno automaticamente
+                    listaIds.Add(factory.MailDao.Insertar(email));
                 }             
                 factory.Commit();
+                return listaIds;
            }
            catch (DAOExcepcion ex)
            {

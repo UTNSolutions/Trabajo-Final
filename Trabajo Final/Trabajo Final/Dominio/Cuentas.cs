@@ -32,6 +32,9 @@ namespace Trabajo_Final.Dominio
                }
         }
 
+        /// <summary>
+        /// Devuelve un diccionario de las cuentas de correo
+        /// </summary>
         public IDictionary<string,Cuenta> ListaCuentas
         {
             get { return this.iListaCuentas; }

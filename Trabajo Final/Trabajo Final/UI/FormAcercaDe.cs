@@ -14,7 +14,7 @@ namespace Trabajo_Final.UI
         public FormAcercaDe()
         {
             InitializeComponent();
-            this.Text = String.Format("Acerca de Administrador de Correo");
+            this.Text = String.Format("Acerca de MaDBaF Email Manager");
             this.labelProductName.Text = AssemblyProduct;
             this.labelVersion.Text = String.Format("Versión {0}", AssemblyVersion);
             this.labelCopyright.Text = AssemblyCopyright;
@@ -66,7 +66,7 @@ namespace Trabajo_Final.UI
         {
             get
             {
-                return "Administrador de Correo";
+                return "MaDBaF Email Manager";
             }
         }
 

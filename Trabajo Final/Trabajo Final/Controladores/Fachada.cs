@@ -337,8 +337,15 @@ namespace Trabajo_Final.Controladores
                 {
                     listaEmailDTO.Add(new EmailDTO(cuentaDto.IdCuenta, email.Remitente, email.Destinatario, email.Cuerpo, email.Asunto,email.Fecha,false));
                 }
-                //Guardo la lista de emails en la base de datos
-                FachadaABMEmail.Instancia.InsertarEmails(listaEmailDTO);
+                //Guardo la lista de emails en la base de datos y obtengo los Ids de los Emails insertados
+                //para luego agregar los emails a su cuenta de dominio correspondiente
+                IList<int> listaIds = FachadaABMEmail.Instancia.InsertarEmails(listaEmailDTO);
+                //itera la lista de los Emails filtrados para asignarle a cada Email su Id correspondiente
+                //de la base de datos
+                for (int indice = 0; indice < listaEmailsFiltrados.Count; indice ++)
+                {
+                    listaEmailsFiltrados[indice].IdEmail = listaIds[indice];
+                }
                 //Actualizo la lista de emails de dicha cuenta de dominio
                 ActualizarListaEmails(cuenta, listaEmailsFiltrados);
                 //actualizo la ultima conexion de dicha cuenta en el servidor con la fecha y hora

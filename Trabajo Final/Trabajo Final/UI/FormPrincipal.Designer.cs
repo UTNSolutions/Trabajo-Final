@@ -61,13 +61,13 @@
             this.tbPara = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.progressBarEnviando = new System.Windows.Forms.ProgressBar();
             this.tbParaROnly = new System.Windows.Forms.TextBox();
             this.botonCCO = new System.Windows.Forms.Button();
             this.botonCCOAtras = new System.Windows.Forms.Button();
             this.botonCC = new System.Windows.Forms.Button();
             this.botonCCAtras = new System.Windows.Forms.Button();
             this.panelCuentas = new System.Windows.Forms.Panel();
+            this.label7 = new System.Windows.Forms.Label();
             this.tbTipoCorreo = new System.Windows.Forms.TextBox();
             this.tbNombreCuenta = new System.Windows.Forms.TextBox();
             this.dgEmails = new System.Windows.Forms.DataGridView();
@@ -87,6 +87,7 @@
             this.tbDeLeerMail = new System.Windows.Forms.TextBox();
             this.tbAsuntoLeerMail = new System.Windows.Forms.TextBox();
             this.gbEnviarMail = new System.Windows.Forms.GroupBox();
+            this.pictureBoxBarraProgreso = new System.Windows.Forms.PictureBox();
             this.lEnviado = new System.Windows.Forms.Label();
             this.menuStrip3 = new System.Windows.Forms.MenuStrip();
             this.administradorDeCuentasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -99,7 +100,6 @@
             this.responderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exportarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.acercaDeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.label7 = new System.Windows.Forms.Label();
             this.gbOpciones1.SuspendLayout();
             this.menuStrip2.SuspendLayout();
             this.gpNuevoMail.SuspendLayout();
@@ -107,6 +107,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgEmails)).BeginInit();
             this.panelLeerMail.SuspendLayout();
             this.gbEnviarMail.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxBarraProgreso)).BeginInit();
             this.menuStrip3.SuspendLayout();
             this.gbLeerMail.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -215,7 +216,6 @@
             this.gpNuevoMail.Controls.Add(this.tbPara);
             this.gpNuevoMail.Controls.Add(this.label4);
             this.gpNuevoMail.Controls.Add(this.label1);
-            this.gpNuevoMail.Controls.Add(this.progressBarEnviando);
             this.gpNuevoMail.Controls.Add(this.tbParaROnly);
             this.gpNuevoMail.Controls.Add(this.botonCCO);
             this.gpNuevoMail.Controls.Add(this.botonCCOAtras);
@@ -455,14 +455,6 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Para";
             // 
-            // progressBarEnviando
-            // 
-            this.progressBarEnviando.Location = new System.Drawing.Point(6, 17);
-            this.progressBarEnviando.Name = "progressBarEnviando";
-            this.progressBarEnviando.Size = new System.Drawing.Size(841, 12);
-            this.progressBarEnviando.TabIndex = 9;
-            this.progressBarEnviando.Visible = false;
-            // 
             // tbParaROnly
             // 
             this.tbParaROnly.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
@@ -526,6 +518,15 @@
             this.panelCuentas.Name = "panelCuentas";
             this.panelCuentas.Size = new System.Drawing.Size(853, 432);
             this.panelCuentas.TabIndex = 7;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(211, 7);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(109, 13);
+            this.label7.TabIndex = 9;
+            this.label7.Text = "Cuenta Seleccionada";
             // 
             // tbTipoCorreo
             // 
@@ -713,6 +714,7 @@
             // gbEnviarMail
             // 
             this.gbEnviarMail.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.gbEnviarMail.Controls.Add(this.pictureBoxBarraProgreso);
             this.gbEnviarMail.Controls.Add(this.lEnviado);
             this.gbEnviarMail.Controls.Add(this.menuStrip3);
             this.gbEnviarMail.Location = new System.Drawing.Point(0, 2);
@@ -722,12 +724,22 @@
             this.gbEnviarMail.TabStop = false;
             this.gbEnviarMail.Visible = false;
             // 
+            // pictureBoxBarraProgreso
+            // 
+            this.pictureBoxBarraProgreso.Image = global::Trabajo_Final.Properties.Resources.ajax_loader__3_;
+            this.pictureBoxBarraProgreso.Location = new System.Drawing.Point(640, 24);
+            this.pictureBoxBarraProgreso.Name = "pictureBoxBarraProgreso";
+            this.pictureBoxBarraProgreso.Size = new System.Drawing.Size(132, 21);
+            this.pictureBoxBarraProgreso.TabIndex = 30;
+            this.pictureBoxBarraProgreso.TabStop = false;
+            this.pictureBoxBarraProgreso.Visible = false;
+            // 
             // lEnviado
             // 
             this.lEnviado.AutoSize = true;
             this.lEnviado.BackColor = System.Drawing.Color.LightGreen;
             this.lEnviado.ForeColor = System.Drawing.Color.Blue;
-            this.lEnviado.Location = new System.Drawing.Point(786, 26);
+            this.lEnviado.Location = new System.Drawing.Point(778, 26);
             this.lEnviado.Name = "lEnviado";
             this.lEnviado.Size = new System.Drawing.Size(61, 13);
             this.lEnviado.TabIndex = 8;
@@ -843,27 +855,18 @@
             this.acercaDeToolStripMenuItem.Text = "Acerca de...";
             this.acercaDeToolStripMenuItem.Click += new System.EventHandler(this.acercaDeToolStripMenuItem_Click);
             // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(211, 7);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(109, 13);
-            this.label7.TabIndex = 9;
-            this.label7.Text = "Cuenta Seleccionada";
-            // 
             // FormPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(851, 482);
-            this.Controls.Add(this.gbLeerMail);
-            this.Controls.Add(this.gbOpciones1);
             this.Controls.Add(this.gbEnviarMail);
-            this.Controls.Add(this.panelCuentas);
             this.Controls.Add(this.gpNuevoMail);
             this.Controls.Add(this.panelLeerMail);
+            this.Controls.Add(this.panelCuentas);
+            this.Controls.Add(this.gbLeerMail);
+            this.Controls.Add(this.gbOpciones1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
@@ -872,7 +875,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "MaDBaF Email Manager";
             this.Load += new System.EventHandler(this.FormPrincipal_Load);
-            this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.BorrarLabelEnviado);
+            this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.BorrarLabelEnviadoYBarraProgreso);
             this.gbOpciones1.ResumeLayout(false);
             this.gbOpciones1.PerformLayout();
             this.menuStrip2.ResumeLayout(false);
@@ -886,6 +889,7 @@
             this.panelLeerMail.PerformLayout();
             this.gbEnviarMail.ResumeLayout(false);
             this.gbEnviarMail.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxBarraProgreso)).EndInit();
             this.menuStrip3.ResumeLayout(false);
             this.menuStrip3.PerformLayout();
             this.gbLeerMail.ResumeLayout(false);
@@ -925,7 +929,6 @@
         private System.Windows.Forms.ComboBox combobDe;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox tbNombreCuenta;
-        private System.Windows.Forms.ProgressBar progressBarEnviando;
         private System.Windows.Forms.Label lEnviado;
         private System.Windows.Forms.TextBox tbTipoCorreo;
         private System.Windows.Forms.ToolStripMenuItem cuentasToolStripMenuItem1;
@@ -961,6 +964,7 @@
         private System.Windows.Forms.Label labelDNValidaCC;
         private System.Windows.Forms.Label labelDNValidaCCO;
         private System.Windows.Forms.DataGridView dgEmails;
+        private System.Windows.Forms.Label label7;
         private System.Windows.Forms.DataGridViewTextBoxColumn remitente;
         private System.Windows.Forms.DataGridViewTextBoxColumn cuerpo;
         private System.Windows.Forms.DataGridViewTextBoxColumn destinatario;
@@ -968,7 +972,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn fecha;
         private System.Windows.Forms.DataGridViewTextBoxColumn leido;
         private System.Windows.Forms.DataGridViewTextBoxColumn idEmail;
-        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.PictureBox pictureBoxBarraProgreso;
     }
 }
 
