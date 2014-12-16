@@ -1,0 +1,15 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Trabajo_Final" GeneratedClassName="bdConfig">
+  <Profiles />
+  <Settings>
+    <Setting Name="equipo" Type="System.String" Scope="User">
+      <Value Profile="(Default)">MATI-D</Value>
+    </Setting>
+    <Setting Name="usuario" Type="System.String" Scope="User">
+      <Value Profile="(Default)">sa</Value>
+    </Setting>
+    <Setting Name="contraseña" Type="System.String" Scope="User">
+      <Value Profile="(Default)">06qiad</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

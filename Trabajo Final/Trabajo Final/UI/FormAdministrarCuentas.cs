@@ -71,10 +71,6 @@ namespace Trabajo_Final.UI
                     return false;
                 }
             }
-
-            //String servicio = cbServicio.SelectedItem.ToString();
-            //String cadena = tbMail.Text;
-            //return Regex.IsMatch(tbMail.Text, "\\w+([-+.']\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*");
         }
 
         /// <summary>
@@ -84,7 +80,7 @@ namespace Trabajo_Final.UI
         /// <param name="e"></param>
         private void ValidarMail(object sender, EventArgs e)
         {
-            if (!MailCorrecto())
+            if (!MailCorrecto() && tbMail.Text != "")
             {
                 labelMailError.Visible = true;
             }
@@ -95,24 +91,8 @@ namespace Trabajo_Final.UI
         }
 
         /// <summary>
-        /// Permite mostrar u ocultar la contraseña en el textBox de contraseña
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void MostrarContraseña(object sender, EventArgs e)
-        {
-            if (chbContraseña.Checked)
-            {
-                tbContraseña.UseSystemPasswordChar = false;
-            }
-            else
-            {
-                tbContraseña.UseSystemPasswordChar = true;
-            }
-        }
-
-        /// <summary>
-        /// Muestra los datos de una fila seleccionada del dataGridView en los textBoxs
+        /// Muestra los datos de una fila seleccionada del dataGridView en los text boxs 
+        /// cuando se clickea sobre dicha fila
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -131,6 +111,12 @@ namespace Trabajo_Final.UI
             }
         }        
 
+        /// <summary>
+        /// Muestras los datos de una fila seleeciona del dataGridView en los text boxs cuando se 
+        /// presiona sobre las teclas (arriba o abajo)
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="k"></param>
         private void MostrarDatos(object sender, KeyEventArgs k )
         {
             if (dgCuentas.RowCount > 0)
@@ -147,7 +133,7 @@ namespace Trabajo_Final.UI
         }
 
         /// <summary>
-        /// Permite dar de alta una cuanta de correo electronico
+        /// Permite dar de alta una cuenta de correo electronico
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -160,19 +146,27 @@ namespace Trabajo_Final.UI
                 }
                 else
                 {
-                    try
+                    if (labelMailError.Visible)
                     {
-                        Fachada.Instancia.AltaCuenta(tbCuenta.Text, tbMail.Text, cbServicio.SelectedItem.ToString(), tbContraseña.Text);
-                        MessageBox.Show("Cuenta agregada con exito", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        CargarDataGridCuentas();                                               
+                        MessageBox.Show("Cambie la dirección de E-Mail antes de intentar realizar la operación", "Advertencia-Dirección incorrecta", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
-                    catch (DAOExcepcion ex)
+                    else
                     {
-                        MessageBox.Show(ex.Message, "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                    catch (NombreCuentaExcepcion ex)
-                    {
-                        MessageBox.Show(ex.Message, "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        try
+                        {
+                            Fachada.Instancia.AltaCuenta(tbCuenta.Text, tbMail.Text, cbServicio.SelectedItem.ToString(), tbContraseña.Text);
+                            MessageBox.Show("Cuenta agregada con exito", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            CargarDataGridCuentas();
+                            LimpiarPantalla();
+                        }
+                        catch (DAOExcepcion ex)
+                        {
+                            MessageBox.Show(ex.Message, "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                        catch (NombreCuentaExcepcion ex)
+                        {
+                            MessageBox.Show(ex.Message, "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
                     }
                 }
             }
@@ -185,27 +179,35 @@ namespace Trabajo_Final.UI
         /// <param name="e"></param>
         private void ModificarCuenta(object sender, EventArgs e)
         {
-          if (tbCuenta.Text == "" | tbMail.Text == "")
-          {
-               MessageBox.Show("Falta completar datos obligatorios", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Error);
-          }
-          else
-          {
-              try
+            if (tbCuenta.Text == "" | tbMail.Text == "")
+            {
+                MessageBox.Show("Falta completar datos obligatorios", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
+            {
+                if (labelMailError.Visible)
                 {
-                    Fachada.Instancia.ModificarCuenta(Convert.ToInt32(tbIdCuenta.Text),tbCuenta.Text, tbMail.Text, cbServicio.SelectedItem.ToString(), tbContraseña.Text);
-                    MessageBox.Show("Datos de la cuenta modificados con exito", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    CargarDataGridCuentas();
-                 }
-               catch (DAOExcepcion ex)
-                {
-                      MessageBox.Show(ex.Message, "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Cambie la dirección de E-Mail antes de intentar realizar la operación", "Advertencia-Dirección incorrecta", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-               catch (NombreCuentaExcepcion ex)
+                else
                 {
-                      MessageBox.Show(ex.Message, "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    try
+                    {
+                        Fachada.Instancia.ModificarCuenta(Convert.ToInt32(tbIdCuenta.Text), tbCuenta.Text, tbMail.Text, cbServicio.SelectedItem.ToString(), tbContraseña.Text);
+                        MessageBox.Show("Datos de la cuenta modificados con exito", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        CargarDataGridCuentas();
+                        LimpiarPantalla();
+                    }
+                    catch (DAOExcepcion ex)
+                    {
+                        MessageBox.Show(ex.Message, "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    catch (NombreCuentaExcepcion ex)
+                    {
+                        MessageBox.Show(ex.Message, "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
-          }
+            }
        } 
 
        /// <summary>
@@ -229,6 +231,7 @@ namespace Trabajo_Final.UI
                         Fachada.Instancia.EliminarCuenta(Convert.ToInt32(tbIdCuenta.Text), tbCuenta.Text, tbMail.Text, cbServicio.SelectedItem.ToString(), tbContraseña.Text);
                         MessageBox.Show("La cuenta ha sido eliminada con éxito", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         CargarDataGridCuentas();
+                        LimpiarPantalla();
                     }
                     catch (DAOExcepcion ex)
                     {
@@ -238,14 +241,26 @@ namespace Trabajo_Final.UI
             }
         }
 
-        //Ocurre cuando cambia el valor del indice de cbServicio.
+        
+        /// <summary>
+        /// Ocurre cuando cambia el valor del indice de cbServicio.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void cbServicio_TabIndexChanged(object sender, EventArgs e)
         {
             if (tbMail.Text != "")
             {
                 ValidarMail(sender, e);
             }
+        }  
+
+        private void LimpiarPantalla()
+        {
+            tbCuenta.Text = "";
+            tbIdCuenta.Text = "";
+            tbMail.Text = "";
+            tbContraseña.Text = "";
         }
-    
     }
 }

@@ -110,13 +110,13 @@ namespace Trabajo_Final.Controladores
         {
             try
             {
-                //actualiza la cuenta en la base de datos
-                FachadaABMCuentas.Instancia.ModificarCuenta(new CuentaDTO(pIdCuenta, pNombre, pDireccion, pServicio, pContraseña));
                 if (!(Cuentas.Instancia.GetCuenta(pNombre) == null))
-                {   
+                {
                     //actualiza la cuenta en la lista de cuentas del dominio
                     Cuentas.Instancia.AgregarCuentaOActualizar(new Cuenta(pNombre, pDireccion, pServicio, pContraseña));
                 }
+                //actualiza la cuenta en la base de datos
+                FachadaABMCuentas.Instancia.ModificarCuenta(new CuentaDTO(pIdCuenta, pNombre, pDireccion, pServicio, pContraseña));               
             }
             catch (DAOExcepcion ex)
             {
@@ -297,7 +297,7 @@ namespace Trabajo_Final.Controladores
             IList<EmailDTO> lista = new List<EmailDTO>();
             foreach (Email email in Cuentas.Instancia.GetCuenta(pNombreCuenta).ListaEMails) 
             {
-                lista.Add(new EmailDTO(email.IdEmail,0,email.Remitente, email.Destinatario, email.Asunto, email.Asunto, email.Fecha, email.Leido));
+                lista.Add(new EmailDTO(email.IdEmail,0,email.Remitente, email.Destinatario, email.Cuerpo, email.Asunto, email.Fecha, email.Leido));
             }
             return lista;
         }

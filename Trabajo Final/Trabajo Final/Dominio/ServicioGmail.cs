@@ -105,7 +105,7 @@ namespace Trabajo_Final.Dominio
                 IList<Email> listaADevolver = new List<Email>();
                 while (indice <= client.GetMessageCount())
                 {
-                    Message mail = client.GetMessage(indice);
+                    Message mail = client.GetMessage(indice);                    
                     MailMessage email = mail.ToMailMessage();
                     IList<String> listaDestinatarios = new List<String>();                     
                     listaDestinatarios.Add(Convert.ToString(email.To));

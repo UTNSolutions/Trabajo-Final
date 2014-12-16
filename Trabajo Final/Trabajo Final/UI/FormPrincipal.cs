@@ -20,7 +20,7 @@ namespace Trabajo_Final.UI
 {
     public partial class FormPrincipal : Form
     {
-        delegate void AddItemCallBack(string p);
+        delegate void CallBack(string p);
 
         private FormBarraProgreso iFormBarraProgreso;
         public FormPrincipal()
@@ -47,7 +47,8 @@ namespace Trabajo_Final.UI
         private void cuentasToolStripMenuItem_Click(object sender, EventArgs e)
         {
             FormAdministrarCuentas iFormAdminCuentas = new FormAdministrarCuentas();
-            iFormAdminCuentas.ShowDialog();
+            iFormAdminCuentas.FormClosed += new FormClosedEventHandler(formAdminCuentas_FormClosed);
+            iFormAdminCuentas.ShowDialog();           
         }
 
         private void formAdminCuentas_FormClosed(object sender, FormClosedEventArgs e)       
@@ -207,6 +208,7 @@ namespace Trabajo_Final.UI
                 nodo.Nodes.Add("R","Recibidos");
                 nodo.Nodes.Add("E","Enviados");
             }
+            tbNombreCuenta.Text =  tvCuentas.GetNodeAt(1, 1).Name;
 
         }
 
@@ -275,7 +277,7 @@ namespace Trabajo_Final.UI
         {
             if (tbPara.Text != "")
             {
-                //Para ver si seesta poniendo una cedena valida como dirección de correo.
+                //Para ver si se esta poniendo una cadena valida como dirección de correo.
                 if (!(Regex.IsMatch(tbPara.Text, "\\w+([-+.']\\w+)*@\\w+([-.]\\w+)*\\.\\w+(a-z)*")))
                 {
                     labelDNValidaPara.Visible = true;
@@ -628,6 +630,7 @@ namespace Trabajo_Final.UI
             }
         }
 
+
         /// <summary>
         /// Carga el data grid.
         /// </summary>
@@ -651,7 +654,7 @@ namespace Trabajo_Final.UI
             foreach (EmailDTO email in Fachada.Instancia.GetEmails(pNombreCuenta))
             {
                 CuentaDTO cuenta = Fachada.Instancia.GetCuenta(pNombreCuenta);
-                String remitente = StringsUtils.ObtenerEmail(email.Remitente);             
+                String remitente = StringsUtils.ObtenerEmail(email.Remitente);
                 if (remitente != cuenta.Direccion)
                 {
                     adaptador.Add(new AdaptadorDataGrid(email.IdEmail,email.Remitente, email.Destinatario[0], email.Asunto, email.Cuerpo,email.Fecha,email.Leido));
@@ -667,7 +670,7 @@ namespace Trabajo_Final.UI
             //sino directamente le asigno los datos al data grid
             if (dgEmails.InvokeRequired) 
             {
-                AddItemCallBack d = new AddItemCallBack( FiltarRecibidos);
+                    CallBack d = new CallBack( FiltarRecibidos);
                     this.Invoke(d,pNombreCuenta);
             }
             else
@@ -710,7 +713,7 @@ namespace Trabajo_Final.UI
             //sino directamente le asigno los datos al data grid
             if (dgEmails.InvokeRequired)
             {
-                AddItemCallBack d = new AddItemCallBack(FiltarEnviados);
+                CallBack d = new CallBack(FiltarEnviados);
                 this.Invoke(d, pNombreCuenta);
                 }
             else
@@ -863,6 +866,11 @@ namespace Trabajo_Final.UI
                hilo.ReportProgress(70);           
         }
 
+        /// <summary>
+        /// Obtiene los correos de cada una de las cuentas configuradas
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ObtenerTodos(object sender, DoWorkEventArgs e)
         {
           try
@@ -945,13 +953,22 @@ namespace Trabajo_Final.UI
 
         private void responderToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            tbPara.Text = tbParaLeerMail.Text;
-            tbAsunto.Text = "Re: " + tbAsuntoLeerMail.Text;
-            panelLeerMail.Visible = false;
-            gbEnviarMail.Visible = true;
-            tbCCOROnly.ReadOnly = true;
-            tbCCROnly.ReadOnly = true;
-            gpNuevoMail.Visible = true;   
+            try
+            {
+                combobDe.DataSource = Fachada.Instancia.ObtenerCuentas();
+                tbParaROnly.Text = tbDeLeerMail.Text + "; ";
+                tbAsunto.Text = "Re: " + tbAsuntoLeerMail.Text;
+                panelLeerMail.Visible = false;
+                gbEnviarMail.Visible = true;
+                tbCCOROnly.ReadOnly = true;
+                tbCCROnly.ReadOnly = true;
+                gpNuevoMail.Visible = true;
+                botonBorrarUltimoPara.Enabled = true;
+            }
+            catch (DAOExcepcion ex)
+            {
+                MessageBox.Show(ex.Message, "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }           
         }
     }
 }
