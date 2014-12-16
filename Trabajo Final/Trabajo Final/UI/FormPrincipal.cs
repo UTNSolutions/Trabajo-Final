@@ -553,8 +553,8 @@ namespace Trabajo_Final.UI
                 pictureBoxBarraProgreso.Visible = true;
                 gpNuevoMail.Enabled = false;
                 gbEnviarMail.Enabled = false;
-                menuStrip1.Enabled = false;               
-                Fachada.Instancia.EnviarEmail(combobDe.Text, generarListaDestinatario(tbParaROnly.Text), tbAsunto.Text, tbCuerpo.Text, combobDe.SelectedValue.ToString());
+                menuStrip1.Enabled = false;
+                Fachada.Instancia.EnviarEmail(combobDe.Text, generarListaCadenas(tbParaROnly.Text), generarListaCadenas(tbCCROnly.Text), generarListaCadenas(tbCCOROnly.Text), tbAsunto.Text, tbCuerpo.Text, generarListaCadenas(tbAdjuntos.Text), combobDe.SelectedValue.ToString());
                 lEnviado.Visible = true;
                 borrarMailEnviado();                           
             }
@@ -675,7 +675,7 @@ namespace Trabajo_Final.UI
                 String remitente = StringsUtils.ObtenerEmail(email.Remitente);
                 if (remitente != cuenta.Direccion)
                 {
-                    adaptador.Add(new AdaptadorDataGrid(email.IdEmail, email.Remitente, email.Destinatario[0], email.Destinatario[0], email.Asunto, email.Cuerpo, email.Fecha, email.Leido));
+                    adaptador.Add(new AdaptadorDataGrid(email.IdEmail, email.Remitente, email.Destinatario, email.ConCopia, email.Asunto, email.Cuerpo, email.Fecha, email.Leido));
                 }
             }
             //ordeno por fecha                         
@@ -723,7 +723,7 @@ namespace Trabajo_Final.UI
                 String remitente = StringsUtils.ObtenerEmail(email.Remitente);
                 if (remitente == cuenta.Direccion)
                 {
-                    adaptador.Add(new AdaptadorDataGrid(email.IdEmail, email.Remitente, email.Destinatario[0], email.Destinatario[0], email.Asunto, email.Cuerpo, email.Fecha, email.Leido));
+                    adaptador.Add(new AdaptadorDataGrid(email.IdEmail, email.Remitente, email.Destinatario, email.ConCopia, email.Asunto, email.Cuerpo, email.Fecha, email.Leido));
                 }
             }
             //ordeno por fecha
@@ -923,7 +923,7 @@ namespace Trabajo_Final.UI
                 {
                     tbAsuntoLeerMail.Text = Convert.ToString(fila.Asunto);
                 }
-                if (fila.CC != "")
+                if (fila.CC != null)
                 {
                     labelCC.Visible = true;
                     tbCCLeerMail.Visible = true;
@@ -933,8 +933,8 @@ namespace Trabajo_Final.UI
                 }
                 else
                 {
-                    labelCC.Visible = true;
-                    tbCCLeerMail.Visible = true;
+                    labelCC.Visible = false;
+                    tbCCLeerMail.Visible = false;
                     tbCuerpoLeerMail.Location = new Point(6, 109);
                     tbCuerpoLeerMail.Size = new Size(841, 314);
                 }
