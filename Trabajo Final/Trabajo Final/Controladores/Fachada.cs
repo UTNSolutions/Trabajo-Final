@@ -250,10 +250,12 @@ namespace Trabajo_Final.Controladores
                 IList<EmailDTO> lEmail = new List<EmailDTO>();
                 lEmail.Add(new EmailDTO(cuentaDto.IdCuenta,email.Remitente,email.Destinatario,email.Cuerpo,email.Asunto,email.Fecha,false));
                 //inserto el email enviado en la base de datos
-                FachadaABMEmail.Instancia.InsertarEmails(lEmail);
-                //Actualizo la lista de emails de dicha cuenta de dominio
+                IList<int> listaId = FachadaABMEmail.Instancia.InsertarEmails(lEmail);                
                 IList<Email> emailEnviado = new List<Email>();
+                //le seteo al email el id devuelto en la insercion en la base de datos
+                email.IdEmail = listaId.First();
                 emailEnviado.Add(email);
+                //Actualizo la lista de emails de dicha cuenta de dominio
                 ActualizarListaEmails(cuenta, emailEnviado);
             }
             catch (FormatException)
