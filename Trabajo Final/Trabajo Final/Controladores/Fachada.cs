@@ -248,7 +248,7 @@ namespace Trabajo_Final.Controladores
                 //para poder asociar el email enviado a la cuenta en la base de datos
                 CuentaDTO cuentaDto = FachadaABMCuentas.Instancia.BuscarCuenta(cuenta.Nombre);
                 IList<EmailDTO> lEmail = new List<EmailDTO>();
-                lEmail.Add(new EmailDTO(cuentaDto.IdCuenta,email.Remitente,email.Destinatario,email.Cuerpo,email.Asunto,email.Fecha,false));
+                lEmail.Add(new EmailDTO(cuentaDto.IdCuenta,email.Remitente,email.Destinatario, email.CC,email.CCO,email.Cuerpo,email.Asunto,email.Fecha,false));
                 //inserto el email enviado en la base de datos
                 FachadaABMEmail.Instancia.InsertarEmails(lEmail);
                 //Actualizo la lista de emails de dicha cuenta de dominio
@@ -297,7 +297,7 @@ namespace Trabajo_Final.Controladores
             IList<EmailDTO> lista = new List<EmailDTO>();
             foreach (Email email in Cuentas.Instancia.GetCuenta(pNombreCuenta).ListaEMails) 
             {
-                lista.Add(new EmailDTO(email.IdEmail,0,email.Remitente, email.Destinatario, email.Cuerpo, email.Asunto, email.Fecha, email.Leido));
+                lista.Add(new EmailDTO(email.IdEmail,0,email.Remitente, email.Destinatario, email.CC, email.CCO, email.Cuerpo, email.Asunto, email.Fecha, email.Leido));
             }
             return lista;
         }
@@ -335,7 +335,7 @@ namespace Trabajo_Final.Controladores
                 //que el email corresponde
                 foreach (Email email in listaEmailsFiltrados)
                 {
-                    listaEmailDTO.Add(new EmailDTO(cuentaDto.IdCuenta, email.Remitente, email.Destinatario, email.Cuerpo, email.Asunto,email.Fecha,false));
+                    listaEmailDTO.Add(new EmailDTO(cuentaDto.IdCuenta, email.Remitente, email.CC, email.CCO, email.Destinatario, email.Cuerpo, email.Asunto, email.Fecha, false));
                 }
                 //Guardo la lista de emails en la base de datos y obtengo los Ids de los Emails insertados
                 //para luego agregar los emails a su cuenta de dominio correspondiente

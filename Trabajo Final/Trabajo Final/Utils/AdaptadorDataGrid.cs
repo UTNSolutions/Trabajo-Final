@@ -16,16 +16,25 @@ namespace Trabajo_Final.Utils
         private String iCuerpo;
         private DateTime iFecha;        
         private bool iLeido;
-        public AdaptadorDataGrid(int pIdEmail,String pRemitente,String pDestinatario,String pCC,String pAsunto,String pCuerpo,DateTime pFecha,bool pLeido)
+        public AdaptadorDataGrid(int pIdEmail,String pRemitente,IList<String> pDestinatario,IList<String> pCC,String pAsunto,String pCuerpo,DateTime pFecha,bool pLeido)
         {
             this.iIdEmail = pIdEmail;
             this.iRemitente = pRemitente;
-            this.iDestinatario = pDestinatario;
+            foreach (String destinatario in pDestinatario)
+            {
+                this.iDestinatario += destinatario + "; ";
+            }
+            if (pCC != null)
+            {
+                foreach (String CC in pCC)
+                {
+                    this.iCC += CC + "; ";
+                }
+            }
             this.iAsunto = pAsunto;
             this.iCuerpo = pCuerpo;
             this.iFecha = pFecha;
-            this.iLeido = pLeido;
-            this.iCC = pCC;
+            this.iLeido = pLeido;            
         }
 
         public int IdEmail

@@ -115,6 +115,11 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>bdConfig.settings</DependentUpon>
     </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="UI\FormAcercaDe.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -169,14 +174,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-    </Compile>
     <EmbeddedResource Include="UI\FormBarraProgreso.resx">
       <DependentUpon>FormBarraProgreso.cs</DependentUpon>
     </EmbeddedResource>
@@ -232,6 +232,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="icono-email11.ico" />
+    <None Include="Resources\observar-smc %281%29.ico" />
     <None Include="Resources\ajax-loader %283%29.gif" />
     <None Include="Resources\ajax-loader %282%29.gif" />
     <None Include="Resources\up.ico" />

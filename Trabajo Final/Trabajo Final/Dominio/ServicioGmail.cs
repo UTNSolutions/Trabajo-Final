@@ -59,7 +59,6 @@ namespace Trabajo_Final.Dominio
                 }
                 SmtpClient client = new SmtpClient();
 
-                client.PickupDirectoryLocation = @"C:\Users\Brian\Desktop\Mail";
                 client.Credentials = this.iCredenciales;
 
                 client.Port = 587;
@@ -67,7 +66,7 @@ namespace Trabajo_Final.Dominio
                 client.Host = "smtp.gmail.com";
                 client.EnableSsl = true;  //Esto es para que vaya a través de SSL que es obligatorio con GMail
                 MailMessage email = new MailMessage(pCuenta.Direccion, destinatario, pMail.Asunto, pMail.Cuerpo);
-                if (pMail.Adjunto.Count != 0)
+                if (pMail.Adjunto != null)
                 {
                     foreach (String adjunto in pMail.Adjunto)
                     {
