@@ -58,11 +58,12 @@ namespace Trabajo_Final.Dominio
         }
 
         /// <summary>
-        /// Devuelve la componente IdEmail
+        /// Devuelve o establece la componente IdEmail
         /// </summary>
         public int IdEmail
         {
             get { return this.iIdEmail; }
+            set { this.iIdEmail = value; }
         }
 
         /// <summary>

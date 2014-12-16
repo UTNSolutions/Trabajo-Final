@@ -21,7 +21,7 @@ namespace Trabajo_Final.Persistencia
             this.iTransaccion = pTransaccion;
 
         }
-        public void Insertar(EmailDTO pEmail)
+        public int Insertar(EmailDTO pEmail)
         {
            try
            {
@@ -45,6 +45,7 @@ namespace Trabajo_Final.Persistencia
                     com.Parameters.AddWithValue("@tipo", "D");
                     com.ExecuteNonQuery();
                 }
+                return idMail;
            }
            catch (SqlException)
             {

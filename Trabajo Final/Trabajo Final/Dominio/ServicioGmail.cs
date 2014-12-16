@@ -40,6 +40,11 @@ namespace Trabajo_Final.Dominio
             {
                 throw new NullReferenceException("No hay una cuenta asociada para realizar la operacion");
             }
+            //controlo si al menos se cargo un destinatario
+            if(pMail.Destinatario.Count == 0)
+            {
+                throw new EmailExcepcion("Ingrese al menos un destinatario");
+            }
             //Configuro las credenciales de la cuenta para poder establecer la conexion
             this.iCredenciales = new NetworkCredential(pCuenta.Direccion, pCuenta.Contraseña);
             foreach (string destinatario in pMail.Destinatario)

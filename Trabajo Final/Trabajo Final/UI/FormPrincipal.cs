@@ -14,6 +14,7 @@ using System.Threading;
 using System.Text.RegularExpressions;
 using Trabajo_Final.Utils;
 using System.IO;
+using System.Activities.Statements;
 
 
 namespace Trabajo_Final.UI
@@ -48,7 +49,7 @@ namespace Trabajo_Final.UI
         {
             FormAdministrarCuentas iFormAdminCuentas = new FormAdministrarCuentas();
             iFormAdminCuentas.FormClosed += new FormClosedEventHandler(formAdminCuentas_FormClosed);
-            iFormAdminCuentas.ShowDialog();
+            iFormAdminCuentas.ShowDialog();           
         }
 
         private void formAdminCuentas_FormClosed(object sender, FormClosedEventArgs e)       
@@ -69,7 +70,7 @@ namespace Trabajo_Final.UI
             {
                 try
                 {
-                combobDe.DataSource = Fachada.Instancia.ObtenerCuentas();
+                    combobDe.DataSource = Fachada.Instancia.ObtenerCuentas();
                 }
                 catch(DAOExcepcion ex)
                 {
@@ -549,32 +550,27 @@ namespace Trabajo_Final.UI
         {
             try
             {
-                progressBarEnviando.Maximum = 10;
-                progressBarEnviando.Visible = true;
-                progressBarEnviando.Value = 3;
-                progressBarEnviando.Value = 4;
-                progressBarEnviando.Value = 5;
+                pictureBoxBarraProgreso.Visible = true;
                 gpNuevoMail.Enabled = false;
                 gbEnviarMail.Enabled = false;
                 menuStrip1.Enabled = false;               
-                progressBarEnviando.Value = 6;
-                Fachada.Instancia.EnviarEmail(combobDe.Text, generarListaCadenas(tbParaROnly.Text), generarListaCadenas(tbCCROnly.Text), generarListaCadenas(tbCCOROnly.Text), tbAsunto.Text, tbCuerpo.Text, generarListaCadenas(tbAdjuntos.Text), combobDe.SelectedValue.ToString());
-                progressBarEnviando.Value = 7;
-                progressBarEnviando.Value = 8;
-                progressBarEnviando.Value = 10;
+                Fachada.Instancia.EnviarEmail(combobDe.Text, generarListaDestinatario(tbParaROnly.Text), tbAsunto.Text, tbCuerpo.Text, combobDe.SelectedValue.ToString());
                 lEnviado.Visible = true;
                 borrarMailEnviado();                           
             }
             catch (DAOExcepcion ex)
             {
+                pictureBoxBarraProgreso.Visible = false;
                 MessageBox.Show(ex.Message, "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             catch (EmailExcepcion ex)
             {
+                pictureBoxBarraProgreso.Visible = false;
                 MessageBox.Show(ex.Message, "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             catch (InternetExcepcion ex)
             {
+                pictureBoxBarraProgreso.Visible = false;
                 MessageBox.Show(ex.Message, "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             finally
@@ -582,9 +578,7 @@ namespace Trabajo_Final.UI
                 gpNuevoMail.Enabled = true;
                 gbEnviarMail.Enabled = true;
                 menuStrip1.Enabled = true;
-                progressBarEnviando.Visible = false;
             }
-            
         }
 
         /// <summary>
@@ -600,30 +594,30 @@ namespace Trabajo_Final.UI
             int ind = 0;
             if (pCadena != "")
             {
-                while (ind < pCadena.Length)
+            while (ind < pCadena.Length)
+            {
+                if (pCadena[ind] != ';' && ind != pCadena.Length)
                 {
-                    if (pCadena[ind] != ';' && ind != pCadena.Length)
-                    {
-                        cadena = cadena + pCadena[ind].ToString();
+                    cadena = cadena + pCadena[ind].ToString();
                         ind++;
+                }
+                else 
+                {
+                    if (pCadena[ind] == ';')
+                    {
+                        listaDestinatarios.Add(cadena);
+                        cadena = "";
+                        ind = ind + 2;
                     }
                     else
                     {
-                        if (pCadena[ind] == ';')
-                        {
-                            listaDestinatarios.Add(cadena);
-                            cadena = "";
-                            ind = ind + 2;
-                        }
-                        else
-                        {
-                            cadena = cadena + pCadena[ind].ToString();
-                            listaDestinatarios.Add(cadena);
-                            cadena = "";
-                            ind++;
-                        }
+                        cadena = cadena + pCadena[ind].ToString();
+                        listaDestinatarios.Add(cadena);
+                        cadena = "";
+                        ind++;
                     }
                 }
+            }
             }
             else
             {
@@ -668,7 +662,7 @@ namespace Trabajo_Final.UI
                     break;
                 case 'E': { FiltarEnviados(pNombreCuenta); }
                     break;
-            }
+            }          
         }
 
         private void FiltarRecibidos(String pNombreCuenta)
@@ -678,7 +672,7 @@ namespace Trabajo_Final.UI
             foreach (EmailDTO email in Fachada.Instancia.GetEmails(pNombreCuenta))
             {
                 CuentaDTO cuenta = Fachada.Instancia.GetCuenta(pNombreCuenta);
-                String remitente = StringsUtils.ObtenerEmail(email.Remitente);             
+                String remitente = StringsUtils.ObtenerEmail(email.Remitente);
                 if (remitente != cuenta.Direccion)
                 {
                     adaptador.Add(new AdaptadorDataGrid(email.IdEmail, email.Remitente, email.Destinatario[0], email.Destinatario[0], email.Asunto, email.Cuerpo, email.Fecha, email.Leido));
@@ -699,7 +693,7 @@ namespace Trabajo_Final.UI
             }
             else
             {
-            dgEmails.DataSource = adaptador;
+                dgEmails.DataSource = adaptador;
                 //itera cada fila del data grid para saber si el email fue leido o no
                 //y asi poder colorear los emails que fueron leidos
                 foreach (DataGridViewRow fila in dgEmails.Rows)
@@ -708,7 +702,7 @@ namespace Trabajo_Final.UI
                     if (!(bool)celda.Value)
                     {
                         fila.DefaultCellStyle.BackColor = Color.Wheat;
-            }
+                    }
                 }
             }         
             dgEmails.Columns["destinatario"].Visible = false;
@@ -731,7 +725,7 @@ namespace Trabajo_Final.UI
                 {
                     adaptador.Add(new AdaptadorDataGrid(email.IdEmail, email.Remitente, email.Destinatario[0], email.Destinatario[0], email.Asunto, email.Cuerpo, email.Fecha, email.Leido));
                 }
-                }
+            }
             //ordeno por fecha
             adaptador = (from e in adaptador
                            orderby e.Fecha descending
@@ -786,13 +780,14 @@ namespace Trabajo_Final.UI
         }
 
         /// <summary>
-        /// Borra el label que notifica que se envio un mail.
+        /// Borra el label que notifica que se envio un mail y la barra de progreso
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void BorrarLabelEnviado(object sender, MouseEventArgs e)
+        private void BorrarLabelEnviadoYBarraProgreso(object sender, MouseEventArgs e)
         {
             lEnviado.Visible = false;
+            pictureBoxBarraProgreso.Visible = false;
         }
 
         /// <summary>
@@ -813,29 +808,16 @@ namespace Trabajo_Final.UI
                 this.iFormBarraProgreso.Show();
                 BackgroundWorker hilo = new BackgroundWorker();
                 hilo.WorkerReportsProgress = true;
-                hilo.ReportProgress(0);           
-                hilo.ReportProgress(40);
                 hilo.DoWork += new DoWorkEventHandler(ObtenerMailDeUnaCuenta);
-                hilo.ProgressChanged += new ProgressChangedEventHandler(ProgressChanged);
                 hilo.RunWorkerCompleted += new RunWorkerCompletedEventHandler(ProgressCompleted);
                 hilo.RunWorkerAsync();
- 
-                hilo.ReportProgress(60);                
             }
         }
 
-        private void ProgressChanged(object sender, ProgressChangedEventArgs e)
-        {
-            //Cambia el valor del progressBar segun el progreso de BackgroundWorker
-            this.iFormBarraProgreso.SetValorProgreso(e.ProgressPercentage);
-        }
 
         private void ProgressCompleted(object sender,RunWorkerCompletedEventArgs e)
         {
-            //Establezco el progressBar en 100 ya que la operacion se completo
-            this.iFormBarraProgreso.SetValorProgreso(100);
             this.iFormBarraProgreso.Close();    
-            Thread.Sleep(2000);
         }
 
         private void ObtenerMailDeUnaCuenta(object sender, DoWorkEventArgs e)
@@ -845,7 +827,7 @@ namespace Trabajo_Final.UI
                 Fachada.Instancia.ObtenerEmail(tbNombreCuenta.Text);
                 CargarDataGrid(tbNombreCuenta.Text, Convert.ToChar(tbTipoCorreo.Text));
             }           
-          catch (NombreCuentaExcepcion ex)
+            catch (NombreCuentaExcepcion ex)
             {
                 MessageBox.Show(ex.Message, "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -871,25 +853,13 @@ namespace Trabajo_Final.UI
         /// <param name="e"></param>
         private void obtenerTodosToolStripMenuItem_Click(object sender, EventArgs e)
         {          
-           
                this.iFormBarraProgreso = new FormBarraProgreso();
                this.iFormBarraProgreso.Show();
                BackgroundWorker hilo = new BackgroundWorker();
                hilo.DoWork += new DoWorkEventHandler(ObtenerTodos);
                hilo.WorkerReportsProgress = true;               
-               hilo.ProgressChanged += new ProgressChangedEventHandler(ProgressChanged);
                hilo.RunWorkerCompleted += new RunWorkerCompletedEventHandler(ProgressCompleted);
                hilo.RunWorkerAsync();
-               
-               hilo.ReportProgress(0);
-     
-               hilo.ReportProgress(20);
-            
-               hilo.ReportProgress(30);
-               
-               hilo.ReportProgress(50);
-            
-               hilo.ReportProgress(70); 
         }
 
         /// <summary>

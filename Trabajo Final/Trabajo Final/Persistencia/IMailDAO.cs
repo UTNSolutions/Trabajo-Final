@@ -10,10 +10,10 @@ namespace Trabajo_Final.Persistencia
     interface IMailDAO
     {
         /// <summary>
-        /// Permite insertar un nuevo Email en la base de datos
+        /// Permite insertar un nuevo Email en la base de datos y devuelve su Id
         /// </summary>
         /// <param name="pCuenta"></param>
-        void Insertar(EmailDTO pEmail);
+        int Insertar(EmailDTO pEmail);
 
       
         /// <summary>
