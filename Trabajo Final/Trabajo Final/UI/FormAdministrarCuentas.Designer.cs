@@ -42,7 +42,6 @@
             this.tbContraseña = new System.Windows.Forms.TextBox();
             this.tbMail = new System.Windows.Forms.TextBox();
             this.cbServicio = new System.Windows.Forms.ComboBox();
-            this.chbContraseña = new System.Windows.Forms.CheckBox();
             this.label5 = new System.Windows.Forms.Label();
             this.labelMailError = new System.Windows.Forms.Label();
             this.bEliminar = new System.Windows.Forms.Button();
@@ -56,6 +55,7 @@
             // 
             this.dgCuentas.AllowUserToAddRows = false;
             this.dgCuentas.AllowUserToDeleteRows = false;
+            this.dgCuentas.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
             this.dgCuentas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgCuentas.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.idCuenta,
@@ -67,7 +67,7 @@
             this.dgCuentas.Name = "dgCuentas";
             this.dgCuentas.ReadOnly = true;
             this.dgCuentas.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgCuentas.Size = new System.Drawing.Size(308, 279);
+            this.dgCuentas.Size = new System.Drawing.Size(308, 250);
             this.dgCuentas.TabIndex = 0;
             this.dgCuentas.TabStop = false;
             this.dgCuentas.Click += new System.EventHandler(this.MostrarDatos);
@@ -184,22 +184,10 @@
             this.cbServicio.TabIndex = 2;
             this.cbServicio.SelectedIndexChanged += new System.EventHandler(this.cbServicio_TabIndexChanged);
             // 
-            // chbContraseña
-            // 
-            this.chbContraseña.AutoSize = true;
-            this.chbContraseña.Location = new System.Drawing.Point(413, 189);
-            this.chbContraseña.Name = "chbContraseña";
-            this.chbContraseña.Size = new System.Drawing.Size(117, 17);
-            this.chbContraseña.TabIndex = 9;
-            this.chbContraseña.TabStop = false;
-            this.chbContraseña.Text = "Mostrar contraseña";
-            this.chbContraseña.UseVisualStyleBackColor = true;
-            this.chbContraseña.CheckedChanged += new System.EventHandler(this.MostrarContraseña);
-            // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(558, 210);
+            this.label5.Location = new System.Drawing.Point(548, 199);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(106, 13);
             this.label5.TabIndex = 10;
@@ -221,7 +209,7 @@
             this.bEliminar.Enabled = false;
             this.bEliminar.Image = global::Trabajo_Final.Properties.Resources.editdelete;
             this.bEliminar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.bEliminar.Location = new System.Drawing.Point(579, 250);
+            this.bEliminar.Location = new System.Drawing.Point(575, 239);
             this.bEliminar.Name = "bEliminar";
             this.bEliminar.Size = new System.Drawing.Size(75, 23);
             this.bEliminar.TabIndex = 7;
@@ -235,7 +223,7 @@
             this.bModificar.Enabled = false;
             this.bModificar.Image = global::Trabajo_Final.Properties.Resources.edit;
             this.bModificar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.bModificar.Location = new System.Drawing.Point(474, 250);
+            this.bModificar.Location = new System.Drawing.Point(470, 239);
             this.bModificar.Name = "bModificar";
             this.bModificar.Size = new System.Drawing.Size(75, 23);
             this.bModificar.TabIndex = 6;
@@ -248,7 +236,7 @@
             // 
             this.bAgregar.Image = global::Trabajo_Final.Properties.Resources.apply;
             this.bAgregar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.bAgregar.Location = new System.Drawing.Point(369, 250);
+            this.bAgregar.Location = new System.Drawing.Point(365, 239);
             this.bAgregar.Name = "bAgregar";
             this.bAgregar.Size = new System.Drawing.Size(75, 23);
             this.bAgregar.TabIndex = 5;
@@ -271,14 +259,13 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(676, 309);
+            this.ClientSize = new System.Drawing.Size(662, 280);
             this.Controls.Add(this.tbIdCuenta);
             this.Controls.Add(this.labelMailError);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.bEliminar);
             this.Controls.Add(this.bModificar);
             this.Controls.Add(this.bAgregar);
-            this.Controls.Add(this.chbContraseña);
             this.Controls.Add(this.cbServicio);
             this.Controls.Add(this.tbMail);
             this.Controls.Add(this.tbContraseña);
@@ -314,7 +301,6 @@
         private System.Windows.Forms.TextBox tbContraseña;
         private System.Windows.Forms.TextBox tbMail;
         private System.Windows.Forms.ComboBox cbServicio;
-        private System.Windows.Forms.CheckBox chbContraseña;
         private System.Windows.Forms.Button bAgregar;
         private System.Windows.Forms.Button bModificar;
         private System.Windows.Forms.Button bEliminar;

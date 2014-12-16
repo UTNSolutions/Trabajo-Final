@@ -11,32 +11,58 @@ namespace Trabajo_Final.Dominio
     /// </summary>
     public class Email
     {
+        private int iIdEmail;
+
         private String iRemitente;
 
         private IList<String> iDestinatario;
 
         private String iCuerpo;
 
-       // private IList<String> iConCopia;
+        private IList<String> iConCopia;
 
-        //private IList<String> iConCopiaOculta;
+        private IList<String> iConCopiaOculta;
 
         private String iAsunto;
 
         private DateTime iFecha;
 
+        private bool iLeido;
+
         private IList<String> iAdjuntos;
 
-        public Email(String pRemitente,IList<String> pDestinatario, String pCuerpo, String pAsunto, IList<String> pAdjuntos,DateTime pFecha)
+        public Email(String pRemitente, IList<String> pDestinatario, IList<String> pCC, IList<String> pCCO, String pCuerpo, String pAsunto, IList<String> pAdjuntos, DateTime pFecha, bool pLeido)
         {
             this.iRemitente = pRemitente;
             this.iDestinatario = pDestinatario;
             this.iCuerpo = pCuerpo;
             this.iAsunto = pAsunto;
-           // this.iConCopia = pCC;
-          //  this.iConCopiaOculta = pCCO;
+            this.iConCopia = pCC;
+            this.iConCopiaOculta = pCCO;
             this.iFecha = pFecha;
+            this.iLeido = pLeido;
             this.iAdjuntos = pAdjuntos;
+        }
+
+        public Email(int pIdEmail, String pRemitente, IList<String> pDestinatario, /*IList<String> pCC, IList<String> pCCO,*/ String pCuerpo, String pAsunto, DateTime pFecha, bool pLeido)
+        {
+            this.iIdEmail = pIdEmail;
+            this.iRemitente = pRemitente;
+            this.iDestinatario = pDestinatario;
+            this.iCuerpo = pCuerpo;
+            this.iAsunto = pAsunto;
+            //this.iConCopia = pCC;
+            //this.iConCopiaOculta = pCCO;
+            this.iFecha = pFecha;
+            this.iLeido = pLeido;
+        }
+
+        /// <summary>
+        /// Devuelve la componente IdEmail
+        /// </summary>
+        public int IdEmail
+        {
+            get { return this.iIdEmail; }
         }
 
         /// <summary>
@@ -53,6 +79,22 @@ namespace Trabajo_Final.Dominio
         public IList<String> Destinatario
         {
             get { return this.iDestinatario; }
+        }
+
+        /// <summary>
+        /// Devuelve el componente CC.
+        /// </summary>
+        public IList<String> CC
+        {
+            get { return this.iConCopia; }
+        }
+
+        /// <summary>
+        /// Devuelve el componente CCO.
+        /// </summary>
+        public IList<String> CCO
+        {
+            get { return this.iConCopiaOculta; }
         }
 
         /// <summary>
@@ -84,6 +126,15 @@ namespace Trabajo_Final.Dominio
         public DateTime Fecha
         {
             get { return this.iFecha; }
+        }
+
+        /// <summary>
+        /// Devuelve o establece si el email fue leido o no
+        /// </summary>
+        public bool Leido
+        {
+            get { return this.iLeido; }
+            set { this.iLeido = value; }
         }
     }
 }

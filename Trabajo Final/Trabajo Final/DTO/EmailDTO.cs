@@ -24,44 +24,38 @@ namespace Trabajo_Final.DTO
         private String iAsunto;
 
         private DateTime iFecha;
-      //  private IList<String> iConCopia;
 
-       // private IList<String> iConCopiaOculta;
+        private bool iLeido;
 
-        public EmailDTO(int pIdCuenta,String pRemitente,IList<String> pDestinatario,String pCuerpo, String pAsunto,DateTime pFecha)
+        private IList<String> iConCopia;
+
+        private IList<String> iConCopiaOculta;
+
+        public EmailDTO(int pIdCuenta, String pRemitente, IList<String> pDestinatario, IList<String> pConCopia, IList<String> pConCopiaOculta, String pCuerpo, String pAsunto, DateTime pFecha, bool pLeido)
         {
             this.iRemitente = pRemitente;
             this.iDestinatario = pDestinatario;
-           // this.iConCopia = pConCopia;
-            //this.iConCopiaOculta = pConCopiaOculta;
+            this.iConCopia = pConCopia;
+            this.iConCopiaOculta = pConCopiaOculta;
             this.iIdCuenta = pIdCuenta;
             this.iCuerpo = pCuerpo;
             this.iAsunto = pAsunto;
             this.iFecha = pFecha;
+            this.iLeido = pLeido;
         }
 
-        public EmailDTO(int pIdEmail, int pIdCuenta, String pRemitente, IList<String> pDestinatario, String pCuerpo, String pAsunto,DateTime pFecha)
+        public EmailDTO(int pIdEmail, int pIdCuenta, String pRemitente, IList<String> pDestinatario, IList<String> pConCopia, IList<String> pConCopiaOculta, String pCuerpo, String pAsunto,DateTime pFecha,bool pLeido)
         {
             this.iRemitente = pRemitente;
             this.iIdEmail = pIdEmail;
             this.iDestinatario = pDestinatario;
-           // this.iConCopia = pConCopia;
-          //  this.iConCopiaOculta = pConCopiaOculta;
+            this.iConCopia = pConCopia;
+            this.iConCopiaOculta = pConCopiaOculta;
             this.iIdCuenta = pIdCuenta;
             this.iCuerpo = pCuerpo;
             this.iAsunto = pAsunto;
             this.iFecha = pFecha;
-        }
-
-        public EmailDTO(String pRemitente, IList<String> pDestinatario, String pCuerpo, String pAsunto, DateTime pFecha)
-        {
-            this.iRemitente = pRemitente;
-            this.iDestinatario = pDestinatario;
-            // this.iConCopia = pConCopia;
-            //  this.iConCopiaOculta = pConCopiaOculta;
-            this.iCuerpo = pCuerpo;
-            this.iAsunto = pAsunto;
-            this.iFecha = pFecha;
+            this.iLeido = pLeido;
         }
 
         /// <summary>
@@ -80,6 +74,24 @@ namespace Trabajo_Final.DTO
         {
             get { return this.iDestinatario; }
             set { this.iDestinatario = value; }
+        }
+
+        /// <summary>
+        /// Devuelve o establece el componente con copia
+        /// </summary>
+        public IList<String> ConCopia
+        {
+            get { return this.iConCopia; }
+            set { this.iConCopia = value; }
+        }
+
+        /// <summary>
+        /// Devuelve o establece el componente con copia oculta
+        /// </summary>
+        public IList<String> ConCopiaOculta
+        {
+            get { return this.iConCopiaOculta; }
+            set { this.iConCopiaOculta = value; }
         }
 
         /// <summary>
@@ -125,6 +137,15 @@ namespace Trabajo_Final.DTO
         {
             get { return this.iFecha; }
             set { this.iFecha = value; }
+        }
+
+        /// <summary>
+        /// Devuelve o establece si el Email fue leido
+        /// </summary>
+        public bool Leido
+        {
+            get { return this.iLeido; }
+            set { this.iLeido = value; }
         }
     }
 }

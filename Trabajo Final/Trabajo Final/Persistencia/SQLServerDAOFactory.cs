@@ -16,8 +16,7 @@ namespace Trabajo_Final.Persistencia
     {
         private SqlConnection iConexion;
         private SqlTransaction iTransaccion;
-        private String conexion = "Data Source=MATI-D; INITIAL Catalog=CuentasCorreo; Persist Security Info=True;User ID=sa;Password=06qiad";
-        //private String conexion = "Data Source=BRIAN-PC; INITIAL Catalog=CuentasCorreo; Persist Security Info=True;User ID=sa;Password=brianfellin";
+        private String conexion = "Data Source=" + bdConfig.Default.equipo +"; INITIAL Catalog=CuentasCorreo; Persist Security Info=True;User ID=" + bdConfig.Default.usuario + ";Password=" + bdConfig.Default.contraseña;       
 
 
         public override ICuentaDAO CuentaDAO
@@ -50,8 +49,6 @@ namespace Trabajo_Final.Persistencia
                     {
                         throw new DAOExcepcion("No se pudo realizar la conexión a la base de datos, reintente mas tarde");
                     }
-
-
                 }
                 return this.iConexion;
             }

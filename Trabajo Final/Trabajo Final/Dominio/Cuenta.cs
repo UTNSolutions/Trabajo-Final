@@ -55,13 +55,30 @@ namespace Trabajo_Final.Dominio
             get { return this.iListaEmail; }
         }
 
+        public Email BuscarEmail(int pIdEmail)
+        {
+            if (pIdEmail == 0)
+            {
+                throw new ArgumentNullException();
+            }
+            return (from c in this.iListaEmail where c.IdEmail == pIdEmail select c).FirstOrDefault();            
+        }
+
         public void AgregarEmail(Email pEmail)
         {
+            if (pEmail == null)
+            {
+                throw new ArgumentNullException();
+            }
             this.iListaEmail.Add(pEmail);
         }
 
         public void EliminarEmail(Email pEmail)
         {
+            if (pEmail == null)
+            {
+                throw new ArgumentNullException();
+            }
             this.iListaEmail.Remove(pEmail);
         }
     }

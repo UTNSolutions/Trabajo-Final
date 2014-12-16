@@ -110,13 +110,13 @@ namespace Trabajo_Final.Controladores
         {
             try
             {
-                //actualiza la cuenta en la base de datos
-                FachadaABMCuentas.Instancia.ModificarCuenta(new CuentaDTO(pIdCuenta, pNombre, pDireccion, pServicio, pContraseña));
                 if (!(Cuentas.Instancia.GetCuenta(pNombre) == null))
                 {   
                     //actualiza la cuenta en la lista de cuentas del dominio
                     Cuentas.Instancia.AgregarCuentaOActualizar(new Cuenta(pNombre, pDireccion, pServicio, pContraseña));
                 }
+                //actualiza la cuenta en la base de datos
+                FachadaABMCuentas.Instancia.ModificarCuenta(new CuentaDTO(pIdCuenta, pNombre, pDireccion, pServicio, pContraseña));               
             }
             catch (DAOExcepcion ex)
             {
@@ -200,7 +200,7 @@ namespace Trabajo_Final.Controladores
         /// </summary>
         private void CargarEmailsACadaCuenta()
         {
-            /*if (Cuentas.Instancia.ListaCuentas.Count == 0)
+            if (Cuentas.Instancia.ListaCuentas.Count == 0)
             {
                 throw new CuentasExcepcion("No existen cuentas de correo");
             }
@@ -214,7 +214,7 @@ namespace Trabajo_Final.Controladores
                     //agregar dicho email a la cuenta de dominio Email
                     foreach (EmailDTO emailDto in FachadaABMEmail.Instancia.ListarEmails(cuentaDto.IdCuenta)) 
                     {
-                        Email email = new Email(emailDto.Remitente,emailDto.Destinatario,emailDto.Cuerpo,emailDto.Asunto,emailDto.Fecha);
+                        Email email = new Email(emailDto.IdEmail,emailDto.Remitente,emailDto.Destinatario,emailDto.Cuerpo,emailDto.Asunto,emailDto.Fecha,emailDto.Leido);
                         cuenta.AgregarEmail(email);
                     }
                 }
@@ -222,7 +222,7 @@ namespace Trabajo_Final.Controladores
             catch (DAOExcepcion ex)
             {
                 throw ex;
-            }*/
+            }
         }
                
         /// <summary>
@@ -231,7 +231,7 @@ namespace Trabajo_Final.Controladores
         /// <param name="pEmail">Email a enviar</param>
         /// <param name="pCuenta">Cuenta con la que se quiere enviar el email</param>
         /// <exception cref="EmailExcepcion"></exception>
-        public void EnviarEmail(String pRemitente,IList<String> pDestinatario, String pAsunto, String pCuerpo, IList<String> pAdjuntos,string pNombreCuenta)
+        public void EnviarEmail(String pRemitente,IList<String> pDestinatario,IList<String> pCC, IList<String> pCCO, String pAsunto, String pCuerpo, IList<String> pAdjuntos,string pNombreCuenta)
         {
             if (pDestinatario == null)
             {
@@ -240,7 +240,7 @@ namespace Trabajo_Final.Controladores
             try
             {
                 Cuenta cuenta = Cuentas.Instancia.GetCuenta(pNombreCuenta);
-                Email email = new Email(pRemitente, pDestinatario, pCuerpo, pAsunto,pAdjuntos,DateTime.Now);
+                Email email = new Email(pRemitente, pDestinatario, pCC, pCCO, pCuerpo, pAsunto,pAdjuntos,DateTime.Now,false);
                 IServicio servicio = FabricaServicios.Instancia.GetServicio(cuenta.NombreServicio);
                 servicio.EnviarMail(email,cuenta);
                 
@@ -248,7 +248,7 @@ namespace Trabajo_Final.Controladores
                 //para poder asociar el email enviado a la cuenta en la base de datos
                 CuentaDTO cuentaDto = FachadaABMCuentas.Instancia.BuscarCuenta(cuenta.Nombre);
                 IList<EmailDTO> lEmail = new List<EmailDTO>();
-                lEmail.Add(new EmailDTO(cuentaDto.IdCuenta,email.Remitente,email.Destinatario,email.Cuerpo,email.Asunto,email.Fecha));
+                lEmail.Add(new EmailDTO(cuentaDto.IdCuenta,email.Remitente,email.Destinatario,email.Cuerpo,email.Asunto,email.Fecha,false));
                 //inserto el email enviado en la base de datos
                 FachadaABMEmail.Instancia.InsertarEmails(lEmail);
                 //Actualizo la lista de emails de dicha cuenta de dominio
@@ -297,7 +297,7 @@ namespace Trabajo_Final.Controladores
             IList<EmailDTO> lista = new List<EmailDTO>();
             foreach (Email email in Cuentas.Instancia.GetCuenta(pNombreCuenta).ListaEMails) 
             {
-                lista.Add(new EmailDTO(email.Remitente, email.Destinatario, email.Asunto, email.Asunto, email.Fecha));
+                lista.Add(new EmailDTO(email.IdEmail,0,email.Remitente, email.Destinatario, email.Cuerpo, email.Asunto, email.Fecha, email.Leido));
             }
             return lista;
         }
@@ -335,7 +335,7 @@ namespace Trabajo_Final.Controladores
                 //que el email corresponde
                 foreach (Email email in listaEmailsFiltrados)
                 {
-                    listaEmailDTO.Add(new EmailDTO(cuentaDto.IdCuenta, email.Remitente, email.Destinatario, email.Cuerpo, email.Asunto,email.Fecha));
+                    listaEmailDTO.Add(new EmailDTO(cuentaDto.IdCuenta, email.Remitente, email.Destinatario, email.Cuerpo, email.Asunto,email.Fecha,false));
                 }
                 //Guardo la lista de emails en la base de datos
                 FachadaABMEmail.Instancia.InsertarEmails(listaEmailDTO);
@@ -419,7 +419,6 @@ namespace Trabajo_Final.Controladores
                     listaNombresCuentas.Remove(nombreCuenta);
                     ObtenerTodosEmails(listaNombresCuentas);
                     throw ex;
-                    //new EmailExcepcion("La recepcion de todas las cuentas de correo finalizó con errores");
                 }
             }             
         }
@@ -454,7 +453,7 @@ namespace Trabajo_Final.Controladores
             /*try
             {
                 IExportador exportador = FabricaExportador.Instancia.GetExportador(pNombreExportador);
-                exportador.Exportar(pRuta, new Email(pRemitente, pDestinatarios, pCuerpo, pAsunto,pFecha));
+                exportador.Exportar(pRuta, new Email(pRemitente, pDestinatarios, pCuerpo, pAsunto,pFecha,false));
             }
             catch (ArgumentException ex)
             {
@@ -464,6 +463,28 @@ namespace Trabajo_Final.Controladores
             {
                 throw ex;
             }*/
+        }
+
+        /// <summary>
+        /// Permite marcar como leido un Email 
+        /// </summary>
+        /// <param name="pNombreCuenta"></param>
+        /// <param name="pIdEmail"></param>
+        public void MarcarComoLeido(string pNombreCuenta,int pIdEmail)
+        {
+            try
+            {
+                Cuentas.Instancia.GetCuenta(pNombreCuenta).BuscarEmail(pIdEmail).Leido = true;
+                FachadaABMEmail.Instancia.MarcarComoLeido(pIdEmail);
+            }
+            catch (NombreCuentaExcepcion ex)
+            {
+                throw ex;
+            }
+            catch (DAOExcepcion ex)
+            {
+                throw ex;
+            }
         }
     }
 }

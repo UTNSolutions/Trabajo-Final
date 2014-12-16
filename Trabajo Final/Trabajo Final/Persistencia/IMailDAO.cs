@@ -23,7 +23,13 @@ namespace Trabajo_Final.Persistencia
         void Eliminar(int pIdEmail);
 
         /// <summary>
-        /// Obtiene todos los Emails correspondiente a una Cuenata de correo
+        /// Permite marcar como leido un Email
+        /// </summary>
+        /// <param name="pIdEmail"></param>
+        void MarcarLeido(int pIdEmail);
+
+        /// <summary>
+        /// Obtiene todos los Emails correspondiente a una Cuenta de correo
         /// </summary>
         /// <returns></returns>
         IList<EmailDTO> Obtener(int pIdCuenta);

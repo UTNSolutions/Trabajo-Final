@@ -8,18 +8,29 @@ namespace Trabajo_Final.Utils
 {
     class AdaptadorDataGrid
     {
+        private int iIdEmail;
         private String iRemitente;
         private String iDestinatario;
+        private String iCC;
         private String iAsunto;
         private String iCuerpo;
-        private DateTime iFecha;
-        public AdaptadorDataGrid(String pRemitente,String pDestinatario,String pAsunto,String pCuerpo,DateTime pFecha)
+        private DateTime iFecha;        
+        private bool iLeido;
+        public AdaptadorDataGrid(int pIdEmail,String pRemitente,String pDestinatario,String pCC,String pAsunto,String pCuerpo,DateTime pFecha,bool pLeido)
         {
+            this.iIdEmail = pIdEmail;
             this.iRemitente = pRemitente;
             this.iDestinatario = pDestinatario;
             this.iAsunto = pAsunto;
             this.iCuerpo = pCuerpo;
             this.iFecha = pFecha;
+            this.iLeido = pLeido;
+            this.iCC = pCC;
+        }
+
+        public int IdEmail
+        {
+            get { return this.iIdEmail; }
         }
 
         public String Remitente
@@ -30,6 +41,11 @@ namespace Trabajo_Final.Utils
         public String Destinatario
         {
             get { return this.iDestinatario; }
+        }
+
+        public String CC
+        {
+            get { return this.iCC; }
         }
 
         public String Asunto
@@ -45,6 +61,11 @@ namespace Trabajo_Final.Utils
         public DateTime Fecha
         {
             get { return this.iFecha; }
+        }
+
+        public bool Leido
+        {
+            get { return this.iLeido; }
         }
     }
 }
