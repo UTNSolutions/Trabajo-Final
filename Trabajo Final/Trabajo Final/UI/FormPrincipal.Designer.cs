@@ -64,10 +64,10 @@
             this.label1 = new System.Windows.Forms.Label();
             this.progressBarEnviando = new System.Windows.Forms.ProgressBar();
             this.tbParaROnly = new System.Windows.Forms.TextBox();
-            this.botonCC = new System.Windows.Forms.Button();
-            this.botonCCAtras = new System.Windows.Forms.Button();
             this.botonCCO = new System.Windows.Forms.Button();
             this.botonCCOAtras = new System.Windows.Forms.Button();
+            this.botonCC = new System.Windows.Forms.Button();
+            this.botonCCAtras = new System.Windows.Forms.Button();
             this.panelCuentas = new System.Windows.Forms.Panel();
             this.tbTipoCorreo = new System.Windows.Forms.TextBox();
             this.tbNombreCuenta = new System.Windows.Forms.TextBox();
@@ -90,7 +90,6 @@
             this.menuStrip3 = new System.Windows.Forms.MenuStrip();
             this.administradorDeCuentasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.bEnviar = new System.Windows.Forms.ToolStripMenuItem();
-            this.bGuardarBorrador = new System.Windows.Forms.ToolStripMenuItem();
             this.acercaDeToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.gbLeerMail = new System.Windows.Forms.GroupBox();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
@@ -382,15 +381,17 @@
             // 
             // tbAsunto
             // 
-            this.tbAsunto.Location = new System.Drawing.Point(103, 357);
+            this.tbAsunto.Location = new System.Drawing.Point(484, 50);
             this.tbAsunto.Name = "tbAsunto";
-            this.tbAsunto.Size = new System.Drawing.Size(329, 20);
+            this.tbAsunto.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.tbAsunto.Size = new System.Drawing.Size(354, 20);
             this.tbAsunto.TabIndex = 10;
+            this.tbAsunto.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbAsunto_KeyPress);
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(57, 360);
+            this.label5.Location = new System.Drawing.Point(438, 53);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(40, 13);
             this.label5.TabIndex = 9;
@@ -398,9 +399,9 @@
             // 
             // tbCuerpo
             // 
-            this.tbCuerpo.Location = new System.Drawing.Point(441, 35);
+            this.tbCuerpo.Location = new System.Drawing.Point(441, 94);
             this.tbCuerpo.Name = "tbCuerpo";
-            this.tbCuerpo.Size = new System.Drawing.Size(397, 393);
+            this.tbCuerpo.Size = new System.Drawing.Size(397, 334);
             this.tbCuerpo.TabIndex = 8;
             this.tbCuerpo.Text = "";
             // 
@@ -477,27 +478,6 @@
             this.tbParaROnly.Size = new System.Drawing.Size(298, 20);
             this.tbParaROnly.TabIndex = 16;
             // 
-            // botonCC
-            // 
-            this.botonCC.Location = new System.Drawing.Point(60, 196);
-            this.botonCC.Name = "botonCC";
-            this.botonCC.Size = new System.Drawing.Size(37, 23);
-            this.botonCC.TabIndex = 12;
-            this.botonCC.Text = "CC";
-            this.botonCC.UseVisualStyleBackColor = true;
-            this.botonCC.Click += new System.EventHandler(this.botonCC_Click);
-            // 
-            // botonCCAtras
-            // 
-            this.botonCCAtras.Image = global::Trabajo_Final.Properties.Resources.up;
-            this.botonCCAtras.Location = new System.Drawing.Point(60, 196);
-            this.botonCCAtras.Name = "botonCCAtras";
-            this.botonCCAtras.Size = new System.Drawing.Size(37, 23);
-            this.botonCCAtras.TabIndex = 25;
-            this.botonCCAtras.UseVisualStyleBackColor = true;
-            this.botonCCAtras.Visible = false;
-            this.botonCCAtras.Click += new System.EventHandler(this.botonCCAtras_Click);
-            // 
             // botonCCO
             // 
             this.botonCCO.Location = new System.Drawing.Point(60, 288);
@@ -518,6 +498,27 @@
             this.botonCCOAtras.UseVisualStyleBackColor = true;
             this.botonCCOAtras.Visible = false;
             this.botonCCOAtras.Click += new System.EventHandler(this.botonCCOAtras_Click);
+            // 
+            // botonCC
+            // 
+            this.botonCC.Location = new System.Drawing.Point(60, 196);
+            this.botonCC.Name = "botonCC";
+            this.botonCC.Size = new System.Drawing.Size(37, 23);
+            this.botonCC.TabIndex = 12;
+            this.botonCC.Text = "CC";
+            this.botonCC.UseVisualStyleBackColor = true;
+            this.botonCC.Click += new System.EventHandler(this.botonCC_Click);
+            // 
+            // botonCCAtras
+            // 
+            this.botonCCAtras.Image = global::Trabajo_Final.Properties.Resources.up;
+            this.botonCCAtras.Location = new System.Drawing.Point(60, 196);
+            this.botonCCAtras.Name = "botonCCAtras";
+            this.botonCCAtras.Size = new System.Drawing.Size(37, 23);
+            this.botonCCAtras.TabIndex = 25;
+            this.botonCCAtras.UseVisualStyleBackColor = true;
+            this.botonCCAtras.Visible = false;
+            this.botonCCAtras.Click += new System.EventHandler(this.botonCCAtras_Click);
             // 
             // panelCuentas
             // 
@@ -727,7 +728,6 @@
             this.menuStrip3.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.administradorDeCuentasToolStripMenuItem,
             this.bEnviar,
-            this.bGuardarBorrador,
             this.acercaDeToolStripMenuItem2});
             this.menuStrip3.Location = new System.Drawing.Point(3, 16);
             this.menuStrip3.Name = "menuStrip3";
@@ -751,15 +751,6 @@
             this.bEnviar.Size = new System.Drawing.Size(74, 23);
             this.bEnviar.Text = "Enviar";
             this.bEnviar.Click += new System.EventHandler(this.toolStripMenubEnviar_Click);
-            // 
-            // bGuardarBorrador
-            // 
-            this.bGuardarBorrador.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.bGuardarBorrador.Image = global::Trabajo_Final.Properties.Resources.filesave;
-            this.bGuardarBorrador.Name = "bGuardarBorrador";
-            this.bGuardarBorrador.Size = new System.Drawing.Size(183, 23);
-            this.bGuardarBorrador.Text = "Guardar como borrador";
-            this.bGuardarBorrador.Click += new System.EventHandler(this.guardarComoBorradorToolStripMenuItem_Click);
             // 
             // acercaDeToolStripMenuItem2
             // 
@@ -838,9 +829,9 @@
             this.Controls.Add(this.gbEnviarMail);
             this.Controls.Add(this.gbLeerMail);
             this.Controls.Add(this.gbOpciones1);
-            this.Controls.Add(this.panelCuentas);
             this.Controls.Add(this.gpNuevoMail);
             this.Controls.Add(this.panelLeerMail);
+            this.Controls.Add(this.panelCuentas);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
@@ -899,7 +890,6 @@
         private System.Windows.Forms.GroupBox gbEnviarMail;
         private System.Windows.Forms.MenuStrip menuStrip3;
         private System.Windows.Forms.ToolStripMenuItem bEnviar;
-        private System.Windows.Forms.ToolStripMenuItem bGuardarBorrador;
         private System.Windows.Forms.ComboBox combobDe;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox tbNombreCuenta;

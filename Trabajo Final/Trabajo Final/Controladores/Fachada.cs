@@ -200,7 +200,7 @@ namespace Trabajo_Final.Controladores
         /// </summary>
         private void CargarEmailsACadaCuenta()
         {
-            if (Cuentas.Instancia.ListaCuentas.Count == 0)
+            /*if (Cuentas.Instancia.ListaCuentas.Count == 0)
             {
                 throw new CuentasExcepcion("No existen cuentas de correo");
             }
@@ -222,7 +222,7 @@ namespace Trabajo_Final.Controladores
             catch (DAOExcepcion ex)
             {
                 throw ex;
-            }
+            }*/
         }
                
         /// <summary>
@@ -231,7 +231,7 @@ namespace Trabajo_Final.Controladores
         /// <param name="pEmail">Email a enviar</param>
         /// <param name="pCuenta">Cuenta con la que se quiere enviar el email</param>
         /// <exception cref="EmailExcepcion"></exception>
-        public void EnviarEmail(String pRemitente,IList<String> pDestinatario, String pAsunto, String pCuerpo,string pNombreCuenta)
+        public void EnviarEmail(String pRemitente,IList<String> pDestinatario, String pAsunto, String pCuerpo, IList<String> pAdjuntos,string pNombreCuenta)
         {
             if (pDestinatario == null)
             {
@@ -240,7 +240,7 @@ namespace Trabajo_Final.Controladores
             try
             {
                 Cuenta cuenta = Cuentas.Instancia.GetCuenta(pNombreCuenta);
-                Email email = new Email(pRemitente, pDestinatario, pCuerpo, pAsunto,DateTime.Now);
+                Email email = new Email(pRemitente, pDestinatario, pCuerpo, pAsunto,pAdjuntos,DateTime.Now);
                 IServicio servicio = FabricaServicios.Instancia.GetServicio(cuenta.NombreServicio);
                 servicio.EnviarMail(email,cuenta);
                 
@@ -451,7 +451,7 @@ namespace Trabajo_Final.Controladores
         /// <exception cref="ExportadorExcepcion"></exception>
         public void Exportar(String pRemitente,IList<String> pDestinatarios,String pAsunto,String pCuerpo,String pRuta,String pNombreExportador,DateTime pFecha)
         {
-            try
+            /*try
             {
                 IExportador exportador = FabricaExportador.Instancia.GetExportador(pNombreExportador);
                 exportador.Exportar(pRuta, new Email(pRemitente, pDestinatarios, pCuerpo, pAsunto,pFecha));
@@ -463,7 +463,7 @@ namespace Trabajo_Final.Controladores
             catch (ExportadorExcepcion ex)
             {
                 throw ex;
-            }
+            }*/
         }
     }
 }

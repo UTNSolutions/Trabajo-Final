@@ -25,7 +25,9 @@ namespace Trabajo_Final.Dominio
 
         private DateTime iFecha;
 
-        public Email(String pRemitente,IList<String> pDestinatario, String pCuerpo, String pAsunto,DateTime pFecha)
+        private IList<String> iAdjuntos;
+
+        public Email(String pRemitente,IList<String> pDestinatario, String pCuerpo, String pAsunto, IList<String> pAdjuntos,DateTime pFecha)
         {
             this.iRemitente = pRemitente;
             this.iDestinatario = pDestinatario;
@@ -34,6 +36,7 @@ namespace Trabajo_Final.Dominio
            // this.iConCopia = pCC;
           //  this.iConCopiaOculta = pCCO;
             this.iFecha = pFecha;
+            this.iAdjuntos = pAdjuntos;
         }
 
         /// <summary>
@@ -68,6 +71,13 @@ namespace Trabajo_Final.Dominio
             get { return this.iAsunto; }
         }
 
+        /// <summary>
+        /// Devuelve un lista con los adjuntos (Rutas) del Email.
+        /// </summary>
+        public IList<String> Adjunto
+        {
+            get { return this.iAdjuntos; }
+        }
         /// <summary>
         /// Devuelve la fecha del Email
         /// </summary>

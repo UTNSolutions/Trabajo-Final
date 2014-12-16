@@ -99,6 +99,14 @@ namespace Trabajo_Final.UI
         /// <param name="e"></param>
         private void botonCCAtras_Click(object sender, EventArgs e)
         {
+            CCAtrasEvento();
+        }
+
+        /// <summary>
+        /// Restablece la opción con copia carbono.
+        /// </summary>
+        private void CCAtrasEvento()
+        {
             botonCCAtras.Visible = false;
             botonCC.Visible = true;
             tbCC.Visible = false;
@@ -114,6 +122,7 @@ namespace Trabajo_Final.UI
                 botonBorrarUltimoCC.Enabled = false;
             }
         }
+
 
         /// <summary>
         /// Habilita la carga de la/las direcciones a los que se le envían una copia carbono oculta del mail.
@@ -135,6 +144,14 @@ namespace Trabajo_Final.UI
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void botonCCOAtras_Click(object sender, EventArgs e)
+        {
+            CCOAtrasEvento();
+        }
+
+        /// <summary>
+        /// Restablece la opción con copia carbono oculta.
+        /// </summary>
+        private void CCOAtrasEvento()
         {
             botonCCOAtras.Visible = false;
             botonCCO.Visible = true;
@@ -161,13 +178,13 @@ namespace Trabajo_Final.UI
         {            
             OpenFileDialog file = new OpenFileDialog();
             file.Title = "Seleccione Archivo";
-            file.InitialDirectory = @"c:\";
+            file.InitialDirectory = @"c:\";            
             file.Filter = "All Files(*.*)|*.*";
             file.FilterIndex = 1;
             file.RestoreDirectory = true;
             file.ShowDialog();
-
-            tbAdjuntos.Text = file.InitialDirectory;
+            tbAdjuntos.Text = tbAdjuntos.Text + file.FileName + "; ";
+                
         }
 
         /// <summary>
@@ -533,7 +550,7 @@ namespace Trabajo_Final.UI
                 gbEnviarMail.Enabled = false;
                 menuStrip1.Enabled = false;               
                 progressBarEnviando.Value = 6;
-                Fachada.Instancia.EnviarEmail(combobDe.Text, generarListaDestinatario(tbParaROnly.Text), tbAsunto.Text, tbCuerpo.Text, combobDe.SelectedValue.ToString());
+                Fachada.Instancia.EnviarEmail(combobDe.Text, generarListaCadenas(tbParaROnly.Text), tbAsunto.Text, tbCuerpo.Text, generarListaCadenas(tbAdjuntos.Text), combobDe.SelectedValue.ToString());
                 progressBarEnviando.Value = 7;
                 progressBarEnviando.Value = 8;
                 progressBarEnviando.Value = 10;
@@ -559,12 +576,12 @@ namespace Trabajo_Final.UI
         }
 
         /// <summary>
-        /// Genera una lista de string con los destinatarioas.
+        /// Genera una lista de string que se utilizan en el envio de un mail.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         /// <returns></returns>
-        private IList<String>  generarListaDestinatario(String pCadena)
+        private IList<String>  generarListaCadenas(String pCadena)
         {
             IList<String> listaDestinatarios = new List<String>();
             String cadena = "";
@@ -670,6 +687,10 @@ namespace Trabajo_Final.UI
             dgEmails.Columns["remitente"].Visible = true;
         }
 
+        /// <summary>
+        /// Separa los mails que fueron enviados y los que fueron recibidos en una cuenta.
+        /// </summary>
+        /// <param name="pNombreCuenta"></param>
         private void FiltarEnviados(String pNombreCuenta)
         {
             IList<AdaptadorDataGrid> adaptador = new List<AdaptadorDataGrid>();
@@ -710,11 +731,6 @@ namespace Trabajo_Final.UI
             dgEmails.Columns["destinatario"].Visible = true;
         }
 
-        private void guardarComoBorradorToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            
-        }
-
         /// <summary>
         /// Luego que se envia un mail borra el panel y sus elementos.
         /// </summary>
@@ -726,6 +742,9 @@ namespace Trabajo_Final.UI
             tbCCOROnly.Text = "";
             tbAsunto.Text = "";
             tbAdjuntos.Text = "";
+            botonBorrarUltimoPara.Enabled = false;
+            CCAtrasEvento();
+            CCOAtrasEvento();
         }
 
         /// <summary>
@@ -899,6 +918,23 @@ namespace Trabajo_Final.UI
         {
             FormExportar iFormExportar = new FormExportar(tbDeLeerMail.Text,tbAsuntoLeerMail.Text,tbParaLeerMail.Text,tbCuerpoLeerMail.Text,Convert.ToDateTime(tbFechaLeerMail.Text));                
             iFormExportar.ShowDialog();
+        }
+
+        private void tbAsunto_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar != (char)13)
+            {
+                if (tbAsunto.Text.Length > 50)
+                {
+                    tbAsunto.Size = new Size(354, 38);
+                    tbAsunto.Multiline = true;
+                }
+                if (tbAsunto.Text.Length < 50)
+                {
+                    tbAsunto.Size = new Size(354, 20);
+                    tbAsunto.Multiline = false;
+                }
+            }
         }
     }
 }

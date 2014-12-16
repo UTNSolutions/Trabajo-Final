@@ -60,6 +60,13 @@ namespace Trabajo_Final.Dominio
                 client.Host = "smtp.mail.yahoo.com";
                 client.EnableSsl = true;  //Esto es para que vaya a través de SSL que es obligatorio con Yahoo
                 MailMessage email = new MailMessage(pCuenta.Direccion, destinatario, pMail.Asunto, pMail.Cuerpo);
+                if (pMail.Adjunto.Count != 0)
+                {
+                    foreach (String adjunto in pMail.Adjunto)
+                    {
+                        email.Attachments.Add(new Attachment(adjunto));
+                    }
+                }
                 try
                 {
                     client.Send(email);
@@ -84,7 +91,7 @@ namespace Trabajo_Final.Dominio
         }
 
         public override IList<Email> RecibirMail(Cuenta pCuenta)
-        {
+        {            
             if (pCuenta == null)
             {
                 throw new NullReferenceException("No hay una cuenta asociada para realizar la operación");
@@ -105,17 +112,29 @@ namespace Trabajo_Final.Dominio
                     Message mail = client.GetMessage(indice);
                     MailMessage email = mail.ToMailMessage();
                     IList<String> listaDestinatarios = new List<String>();
+                    IList<String> listaAdjunto = new List<String>();    
+                    if ( email.Attachments != null)
+                    {
+                        
+                        foreach(Attachment adjunto in email.Attachments)
+                        {
+                            String DirectorioDescarga =  @"C:\";
+                            String nuevoPath = DirectorioDescarga +@"\"+ adjunto.Name;
+                            FileStream file = new FileStream(nuevoPath, FileMode.Create);
+                            adjunto.ContentStream.CopyTo(file,4096);  
+                            listaAdjunto.Add(adjunto.Name);                        
+                        }
+                    }
                     listaDestinatarios.Add(Convert.ToString(email.To));
                     //Si el cuerpo esta en HTML lo trasforma.
                     if (email.IsBodyHtml)
                     {
                         //desace de las etiquetas HTML.
-                        email.Body = Regex.Replace(email.Body, "<[^>]*>", string.Empty);
-                        //get rid of multiple blank lines
-                        //email.Body = Regex.Replace(email.Body, @"^\s*$\n", string.Empty, RegexOptions.Multiline);
+                        email.Body = Regex.Replace(email.Body, "<[^>]*>", string.Empty);                        
                     }
                     DateTime fecha = mail.Headers.DateSent;
-                    Email msj = new Email(Convert.ToString(email.From),listaDestinatarios, email.Body, email.Subject,fecha);
+
+                    Email msj = new Email(Convert.ToString(email.From), listaDestinatarios, email.Body, email.Subject, listaAdjunto, fecha);
                     listaADevolver.Add(msj);
                     indice++;
                 }

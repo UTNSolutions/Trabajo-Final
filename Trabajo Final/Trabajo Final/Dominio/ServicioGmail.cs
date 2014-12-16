@@ -44,8 +44,7 @@ namespace Trabajo_Final.Dominio
             this.iCredenciales = new NetworkCredential(pCuenta.Direccion, pCuenta.Contraseña);
             foreach (string destinatario in pMail.Destinatario)
             {
-                String cadena = destinatario;
-                if (!(Regex.IsMatch(cadena, "\\w+([-+.']\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*")))
+                if (!(Regex.IsMatch(destinatario, "\\w+([-+.']\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*")))
                 {
                     throw new EmailExcepcion("El destinatario no posee la estructura correcta");
                 }
@@ -63,6 +62,13 @@ namespace Trabajo_Final.Dominio
                 client.Host = "smtp.gmail.com";
                 client.EnableSsl = true;  //Esto es para que vaya a través de SSL que es obligatorio con GMail
                 MailMessage email = new MailMessage(pCuenta.Direccion, destinatario, pMail.Asunto, pMail.Cuerpo);
+                if (pMail.Adjunto.Count != 0)
+                {
+                    foreach (String adjunto in pMail.Adjunto)
+                    {
+                        email.Attachments.Add(new Attachment(adjunto));
+                    }
+                }
                 try
                 {
                     client.Send(email);
@@ -88,6 +94,7 @@ namespace Trabajo_Final.Dominio
 
         public override IList<Email> RecibirMail(Cuenta pCuenta)
         {
+           /*
             if (pCuenta == null)
             {
                 throw new NullReferenceException("no hay una cuenta asociada para realizar la operacion");
@@ -101,8 +108,8 @@ namespace Trabajo_Final.Dominio
                 Pop3Client client = new Pop3Client();
                 client.Connect("pop.gmail.com", 995, true);
                 client.Authenticate(pCuenta.Direccion, pCuenta.Contraseña);
-                int indice = 1;
-                IList<Email> listaADevolver = new List<Email>();
+                int indice = 1;*/
+                IList<Email> listaADevolver = new List<Email>();/*
                 while (indice <= client.GetMessageCount())
                 {
                     Message mail = client.GetMessage(indice);
@@ -121,8 +128,8 @@ namespace Trabajo_Final.Dominio
                     listaADevolver.Add(msj);
                     indice++;
                 }
-                client.Disconnect();
-                return listaADevolver;
+                client.Disconnect();*/
+                return listaADevolver;/*
             }
             catch(OpenPop.Pop3.Exceptions.PopServerNotFoundException)
             {
@@ -139,7 +146,7 @@ namespace Trabajo_Final.Dominio
             catch (IOException)
             {
                 throw new EmailExcepcion("Error en el servidor de " + pCuenta.NombreServicio + ", no responde");
-            }
+            }*/
         }
 
         public override bool AccesoInternet() 
