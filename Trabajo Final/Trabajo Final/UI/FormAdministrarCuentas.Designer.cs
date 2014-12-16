@@ -29,11 +29,6 @@
         private void InitializeComponent()
         {
             this.dgCuentas = new System.Windows.Forms.DataGridView();
-            this.idCuenta = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.direccion = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.servicio = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.contraseña = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -48,6 +43,11 @@
             this.bModificar = new System.Windows.Forms.Button();
             this.bAgregar = new System.Windows.Forms.Button();
             this.tbIdCuenta = new System.Windows.Forms.TextBox();
+            this.idCuenta = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.direccion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.servicio = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.contraseña = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgCuentas)).BeginInit();
             this.SuspendLayout();
             // 
@@ -74,49 +74,10 @@
             this.dgCuentas.KeyDown += new System.Windows.Forms.KeyEventHandler(this.MostrarDatos);
             this.dgCuentas.KeyUp += new System.Windows.Forms.KeyEventHandler(this.MostrarDatos);
             // 
-            // idCuenta
-            // 
-            this.idCuenta.DataPropertyName = "IdCuenta";
-            this.idCuenta.HeaderText = "idCuenta";
-            this.idCuenta.Name = "idCuenta";
-            this.idCuenta.ReadOnly = true;
-            this.idCuenta.Visible = false;
-            // 
-            // nombre
-            // 
-            this.nombre.DataPropertyName = "Nombre";
-            this.nombre.HeaderText = "Nombre";
-            this.nombre.Name = "nombre";
-            this.nombre.ReadOnly = true;
-            // 
-            // direccion
-            // 
-            this.direccion.DataPropertyName = "Direccion";
-            this.direccion.HeaderText = "Direccion";
-            this.direccion.Name = "direccion";
-            this.direccion.ReadOnly = true;
-            this.direccion.Width = 160;
-            // 
-            // servicio
-            // 
-            this.servicio.DataPropertyName = "NombreServicio";
-            this.servicio.HeaderText = "Servicio";
-            this.servicio.Name = "servicio";
-            this.servicio.ReadOnly = true;
-            this.servicio.Visible = false;
-            // 
-            // contraseña
-            // 
-            this.contraseña.DataPropertyName = "Contraseña";
-            this.contraseña.HeaderText = "Contraseña";
-            this.contraseña.Name = "contraseña";
-            this.contraseña.ReadOnly = true;
-            this.contraseña.Visible = false;
-            // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(326, 30);
+            this.label1.Location = new System.Drawing.Point(322, 15);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(85, 13);
             this.label1.TabIndex = 1;
@@ -125,7 +86,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(381, 120);
+            this.label2.Location = new System.Drawing.Point(377, 116);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(30, 13);
             this.label2.TabIndex = 2;
@@ -134,7 +95,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(346, 165);
+            this.label3.Location = new System.Drawing.Point(346, 166);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(61, 13);
             this.label3.TabIndex = 3;
@@ -143,7 +104,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(362, 75);
+            this.label4.Location = new System.Drawing.Point(358, 65);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(49, 13);
             this.label4.TabIndex = 4;
@@ -151,7 +112,7 @@
             // 
             // tbCuenta
             // 
-            this.tbCuenta.Location = new System.Drawing.Point(413, 27);
+            this.tbCuenta.Location = new System.Drawing.Point(413, 12);
             this.tbCuenta.Name = "tbCuenta";
             this.tbCuenta.Size = new System.Drawing.Size(180, 20);
             this.tbCuenta.TabIndex = 1;
@@ -166,7 +127,7 @@
             // 
             // tbMail
             // 
-            this.tbMail.Location = new System.Drawing.Point(413, 118);
+            this.tbMail.Location = new System.Drawing.Point(413, 113);
             this.tbMail.Name = "tbMail";
             this.tbMail.Size = new System.Drawing.Size(180, 20);
             this.tbMail.TabIndex = 3;
@@ -178,7 +139,7 @@
             this.cbServicio.Items.AddRange(new object[] {
             "Gmail",
             "Yahoo"});
-            this.cbServicio.Location = new System.Drawing.Point(413, 72);
+            this.cbServicio.Location = new System.Drawing.Point(413, 62);
             this.cbServicio.Name = "cbServicio";
             this.cbServicio.Size = new System.Drawing.Size(122, 21);
             this.cbServicio.TabIndex = 2;
@@ -197,11 +158,11 @@
             // 
             this.labelMailError.AutoSize = true;
             this.labelMailError.ForeColor = System.Drawing.Color.Red;
-            this.labelMailError.Location = new System.Drawing.Point(413, 144);
+            this.labelMailError.Location = new System.Drawing.Point(417, 136);
             this.labelMailError.Name = "labelMailError";
-            this.labelMailError.Size = new System.Drawing.Size(157, 13);
+            this.labelMailError.Size = new System.Drawing.Size(153, 13);
             this.labelMailError.TabIndex = 11;
-            this.labelMailError.Text = "E-Mail con estructura incorrecta";
+            this.labelMailError.Text = "Email con estructura incorrecta";
             this.labelMailError.Visible = false;
             // 
             // bEliminar
@@ -236,7 +197,7 @@
             // 
             this.bAgregar.Image = global::Trabajo_Final.Properties.Resources.apply;
             this.bAgregar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.bAgregar.Location = new System.Drawing.Point(365, 239);
+            this.bAgregar.Location = new System.Drawing.Point(361, 239);
             this.bAgregar.Name = "bAgregar";
             this.bAgregar.Size = new System.Drawing.Size(75, 23);
             this.bAgregar.TabIndex = 5;
@@ -247,7 +208,7 @@
             // 
             // tbIdCuenta
             // 
-            this.tbIdCuenta.Location = new System.Drawing.Point(618, 30);
+            this.tbIdCuenta.Location = new System.Drawing.Point(557, 12);
             this.tbIdCuenta.Name = "tbIdCuenta";
             this.tbIdCuenta.ReadOnly = true;
             this.tbIdCuenta.Size = new System.Drawing.Size(36, 20);
@@ -255,12 +216,51 @@
             this.tbIdCuenta.TabStop = false;
             this.tbIdCuenta.Visible = false;
             // 
+            // idCuenta
+            // 
+            this.idCuenta.DataPropertyName = "IdCuenta";
+            this.idCuenta.HeaderText = "idCuenta";
+            this.idCuenta.Name = "idCuenta";
+            this.idCuenta.ReadOnly = true;
+            this.idCuenta.Visible = false;
+            // 
+            // nombre
+            // 
+            this.nombre.DataPropertyName = "Nombre";
+            this.nombre.HeaderText = "Nombre";
+            this.nombre.Name = "nombre";
+            this.nombre.ReadOnly = true;
+            this.nombre.Width = 105;
+            // 
+            // direccion
+            // 
+            this.direccion.DataPropertyName = "Direccion";
+            this.direccion.HeaderText = "Direccion";
+            this.direccion.Name = "direccion";
+            this.direccion.ReadOnly = true;
+            this.direccion.Width = 160;
+            // 
+            // servicio
+            // 
+            this.servicio.DataPropertyName = "NombreServicio";
+            this.servicio.HeaderText = "Servicio";
+            this.servicio.Name = "servicio";
+            this.servicio.ReadOnly = true;
+            this.servicio.Visible = false;
+            // 
+            // contraseña
+            // 
+            this.contraseña.DataPropertyName = "Contraseña";
+            this.contraseña.HeaderText = "Contraseña";
+            this.contraseña.Name = "contraseña";
+            this.contraseña.ReadOnly = true;
+            this.contraseña.Visible = false;
+            // 
             // FormAdministrarCuentas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(662, 280);
-            this.Controls.Add(this.tbIdCuenta);
             this.Controls.Add(this.labelMailError);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.bEliminar);
@@ -275,6 +275,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.dgCuentas);
+            this.Controls.Add(this.tbIdCuenta);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "FormAdministrarCuentas";
