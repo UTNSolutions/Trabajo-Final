@@ -122,7 +122,7 @@ namespace Trabajo_Final.Controladores
         }
 
         /// <summary>
-        /// Marca como leido un Email identificado como por su Id
+        /// Marca como leido un Email identificado por su Id
         /// </summary>
         /// <param name="pIdEmail"></param>
         /// <exception cref="DAOExcepcion"></exception>

@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace Trabajo_Final.Dominio
 {
+    /// <summary>
+    /// Representa funcionalidades para exportar Emails al sistema de archivos de la pc
+    /// </summary>
     interface IExportador
     {
  
@@ -15,7 +18,7 @@ namespace Trabajo_Final.Dominio
         String Nombre { get; }
 
         /// <summary>
-        /// Exporta un email a Texto Plano
+        /// Exporta un email 
         /// </summary>
         /// <param name="pRuta">Ruta donde se alojara el archivo en el disco duro</param>
         /// <param name="pEmail">Email que se quiere exportar</param>

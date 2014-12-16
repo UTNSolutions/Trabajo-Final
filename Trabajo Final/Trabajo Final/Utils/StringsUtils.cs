@@ -12,7 +12,8 @@ namespace Trabajo_Final.Utils
     class StringsUtils
     {
         /// <summary>
-        /// Obtiene la direccion de Email de una cadena, donde el email esta entre "<" y ">"
+        /// Obtiene la direccion de Email de una cadena, donde el email esta entre "<" y ">" 
+        /// y sino devuelve la cadena original
         /// </summary>
         /// <param name="pCadena"></param>
         public static String ObtenerEmail(String pCadena)
