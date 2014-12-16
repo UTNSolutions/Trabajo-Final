@@ -19,9 +19,9 @@ namespace Trabajo_Final.Dominio
 
         private String iCuerpo;
 
-       // private IList<String> iConCopia;
+        private IList<String> iConCopia;
 
-        //private IList<String> iConCopiaOculta;
+        private IList<String> iConCopiaOculta;
 
         private String iAsunto;
 
@@ -29,27 +29,30 @@ namespace Trabajo_Final.Dominio
 
         private bool iLeido;
 
-        public Email(String pRemitente,IList<String> pDestinatario, String pCuerpo, String pAsunto,DateTime pFecha,bool pLeido)
+        private IList<String> iAdjuntos;
+
+        public Email(String pRemitente, IList<String> pDestinatario, IList<String> pCC, IList<String> pCCO, String pCuerpo, String pAsunto, IList<String> pAdjuntos, DateTime pFecha, bool pLeido)
         {
             this.iRemitente = pRemitente;
             this.iDestinatario = pDestinatario;
             this.iCuerpo = pCuerpo;
             this.iAsunto = pAsunto;
-           // this.iConCopia = pCC;
-          //  this.iConCopiaOculta = pCCO;
+            this.iConCopia = pCC;
+            this.iConCopiaOculta = pCCO;
             this.iFecha = pFecha;
             this.iLeido = pLeido;
+            this.iAdjuntos = pAdjuntos;
         }
 
-        public Email(int pIdEmail,String pRemitente, IList<String> pDestinatario, String pCuerpo, String pAsunto, DateTime pFecha, bool pLeido)
+        public Email(int pIdEmail, String pRemitente, IList<String> pDestinatario, /*IList<String> pCC, IList<String> pCCO,*/ String pCuerpo, String pAsunto, DateTime pFecha, bool pLeido)
         {
             this.iIdEmail = pIdEmail;
             this.iRemitente = pRemitente;
             this.iDestinatario = pDestinatario;
             this.iCuerpo = pCuerpo;
             this.iAsunto = pAsunto;
-            // this.iConCopia = pCC;
-            //  this.iConCopiaOculta = pCCO;
+            //this.iConCopia = pCC;
+            //this.iConCopiaOculta = pCCO;
             this.iFecha = pFecha;
             this.iLeido = pLeido;
         }
@@ -80,6 +83,22 @@ namespace Trabajo_Final.Dominio
         }
 
         /// <summary>
+        /// Devuelve el componente CC.
+        /// </summary>
+        public IList<String> CC
+        {
+            get { return this.iConCopia; }
+        }
+
+        /// <summary>
+        /// Devuelve el componente CCO.
+        /// </summary>
+        public IList<String> CCO
+        {
+            get { return this.iConCopiaOculta; }
+        }
+
+        /// <summary>
         /// Devuelve el cuerpo del Email.
         /// </summary>
         public String Cuerpo
@@ -95,6 +114,13 @@ namespace Trabajo_Final.Dominio
             get { return this.iAsunto; }
         }
 
+        /// <summary>
+        /// Devuelve un lista con los adjuntos (Rutas) del Email.
+        /// </summary>
+        public IList<String> Adjunto
+        {
+            get { return this.iAdjuntos; }
+        }
         /// <summary>
         /// Devuelve la fecha del Email
         /// </summary>

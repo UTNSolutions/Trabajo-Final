@@ -82,8 +82,8 @@
             this.tbFechaLeerMail = new System.Windows.Forms.TextBox();
             this.tbCuerpoLeerMail = new System.Windows.Forms.TextBox();
             this.tbParaLeerMail = new System.Windows.Forms.TextBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
+            this.labelPara = new System.Windows.Forms.Label();
+            this.labelDe = new System.Windows.Forms.Label();
             this.tbDeLeerMail = new System.Windows.Forms.TextBox();
             this.tbAsuntoLeerMail = new System.Windows.Forms.TextBox();
             this.gbEnviarMail = new System.Windows.Forms.GroupBox();
@@ -92,7 +92,6 @@
             this.menuStrip3 = new System.Windows.Forms.MenuStrip();
             this.administradorDeCuentasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.bEnviar = new System.Windows.Forms.ToolStripMenuItem();
-            this.bGuardarBorrador = new System.Windows.Forms.ToolStripMenuItem();
             this.acercaDeToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.gbLeerMail = new System.Windows.Forms.GroupBox();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
@@ -100,6 +99,8 @@
             this.responderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exportarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.acercaDeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tbCCLeerMail = new System.Windows.Forms.TextBox();
+            this.labelCC = new System.Windows.Forms.Label();
             this.gbOpciones1.SuspendLayout();
             this.menuStrip2.SuspendLayout();
             this.gpNuevoMail.SuspendLayout();
@@ -378,15 +379,17 @@
             // 
             // tbAsunto
             // 
-            this.tbAsunto.Location = new System.Drawing.Point(103, 357);
+            this.tbAsunto.Location = new System.Drawing.Point(484, 50);
             this.tbAsunto.Name = "tbAsunto";
-            this.tbAsunto.Size = new System.Drawing.Size(329, 20);
+            this.tbAsunto.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.tbAsunto.Size = new System.Drawing.Size(354, 20);
             this.tbAsunto.TabIndex = 10;
+            this.tbAsunto.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbAsunto_KeyPress);
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(57, 360);
+            this.label5.Location = new System.Drawing.Point(438, 53);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(40, 13);
             this.label5.TabIndex = 9;
@@ -394,9 +397,9 @@
             // 
             // tbCuerpo
             // 
-            this.tbCuerpo.Location = new System.Drawing.Point(441, 35);
+            this.tbCuerpo.Location = new System.Drawing.Point(441, 94);
             this.tbCuerpo.Name = "tbCuerpo";
-            this.tbCuerpo.Size = new System.Drawing.Size(397, 393);
+            this.tbCuerpo.Size = new System.Drawing.Size(397, 334);
             this.tbCuerpo.TabIndex = 8;
             this.tbCuerpo.Text = "";
             // 
@@ -626,11 +629,13 @@
             // panelLeerMail
             // 
             this.panelLeerMail.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.panelLeerMail.Controls.Add(this.tbCCLeerMail);
+            this.panelLeerMail.Controls.Add(this.labelCC);
             this.panelLeerMail.Controls.Add(this.tbFechaLeerMail);
             this.panelLeerMail.Controls.Add(this.tbCuerpoLeerMail);
             this.panelLeerMail.Controls.Add(this.tbParaLeerMail);
-            this.panelLeerMail.Controls.Add(this.label6);
-            this.panelLeerMail.Controls.Add(this.label3);
+            this.panelLeerMail.Controls.Add(this.labelPara);
+            this.panelLeerMail.Controls.Add(this.labelDe);
             this.panelLeerMail.Controls.Add(this.tbDeLeerMail);
             this.panelLeerMail.Controls.Add(this.tbAsuntoLeerMail);
             this.panelLeerMail.Location = new System.Drawing.Point(0, 49);
@@ -652,51 +657,51 @@
             // tbCuerpoLeerMail
             // 
             this.tbCuerpoLeerMail.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.tbCuerpoLeerMail.Location = new System.Drawing.Point(6, 109);
+            this.tbCuerpoLeerMail.Location = new System.Drawing.Point(6, 142);
             this.tbCuerpoLeerMail.Multiline = true;
             this.tbCuerpoLeerMail.Name = "tbCuerpoLeerMail";
             this.tbCuerpoLeerMail.ReadOnly = true;
-            this.tbCuerpoLeerMail.Size = new System.Drawing.Size(841, 314);
+            this.tbCuerpoLeerMail.Size = new System.Drawing.Size(841, 276);
             this.tbCuerpoLeerMail.TabIndex = 6;
             // 
             // tbParaLeerMail
             // 
             this.tbParaLeerMail.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.tbParaLeerMail.Location = new System.Drawing.Point(98, 77);
+            this.tbParaLeerMail.Location = new System.Drawing.Point(49, 78);
             this.tbParaLeerMail.Name = "tbParaLeerMail";
             this.tbParaLeerMail.ReadOnly = true;
-            this.tbParaLeerMail.Size = new System.Drawing.Size(749, 20);
+            this.tbParaLeerMail.Size = new System.Drawing.Size(798, 20);
             this.tbParaLeerMail.TabIndex = 5;
             // 
-            // label6
+            // labelPara
             // 
-            this.label6.AutoSize = true;
-            this.label6.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(6, 80);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(77, 13);
-            this.label6.TabIndex = 4;
-            this.label6.Text = "          Para:";
+            this.labelPara.AutoSize = true;
+            this.labelPara.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.labelPara.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelPara.Location = new System.Drawing.Point(6, 81);
+            this.labelPara.Name = "labelPara";
+            this.labelPara.Size = new System.Drawing.Size(37, 13);
+            this.labelPara.TabIndex = 4;
+            this.labelPara.Text = "Para:";
             // 
-            // label3
+            // labelDe
             // 
-            this.label3.AutoSize = true;
-            this.label3.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(8, 49);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(75, 13);
-            this.label3.TabIndex = 3;
-            this.label3.Text = "            De:";
+            this.labelDe.AutoSize = true;
+            this.labelDe.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.labelDe.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelDe.Location = new System.Drawing.Point(16, 49);
+            this.labelDe.Name = "labelDe";
+            this.labelDe.Size = new System.Drawing.Size(27, 13);
+            this.labelDe.TabIndex = 3;
+            this.labelDe.Text = "De:";
             // 
             // tbDeLeerMail
             // 
             this.tbDeLeerMail.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.tbDeLeerMail.Location = new System.Drawing.Point(98, 46);
+            this.tbDeLeerMail.Location = new System.Drawing.Point(49, 46);
             this.tbDeLeerMail.Name = "tbDeLeerMail";
             this.tbDeLeerMail.ReadOnly = true;
-            this.tbDeLeerMail.Size = new System.Drawing.Size(749, 20);
+            this.tbDeLeerMail.Size = new System.Drawing.Size(798, 20);
             this.tbDeLeerMail.TabIndex = 2;
             // 
             // tbAsuntoLeerMail
@@ -752,7 +757,6 @@
             this.menuStrip3.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.administradorDeCuentasToolStripMenuItem,
             this.bEnviar,
-            this.bGuardarBorrador,
             this.acercaDeToolStripMenuItem2});
             this.menuStrip3.Location = new System.Drawing.Point(3, 16);
             this.menuStrip3.Name = "menuStrip3";
@@ -776,15 +780,6 @@
             this.bEnviar.Size = new System.Drawing.Size(74, 23);
             this.bEnviar.Text = "Enviar";
             this.bEnviar.Click += new System.EventHandler(this.toolStripMenubEnviar_Click);
-            // 
-            // bGuardarBorrador
-            // 
-            this.bGuardarBorrador.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.bGuardarBorrador.Image = global::Trabajo_Final.Properties.Resources.filesave;
-            this.bGuardarBorrador.Name = "bGuardarBorrador";
-            this.bGuardarBorrador.Size = new System.Drawing.Size(183, 23);
-            this.bGuardarBorrador.Text = "Guardar como borrador";
-            this.bGuardarBorrador.Click += new System.EventHandler(this.guardarComoBorradorToolStripMenuItem_Click);
             // 
             // acercaDeToolStripMenuItem2
             // 
@@ -854,6 +849,28 @@
             this.acercaDeToolStripMenuItem.Size = new System.Drawing.Size(105, 23);
             this.acercaDeToolStripMenuItem.Text = "Acerca de...";
             this.acercaDeToolStripMenuItem.Click += new System.EventHandler(this.acercaDeToolStripMenuItem_Click);
+            // 
+            // tbCCLeerMail
+            // 
+            this.tbCCLeerMail.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.tbCCLeerMail.Location = new System.Drawing.Point(49, 110);
+            this.tbCCLeerMail.Name = "tbCCLeerMail";
+            this.tbCCLeerMail.ReadOnly = true;
+            this.tbCCLeerMail.Size = new System.Drawing.Size(798, 20);
+            this.tbCCLeerMail.TabIndex = 9;
+            this.tbCCLeerMail.Visible = false;
+            // 
+            // labelCC
+            // 
+            this.labelCC.AutoSize = true;
+            this.labelCC.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.labelCC.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelCC.Location = new System.Drawing.Point(16, 113);
+            this.labelCC.Name = "labelCC";
+            this.labelCC.Size = new System.Drawing.Size(27, 13);
+            this.labelCC.TabIndex = 8;
+            this.labelCC.Text = "CC:";
+            this.labelCC.Visible = false;
             // 
             // FormPrincipal
             // 
@@ -925,7 +942,6 @@
         private System.Windows.Forms.GroupBox gbEnviarMail;
         private System.Windows.Forms.MenuStrip menuStrip3;
         private System.Windows.Forms.ToolStripMenuItem bEnviar;
-        private System.Windows.Forms.ToolStripMenuItem bGuardarBorrador;
         private System.Windows.Forms.ComboBox combobDe;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox tbNombreCuenta;
@@ -945,8 +961,8 @@
         private System.Windows.Forms.TextBox tbAsuntoLeerMail;
         private System.Windows.Forms.TextBox tbCuerpoLeerMail;
         private System.Windows.Forms.TextBox tbParaLeerMail;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label labelPara;
+        private System.Windows.Forms.Label labelDe;
         private System.Windows.Forms.TextBox tbDeLeerMail;
         private System.Windows.Forms.TextBox tbFechaLeerMail;
         private System.Windows.Forms.Button botonAgregarCCO;
@@ -973,6 +989,9 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn leido;
         private System.Windows.Forms.DataGridViewTextBoxColumn idEmail;
         private System.Windows.Forms.PictureBox pictureBoxBarraProgreso;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.TextBox tbCCLeerMail;
+        private System.Windows.Forms.Label labelCC;
     }
 }
 

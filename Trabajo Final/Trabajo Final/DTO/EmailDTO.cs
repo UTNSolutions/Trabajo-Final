@@ -27,16 +27,16 @@ namespace Trabajo_Final.DTO
 
         private bool iLeido;
 
-      //  private IList<String> iConCopia;
+        private IList<String> iConCopia;
 
-       // private IList<String> iConCopiaOculta;
+        private IList<String> iConCopiaOculta;
 
-        public EmailDTO(int pIdCuenta,String pRemitente,IList<String> pDestinatario,String pCuerpo, String pAsunto,DateTime pFecha,bool pLeido)
+        public EmailDTO(int pIdCuenta, String pRemitente, IList<String> pDestinatario, IList<String> pConCopia, IList<String> pConCopiaOculta, String pCuerpo, String pAsunto, DateTime pFecha, bool pLeido)
         {
             this.iRemitente = pRemitente;
             this.iDestinatario = pDestinatario;
-           // this.iConCopia = pConCopia;
-            //this.iConCopiaOculta = pConCopiaOculta;
+            this.iConCopia = pConCopia;
+            this.iConCopiaOculta = pConCopiaOculta;
             this.iIdCuenta = pIdCuenta;
             this.iCuerpo = pCuerpo;
             this.iAsunto = pAsunto;
@@ -44,13 +44,13 @@ namespace Trabajo_Final.DTO
             this.iLeido = pLeido;
         }
 
-        public EmailDTO(int pIdEmail, int pIdCuenta, String pRemitente, IList<String> pDestinatario, String pCuerpo, String pAsunto,DateTime pFecha,bool pLeido)
+        public EmailDTO(int pIdEmail, int pIdCuenta, String pRemitente, IList<String> pDestinatario, IList<String> pConCopia, IList<String> pConCopiaOculta, String pCuerpo, String pAsunto,DateTime pFecha,bool pLeido)
         {
             this.iRemitente = pRemitente;
             this.iIdEmail = pIdEmail;
             this.iDestinatario = pDestinatario;
-           // this.iConCopia = pConCopia;
-          //  this.iConCopiaOculta = pConCopiaOculta;
+            this.iConCopia = pConCopia;
+            this.iConCopiaOculta = pConCopiaOculta;
             this.iIdCuenta = pIdCuenta;
             this.iCuerpo = pCuerpo;
             this.iAsunto = pAsunto;
@@ -74,6 +74,24 @@ namespace Trabajo_Final.DTO
         {
             get { return this.iDestinatario; }
             set { this.iDestinatario = value; }
+        }
+
+        /// <summary>
+        /// Devuelve o establece el componente con copia
+        /// </summary>
+        public IList<String> ConCopia
+        {
+            get { return this.iConCopia; }
+            set { this.iConCopia = value; }
+        }
+
+        /// <summary>
+        /// Devuelve o establece el componente con copia oculta
+        /// </summary>
+        public IList<String> ConCopiaOculta
+        {
+            get { return this.iConCopiaOculta; }
+            set { this.iConCopiaOculta = value; }
         }
 
         /// <summary>

@@ -49,8 +49,7 @@ namespace Trabajo_Final.Dominio
             this.iCredenciales = new NetworkCredential(pCuenta.Direccion, pCuenta.Contraseña);
             foreach (string destinatario in pMail.Destinatario)
             {
-                String cadena = destinatario;
-                if (!(Regex.IsMatch(cadena, "\\w+([-+.']\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*")))
+                if (!(Regex.IsMatch(destinatario, "\\w+([-+.']\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*")))
                 {
                     throw new EmailExcepcion("El destinatario no posee la estructura correcta");
                 }
@@ -68,6 +67,13 @@ namespace Trabajo_Final.Dominio
                 client.Host = "smtp.gmail.com";
                 client.EnableSsl = true;  //Esto es para que vaya a través de SSL que es obligatorio con GMail
                 MailMessage email = new MailMessage(pCuenta.Direccion, destinatario, pMail.Asunto, pMail.Cuerpo);
+                if (pMail.Adjunto.Count != 0)
+                {
+                    foreach (String adjunto in pMail.Adjunto)
+                    {
+                        email.Attachments.Add(new Attachment(adjunto));
+                    }
+                }
                 try
                 {
                     client.Send(email);
@@ -93,6 +99,7 @@ namespace Trabajo_Final.Dominio
 
         public override IList<Email> RecibirMail(Cuenta pCuenta)
         {
+           
             if (pCuenta == null)
             {
                 throw new NullReferenceException("no hay una cuenta asociada para realizar la operacion");
@@ -112,8 +119,42 @@ namespace Trabajo_Final.Dominio
                 {
                     Message mail = client.GetMessage(indice);                    
                     MailMessage email = mail.ToMailMessage();
-                    IList<String> listaDestinatarios = new List<String>();                     
+                    IList<String> listaDestinatarios = new List<String>();
+                    IList<String> listaCC = new List<String>();
+                    IList<String> listaCCO = new List<String>();
+                    IList<String> listaAdjunto = new List<String>();
                     listaDestinatarios.Add(Convert.ToString(email.To));
+                    if (email.CC.Count > 0)
+                    {
+                        foreach (MailAddress cadenaCC in email.CC)
+                        {
+                            listaCC.Add(cadenaCC.ToString());
+                        }
+                    }
+                    if (email.Bcc.Count > 0)
+                    {
+                        foreach (MailAddress cadenaCCO in email.Bcc)
+                        {
+                            listaCCO.Add(cadenaCCO.ToString());
+                        }
+                    }
+                    if ( email.Attachments != null)
+                    {
+                        
+                        foreach(Attachment adjunto in email.Attachments)
+                        {
+                            
+                            String DirectorioDescarga =  @"C:\hola\";
+                            String nuevoPath = DirectorioDescarga +@"\"+ adjunto.Name;
+                            if (!Directory.Exists(nuevoPath))
+                            {
+                                FileStream file = new FileStream(nuevoPath, FileMode.Create);
+                                adjunto.ContentStream.CopyTo(file, 409633333);
+                                listaAdjunto.Add(adjunto.Name);
+                                file.Close();
+                            }
+                        }
+                    }
                     //Si el cuerpo esta en HTML lo trasforma.
                     if (email.IsBodyHtml)
                     {
@@ -122,7 +163,7 @@ namespace Trabajo_Final.Dominio
                     }
                     //obtengo la fecha de dicho Email
                     DateTime fecha = mail.Headers.DateSent;
-                    Email msj = new Email(Convert.ToString(email.From), listaDestinatarios, email.Body, email.Subject,fecha,false);
+                    Email msj = new Email(Convert.ToString(email.From), listaDestinatarios, listaCC, listaCCO, email.Body, email.Subject,listaDestinatarios,fecha,false);
                     listaADevolver.Add(msj);
                     indice++;
                 }

@@ -108,6 +108,14 @@ namespace Trabajo_Final.UI
         /// <param name="e"></param>
         private void botonCCAtras_Click(object sender, EventArgs e)
         {
+            CCAtrasEvento();
+        }
+
+        /// <summary>
+        /// Restablece la opción con copia carbono.
+        /// </summary>
+        private void CCAtrasEvento()
+        {
             botonCCAtras.Visible = false;
             botonCC.Visible = true;
             tbCC.Visible = false;
@@ -123,6 +131,7 @@ namespace Trabajo_Final.UI
                 botonBorrarUltimoCC.Enabled = false;
             }
         }
+
 
         /// <summary>
         /// Habilita la carga de la/las direcciones a los que se le envían una copia carbono oculta del mail.
@@ -144,6 +153,14 @@ namespace Trabajo_Final.UI
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void botonCCOAtras_Click(object sender, EventArgs e)
+        {
+            CCOAtrasEvento();
+        }
+
+        /// <summary>
+        /// Restablece la opción con copia carbono oculta.
+        /// </summary>
+        private void CCOAtrasEvento()
         {
             botonCCOAtras.Visible = false;
             botonCCO.Visible = true;
@@ -175,8 +192,8 @@ namespace Trabajo_Final.UI
             file.FilterIndex = 1;
             file.RestoreDirectory = true;
             file.ShowDialog();
+            tbAdjuntos.Text = tbAdjuntos.Text + file.FileName + "; ";
 
-            tbAdjuntos.Text = file.InitialDirectory;
         }
 
         /// <summary>
@@ -561,26 +578,28 @@ namespace Trabajo_Final.UI
                 gpNuevoMail.Enabled = true;
                 gbEnviarMail.Enabled = true;
                 menuStrip1.Enabled = true;
-            }            
+            }
         }
 
         /// <summary>
-        /// Genera una lista de string con los destinatarioas.
+        /// Genera una lista de string que se utilizan en el envio de un mail.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         /// <returns></returns>
-        private IList<String>  generarListaDestinatario(String pCadena)
+        private IList<String>  generarListaCadenas(String pCadena)
         {
             IList<String> listaDestinatarios = new List<String>();
             String cadena = "";
             int ind = 0;
+            if (pCadena != "")
+            {
             while (ind < pCadena.Length)
             {
                 if (pCadena[ind] != ';' && ind != pCadena.Length)
                 {
                     cadena = cadena + pCadena[ind].ToString();
-                    ind ++;
+                        ind++;
                 }
                 else 
                 {
@@ -599,6 +618,11 @@ namespace Trabajo_Final.UI
                     }
                 }
             }
+            }
+            else
+            {
+                listaDestinatarios = null;
+            }            
             return listaDestinatarios;
         }
            
@@ -651,7 +675,7 @@ namespace Trabajo_Final.UI
                 String remitente = StringsUtils.ObtenerEmail(email.Remitente);
                 if (remitente != cuenta.Direccion)
                 {
-                    adaptador.Add(new AdaptadorDataGrid(email.IdEmail,email.Remitente, email.Destinatario[0], email.Asunto, email.Cuerpo,email.Fecha,email.Leido));
+                    adaptador.Add(new AdaptadorDataGrid(email.IdEmail, email.Remitente, email.Destinatario[0], email.Destinatario[0], email.Asunto, email.Cuerpo, email.Fecha, email.Leido));
                 }
             }
             //ordeno por fecha                         
@@ -685,6 +709,10 @@ namespace Trabajo_Final.UI
             dgEmails.Columns["remitente"].Visible = true;
         }
 
+        /// <summary>
+        /// Separa los mails que fueron enviados y los que fueron recibidos en una cuenta.
+        /// </summary>
+        /// <param name="pNombreCuenta"></param>
         private void FiltarEnviados(String pNombreCuenta)
         {
             IList<AdaptadorDataGrid> adaptador = new List<AdaptadorDataGrid>();
@@ -695,7 +723,7 @@ namespace Trabajo_Final.UI
                 String remitente = StringsUtils.ObtenerEmail(email.Remitente);
                 if (remitente == cuenta.Direccion)
                 {
-                    adaptador.Add(new AdaptadorDataGrid(email.IdEmail, email.Remitente, email.Destinatario[0], email.Asunto, email.Cuerpo, email.Fecha, email.Leido));
+                    adaptador.Add(new AdaptadorDataGrid(email.IdEmail, email.Remitente, email.Destinatario[0], email.Destinatario[0], email.Asunto, email.Cuerpo, email.Fecha, email.Leido));
                 }
             }
             //ordeno por fecha
@@ -735,11 +763,6 @@ namespace Trabajo_Final.UI
             dgEmails.Columns["destinatario"].Visible = true;
         }
 
-        private void guardarComoBorradorToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            
-        }
-
         /// <summary>
         /// Luego que se envia un mail borra el panel y sus elementos.
         /// </summary>
@@ -751,6 +774,9 @@ namespace Trabajo_Final.UI
             tbCCOROnly.Text = "";
             tbAsunto.Text = "";
             tbAdjuntos.Text = "";
+            botonBorrarUltimoPara.Enabled = false;
+            CCAtrasEvento();
+            CCOAtrasEvento();
         }
 
         /// <summary>
@@ -784,18 +810,18 @@ namespace Trabajo_Final.UI
                 hilo.WorkerReportsProgress = true;
                 hilo.DoWork += new DoWorkEventHandler(ObtenerMailDeUnaCuenta);
                 hilo.RunWorkerCompleted += new RunWorkerCompletedEventHandler(ProgressCompleted);
-                hilo.RunWorkerAsync();             
+                hilo.RunWorkerAsync();
             }
         }
 
 
         private void ProgressCompleted(object sender,RunWorkerCompletedEventArgs e)
         {
-            this.iFormBarraProgreso.Close();            
+            this.iFormBarraProgreso.Close();    
         }
 
         private void ObtenerMailDeUnaCuenta(object sender, DoWorkEventArgs e)
-        {
+        {         
             try
             {               
                 Fachada.Instancia.ObtenerEmail(tbNombreCuenta.Text);
@@ -826,14 +852,14 @@ namespace Trabajo_Final.UI
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void obtenerTodosToolStripMenuItem_Click(object sender, EventArgs e)
-        {                   
+        {          
                this.iFormBarraProgreso = new FormBarraProgreso();
                this.iFormBarraProgreso.Show();
                BackgroundWorker hilo = new BackgroundWorker();
                hilo.DoWork += new DoWorkEventHandler(ObtenerTodos);
                hilo.WorkerReportsProgress = true;               
                hilo.RunWorkerCompleted += new RunWorkerCompletedEventHandler(ProgressCompleted);
-               hilo.RunWorkerAsync();             
+               hilo.RunWorkerAsync();
         }
 
         /// <summary>
@@ -850,7 +876,7 @@ namespace Trabajo_Final.UI
             //itera los nodos principales del tree view para obtener las cuentas configuradas
             //para poder extraer sus emails
             foreach (TreeNode tn in tvCuentas.Nodes)
-            {                              
+            {               
                 listaNombreCuentas.Add(tn.Name);
             }
             Fachada.Instancia.ObtenerTodosEmails(listaNombreCuentas);
@@ -897,6 +923,21 @@ namespace Trabajo_Final.UI
                 {
                     tbAsuntoLeerMail.Text = Convert.ToString(fila.Asunto);
                 }
+                if (fila.CC != "")
+                {
+                    labelCC.Visible = true;
+                    tbCCLeerMail.Visible = true;
+                    tbCCLeerMail.Text = fila.CC;
+                    tbCuerpoLeerMail.Location = new Point(6, 142);
+                    tbCuerpoLeerMail.Size = new Size(841, 276);
+                }
+                else
+                {
+                    labelCC.Visible = true;
+                    tbCCLeerMail.Visible = true;
+                    tbCuerpoLeerMail.Location = new Point(6, 109);
+                    tbCuerpoLeerMail.Size = new Size(841, 314);
+                }
                 tbDeLeerMail.Text = fila.Remitente;
                 tbParaLeerMail.Text = fila.Destinatario;
                 tbCuerpoLeerMail.Text = fila.Cuerpo;
@@ -939,6 +980,23 @@ namespace Trabajo_Final.UI
             {
                 MessageBox.Show(ex.Message, "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }           
+        }
+
+        private void tbAsunto_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar != (char)13)
+            {
+                if (tbAsunto.Text.Length > 50)
+                {
+                    tbAsunto.Size = new Size(354, 38);
+                    tbAsunto.Multiline = true;
+                }
+                if (tbAsunto.Text.Length < 50)
+                {
+                    tbAsunto.Size = new Size(354, 20);
+                    tbAsunto.Multiline = false;
+                }
+            }
         }
     }
 }
