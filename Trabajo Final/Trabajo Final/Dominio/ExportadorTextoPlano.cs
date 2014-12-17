@@ -39,12 +39,23 @@ namespace Trabajo_Final.Dominio
             {
                 StreamWriter archivo = new StreamWriter(pRuta);
                 String destinatarios = "";
+                String CC = "";
+                if (pEmail.CC != null)
+                {
+                    CC = "CC: ";
+                    foreach (String ConCopia in pEmail.CC)
+                    {
+                        CC += ConCopia + ";";
+                    }
+                    CC += Environment.NewLine; 
+                }
                 foreach (String destinatario in pEmail.Destinatario)
                 {
                     destinatarios += destinatario + ";";
                 }
                 archivo.WriteLine("De: " + pEmail.Remitente + Environment.NewLine +
                                   "Para: " + destinatarios + Environment.NewLine +
+                                  CC +
                                   "Fecha: " + pEmail.Fecha + Environment.NewLine +
                                   "Asunto: " + pEmail.Asunto + Environment.NewLine +
                                    Environment.NewLine +

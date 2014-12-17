@@ -67,6 +67,16 @@ namespace Trabajo_Final.Persistencia
                        com.ExecuteNonQuery();
                    }
                }
+               if (pEmail.Adjuntos != null)
+               {
+                   foreach (String adjuntos in pEmail.Adjuntos)
+                   {
+                       SqlCommand com = new SqlCommand("insert into AdjuntosXEmail(idMail,ruta) values(@idMail,@ruta)", this.iConexion, this.iTransaccion);
+                       com.Parameters.AddWithValue("@idMail", idMail);
+                       com.Parameters.AddWithValue("@ruta", adjuntos);
+                       com.ExecuteNonQuery();
+                   }
+               }
                return idMail;
            }
            catch (SqlException)
@@ -120,21 +130,27 @@ namespace Trabajo_Final.Persistencia
                     SqlCommand cmd = new SqlCommand("select direccion from DireccionXEmail where idMail = @idMail and tipo='D'", this.iConexion);
                     SqlCommand cmdCC = new SqlCommand("select direccion from DireccionXEmail where idMail = @idMail and tipo='CC'", this.iConexion);
                     SqlCommand cmdCCO = new SqlCommand("select direccion from DireccionXEmail where idMail = @idMail and tipo='CCO'", this.iConexion);
+                    SqlCommand cmdAdjuntos = new SqlCommand("select ruta from AdjuntosXEmail where idMail = @idMail", this.iConexion);
                     cmd.Parameters.AddWithValue("@idMail", fila["idMail"]);
                     cmdCC.Parameters.AddWithValue("@idMail", fila["idMail"]);
-                    cmdCCO.Parameters.AddWithValue("@idMail", fila["idMail"]);
+                    cmdCCO.Parameters.AddWithValue("@idMail", fila["idMail"]);                        
+                    cmdAdjuntos.Parameters.AddWithValue("@idMail", fila["idMail"]);
                     DataTable tablaDestinatarios = new DataTable();
                     DataTable tablaCC = new DataTable();
-                    DataTable tablaCCO = new DataTable();
+                    DataTable tablaCCO = new DataTable();                    
+                    DataTable tablaAdjuntos = new DataTable();
                     IList<String> listaDestinatarios = new List<String>();
                     IList<String> listaCC = new List<String>();
-                    IList<String> listaCCO = new List<String>();
+                    IList<String> listaCCO = new List<String>();                    
+                    IList<String> listaAdjuntos = new List<String>();
                     SqlDataAdapter operacion1 = new SqlDataAdapter(cmd);
                     SqlDataAdapter operacion2 = new SqlDataAdapter(cmdCC);
                     SqlDataAdapter operacion3 = new SqlDataAdapter(cmdCCO);
+                    SqlDataAdapter operacion4 = new SqlDataAdapter(cmdAdjuntos);
                     operacion1.Fill(tablaDestinatarios);
                     operacion2.Fill(tablaCC);
                     operacion3.Fill(tablaCCO);
+                    operacion4.Fill(tablaAdjuntos);
                     //por cada direccion (destinatario) encontrado lo agrego a una lista 
                     foreach (DataRow fila1 in tablaDestinatarios.Rows)
                     {
@@ -148,7 +164,11 @@ namespace Trabajo_Final.Persistencia
                     {
                         listaCCO.Add(Convert.ToString(fila1["direccion"]));
                     }
-                    listaEmails.Add(new EmailDTO(Convert.ToInt32(fila["idMail"]), Convert.ToInt32(fila["idCuenta"]), Convert.ToString(fila["remitente"]), listaDestinatarios, listaCC, listaCCO, Convert.ToString(fila["cuerpo"]), Convert.ToString(fila["asunto"]),Convert.ToDateTime(fila["fecha"]),Convert.ToBoolean(fila["leido"])));
+                    foreach (DataRow fila1 in tablaAdjuntos.Rows)
+                    {
+                        listaAdjuntos.Add(Convert.ToString(fila1["ruta"]));
+                    }
+                    listaEmails.Add(new EmailDTO(Convert.ToInt32(fila["idMail"]), Convert.ToInt32(fila["idCuenta"]), Convert.ToString(fila["remitente"]), listaDestinatarios, listaCC, listaCCO, Convert.ToString(fila["cuerpo"]), Convert.ToString(fila["asunto"]), listaAdjuntos,Convert.ToDateTime(fila["fecha"]),Convert.ToBoolean(fila["leido"])));
                 }
                 return listaEmails;
             }

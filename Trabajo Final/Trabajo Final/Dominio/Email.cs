@@ -44,17 +44,18 @@ namespace Trabajo_Final.Dominio
             this.iAdjuntos = pAdjuntos;
         }
 
-        public Email(int pIdEmail, String pRemitente, IList<String> pDestinatario, /*IList<String> pCC, IList<String> pCCO,*/ String pCuerpo, String pAsunto, DateTime pFecha, bool pLeido)
+        public Email(int pIdEmail, String pRemitente, IList<String> pDestinatario, IList<String> pCC, IList<String> pCCO, String pCuerpo, String pAsunto, IList<String> pAdjuntos, DateTime pFecha, bool pLeido)
         {
             this.iIdEmail = pIdEmail;
             this.iRemitente = pRemitente;
             this.iDestinatario = pDestinatario;
             this.iCuerpo = pCuerpo;
             this.iAsunto = pAsunto;
-            //this.iConCopia = pCC;
-            //this.iConCopiaOculta = pCCO;
+            this.iConCopia = pCC;
+            this.iConCopiaOculta = pCCO;
             this.iFecha = pFecha;
             this.iLeido = pLeido;
+            this.iAdjuntos = pAdjuntos;
         }
 
         /// <summary>
@@ -115,7 +116,7 @@ namespace Trabajo_Final.Dominio
         }
 
         /// <summary>
-        /// Devuelve un lista con los adjuntos (Rutas) del Email.
+        /// Devuelve los adjuntos (Rutas) del Email.
         /// </summary>
         public IList<String> Adjunto
         {

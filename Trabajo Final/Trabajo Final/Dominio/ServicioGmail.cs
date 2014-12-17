@@ -73,6 +73,20 @@ namespace Trabajo_Final.Dominio
                         email.Attachments.Add(new Attachment(adjunto));
                     }
                 }
+                if (pMail.CC != null)
+                {
+                    foreach (String CC in pMail.CC)
+                    {
+                        email.CC.Add(new MailAddress(CC));
+                    }
+                }
+                if (pMail.CCO != null)
+                {
+                    foreach (String CCO in pMail.CCO)
+                    {
+                        email.CC.Add(new MailAddress(CCO));
+                    }
+                }
                 try
                 {
                     client.Send(email);
@@ -142,14 +156,12 @@ namespace Trabajo_Final.Dominio
                         
                         foreach(Attachment adjunto in email.Attachments)
                         {
-                            
-                            String DirectorioDescarga =  @"C:\hola\";
-                            String nuevoPath = DirectorioDescarga +@"\"+ adjunto.Name;
+                            String nuevoPath = pCuenta.DirectorioDeAdjuntos +@"\"+ adjunto.Name;
                             if (!Directory.Exists(nuevoPath))
                             {
                                 FileStream file = new FileStream(nuevoPath, FileMode.Create);
                                 adjunto.ContentStream.CopyTo(file, 409633333);
-                                listaAdjunto.Add(adjunto.Name);
+                                listaAdjunto.Add(nuevoPath);
                                 file.Close();
                             }
                         }
@@ -162,7 +174,7 @@ namespace Trabajo_Final.Dominio
                     }
                     //obtengo la fecha de dicho Email
                     DateTime fecha = mail.Headers.DateSent;
-                    Email msj = new Email(Convert.ToString(email.From), listaDestinatarios, listaCC, listaCCO, email.Body, email.Subject,listaDestinatarios,fecha,false);
+                    Email msj = new Email(Convert.ToString(email.From), listaDestinatarios, listaCC, listaCCO, email.Body, email.Subject, listaAdjunto,fecha,false);
                     listaADevolver.Add(msj);
                     indice++;
                 }

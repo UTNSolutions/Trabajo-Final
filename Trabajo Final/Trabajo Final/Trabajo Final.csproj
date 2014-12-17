@@ -164,6 +164,7 @@
     <Compile Include="Dominio\ServicioGmail.cs" />
     <Compile Include="Dominio\ServicioYahoo.cs" />
     <Compile Include="Utils\AdaptadorDataGrid.cs" />
+    <Compile Include="Utils\ArchivoAdjunto.cs" />
     <Compile Include="Utils\EncriptadorCesar.cs" />
     <Compile Include="Utils\StringsUtils.cs" />
     <EmbeddedResource Include="UI\FormAcercaDe.resx">

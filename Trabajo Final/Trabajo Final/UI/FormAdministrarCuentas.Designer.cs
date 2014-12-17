@@ -29,6 +29,11 @@
         private void InitializeComponent()
         {
             this.dgCuentas = new System.Windows.Forms.DataGridView();
+            this.idCuenta = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.direccion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.servicio = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.contraseña = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -43,11 +48,6 @@
             this.bModificar = new System.Windows.Forms.Button();
             this.bAgregar = new System.Windows.Forms.Button();
             this.tbIdCuenta = new System.Windows.Forms.TextBox();
-            this.idCuenta = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.direccion = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.servicio = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.contraseña = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgCuentas)).BeginInit();
             this.SuspendLayout();
             // 
@@ -74,6 +74,46 @@
             this.dgCuentas.KeyDown += new System.Windows.Forms.KeyEventHandler(this.MostrarDatos);
             this.dgCuentas.KeyUp += new System.Windows.Forms.KeyEventHandler(this.MostrarDatos);
             // 
+            // idCuenta
+            // 
+            this.idCuenta.DataPropertyName = "IdCuenta";
+            this.idCuenta.HeaderText = "idCuenta";
+            this.idCuenta.Name = "idCuenta";
+            this.idCuenta.ReadOnly = true;
+            this.idCuenta.Visible = false;
+            // 
+            // nombre
+            // 
+            this.nombre.DataPropertyName = "Nombre";
+            this.nombre.HeaderText = "Nombre";
+            this.nombre.Name = "nombre";
+            this.nombre.ReadOnly = true;
+            this.nombre.Width = 105;
+            // 
+            // direccion
+            // 
+            this.direccion.DataPropertyName = "Direccion";
+            this.direccion.HeaderText = "Direccion";
+            this.direccion.Name = "direccion";
+            this.direccion.ReadOnly = true;
+            this.direccion.Width = 160;
+            // 
+            // servicio
+            // 
+            this.servicio.DataPropertyName = "NombreServicio";
+            this.servicio.HeaderText = "Servicio";
+            this.servicio.Name = "servicio";
+            this.servicio.ReadOnly = true;
+            this.servicio.Visible = false;
+            // 
+            // contraseña
+            // 
+            this.contraseña.DataPropertyName = "Contraseña";
+            this.contraseña.HeaderText = "Contraseña";
+            this.contraseña.Name = "contraseña";
+            this.contraseña.ReadOnly = true;
+            this.contraseña.Visible = false;
+            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -86,11 +126,11 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(377, 116);
+            this.label2.Location = new System.Drawing.Point(367, 116);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(30, 13);
+            this.label2.Size = new System.Drawing.Size(40, 13);
             this.label2.TabIndex = 2;
-            this.label2.Text = "Mail*";
+            this.label2.Text = "E-Mail*";
             // 
             // label3
             // 
@@ -215,46 +255,6 @@
             this.tbIdCuenta.TabIndex = 12;
             this.tbIdCuenta.TabStop = false;
             this.tbIdCuenta.Visible = false;
-            // 
-            // idCuenta
-            // 
-            this.idCuenta.DataPropertyName = "IdCuenta";
-            this.idCuenta.HeaderText = "idCuenta";
-            this.idCuenta.Name = "idCuenta";
-            this.idCuenta.ReadOnly = true;
-            this.idCuenta.Visible = false;
-            // 
-            // nombre
-            // 
-            this.nombre.DataPropertyName = "Nombre";
-            this.nombre.HeaderText = "Nombre";
-            this.nombre.Name = "nombre";
-            this.nombre.ReadOnly = true;
-            this.nombre.Width = 105;
-            // 
-            // direccion
-            // 
-            this.direccion.DataPropertyName = "Direccion";
-            this.direccion.HeaderText = "Direccion";
-            this.direccion.Name = "direccion";
-            this.direccion.ReadOnly = true;
-            this.direccion.Width = 160;
-            // 
-            // servicio
-            // 
-            this.servicio.DataPropertyName = "NombreServicio";
-            this.servicio.HeaderText = "Servicio";
-            this.servicio.Name = "servicio";
-            this.servicio.ReadOnly = true;
-            this.servicio.Visible = false;
-            // 
-            // contraseña
-            // 
-            this.contraseña.DataPropertyName = "Contraseña";
-            this.contraseña.HeaderText = "Contraseña";
-            this.contraseña.Name = "contraseña";
-            this.contraseña.ReadOnly = true;
-            this.contraseña.Visible = false;
             // 
             // FormAdministrarCuentas
             // 
