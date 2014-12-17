@@ -7,6 +7,7 @@ using Trabajo_Final.Persistencia;
 using Trabajo_Final.Excepciones;
 using Trabajo_Final.Dominio;
 using Trabajo_Final.DTO;
+using System.IO;
 
 namespace Trabajo_Final.Controladores
 {
@@ -150,8 +151,16 @@ namespace Trabajo_Final.Controladores
         {
             try
             {
+                //Aca obtengo la cuenta para luego eliminar el directorio donde se descargan los adjuntos
+                //Esto se hace para no dejar reciduos en el sistema.
+                Cuenta cuenta = Cuentas.Instancia.GetCuenta(pNombre);
                 FachadaABMCuentas.Instancia.EliminarCuenta(new CuentaDTO(pIdCuenta, pNombre, pDireccion, pServicio, pContraseña));
                 Cuentas.Instancia.EliminarCuenta(pNombre);
+                //Acá elimino el directorio.
+                if (Directory.Exists(cuenta.DirectorioDeAdjuntos))
+                {
+                    Directory.Delete(cuenta.DirectorioDeAdjuntos);
+                }                
             }
             catch (DAOExcepcion ex)
             {

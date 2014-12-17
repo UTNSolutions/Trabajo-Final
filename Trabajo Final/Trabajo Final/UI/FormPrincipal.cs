@@ -62,7 +62,6 @@ namespace Trabajo_Final.UI
         }
         #endregion
         
-
         #region RedactarEmail
 
         /// <summary>
@@ -188,6 +187,40 @@ namespace Trabajo_Final.UI
             file.RestoreDirectory = true;
             file.ShowDialog();
             tbAdjuntos.Text = tbAdjuntos.Text + file.FileName + "; ";
+            if(botonBorrarUltimoAdjuntos.Visible == false)
+            {
+                botonBorrarUltimoAdjuntos.Visible = true;
+
+            }
+        }
+
+        private void botonBorrarUltimoAdjuntos_Click(object sender, EventArgs e)
+        {
+            //Le saco dos porque se que la última cadena tiene un "; " (punto y coma seguido de un espacio),
+            //y no me interezan para ciclar.
+            int indice = tbAdjuntos.Text.Length - 2;
+            bool control = true;
+            //Recorro la cadena hacia atras hasta encontrar un "; " (punto y coma seguido de un espacio)
+            //para eliminar la última cadena. 
+            while (indice > 0 && control)
+            {
+                //Elimino la última cadena.
+                if (tbAdjuntos.Text[indice] == ' ' && tbAdjuntos.Text[indice - 1] == ';')
+                {
+                    tbAdjuntos.Text = tbAdjuntos.Text.Substring(0, indice + 1);
+                    control = false;
+                }
+                else
+                {
+                    indice--;
+                }
+            }
+            //En caso de que salga del while por la condición de la sig. linea es porque es la última cadena.
+            if (indice == 0)
+            {
+                tbAdjuntos.Text = "";
+                botonBorrarUltimoAdjuntos.Visible = false;
+            }
         }
 
         /// <summary>
@@ -1113,31 +1146,34 @@ namespace Trabajo_Final.UI
             }
             SaveFileDialog saveFileDialog1 = new SaveFileDialog();
             saveFileDialog1.Filter = cadena + "|*." + cadena;
-
-            if (saveFileDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            if (File.Exists(cbDatosAdLeerMail.SelectedValue.ToString()))
             {
-                FileStream archivoAGuardar = new FileStream(saveFileDialog1.FileName, FileMode.Create);
-                try
-                {
-                    FileStream archivoACopiar = File.Open(cbDatosAdLeerMail.SelectedValue.ToString(), FileMode.Open);
-                    archivoACopiar.CopyTo(archivoAGuardar, 4096);
-                    archivoACopiar.Close();
-                    MessageBox.Show("El archivo se ha guardado con éxito", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                if (saveFileDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                {                
+                    FileStream archivoAGuardar = new FileStream(saveFileDialog1.FileName, FileMode.Create);
+                    try
+                    {
+                        FileStream archivoACopiar = File.Open(cbDatosAdLeerMail.SelectedValue.ToString(), FileMode.Open);
+                        archivoACopiar.CopyTo(archivoAGuardar, 4096);
+                        archivoACopiar.Close();
+                        MessageBox.Show("El archivo se ha guardado con éxito", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    catch (IOException)
+                    {
+                        MessageBox.Show("Cierre el archivo antes de guardarlo", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        File.Delete(saveFileDialog1.FileName);
+                    }
+                    finally
+                    {
+                        archivoAGuardar.Close();
+                    }
                 }
-                catch (IOException)
-                {
-                    MessageBox.Show("Cierre el archivo antes de guardarlo", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Error);                    
-                    File.Delete(saveFileDialog1.FileName);
-                }
-                finally
-                {
-                    archivoAGuardar.Close();
-                }
-            }            
+            }
+            else
+            {
+                MessageBox.Show("El archivo que intenta guardar no se encuentra disponible, se ha eliminado o cambiado de directorio", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }           
         }
-
-        #endregion
-
-        
+        #endregion                
     }
 }
