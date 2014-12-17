@@ -28,18 +28,20 @@ namespace Trabajo_Final.Dominio
         }
 
         public void Exportar(string pRuta, Email pEMail)
-            {
+        {
             if (pRuta == null)
-                {
+            {
                 throw new ArgumentNullException("La ruta pasada es nula");
-                }
+            }
             SmtpClient client = new SmtpClient();
+            //establezco que el email saliente se tiene que guardar en un directorio especificado
             client.DeliveryMethod = SmtpDeliveryMethod.SpecifiedPickupDirectory;
             MailMessage email = new MailMessage(pEMail.Remitente, pEMail.Destinatario[0], pEMail.Asunto, pEMail.Cuerpo);
+            //establezco el directorio donde se quiere alojar el Email
             client.PickupDirectoryLocation = pRuta;
             client.DeliveryFormat = SmtpDeliveryFormat.International;
             client.Send(email);
-            }
         }
     }
+}
 

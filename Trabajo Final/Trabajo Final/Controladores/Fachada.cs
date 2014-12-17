@@ -416,11 +416,12 @@ namespace Trabajo_Final.Controladores
                 //Actualizo la lista de emails de dicha cuenta de dominio
                 ActualizarListaEmails(cuenta, listaEmailsFiltrados);
                 //actualizo la ultima conexion de dicha cuenta en el servidor con la fecha y hora
-                //del ultimo email recibidoo del servidor. Hago esto siempre y cuando 
-                //halla recibibo al menos un Email.
+                //del ultimo email recibido del servidor. Hago esto siempre y cuando 
+                //halla recibido al menos un Email.
 
                 if (listaEmails.Count > 0)
                 {
+                    //ordeno por fecha
                     listaEmails = (from e in listaEmails
                                                               orderby e.Fecha descending    
                                                                 select e).ToList();
@@ -464,6 +465,8 @@ namespace Trabajo_Final.Controladores
                 }
                 catch (EmailExcepcion ex)
                 {                   
+                    //elimino la cuenta que produjo la excepcion de la lista asi 
+                    //no la tiene en cuenta cuando llamo devuelta al metodo
                     listaNombresCuentas.Remove(nombreCuenta);
                     ObtenerTodosEmails(listaNombresCuentas);
                     throw ex;
