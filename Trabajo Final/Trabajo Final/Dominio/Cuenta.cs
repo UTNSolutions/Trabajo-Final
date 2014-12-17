@@ -112,7 +112,7 @@ namespace Trabajo_Final.Dominio
         /// <param name="pEmail"></param>
         public void EliminarEmail(int pIdEmail)
         {
-            if (pIdEmail == null)
+            if (pIdEmail == 0)
             {
                 throw new ArgumentNullException();
             }

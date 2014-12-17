@@ -116,8 +116,7 @@
             this.cuentasToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.redactarMailToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.acercaDeToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.button1 = new System.Windows.Forms.Button();
-            this.botonGuardarLeerMail = new System.Windows.Forms.Button();
+            this.bGuardarLeerMail = new System.Windows.Forms.Button();
             this.gbOpciones1.SuspendLayout();
             this.menuStrip2.SuspendLayout();
             this.gpNuevoMail.SuspendLayout();
@@ -980,27 +979,16 @@
             this.acercaDeToolStripMenuItem1.Text = "Acerca de...";
             this.acercaDeToolStripMenuItem1.Click += new System.EventHandler(this.acercaDeToolStripMenuItem_Click);
             // 
-            // button1
-            // 
-            this.button1.Image = global::Trabajo_Final.Properties.Resources.observar_smc__1_;
-            this.button1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button1.Location = new System.Drawing.Point(511, 4);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 14;
-            this.button1.Text = "  Ver";
-            this.button1.UseVisualStyleBackColor = true;
-            // 
             // botonGuardarLeerMail
             // 
-            this.botonGuardarLeerMail.Image = global::Trabajo_Final.Properties.Resources.filesave;
-            this.botonGuardarLeerMail.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.botonGuardarLeerMail.Location = new System.Drawing.Point(601, 4);
-            this.botonGuardarLeerMail.Name = "botonGuardarLeerMail";
-            this.botonGuardarLeerMail.Size = new System.Drawing.Size(75, 23);
-            this.botonGuardarLeerMail.TabIndex = 13;
-            this.botonGuardarLeerMail.Text = "   Guardar";
-            this.botonGuardarLeerMail.UseVisualStyleBackColor = true;
+            this.bGuardarLeerMail.Image = global::Trabajo_Final.Properties.Resources.filesave;
+            this.bGuardarLeerMail.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.bGuardarLeerMail.Location = new System.Drawing.Point(601, 4);
+            this.bGuardarLeerMail.Name = "botonGuardarLeerMail";
+            this.bGuardarLeerMail.Size = new System.Drawing.Size(75, 23);
+            this.bGuardarLeerMail.TabIndex = 13;
+            this.bGuardarLeerMail.Text = "   Guardar";
+            this.bGuardarLeerMail.UseVisualStyleBackColor = true;
             // 
             // FormPrincipal
             // 
