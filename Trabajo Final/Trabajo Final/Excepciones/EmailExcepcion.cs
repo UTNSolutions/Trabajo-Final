@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace Trabajo_Final.Excepciones
 {
     /// <summary>
-    /// Excepcion que se produce cuando en una cuenta de correo
+    /// Excepcion que se produce cuando hay un error en un Email de una cuenta
     /// </summary>
     class EmailExcepcion : Exception 
     {

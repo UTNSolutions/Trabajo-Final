@@ -25,6 +25,8 @@ namespace Trabajo_Final.Persistencia
         {
             try
             {
+                //declaro un encriptador para poder encriptar la contraseña antes de insertarla
+                //en la base de datos
                 EncriptadorCesar encriptador = new EncriptadorCesar(4);
                 String contraseñaEncriptada = encriptador.Encriptar(pCuenta.Contraseña);
                 SqlCommand comando = new SqlCommand("insert into Cuenta(nombre,direccion,servicio,contraseña,directorioDeAdjuntos) values(@nombre,@direccion,@servicio,@contraseña,@directorio)", this.iConexion, this.iTransaccion);
@@ -119,7 +121,7 @@ namespace Trabajo_Final.Persistencia
             }
             catch (SqlException)
             {
-                throw new DAOExcepcion("No se pudo obtener los datos de las cuentas");
+                throw new DAOExcepcion("No se pudo obtener los datos de la cuenta");
             }
         }
 

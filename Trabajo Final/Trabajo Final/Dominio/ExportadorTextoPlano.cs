@@ -37,6 +37,7 @@ namespace Trabajo_Final.Dominio
             }
             try
             {
+                //creo un archivo vacio en la ruta especificada
                 StreamWriter archivo = new StreamWriter(pRuta);
                 String destinatarios = "";
                 String CC = "";
@@ -53,6 +54,7 @@ namespace Trabajo_Final.Dominio
                 {
                     destinatarios += destinatario + ";";
                 }
+                //escribo el archivo con los datos del Email
                 archivo.WriteLine("De: " + pEmail.Remitente + Environment.NewLine +
                                   "Para: " + destinatarios + Environment.NewLine +
                                   CC +

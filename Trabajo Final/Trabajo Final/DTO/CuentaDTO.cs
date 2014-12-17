@@ -42,34 +42,53 @@ namespace Trabajo_Final.DTO
             this.iContraseña = pContraseña;
         }
 
+        /// <summary>
+        /// Devuelve la componente IdCuenta
+        /// </summary>
         public int IdCuenta
         {
             get {return this.iIdCuenta;}
         }
+
+        /// <summary>
+        /// Devuelve o establece la componente Nombre
+        /// </summary>
         public String Nombre
         {
             get { return this.iNombre;}
             set { this.iNombre = value; }
         }
 
+        /// <summary>
+        /// Devuelve o establece la componente Direccion
+        /// </summary>
         public String Direccion
         {
             get { return this.iDireccion; }
             set { this.iDireccion = value; }
         }
 
+        /// <summary>
+        /// Devuelve o establece la componente NombreServicio
+        /// </summary>
         public String NombreServicio
         {
             get { return this.iNombreServicio; }
             set { this.iNombreServicio = value; }
         }
 
+        /// <summary>
+        /// Devuelve o establece la componente Contraseña
+        /// </summary>
         public String Contraseña
         {
             get { return this.iContraseña; }
             set { this.iContraseña = value; }
         }
 
+        /// <summary>
+        /// Devuelve la componente DirectorioDeAdjuntos
+        /// </summary>
         public String DirectorioDeAdjuntos
         {
             get { return this.iDirectorioDeAdjuntos; }

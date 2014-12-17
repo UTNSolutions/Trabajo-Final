@@ -14,14 +14,14 @@ namespace Trabajo_Final.Utils
         private String iNombreArchivo;
         private String iRutaArchivo;
 
-        public ArchivoAdjunto(String pNombreArchivo, String pRutaArcivo)
+        public ArchivoAdjunto(String pNombreArchivo, String pRutaArchivo)
         {
             this.iNombreArchivo = pNombreArchivo;
-            this.iRutaArchivo = pRutaArcivo;
+            this.iRutaArchivo = pRutaArchivo;
         }
 
         /// <summary>
-        /// Devuelve el nombre del archivo y la extensión de un adjunto.
+        /// Devuelve la componente nombre del archivo y la extensión del mismo.
         /// </summary>
         public String NombreArchivo
         {
@@ -29,7 +29,7 @@ namespace Trabajo_Final.Utils
         }
 
         /// <summary>
-        /// Devuelve la ruta de un adjunto.
+        /// Devuelve la componente ruta de un adjunto.
         /// </summary>
         public String RutaArchivo
         {            

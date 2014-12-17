@@ -36,7 +36,7 @@ namespace Trabajo_Final.UI
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void acercaDeToolStripMenuItem_Click(object sender, EventArgs e)
+        private void acercaDe_Click(object sender, EventArgs e)
         {
             FormAcercaDe iFormAcercaDe = new FormAcercaDe();            
             iFormAcercaDe.ShowDialog();
@@ -47,14 +47,14 @@ namespace Trabajo_Final.UI
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void cuentasToolStripMenuItem_Click(object sender, EventArgs e)
+        private void cuentas_Click(object sender, EventArgs e)
         {
             FormAdministrarCuentas iFormAdminCuentas = new FormAdministrarCuentas();
             iFormAdminCuentas.FormClosed += new FormClosedEventHandler(formAdminCuentas_FormClosed);
             iFormAdminCuentas.ShowDialog();           
         }
 
-        private void exportarToolStripMenuItem_Click(object sender, EventArgs e)
+        private void exportar_Click(object sender, EventArgs e)
         {
 
             FormExportar iFormExportar = new FormExportar(tbDeLeerMail.Text, tbAsuntoLeerMail.Text, generarListaCadenas(tbParaLeerMail.Text), generarListaCadenas(tbCCLeerMail.Text), tbCuerpoLeerMail.Text, Convert.ToDateTime(tbFechaLeerMail.Text));
@@ -69,7 +69,7 @@ namespace Trabajo_Final.UI
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void toolStripMenuAdministrarCorreo_Click(object sender, EventArgs e)
+        private void volverAtras_Click(object sender, EventArgs e)
         {
             if (VaciarDatosEnviarMail_TextChanged(sender, e))
             {
@@ -521,7 +521,7 @@ namespace Trabajo_Final.UI
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void toolStripMenubEnviar_Click(object sender, EventArgs e)
+        private void enviar_Click(object sender, EventArgs e)
         {
             try
             {
@@ -699,7 +699,7 @@ namespace Trabajo_Final.UI
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void redactarEmailToolStripMenuItem_Click(object sender, EventArgs e)
+        private void redactar_Click(object sender, EventArgs e)
         {
             if (!gpNuevoMail.Visible)
             {
@@ -865,7 +865,7 @@ namespace Trabajo_Final.UI
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void obtenerMailsToolStripMenuItem_Click(object sender, EventArgs e)
+        private void obtenerEmail_Click(object sender, EventArgs e)
         {
 
             if (tbNombreCuenta.Text == "")
@@ -926,7 +926,7 @@ namespace Trabajo_Final.UI
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void obtenerTodosToolStripMenuItem_Click(object sender, EventArgs e)
+        private void obtenerTodos_Click(object sender, EventArgs e)
         {          
                this.iFormBarraProgreso = new FormBarraProgreso();
                this.iFormBarraProgreso.Show();
@@ -1085,7 +1085,7 @@ namespace Trabajo_Final.UI
             }
         }
       
-        private void responderToolStripMenuItem_Click(object sender, EventArgs e)
+        private void responder_Click(object sender, EventArgs e)
         {
             try
             {

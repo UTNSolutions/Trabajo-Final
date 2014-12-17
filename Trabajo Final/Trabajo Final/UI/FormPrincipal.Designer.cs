@@ -127,7 +127,7 @@
             this.tvCuentas.BackColor = System.Drawing.SystemColors.InactiveCaption;
             this.tvCuentas.Location = new System.Drawing.Point(3, 6);
             this.tvCuentas.Name = "tvCuentas";
-            this.tvCuentas.Size = new System.Drawing.Size(185, 437);
+            this.tvCuentas.Size = new System.Drawing.Size(185, 420);
             this.tvCuentas.TabIndex = 1;
             this.tvCuentas.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.MostrarDatosDelNodo);
             // 
@@ -162,7 +162,43 @@
             this.obtenerMailsToolStripMenuItem.Name = "obtenerMailsToolStripMenuItem";
             this.obtenerMailsToolStripMenuItem.Size = new System.Drawing.Size(72, 23);
             this.obtenerMailsToolStripMenuItem.Text = "Obtener";
-            this.obtenerMailsToolStripMenuItem.Click += new System.EventHandler(this.obtenerMailsToolStripMenuItem_Click);
+            this.obtenerMailsToolStripMenuItem.Click += new System.EventHandler(this.obtenerEmail_Click);
+            // 
+            // obtenerTodosToolStripMenuItem
+            // 
+            this.obtenerTodosToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.obtenerTodosToolStripMenuItem.Image = global::Trabajo_Final.Properties.Resources.descarga;
+            this.obtenerTodosToolStripMenuItem.Name = "obtenerTodosToolStripMenuItem";
+            this.obtenerTodosToolStripMenuItem.Size = new System.Drawing.Size(129, 23);
+            this.obtenerTodosToolStripMenuItem.Text = "Obtener Todos";
+            this.obtenerTodosToolStripMenuItem.Click += new System.EventHandler(this.obtenerTodos_Click);
+            // 
+            // cuentasToolStripMenuItem1
+            // 
+            this.cuentasToolStripMenuItem1.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.cuentasToolStripMenuItem1.Image = global::Trabajo_Final.Properties.Resources.Administrar;
+            this.cuentasToolStripMenuItem1.Name = "cuentasToolStripMenuItem1";
+            this.cuentasToolStripMenuItem1.Size = new System.Drawing.Size(87, 23);
+            this.cuentasToolStripMenuItem1.Text = "Cuentas";
+            this.cuentasToolStripMenuItem1.Click += new System.EventHandler(this.cuentas_Click);
+            // 
+            // redactarMailToolStripMenuItem
+            // 
+            this.redactarMailToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.redactarMailToolStripMenuItem.Image = global::Trabajo_Final.Properties.Resources.icono_del_l_piz_y_del_cuaderno_7956808___1_;
+            this.redactarMailToolStripMenuItem.Name = "redactarMailToolStripMenuItem";
+            this.redactarMailToolStripMenuItem.Size = new System.Drawing.Size(126, 23);
+            this.redactarMailToolStripMenuItem.Text = "Redactar Email";
+            this.redactarMailToolStripMenuItem.Click += new System.EventHandler(this.redactar_Click);
+            // 
+            // acercaDeToolStripMenuItem1
+            // 
+            this.acercaDeToolStripMenuItem1.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.acercaDeToolStripMenuItem1.Image = global::Trabajo_Final.Properties.Resources.Help;
+            this.acercaDeToolStripMenuItem1.Name = "acercaDeToolStripMenuItem1";
+            this.acercaDeToolStripMenuItem1.Size = new System.Drawing.Size(105, 23);
+            this.acercaDeToolStripMenuItem1.Text = "Acerca de...";
+            this.acercaDeToolStripMenuItem1.Click += new System.EventHandler(this.acercaDe_Click);
             // 
             // obtenerTodosToolStripMenuItem
             // 
@@ -904,7 +940,7 @@
             this.administradorDeCuentasToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("administradorDeCuentasToolStripMenuItem.Image")));
             this.administradorDeCuentasToolStripMenuItem.Name = "administradorDeCuentasToolStripMenuItem";
             this.administradorDeCuentasToolStripMenuItem.Size = new System.Drawing.Size(28, 23);
-            this.administradorDeCuentasToolStripMenuItem.Click += new System.EventHandler(this.toolStripMenuAdministrarCorreo_Click);
+            this.administradorDeCuentasToolStripMenuItem.Click += new System.EventHandler(this.volverAtras_Click);
             // 
             // bEnviar
             // 
@@ -913,7 +949,7 @@
             this.bEnviar.Name = "bEnviar";
             this.bEnviar.Size = new System.Drawing.Size(74, 23);
             this.bEnviar.Text = "Enviar";
-            this.bEnviar.Click += new System.EventHandler(this.toolStripMenubEnviar_Click);
+            this.bEnviar.Click += new System.EventHandler(this.enviar_Click);
             // 
             // acercaDeToolStripMenuItem2
             // 
@@ -922,7 +958,7 @@
             this.acercaDeToolStripMenuItem2.Name = "acercaDeToolStripMenuItem2";
             this.acercaDeToolStripMenuItem2.Size = new System.Drawing.Size(105, 23);
             this.acercaDeToolStripMenuItem2.Text = "Acerca de...";
-            this.acercaDeToolStripMenuItem2.Click += new System.EventHandler(this.acercaDeToolStripMenuItem_Click);
+            this.acercaDeToolStripMenuItem2.Click += new System.EventHandler(this.acercaDe_Click);
             // 
             // gbLeerMail
             // 
@@ -955,7 +991,7 @@
             this.sadqadToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("sadqadToolStripMenuItem.Image")));
             this.sadqadToolStripMenuItem.Name = "sadqadToolStripMenuItem";
             this.sadqadToolStripMenuItem.Size = new System.Drawing.Size(28, 23);
-            this.sadqadToolStripMenuItem.Click += new System.EventHandler(this.toolStripMenuAdministrarCorreo_Click);
+            this.sadqadToolStripMenuItem.Click += new System.EventHandler(this.volverAtras_Click);
             // 
             // responderToolStripMenuItem
             // 
@@ -964,7 +1000,7 @@
             this.responderToolStripMenuItem.Name = "responderToolStripMenuItem";
             this.responderToolStripMenuItem.Size = new System.Drawing.Size(102, 23);
             this.responderToolStripMenuItem.Text = "Responder";
-            this.responderToolStripMenuItem.Click += new System.EventHandler(this.responderToolStripMenuItem_Click);
+            this.responderToolStripMenuItem.Click += new System.EventHandler(this.responder_Click);
             // 
             // exportarToolStripMenuItem
             // 
@@ -973,7 +1009,7 @@
             this.exportarToolStripMenuItem.Name = "exportarToolStripMenuItem";
             this.exportarToolStripMenuItem.Size = new System.Drawing.Size(88, 23);
             this.exportarToolStripMenuItem.Text = "Exportar";
-            this.exportarToolStripMenuItem.Click += new System.EventHandler(this.exportarToolStripMenuItem_Click);
+            this.exportarToolStripMenuItem.Click += new System.EventHandler(this.exportar_Click);
             // 
             // acercaDeToolStripMenuItem
             // 
@@ -982,7 +1018,7 @@
             this.acercaDeToolStripMenuItem.Name = "acercaDeToolStripMenuItem";
             this.acercaDeToolStripMenuItem.Size = new System.Drawing.Size(105, 23);
             this.acercaDeToolStripMenuItem.Text = "Acerca de...";
-            this.acercaDeToolStripMenuItem.Click += new System.EventHandler(this.acercaDeToolStripMenuItem_Click);
+            this.acercaDeToolStripMenuItem.Click += new System.EventHandler(this.acercaDe_Click);
             // 
             // FormPrincipal
             // 
