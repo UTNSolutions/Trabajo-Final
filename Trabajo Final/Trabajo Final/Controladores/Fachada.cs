@@ -43,6 +43,9 @@ namespace Trabajo_Final.Controladores
                }
         }
 
+
+        #region ABMCuentas
+ 
         /// <summary>
         /// Permite dar de alta una nueva cuenta de correo electronico
         /// </summary>
@@ -135,23 +138,6 @@ namespace Trabajo_Final.Controladores
         }
 
         /// <summary>
-        /// Inicializa las cuentas de correo y su emails
-        /// </summary>
-        private void Inicializar()
-        {
-            try
-            {
-                CargarCuentasCorreo();
-                CargarEmailsACadaCuenta();
-            }
-            catch (DAOExcepcion ex)
-            {
-                throw ex;
-            }
-        }
-
-
-        /// <summary>
         /// Permite eliminar una cuenta de correo electronico
         /// </summary>
         /// <param name="pIdCuenta"></param>
@@ -172,18 +158,36 @@ namespace Trabajo_Final.Controladores
                 throw ex;
             } 
         }
+        #endregion
 
-        public void EliminarEmail(String pNombreCuenta, int pIdEmail)
+        #region MetodosPrivados
+        /// <summary>
+        /// Inicializa las cuentas de correo y su emails
+        /// </summary>
+        private void Inicializar()
         {
             try
             {
-                FachadaABMEmail.Instancia.EliminarEmail(pIdEmail);
-                Cuentas.Instancia.GetCuenta(pNombreCuenta).EliminarEmail(pIdEmail);
+                CargarCuentasCorreo();
+                CargarEmailsACadaCuenta();
             }
             catch (DAOExcepcion ex)
             {
                 throw ex;
-            }                        
+            }
+        }
+
+        /// <summary>
+        /// Actualiza la lista de emails de un cuenta del dominio
+        /// </summary>
+        /// <param name="pCuenta"></param>
+        /// <param name="?"></param>
+        private void ActualizarListaEmails(Cuenta pCuenta, IList<Email> pListaEmails)
+        {
+            foreach (Email email in pListaEmails)
+            {
+                pCuenta.AgregarEmail(email);
+            }
         }
 
         /// <summary>
@@ -202,7 +206,7 @@ namespace Trabajo_Final.Controladores
                 // Para cada cuenta la agrego en la lista de cuentas pertenecientes al dominio de la aplicacion
                 foreach (CuentaDTO cuenta in listaCuentas)
                 {
-                    Cuentas.Instancia.AgregarCuentaOActualizar(new Cuenta(cuenta.Nombre, cuenta.Direccion, cuenta.NombreServicio, cuenta.Contraseña));                    
+                    Cuentas.Instancia.AgregarCuentaOActualizar(new Cuenta(cuenta.Nombre, cuenta.Direccion, cuenta.NombreServicio, cuenta.Contraseña));
                 }
             }
             catch (DAOExcepcion ex)
@@ -210,7 +214,6 @@ namespace Trabajo_Final.Controladores
                 throw ex;
             }
         }
-
 
         /// <summary>
         /// Obtiene los mails de la base de datos y se los asigna a cada Cuenta a la que cada email
@@ -241,6 +244,64 @@ namespace Trabajo_Final.Controladores
                 throw ex;
             }
         }
+
+        /// <summary>
+        /// Devuelve una cuenta identificada con su nombre, y tambien devuelve
+        /// el Id de esa cuenta 
+        /// </summary>
+        /// <param name="pNombreCuenta"></param>
+        /// <returns></returns>
+        private CuentaDTO BuscarCuenta(string pNombreCuenta)
+        {
+            try
+            {
+                return FachadaABMCuentas.Instancia.BuscarCuenta(pNombreCuenta);
+            }
+            catch (DAOExcepcion ex)
+            {
+                throw ex;
+            }
+        }
+
+        /// <summary>
+        /// Filtra los Emails descargados del servidor contra los emails que estan en la 
+        /// base de datos para que no se repitan
+        /// </summary>
+        /// <param name="?"></param>
+        /// <param name="?"></param>
+        /// <returns></returns>
+        private IList<Email> FiltrarEmailsRepetidos(IList<Email> pListaEmail, String pNombreCuenta)
+        {
+            //Obtengo la ultima conexion (fecha y hora) de la cuenta de correo
+            DateTime ultimaConexion = FachadaABMCuentas.Instancia.GetUltimaConexion(pNombreCuenta);
+            IList<Email> listaEmailsFiltrados = new List<Email>();
+            //itera por cada email en la lista pasada como parametro para hacer el filtro
+            foreach (Email email in pListaEmail)
+            {
+                //si la fecha del email es mayor que la ultima conexion de la cuenta al servidor
+                //significa que ese email no esta persistido en la base de datos, por lo que debo
+                //agregarlo a la lista para que se agregue
+                if (email.Fecha > ultimaConexion)
+                {
+                    listaEmailsFiltrados.Add(email);
+                }
+            }
+            return listaEmailsFiltrados;
+        }
+        #endregion
+
+        public void EliminarEmail(String pNombreCuenta, int pIdEmail)
+        {
+            try
+            {
+                FachadaABMEmail.Instancia.EliminarEmail(pIdEmail);
+                Cuentas.Instancia.GetCuenta(pNombreCuenta).EliminarEmail(pIdEmail);
+            }
+            catch (DAOExcepcion ex)
+            {
+                throw ex;
+            }                        
+        }          
 
         /// <summary>
         /// Permite enviar un Email
@@ -288,25 +349,7 @@ namespace Trabajo_Final.Controladores
                 throw ex;
             }
         }
-
-        /// <summary>
-        /// Devuelve una cuenta identificada con su nombre, y tambien devuelve
-        /// el Id de esa cuenta 
-        /// </summary>
-        /// <param name="pNombreCuenta"></param>
-        /// <returns></returns>
-        private CuentaDTO BuscarCuenta(string pNombreCuenta)
-        {
-            try
-            {
-                return FachadaABMCuentas.Instancia.BuscarCuenta(pNombreCuenta);
-            }
-            catch (DAOExcepcion ex)
-            {
-                throw ex;
-            }
-        }
-
+      
         /// <summary>
         /// Devuelve los emails de una cuenta
         /// </summary>
@@ -392,33 +435,7 @@ namespace Trabajo_Final.Controladores
                 throw ex;
             }
         }
-
-        /// <summary>
-        /// Filtra los Emails descargados del servidor contra los emails que estan en la 
-        /// base de datos para que no se repitan
-        /// </summary>
-        /// <param name="?"></param>
-        /// <param name="?"></param>
-        /// <returns></returns>
-        private IList<Email> FiltrarEmailsRepetidos(IList<Email> pListaEmail, String pNombreCuenta)
-        {
-            //Obtengo la ultima conexion (fecha y hora) de la cuenta de correo
-            DateTime ultimaConexion = FachadaABMCuentas.Instancia.GetUltimaConexion(pNombreCuenta);
-            IList<Email> listaEmailsFiltrados = new List<Email>();
-            //itera por cada email en la lista pasada como parametro para hacer el filtro
-            foreach (Email email in pListaEmail)
-            {
-                //si la fecha del email es mayor que la ultima conexion de la cuenta al servidor
-                //significa que ese email no esta persistido en la base de datos, por lo que debo
-                //agregarlo a la lista para que se agregue
-                if (email.Fecha > ultimaConexion)
-                {
-                    listaEmailsFiltrados.Add(email);
-                }
-            }
-            return listaEmailsFiltrados;
-        }
-
+      
         /// <summary>
         /// Obtiene los emails de todas las cuentas configuradas, descargandolos del servidor 
         /// correspondiente 
@@ -448,21 +465,7 @@ namespace Trabajo_Final.Controladores
                 }
             }             
         }
-
-        /// <summary>
-        /// Actualiza la lista de emails de un cuenta del dominio
-        /// </summary>
-        /// <param name="pCuenta"></param>
-        /// <param name="?"></param>
-        private void ActualizarListaEmails(Cuenta pCuenta, IList<Email> pListaEmails)
-        {
-            foreach (Email email in pListaEmails)
-            {
-                pCuenta.AgregarEmail(email);
-            }
-        }
-
-
+       
         /// <summary>
         /// Permite exportar un Email a un tipo de formato
         /// </summary>
