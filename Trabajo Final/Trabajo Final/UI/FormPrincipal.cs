@@ -675,17 +675,24 @@ namespace Trabajo_Final.UI
         /// </summary>
         public void CargarTreeView()
         {
-            tvCuentas.Nodes.Clear();
-            //cargo los nombres de las cuentas, y genero sus nodos de recibidos,enviados y borradores
-            foreach (CuentaDTO cuenta in Fachada.Instancia.ObtenerCuentas())
+            try
             {
-                TreeNode nodo = tvCuentas.Nodes.Add(cuenta.Nombre, cuenta.Nombre + "(" + cuenta.Direccion + ")");
-                nodo.Nodes.Add("R", "Recibidos");
-                nodo.Nodes.Add("E", "Enviados");
+                tvCuentas.Nodes.Clear();
+                //cargo los nombres de las cuentas, y genero sus nodos de recibidos,enviados y borradores
+                foreach (CuentaDTO cuenta in Fachada.Instancia.ObtenerCuentas())
+                {
+                    TreeNode nodo = tvCuentas.Nodes.Add(cuenta.Nombre, cuenta.Nombre + "(" + cuenta.Direccion + ")");
+                    nodo.Nodes.Add("R", "Recibidos");
+                    nodo.Nodes.Add("E", "Enviados");
+                }
+                if (tvCuentas.Nodes.Count > 0)
+                {
+                    tbNombreCuenta.Text = tvCuentas.GetNodeAt(1, 1).Name;
+                }
             }
-            if (tvCuentas.Nodes.Count > 0)
+            catch (DAOExcepcion ex)
             {
-                tbNombreCuenta.Text = tvCuentas.GetNodeAt(1, 1).Name;
+                MessageBox.Show(ex.Message, "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -1043,6 +1050,7 @@ namespace Trabajo_Final.UI
                 {
                     labelCC.Visible = false;
                     tbCCLeerMail.Visible = false;
+                    tbCCLeerMail.Text = "";
                     tbCuerpoLeerMail.Location = new Point(6, 109);
                     tbCuerpoLeerMail.Size = new Size(841, 314);
                 }

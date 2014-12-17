@@ -37,6 +37,10 @@ namespace Trabajo_Final.Dominio
             //establezco que el email saliente se tiene que guardar en un directorio especificado
             client.DeliveryMethod = SmtpDeliveryMethod.SpecifiedPickupDirectory;
             MailMessage email = new MailMessage(pEMail.Remitente, pEMail.Destinatario[0], pEMail.Asunto, pEMail.Cuerpo);
+            foreach(String cc in pEMail.CC)
+            {
+                email.CC.Add(new MailAddress(cc));
+            }
             //establezco el directorio donde se quiere alojar el Email
             client.PickupDirectoryLocation = pRuta;
             client.DeliveryFormat = SmtpDeliveryFormat.International;

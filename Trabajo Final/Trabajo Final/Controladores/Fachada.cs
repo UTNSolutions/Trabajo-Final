@@ -329,7 +329,7 @@ namespace Trabajo_Final.Controladores
             {
                 throw new EmailExcepcion("No hay cuentas configuradas para enviar un e-mail");
             }
-            if (pDestinatario.Count == 0)
+            if (pDestinatario == null)
             {
                 throw new EmailExcepcion("Se debe ingresar al menos un destinatario");
             }
