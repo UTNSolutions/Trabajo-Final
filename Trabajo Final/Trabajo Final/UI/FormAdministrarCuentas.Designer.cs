@@ -29,11 +29,6 @@
         private void InitializeComponent()
         {
             this.dgCuentas = new System.Windows.Forms.DataGridView();
-            this.idCuenta = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.direccion = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.servicio = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.contraseña = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -48,6 +43,12 @@
             this.bModificar = new System.Windows.Forms.Button();
             this.bAgregar = new System.Windows.Forms.Button();
             this.tbIdCuenta = new System.Windows.Forms.TextBox();
+            this.idCuenta = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DirectorioDeAdjuntos = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.direccion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.servicio = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.contraseña = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgCuentas)).BeginInit();
             this.SuspendLayout();
             // 
@@ -59,6 +60,7 @@
             this.dgCuentas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgCuentas.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.idCuenta,
+            this.DirectorioDeAdjuntos,
             this.nombre,
             this.direccion,
             this.servicio,
@@ -73,46 +75,6 @@
             this.dgCuentas.Click += new System.EventHandler(this.MostrarDatos);
             this.dgCuentas.KeyDown += new System.Windows.Forms.KeyEventHandler(this.MostrarDatos);
             this.dgCuentas.KeyUp += new System.Windows.Forms.KeyEventHandler(this.MostrarDatos);
-            // 
-            // idCuenta
-            // 
-            this.idCuenta.DataPropertyName = "IdCuenta";
-            this.idCuenta.HeaderText = "idCuenta";
-            this.idCuenta.Name = "idCuenta";
-            this.idCuenta.ReadOnly = true;
-            this.idCuenta.Visible = false;
-            // 
-            // nombre
-            // 
-            this.nombre.DataPropertyName = "Nombre";
-            this.nombre.HeaderText = "Nombre";
-            this.nombre.Name = "nombre";
-            this.nombre.ReadOnly = true;
-            this.nombre.Width = 105;
-            // 
-            // direccion
-            // 
-            this.direccion.DataPropertyName = "Direccion";
-            this.direccion.HeaderText = "Direccion";
-            this.direccion.Name = "direccion";
-            this.direccion.ReadOnly = true;
-            this.direccion.Width = 160;
-            // 
-            // servicio
-            // 
-            this.servicio.DataPropertyName = "NombreServicio";
-            this.servicio.HeaderText = "Servicio";
-            this.servicio.Name = "servicio";
-            this.servicio.ReadOnly = true;
-            this.servicio.Visible = false;
-            // 
-            // contraseña
-            // 
-            this.contraseña.DataPropertyName = "Contraseña";
-            this.contraseña.HeaderText = "Contraseña";
-            this.contraseña.Name = "contraseña";
-            this.contraseña.ReadOnly = true;
-            this.contraseña.Visible = false;
             // 
             // label1
             // 
@@ -256,6 +218,54 @@
             this.tbIdCuenta.TabStop = false;
             this.tbIdCuenta.Visible = false;
             // 
+            // idCuenta
+            // 
+            this.idCuenta.DataPropertyName = "IdCuenta";
+            this.idCuenta.HeaderText = "idCuenta";
+            this.idCuenta.Name = "idCuenta";
+            this.idCuenta.ReadOnly = true;
+            this.idCuenta.Visible = false;
+            // 
+            // DirectorioDeAdjuntos
+            // 
+            this.DirectorioDeAdjuntos.DataPropertyName = "DirectorioDeAdjuntos";
+            this.DirectorioDeAdjuntos.HeaderText = "DirectorioDeAdjuntos";
+            this.DirectorioDeAdjuntos.Name = "DirectorioDeAdjuntos";
+            this.DirectorioDeAdjuntos.ReadOnly = true;
+            this.DirectorioDeAdjuntos.Visible = false;
+            // 
+            // nombre
+            // 
+            this.nombre.DataPropertyName = "Nombre";
+            this.nombre.HeaderText = "Nombre";
+            this.nombre.Name = "nombre";
+            this.nombre.ReadOnly = true;
+            this.nombre.Width = 105;
+            // 
+            // direccion
+            // 
+            this.direccion.DataPropertyName = "Direccion";
+            this.direccion.HeaderText = "Direccion";
+            this.direccion.Name = "direccion";
+            this.direccion.ReadOnly = true;
+            this.direccion.Width = 160;
+            // 
+            // servicio
+            // 
+            this.servicio.DataPropertyName = "NombreServicio";
+            this.servicio.HeaderText = "Servicio";
+            this.servicio.Name = "servicio";
+            this.servicio.ReadOnly = true;
+            this.servicio.Visible = false;
+            // 
+            // contraseña
+            // 
+            this.contraseña.DataPropertyName = "Contraseña";
+            this.contraseña.HeaderText = "Contraseña";
+            this.contraseña.Name = "contraseña";
+            this.contraseña.ReadOnly = true;
+            this.contraseña.Visible = false;
+            // 
             // FormAdministrarCuentas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -309,6 +319,7 @@
         private System.Windows.Forms.Label labelMailError;
         private System.Windows.Forms.TextBox tbIdCuenta;
         private System.Windows.Forms.DataGridViewTextBoxColumn idCuenta;
+        private System.Windows.Forms.DataGridViewTextBoxColumn DirectorioDeAdjuntos;
         private System.Windows.Forms.DataGridViewTextBoxColumn nombre;
         private System.Windows.Forms.DataGridViewTextBoxColumn direccion;
         private System.Windows.Forms.DataGridViewTextBoxColumn servicio;

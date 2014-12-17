@@ -207,7 +207,7 @@
             this.obtenerTodosToolStripMenuItem.Name = "obtenerTodosToolStripMenuItem";
             this.obtenerTodosToolStripMenuItem.Size = new System.Drawing.Size(129, 23);
             this.obtenerTodosToolStripMenuItem.Text = "Obtener Todos";
-            this.obtenerTodosToolStripMenuItem.Click += new System.EventHandler(this.obtenerTodosToolStripMenuItem_Click);
+            this.obtenerTodosToolStripMenuItem.Click += new System.EventHandler(this.obtenerTodos_Click);
             // 
             // cuentasToolStripMenuItem1
             // 
@@ -216,7 +216,7 @@
             this.cuentasToolStripMenuItem1.Name = "cuentasToolStripMenuItem1";
             this.cuentasToolStripMenuItem1.Size = new System.Drawing.Size(87, 23);
             this.cuentasToolStripMenuItem1.Text = "Cuentas";
-            this.cuentasToolStripMenuItem1.Click += new System.EventHandler(this.cuentasToolStripMenuItem_Click);
+            this.cuentasToolStripMenuItem1.Click += new System.EventHandler(this.cuentas_Click);
             // 
             // redactarMailToolStripMenuItem
             // 
@@ -225,7 +225,7 @@
             this.redactarMailToolStripMenuItem.Name = "redactarMailToolStripMenuItem";
             this.redactarMailToolStripMenuItem.Size = new System.Drawing.Size(126, 23);
             this.redactarMailToolStripMenuItem.Text = "Redactar Email";
-            this.redactarMailToolStripMenuItem.Click += new System.EventHandler(this.redactarEmailToolStripMenuItem_Click);
+            this.redactarMailToolStripMenuItem.Click += new System.EventHandler(this.redactar_Click);
             // 
             // acercaDeToolStripMenuItem1
             // 
@@ -234,7 +234,7 @@
             this.acercaDeToolStripMenuItem1.Name = "acercaDeToolStripMenuItem1";
             this.acercaDeToolStripMenuItem1.Size = new System.Drawing.Size(105, 23);
             this.acercaDeToolStripMenuItem1.Text = "Acerca de...";
-            this.acercaDeToolStripMenuItem1.Click += new System.EventHandler(this.acercaDeToolStripMenuItem_Click);
+            this.acercaDeToolStripMenuItem1.Click += new System.EventHandler(this.acercaDe_Click);
             // 
             // gpNuevoMail
             // 

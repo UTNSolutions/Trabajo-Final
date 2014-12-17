@@ -325,6 +325,10 @@ namespace Trabajo_Final.Controladores
         /// <exception cref="EmailExcepcion"></exception>
         public void EnviarEmail(String pRemitente, IList<String> pDestinatario, IList<String> pCC, IList<String> pCCO, String pAsunto, String pCuerpo, IList<String> pAdjuntos, string pNombreCuenta)
         {
+            if (pRemitente == null)
+            {
+                throw new EmailExcepcion("No hay cuentas configuradas para enviar un e-mail");
+            }
             if (pDestinatario.Count == 0)
             {
                 throw new EmailExcepcion("Se debe ingresar al menos un destinatario");

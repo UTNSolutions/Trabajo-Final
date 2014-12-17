@@ -536,6 +536,10 @@ namespace Trabajo_Final.UI
             {
                 MessageBox.Show(ex.Message, "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+            catch (NullReferenceException)
+            {
+                MessageBox.Show("No hay cuentas configuradas para enviar un e-mail", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
             catch (EmailExcepcion ex)
             {
                 MessageBox.Show(ex.Message, "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Error);

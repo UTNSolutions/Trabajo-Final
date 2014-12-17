@@ -52,14 +52,7 @@ namespace Trabajo_Final.UI
         public string AssemblyDescription
         {
             get
-            {
-                object[] attributes = Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(AssemblyDescriptionAttribute), false);
-                if (attributes.Length == 0)
-                {
-                    return "";
-                }
-                return ((AssemblyDescriptionAttribute)attributes[0]).Description;
-            }
+            {return "Esta aplicación administra cuentas de correos electronicos, donde permite enviar, recibir y exportar e-mail." ; }
         }
 
         public string AssemblyProduct
@@ -73,27 +66,12 @@ namespace Trabajo_Final.UI
         public string AssemblyCopyright
         {
             get
-            {
-                object[] attributes = Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(AssemblyCopyrightAttribute), false);
-                if (attributes.Length == 0)
-                {
-                    return "";
-                }
-                return ((AssemblyCopyrightAttribute)attributes[0]).Copyright;
-            }
+            { return "Copyright 2014 MaDBaF Email Manager"; }
         }
 
         public string AssemblyCompany
         {
-            get
-            {
-                object[] attributes = Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(AssemblyCompanyAttribute), false);
-                if (attributes.Length == 0)
-                {
-                    return "";
-                }
-                return ((AssemblyCompanyAttribute)attributes[0]).Company;
-            }
+            get { return "Del Real Matias, Fellin Brian"; }
         }
         #endregion
 
