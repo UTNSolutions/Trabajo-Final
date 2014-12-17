@@ -66,30 +66,20 @@ namespace Trabajo_Final.UI
         #region RedactarEmail
 
         /// <summary>
-        /// Cambia la pantalla principal y habilita el panel para enviar un nuevo mail.
+        /// Cambia la pantalla principal y Habilita el panel para mostrar los E-Mails de las cuentas.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void redactarEmailToolStripMenuItem_Click(object sender, EventArgs e)
+        private void toolStripMenuAdministrarCorreo_Click(object sender, EventArgs e)
         {
-            if (!gpNuevoMail.Visible)
+            if (VaciarDatosEnviarMail_TextChanged(sender, e))
             {
-                try
-                {
-                    combobDe.DataSource = Fachada.Instancia.ObtenerCuentas();
-                }
-                catch (DAOExcepcion ex)
-                {
-                    MessageBox.Show(ex.Message, "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-                combobDe.ValueMember = "Nombre";
-                combobDe.DisplayMember = "Direccion";
-                gbOpciones1.Visible = false;
-                gbEnviarMail.Visible = true;
-                tbCCOROnly.ReadOnly = true;
-                tbCCROnly.ReadOnly = true;
-                panelCuentas.Visible = false;
-                gpNuevoMail.Visible = true;              
+                gbEnviarMail.Visible = false;
+                gbOpciones1.Visible = true;
+                gpNuevoMail.Visible = false;
+                panelCuentas.Visible = true;
+                panelLeerMail.Visible = false;
+                gbLeerMail.Visible = false;
             }
         }
 
@@ -625,6 +615,7 @@ namespace Trabajo_Final.UI
         }
         #endregion
 
+        #region Formulario Principal
         /// <summary>
         /// Evento que se ejecuta cuando inicia el formulario principal.
         /// </summary>
@@ -659,7 +650,6 @@ namespace Trabajo_Final.UI
             {
                 tbNombreCuenta.Text = tvCuentas.GetNodeAt(1, 1).Name;
             }
-
         }
 
         private void formAdminCuentas_FormClosed(object sender, FormClosedEventArgs e)
@@ -667,28 +657,40 @@ namespace Trabajo_Final.UI
             //Cuando cierro el formulario de administrar las cuentas, cargo nuevamente
             //el tree view para que se actualize
             CargarTreeView();
+            //le asigno al data grid una lista vacia para que no muestre ningun dato
+            dgEmails.DataSource = new List<AdaptadorDataGrid>();
         }
 
         /// <summary>
-        /// Cambia la pantalla principal y abilita el panel para mostrar los mail de las cuentas.
+        /// Cambia la pantalla principal y habilita el panel para enviar un nuevo mail.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void toolStripMenuAdministrarCorreo_Click(object sender, EventArgs e)
+        private void redactarEmailToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (VaciarDatosEnviarMail_TextChanged(sender, e))
+            if (!gpNuevoMail.Visible)
             {
-                gbEnviarMail.Visible = false;
-                gbOpciones1.Visible = true;
-                gpNuevoMail.Visible = false;
-                panelCuentas.Visible = true;
-                panelLeerMail.Visible = false; 
-                gbLeerMail.Visible = false; 
+                try
+                {
+                    combobDe.DataSource = Fachada.Instancia.ObtenerCuentas();
+                }
+                catch (DAOExcepcion ex)
+                {
+                    MessageBox.Show(ex.Message, "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                combobDe.ValueMember = "Nombre";
+                combobDe.DisplayMember = "Direccion";
+                gbOpciones1.Visible = false;
+                gbEnviarMail.Visible = true;
+                tbCCOROnly.ReadOnly = true;
+                tbCCROnly.ReadOnly = true;
+                panelCuentas.Visible = false;
+                gpNuevoMail.Visible = true;
             }
         }
-                 
+                       
         /// <summary>
-        /// Cargar el data grid con los datos de los emails de una cuenta teniendo en cuenta
+        /// Carga el data grid con los datos de los emails de una cuenta teniendo en cuenta
         /// el nodo seleccionado
         /// </summary>
         /// <param name="sender"></param>
@@ -737,6 +739,8 @@ namespace Trabajo_Final.UI
             {
                 CuentaDTO cuenta = Fachada.Instancia.GetCuenta(pNombreCuenta);
                 String remitente = StringsUtils.ObtenerEmail(email.Remitente);
+                //si el remitente del email no coincide con la direccion de la cuenta es porque
+                //se trata de un Email recibido
                 if (remitente != cuenta.Direccion)
                 {
                     adaptador.Add(new AdaptadorDataGrid(email.IdEmail, email.Remitente, email.Destinatario, email.ConCopia, email.Asunto, email.Cuerpo, email.Adjuntos, email.Fecha, email.Leido));
@@ -785,6 +789,8 @@ namespace Trabajo_Final.UI
             {
                 CuentaDTO cuenta = Fachada.Instancia.GetCuenta(pNombreCuenta);
                 String remitente = StringsUtils.ObtenerEmail(email.Remitente);
+                //si el remitente del email coincide con la direccion de la cuenta es porque
+                //se trata de un Email enviado
                 if (remitente == cuenta.Direccion)
                 {
                     adaptador.Add(new AdaptadorDataGrid(email.IdEmail, email.Remitente, email.Destinatario, email.ConCopia, email.Asunto, email.Cuerpo, email.Adjuntos, email.Fecha, email.Leido));
@@ -851,6 +857,11 @@ namespace Trabajo_Final.UI
             this.iFormBarraProgreso.Close();    
         }
 
+        /// <summary>
+        /// Obtiene los Emails de una cuenta
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ObtenerMailDeUnaCuenta(object sender, DoWorkEventArgs e)
         {         
             try
@@ -930,6 +941,35 @@ namespace Trabajo_Final.UI
             MessageBox.Show(ex.Message, "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Error);
           }
         }
+
+        /// <summary>
+        /// Permite Eliminar un Email
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void bEliminar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (dgEmails.RowCount > 0)
+                {
+                    DialogResult resultado = MessageBox.Show("¿Está seguro que desea eliminar el E-Mail seleccionado?", "Atención", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    if (resultado == DialogResult.Yes)
+                    {
+                        AdaptadorDataGrid fila = (AdaptadorDataGrid)dgEmails.CurrentRow.DataBoundItem;
+                        int id = fila.IdEmail;
+                        Fachada.Instancia.EliminarEmail(tbNombreCuenta.Text, id);
+                        MessageBox.Show("El E-Mail ha sido eliminado con éxito", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        CargarDataGrid(tbNombreCuenta.Text, Convert.ToChar(tbTipoCorreo.Text));
+                    }
+                }
+            }
+            catch (DAOExcepcion ex)
+            {
+                MessageBox.Show(ex.Message, "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+#endregion
 
         #region LeerEmail
 
@@ -1098,32 +1138,6 @@ namespace Trabajo_Final.UI
 
         #endregion
 
-        /// <summary>
-        /// Permite Eliminar un Email
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void bEliminar_Click(object sender, EventArgs e)
-        {
-            try
-            {                
-              if (dgEmails.RowCount > 0)
-              {
-                  DialogResult resultado = MessageBox.Show("¿Está seguro que desea eliminar el E-Mail seleccionado?", "Atención", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                  if (resultado == DialogResult.Yes)
-                  {
-                     AdaptadorDataGrid fila = (AdaptadorDataGrid)dgEmails.CurrentRow.DataBoundItem;
-                     int id = fila.IdEmail;
-                     Fachada.Instancia.EliminarEmail(tbNombreCuenta.Text, id);
-                     MessageBox.Show("El E-Mail ha sido eliminado con éxito", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                     CargarDataGrid(tbNombreCuenta.Text, Convert.ToChar(tbTipoCorreo.Text));                 
-                  }
-                }
-            }
-            catch (DAOExcepcion ex)
-            {
-                MessageBox.Show(ex.Message, "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
+        
     }
 }

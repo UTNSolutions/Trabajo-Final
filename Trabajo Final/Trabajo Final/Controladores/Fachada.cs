@@ -290,6 +290,11 @@ namespace Trabajo_Final.Controladores
         }
         #endregion
 
+        /// <summary>
+        /// Permite Eliminar un Email de una cuenta de correo
+        /// </summary>
+        /// <param name="pNombreCuenta"></param>
+        /// <param name="pIdEmail"></param>
         public void EliminarEmail(String pNombreCuenta, int pIdEmail)
         {
             try
@@ -311,9 +316,9 @@ namespace Trabajo_Final.Controladores
         /// <exception cref="EmailExcepcion"></exception>
         public void EnviarEmail(String pRemitente, IList<String> pDestinatario, IList<String> pCC, IList<String> pCCO, String pAsunto, String pCuerpo, IList<String> pAdjuntos, string pNombreCuenta)
         {
-            if (pDestinatario == null)
+            if (pDestinatario.Count == 0)
             {
-                throw new EmailExcepcion("Se debe ingresar un destinatario");
+                throw new EmailExcepcion("Se debe ingresar al menos un destinatario");
             }
             try
             {
