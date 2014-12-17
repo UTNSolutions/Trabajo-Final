@@ -21,15 +21,16 @@ namespace Trabajo_Final.Controladores
 
         public static FachadaABMCuentas Instancia
         {
-            get { 
-                    if (iInstanciaSingleton == null)
-                    {    
-                        iInstanciaSingleton = new FachadaABMCuentas ();
-                    }
-                    return iInstanciaSingleton;
+            get
+            {
+                if (iInstanciaSingleton == null)
+                {
+                    iInstanciaSingleton = new FachadaABMCuentas();
                 }
+                return iInstanciaSingleton;
+            }
         }
-        
+
 
         /// <summary>
         /// Devuelve una lista de todos las cuentas de correo
@@ -74,7 +75,7 @@ namespace Trabajo_Final.Controladores
                 factory.Commit();
             }
             catch (DAOExcepcion ex)
-            {          
+            {
                 factory.RollBack();
                 throw ex;
             }
@@ -219,4 +220,4 @@ namespace Trabajo_Final.Controladores
             }
         }
     }
-    }
+}

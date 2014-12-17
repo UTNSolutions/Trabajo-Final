@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace Trabajo_Final.Utils
 {
+    /// <summary>
+    /// Representa un adaptador al DataGrid de Emails
+    /// </summary>
     class AdaptadorDataGrid
     {
         private int iIdEmail;
