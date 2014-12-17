@@ -30,7 +30,7 @@ namespace Trabajo_Final.UI
         {
             InitializeComponent();
         }
-
+        #region MetodosParaAbrirFormularios
         /// <summary>
         /// Abre un formulario con la especificaciones del programa. 
         /// </summary>
@@ -54,12 +54,16 @@ namespace Trabajo_Final.UI
             iFormAdminCuentas.ShowDialog();           
         }
 
-        private void formAdminCuentas_FormClosed(object sender, FormClosedEventArgs e)       
-        {              
-            //Cuando cierro el formulario de administrar las cuentas, cargo nuevamente
-            //el tree view para que se actualize
-            CargarTreeView();         
+        private void exportarToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+            FormExportar iFormExportar = new FormExportar(tbDeLeerMail.Text, tbAsuntoLeerMail.Text, generarListaCadenas(tbParaLeerMail.Text), generarListaCadenas(tbCCLeerMail.Text), tbCuerpoLeerMail.Text, Convert.ToDateTime(tbFechaLeerMail.Text));
+            iFormExportar.ShowDialog();
         }
+        #endregion
+        
+
+        #region RedactarEmail
 
         /// <summary>
         /// Cambia la pantalla principal y habilita el panel para enviar un nuevo mail.
@@ -134,7 +138,6 @@ namespace Trabajo_Final.UI
             }
         }
 
-
         /// <summary>
         /// Habilita la carga de la/las direcciones a los que se le envían una copia carbono oculta del mail.
         /// </summary>
@@ -195,62 +198,6 @@ namespace Trabajo_Final.UI
             file.RestoreDirectory = true;
             file.ShowDialog();
             tbAdjuntos.Text = tbAdjuntos.Text + file.FileName + "; ";
-
-        }
-
-        /// <summary>
-        /// Evento que se ejecuta cuando inicia el formulario principal.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void FormPrincipal_Load(object sender, EventArgs e)
-        {
-            try
-            {
-                CargarTreeView();
-            }
-            catch (DAOExcepcion ex)
-            {
-                MessageBox.Show(ex.Message, "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        /// <summary>
-        /// Carga las cuentas en el treeView del formulario principal.
-        /// </summary>
-        public void CargarTreeView()
-        {
-            tvCuentas.Nodes.Clear();
-            //cargo los nombres de las cuentas, y genero sus nodos de recibidos,enviados y borradores
-            foreach (CuentaDTO cuenta in Fachada.Instancia.ObtenerCuentas())
-            {
-                TreeNode nodo = tvCuentas.Nodes.Add(cuenta.Nombre, cuenta.Nombre + "(" + cuenta.Direccion + ")");
-                nodo.Nodes.Add("R", "Recibidos");
-                nodo.Nodes.Add("E", "Enviados");
-            }
-            if (tvCuentas.Nodes.Count > 0)
-            {
-                tbNombreCuenta.Text = tvCuentas.GetNodeAt(1, 1).Name;
-            }
-
-        }
-
-        /// <summary>
-        /// Cambia la pantalla principal y abilita el panel para mostrar los mail de las cuentas.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void toolStripMenuAdministrarCorreo_Click(object sender, EventArgs e)
-        {
-            if (VaciarDatosEnviarMail_TextChanged(sender, e))
-            {
-                gbEnviarMail.Visible = false;
-                gbOpciones1.Visible = true;
-                gpNuevoMail.Visible = false;
-                panelCuentas.Visible = true;
-                panelLeerMail.Visible = false; 
-                gbLeerMail.Visible = false; 
-            }
         }
 
         /// <summary>
@@ -267,7 +214,7 @@ namespace Trabajo_Final.UI
             {
                 DialogResult resultado = MessageBox.Show("¿Está seguro que quiere eliminar este mail no enviado ?", "Advertencia", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (resultado == DialogResult.Yes)
-                {                    
+                {
                     tbParaROnly.Text = "";
                     tbCCROnly.Text = "";
                     tbCCOROnly.Text = "";
@@ -359,7 +306,7 @@ namespace Trabajo_Final.UI
                 else
                 {
                     indice--;
-                }                
+                }
             }
             //En caso de que salga del while por la condición de la sig. linea es porque es la última cadena.
             if (indice == 0)
@@ -468,7 +415,7 @@ namespace Trabajo_Final.UI
         /// <param name="e"></param>
         private void botonAgregarCCO_Click(object sender, EventArgs e)
         {
-             if (tbCCO.Text != "")
+            if (tbCCO.Text != "")
             {
                 //Para ver si seesta poniendo una cedena valida como dirección de correo.
                 if (!(Regex.IsMatch(tbCCO.Text, "\\w+([-+.']\\w+)*@\\w+([-.]\\w+)*\\.\\w+(a-z)*")))
@@ -560,7 +507,7 @@ namespace Trabajo_Final.UI
                 menuStrip1.Enabled = false;
                 Fachada.Instancia.EnviarEmail(combobDe.Text, generarListaCadenas(tbParaROnly.Text), generarListaCadenas(tbCCROnly.Text), generarListaCadenas(tbCCOROnly.Text), tbAsunto.Text, tbCuerpo.Text, generarListaCadenas(tbAdjuntos.Text), combobDe.SelectedValue.ToString());
                 lEnviado.Visible = true;
-                borrarMailEnviado();                           
+                borrarMailEnviado();
             }
             catch (DAOExcepcion ex)
             {
@@ -575,7 +522,7 @@ namespace Trabajo_Final.UI
                 MessageBox.Show(ex.Message, "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             finally
-            {                
+            {
                 gpNuevoMail.Enabled = true;
                 gbEnviarMail.Enabled = true;
                 menuStrip1.Enabled = true;
@@ -595,38 +542,151 @@ namespace Trabajo_Final.UI
             int ind = 0;
             if (pCadena != "")
             {
-            while (ind < pCadena.Length)
-            {
-                if (pCadena[ind] != ';' && ind != pCadena.Length)
+                while (ind < pCadena.Length)
                 {
-                    cadena = cadena + pCadena[ind].ToString();
-                        ind++;
-                }
-                else 
-                {
-                    if (pCadena[ind] == ';')
+                    if (pCadena[ind] != ';' && ind != pCadena.Length)
                     {
-                        listaDestinatarios.Add(cadena);
-                        cadena = "";
-                        ind = ind + 2;
+                        cadena = cadena + pCadena[ind].ToString();
+                        ind++;
                     }
                     else
                     {
-                        cadena = cadena + pCadena[ind].ToString();
-                        listaDestinatarios.Add(cadena);
-                        cadena = "";
-                        ind++;
+                        if (pCadena[ind] == ';')
+                        {
+                            listaDestinatarios.Add(cadena);
+                            cadena = "";
+                            ind = ind + 2;
+                        }
+                        else
+                        {
+                            cadena = cadena + pCadena[ind].ToString();
+                            listaDestinatarios.Add(cadena);
+                            cadena = "";
+                            ind++;
+                        }
                     }
                 }
-            }
             }
             else
             {
                 listaDestinatarios = null;
-            }            
+            }
             return listaDestinatarios;
         }
-           
+
+        /// <summary>
+        /// Luego que se envia un mail borra el panel y sus elementos.
+        /// </summary>
+        private void borrarMailEnviado()
+        {
+            tbParaROnly.Text = "";
+            tbCuerpo.Text = "";
+            tbCCROnly.Text = "";
+            tbCCOROnly.Text = "";
+            tbAsunto.Text = "";
+            tbAdjuntos.Text = "";
+            botonBorrarUltimoPara.Enabled = false;
+            CCAtrasEvento();
+            CCOAtrasEvento();
+        }
+
+        /// <summary>
+        /// Borra el label que notifica que se envio un mail y la barra de progreso
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void BorrarLabelEnviadoYBarraProgreso(object sender, MouseEventArgs e)
+        {
+            lEnviado.Visible = false;
+        }
+
+        /// <summary>
+        /// Lo que hace es si se redacta un nuevo mail, cuando se escribe el asunto, si el textbox pasado los 
+        /// 50 caracteres, entonces se le modifica a este último la propiedad multiline, y se le aumenta de tamaño.
+        /// El proceso a la inversa se hace, si se esta borrando en el textbox.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void tbAsunto_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar != (char)13)
+            {
+                if (tbAsunto.Text.Length > 50)
+                {
+                    tbAsunto.Size = new Size(354, 38);
+                    tbAsunto.Multiline = true;
+                }
+                if (tbAsunto.Text.Length < 50)
+                {
+                    tbAsunto.Size = new Size(354, 20);
+                    tbAsunto.Multiline = false;
+                }
+            }
+        }
+        #endregion
+
+        /// <summary>
+        /// Evento que se ejecuta cuando inicia el formulario principal.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void FormPrincipal_Load(object sender, EventArgs e)
+        {
+            try
+            {
+                CargarTreeView();
+            }
+            catch (DAOExcepcion ex)
+            {
+                MessageBox.Show(ex.Message, "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        /// <summary>
+        /// Carga las cuentas en el treeView del formulario principal.
+        /// </summary>
+        public void CargarTreeView()
+        {
+            tvCuentas.Nodes.Clear();
+            //cargo los nombres de las cuentas, y genero sus nodos de recibidos,enviados y borradores
+            foreach (CuentaDTO cuenta in Fachada.Instancia.ObtenerCuentas())
+            {
+                TreeNode nodo = tvCuentas.Nodes.Add(cuenta.Nombre, cuenta.Nombre + "(" + cuenta.Direccion + ")");
+                nodo.Nodes.Add("R", "Recibidos");
+                nodo.Nodes.Add("E", "Enviados");
+            }
+            if (tvCuentas.Nodes.Count > 0)
+            {
+                tbNombreCuenta.Text = tvCuentas.GetNodeAt(1, 1).Name;
+            }
+
+        }
+
+        private void formAdminCuentas_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            //Cuando cierro el formulario de administrar las cuentas, cargo nuevamente
+            //el tree view para que se actualize
+            CargarTreeView();
+        }
+
+        /// <summary>
+        /// Cambia la pantalla principal y abilita el panel para mostrar los mail de las cuentas.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void toolStripMenuAdministrarCorreo_Click(object sender, EventArgs e)
+        {
+            if (VaciarDatosEnviarMail_TextChanged(sender, e))
+            {
+                gbEnviarMail.Visible = false;
+                gbOpciones1.Visible = true;
+                gpNuevoMail.Visible = false;
+                panelCuentas.Visible = true;
+                panelLeerMail.Visible = false; 
+                gbLeerMail.Visible = false; 
+            }
+        }
+                 
         /// <summary>
         /// Cargar el data grid con los datos de los emails de una cuenta teniendo en cuenta
         /// el nodo seleccionado
@@ -649,7 +709,6 @@ namespace Trabajo_Final.UI
             }
         }
 
-
         /// <summary>
         /// Carga el data grid.
         /// </summary>
@@ -666,6 +725,10 @@ namespace Trabajo_Final.UI
             }          
         }
 
+        /// <summary>
+        /// Separa los E-Mails que fueron recibidos de los que fueron recibidos en una cuenta.
+        /// </summary>
+        /// <param name="pNombreCuenta"></param>
         private void FiltarRecibidos(String pNombreCuenta)
         {
             IList<AdaptadorDataGrid> adaptador = new List<AdaptadorDataGrid>();
@@ -711,7 +774,7 @@ namespace Trabajo_Final.UI
         }
 
         /// <summary>
-        /// Separa los mails que fueron enviados y los que fueron recibidos en una cuenta.
+        /// Separa los E-Mails que fueron enviados de los que fueron recibidos en una cuenta.
         /// </summary>
         /// <param name="pNombreCuenta"></param>
         private void FiltarEnviados(String pNombreCuenta)
@@ -757,39 +820,7 @@ namespace Trabajo_Final.UI
             dgEmails.Columns["destinatario"].Visible = true;
         }
 
-        private void FiltarBorradores(String pNombreCuenta)
-        {
-            dgEmails.DataSource = "";
-            dgEmails.Columns["remitente"].Visible = false;
-            dgEmails.Columns["destinatario"].Visible = true;
-        }
-
-        /// <summary>
-        /// Luego que se envia un mail borra el panel y sus elementos.
-        /// </summary>
-        private void borrarMailEnviado()
-        {
-            tbParaROnly.Text = "";
-            tbCuerpo.Text = "";
-            tbCCROnly.Text = "";
-            tbCCOROnly.Text = "";
-            tbAsunto.Text = "";
-            tbAdjuntos.Text = "";
-            botonBorrarUltimoPara.Enabled = false;
-            CCAtrasEvento();
-            CCOAtrasEvento();
-        }
-
-        /// <summary>
-        /// Borra el label que notifica que se envio un mail y la barra de progreso
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void BorrarLabelEnviadoYBarraProgreso(object sender, MouseEventArgs e)
-        {
-            lEnviado.Visible = false;
-        }
-
+        
         /// <summary>
         /// Obtiene los Emails de una cuenta de correo
         /// </summary>
@@ -900,6 +931,7 @@ namespace Trabajo_Final.UI
           }
         }
 
+        #region LeerEmail
 
         /// <summary>
         /// Extrae un mail del DataGrilView y lo muestra.
@@ -979,14 +1011,7 @@ namespace Trabajo_Final.UI
                 }
             }
         }
-
-        private void exportarToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-            FormExportar iFormExportar = new FormExportar(tbDeLeerMail.Text, tbAsuntoLeerMail.Text, generarListaCadenas(tbParaLeerMail.Text), generarListaCadenas(tbCCLeerMail.Text), tbCuerpoLeerMail.Text, Convert.ToDateTime(tbFechaLeerMail.Text));
-            iFormExportar.ShowDialog();
-        }
-
+      
         private void responderToolStripMenuItem_Click(object sender, EventArgs e)
         {
             try
@@ -1007,29 +1032,7 @@ namespace Trabajo_Final.UI
             }           
         }
 
-        /// <summary>
-        /// Lo que hace es si se redacta un nuevo mail, cuando se escribe el asunto, si el textbox pasado los 
-        /// 50 caracteres, entonces se le modifica a este último la propiedad multiline, y se le aumenta de tamaño.
-        /// El proceso a la inversa se hace, si se esta borrando en el textbox.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void tbAsunto_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (e.KeyChar != (char)13)
-            {
-                if (tbAsunto.Text.Length > 50)
-                {
-                    tbAsunto.Size = new Size(354, 38);
-                    tbAsunto.Multiline = true;
-                }
-                if (tbAsunto.Text.Length < 50)
-                {
-                    tbAsunto.Size = new Size(354, 20);
-                    tbAsunto.Multiline = false;
-                }
-            }
-        }
+       
         /// <summary>
         /// Abre el archivo adjunto seleccionado, por una llamada al sistema operativos.
         /// </summary>
@@ -1092,6 +1095,8 @@ namespace Trabajo_Final.UI
                 }
             }            
         }
+
+        #endregion
 
         /// <summary>
         /// Permite Eliminar un Email

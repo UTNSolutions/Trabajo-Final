@@ -397,7 +397,7 @@ namespace Trabajo_Final.Controladores
                 //que el email corresponde
                 foreach (Email email in listaEmailsFiltrados)
                 {
-                    listaEmailDTO.Add(new EmailDTO(cuentaDto.IdCuenta, email.Remitente, email.CC, email.CCO, email.Destinatario, email.Cuerpo, email.Asunto,email.Adjunto, email.Fecha, false));
+                    listaEmailDTO.Add(new EmailDTO(cuentaDto.IdCuenta, email.Remitente,email.Destinatario, email.CC, email.CCO, email.Cuerpo, email.Asunto,email.Adjunto, email.Fecha, false));
                 }
                 //Guardo la lista de emails en la base de datos y obtengo los Ids de los Emails insertados
                 //para luego agregar los emails a su cuenta de dominio correspondiente
