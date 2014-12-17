@@ -200,42 +200,6 @@
             this.acercaDeToolStripMenuItem1.Text = "Acerca de...";
             this.acercaDeToolStripMenuItem1.Click += new System.EventHandler(this.acercaDe_Click);
             // 
-            // obtenerTodosToolStripMenuItem
-            // 
-            this.obtenerTodosToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.obtenerTodosToolStripMenuItem.Image = global::Trabajo_Final.Properties.Resources.descarga;
-            this.obtenerTodosToolStripMenuItem.Name = "obtenerTodosToolStripMenuItem";
-            this.obtenerTodosToolStripMenuItem.Size = new System.Drawing.Size(129, 23);
-            this.obtenerTodosToolStripMenuItem.Text = "Obtener Todos";
-            this.obtenerTodosToolStripMenuItem.Click += new System.EventHandler(this.obtenerTodos_Click);
-            // 
-            // cuentasToolStripMenuItem1
-            // 
-            this.cuentasToolStripMenuItem1.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.cuentasToolStripMenuItem1.Image = global::Trabajo_Final.Properties.Resources.Administrar;
-            this.cuentasToolStripMenuItem1.Name = "cuentasToolStripMenuItem1";
-            this.cuentasToolStripMenuItem1.Size = new System.Drawing.Size(87, 23);
-            this.cuentasToolStripMenuItem1.Text = "Cuentas";
-            this.cuentasToolStripMenuItem1.Click += new System.EventHandler(this.cuentas_Click);
-            // 
-            // redactarMailToolStripMenuItem
-            // 
-            this.redactarMailToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.redactarMailToolStripMenuItem.Image = global::Trabajo_Final.Properties.Resources.icono_del_l_piz_y_del_cuaderno_7956808___1_;
-            this.redactarMailToolStripMenuItem.Name = "redactarMailToolStripMenuItem";
-            this.redactarMailToolStripMenuItem.Size = new System.Drawing.Size(126, 23);
-            this.redactarMailToolStripMenuItem.Text = "Redactar Email";
-            this.redactarMailToolStripMenuItem.Click += new System.EventHandler(this.redactar_Click);
-            // 
-            // acercaDeToolStripMenuItem1
-            // 
-            this.acercaDeToolStripMenuItem1.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.acercaDeToolStripMenuItem1.Image = global::Trabajo_Final.Properties.Resources.Help;
-            this.acercaDeToolStripMenuItem1.Name = "acercaDeToolStripMenuItem1";
-            this.acercaDeToolStripMenuItem1.Size = new System.Drawing.Size(105, 23);
-            this.acercaDeToolStripMenuItem1.Text = "Acerca de...";
-            this.acercaDeToolStripMenuItem1.Click += new System.EventHandler(this.acercaDe_Click);
-            // 
             // gpNuevoMail
             // 
             this.gpNuevoMail.Controls.Add(this.botonBorrarUltimoAdjuntos);
@@ -1026,12 +990,12 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(851, 482);
-            this.Controls.Add(this.gbEnviarMail);
-            this.Controls.Add(this.gbLeerMail);
             this.Controls.Add(this.gbOpciones1);
             this.Controls.Add(this.gpNuevoMail);
             this.Controls.Add(this.panelLeerMail);
             this.Controls.Add(this.panelCuentas);
+            this.Controls.Add(this.gbEnviarMail);
+            this.Controls.Add(this.gbLeerMail);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;

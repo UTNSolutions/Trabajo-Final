@@ -51,7 +51,7 @@ namespace Trabajo_Final.UI
         {
             FormAdministrarCuentas iFormAdminCuentas = new FormAdministrarCuentas();
             iFormAdminCuentas.FormClosed += new FormClosedEventHandler(formAdminCuentas_FormClosed);
-            iFormAdminCuentas.ShowDialog();           
+            iFormAdminCuentas.ShowDialog();
         }
 
         private void exportar_Click(object sender, EventArgs e)
@@ -871,7 +871,6 @@ namespace Trabajo_Final.UI
         /// <param name="e"></param>
         private void obtenerEmail_Click(object sender, EventArgs e)
         {
-
             if (tbNombreCuenta.Text == "")
             {
                 MessageBox.Show("Seleccione una cuenta antes de obtener los Correos", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -918,7 +917,7 @@ namespace Trabajo_Final.UI
             {
                 MessageBox.Show(ex.Message, "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-          catch (DAOExcepcion ex)
+            catch (DAOExcepcion ex)
             {
                 MessageBox.Show(ex.Message, "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
