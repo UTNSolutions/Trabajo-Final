@@ -27,11 +27,12 @@ namespace Trabajo_Final.Persistencia
             {
                 EncriptadorCesar encriptador = new EncriptadorCesar(4);
                 String contraseñaEncriptada = encriptador.Encriptar(pCuenta.Contraseña);
-                SqlCommand comando = new SqlCommand("insert into Cuenta(nombre,direccion,servicio,contraseña) values(@nombre,@direccion,@servicio,@contraseña)", this.iConexion, this.iTransaccion);
+                SqlCommand comando = new SqlCommand("insert into Cuenta(nombre,direccion,servicio,contraseña,directorioDeAdjuntos) values(@nombre,@direccion,@servicio,@contraseña,@directorio)", this.iConexion, this.iTransaccion);
                 comando.Parameters.AddWithValue("@nombre", pCuenta.Nombre);
                 comando.Parameters.AddWithValue("@servicio", pCuenta.NombreServicio);
                 comando.Parameters.AddWithValue("@direccion", pCuenta.Direccion);
                 comando.Parameters.AddWithValue("@contraseña", contraseñaEncriptada);
+                comando.Parameters.AddWithValue("@directorio", pCuenta.DirectorioDeAdjuntos);
                 comando.ExecuteNonQuery();
             }
             catch(SqlException)
@@ -145,8 +146,15 @@ namespace Trabajo_Final.Persistencia
             try
             {  
                 object consulta = comando.ExecuteScalar();
-                DateTime ultimaConexion;
-                ultimaConexion = Convert.ToDateTime(consulta);
+                DateTime ultimaConexion = DateTime.Now;
+                if (consulta == DBNull.Value)
+                {
+                    ultimaConexion = new DateTime();
+                }
+                else
+                {
+                    ultimaConexion = Convert.ToDateTime(consulta);
+                }
                 return ultimaConexion;
             }
             catch (SqlException)

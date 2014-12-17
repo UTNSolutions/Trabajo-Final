@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Diagnostics;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -15,6 +16,7 @@ using System.Text.RegularExpressions;
 using Trabajo_Final.Utils;
 using System.IO;
 using System.Activities.Statements;
+using System.Collections;
 
 
 namespace Trabajo_Final.UI
@@ -36,7 +38,7 @@ namespace Trabajo_Final.UI
         /// <param name="e"></param>
         private void acercaDeToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            FormAcercaDe iFormAcercaDe = new FormAcercaDe();            
+            FormAcercaDe iFormAcercaDe = new FormAcercaDe();
             iFormAcercaDe.ShowDialog();
         }
 
@@ -49,14 +51,14 @@ namespace Trabajo_Final.UI
         {
             FormAdministrarCuentas iFormAdminCuentas = new FormAdministrarCuentas();
             iFormAdminCuentas.FormClosed += new FormClosedEventHandler(formAdminCuentas_FormClosed);
-            iFormAdminCuentas.ShowDialog();           
+            iFormAdminCuentas.ShowDialog();
         }
 
-        private void formAdminCuentas_FormClosed(object sender, FormClosedEventArgs e)       
-        {              
+        private void formAdminCuentas_FormClosed(object sender, FormClosedEventArgs e)
+        {
             //Cuando cierro el formulario de administrar las cuentas, cargo nuevamente
             //el tree view para que se actualize
-            CargarTreeView();         
+            CargarTreeView();
         }
 
         /// <summary>
@@ -72,7 +74,7 @@ namespace Trabajo_Final.UI
                 {
                     combobDe.DataSource = Fachada.Instancia.ObtenerCuentas();
                 }
-                catch(DAOExcepcion ex)
+                catch (DAOExcepcion ex)
                 {
                     MessageBox.Show(ex.Message, "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
@@ -83,7 +85,7 @@ namespace Trabajo_Final.UI
                 tbCCOROnly.ReadOnly = true;
                 tbCCROnly.ReadOnly = true;
                 panelCuentas.Visible = false;
-                gpNuevoMail.Visible = true;              
+                gpNuevoMail.Visible = true;
             }
         }
 
@@ -94,11 +96,11 @@ namespace Trabajo_Final.UI
         /// <param name="e"></param>
         private void botonCC_Click(object sender, EventArgs e)
         {
-                botonCC.Visible = false;
-                botonCCAtras.Visible = true;
-                tbCC.Visible = true;
-                botonAgregarCC.Visible = true;
-                botonBorrarUltimoCC.Visible = true;
+            botonCC.Visible = false;
+            botonCCAtras.Visible = true;
+            tbCC.Visible = true;
+            botonAgregarCC.Visible = true;
+            botonBorrarUltimoCC.Visible = true;
         }
 
         /// <summary>
@@ -184,7 +186,7 @@ namespace Trabajo_Final.UI
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void botonAdjuntar_Click(object sender, EventArgs e)
-        {            
+        {
             OpenFileDialog file = new OpenFileDialog();
             file.Title = "Seleccione Archivo";
             file.InitialDirectory = @"c:\";
@@ -222,11 +224,14 @@ namespace Trabajo_Final.UI
             //cargo los nombres de las cuentas, y genero sus nodos de recibidos,enviados y borradores
             foreach (CuentaDTO cuenta in Fachada.Instancia.ObtenerCuentas())
             {
-                TreeNode nodo = tvCuentas.Nodes.Add(cuenta.Nombre,cuenta.Nombre+ "("+cuenta.Direccion+")") ;
-                nodo.Nodes.Add("R","Recibidos");
-                nodo.Nodes.Add("E","Enviados");
+                TreeNode nodo = tvCuentas.Nodes.Add(cuenta.Nombre, cuenta.Nombre + "(" + cuenta.Direccion + ")");
+                nodo.Nodes.Add("R", "Recibidos");
+                nodo.Nodes.Add("E", "Enviados");
             }
-            tbNombreCuenta.Text =  tvCuentas.GetNodeAt(1, 1).Name;
+            if (tvCuentas.Nodes.Count > 0)
+            {
+                tbNombreCuenta.Text = tvCuentas.GetNodeAt(1, 1).Name;
+            }
 
         }
 
@@ -243,8 +248,8 @@ namespace Trabajo_Final.UI
                 gbOpciones1.Visible = true;
                 gpNuevoMail.Visible = false;
                 panelCuentas.Visible = true;
-                panelLeerMail.Visible = false; 
-                gbLeerMail.Visible = false; 
+                panelLeerMail.Visible = false;
+                gbLeerMail.Visible = false;
             }
         }
 
@@ -260,9 +265,9 @@ namespace Trabajo_Final.UI
             botonCCAtras_Click(sender, e);
             if (tbParaROnly.Text != "" || tbCCROnly.Text != "" || tbCCOROnly.Text != "" || tbAsunto.Text != "" || tbAdjuntos.Text != "" || tbCuerpo.Text != "")
             {
-                DialogResult resultado = MessageBox.Show("¿Está seguro que quiere eliminar este mail no enviado ?", "Advertencia", MessageBoxButtons.YesNo,MessageBoxIcon.Question);
+                DialogResult resultado = MessageBox.Show("¿Está seguro que quiere eliminar este mail no enviado ?", "Advertencia", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (resultado == DialogResult.Yes)
-                {                    
+                {
                     tbParaROnly.Text = "";
                     tbCCROnly.Text = "";
                     tbCCOROnly.Text = "";
@@ -354,7 +359,7 @@ namespace Trabajo_Final.UI
                 else
                 {
                     indice--;
-                }                
+                }
             }
             //En caso de que salga del while por la condición de la sig. linea es porque es la última cadena.
             if (indice == 0)
@@ -463,7 +468,7 @@ namespace Trabajo_Final.UI
         /// <param name="e"></param>
         private void botonAgregarCCO_Click(object sender, EventArgs e)
         {
-             if (tbCCO.Text != "")
+            if (tbCCO.Text != "")
             {
                 //Para ver si seesta poniendo una cedena valida como dirección de correo.
                 if (!(Regex.IsMatch(tbCCO.Text, "\\w+([-+.']\\w+)*@\\w+([-.]\\w+)*\\.\\w+(a-z)*")))
@@ -556,7 +561,7 @@ namespace Trabajo_Final.UI
                 menuStrip1.Enabled = false;
                 Fachada.Instancia.EnviarEmail(combobDe.Text, generarListaCadenas(tbParaROnly.Text), generarListaCadenas(tbCCROnly.Text), generarListaCadenas(tbCCOROnly.Text), tbAsunto.Text, tbCuerpo.Text, generarListaCadenas(tbAdjuntos.Text), combobDe.SelectedValue.ToString());
                 lEnviado.Visible = true;
-                borrarMailEnviado();                           
+                borrarMailEnviado();
             }
             catch (DAOExcepcion ex)
             {
@@ -574,7 +579,7 @@ namespace Trabajo_Final.UI
                 MessageBox.Show(ex.Message, "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             finally
-            {                
+            {
                 gpNuevoMail.Enabled = true;
                 gbEnviarMail.Enabled = true;
                 menuStrip1.Enabled = true;
@@ -587,45 +592,45 @@ namespace Trabajo_Final.UI
         /// <param name="sender"></param>
         /// <param name="e"></param>
         /// <returns></returns>
-        private IList<String>  generarListaCadenas(String pCadena)
+        private IList<String> generarListaCadenas(String pCadena)
         {
             IList<String> listaDestinatarios = new List<String>();
             String cadena = "";
             int ind = 0;
             if (pCadena != "")
             {
-            while (ind < pCadena.Length)
-            {
-                if (pCadena[ind] != ';' && ind != pCadena.Length)
+                while (ind < pCadena.Length)
                 {
-                    cadena = cadena + pCadena[ind].ToString();
-                        ind++;
-                }
-                else 
-                {
-                    if (pCadena[ind] == ';')
+                    if (pCadena[ind] != ';' && ind != pCadena.Length)
                     {
-                        listaDestinatarios.Add(cadena);
-                        cadena = "";
-                        ind = ind + 2;
+                        cadena = cadena + pCadena[ind].ToString();
+                        ind++;
                     }
                     else
                     {
-                        cadena = cadena + pCadena[ind].ToString();
-                        listaDestinatarios.Add(cadena);
-                        cadena = "";
-                        ind++;
+                        if (pCadena[ind] == ';')
+                        {
+                            listaDestinatarios.Add(cadena);
+                            cadena = "";
+                            ind = ind + 2;
+                        }
+                        else
+                        {
+                            cadena = cadena + pCadena[ind].ToString();
+                            listaDestinatarios.Add(cadena);
+                            cadena = "";
+                            ind++;
+                        }
                     }
                 }
-            }
             }
             else
             {
                 listaDestinatarios = null;
-            }            
+            }
             return listaDestinatarios;
         }
-           
+
         /// <summary>
         /// Cargar el data grid con los datos de los emails de una cuenta teniendo en cuenta
         /// el nodo seleccionado
@@ -640,7 +645,7 @@ namespace Trabajo_Final.UI
             {
                 tbNombreCuenta.Text = e.Node.Parent.Name;
                 tbTipoCorreo.Text = e.Node.Name;
-                CargarDataGrid(e.Node.Parent.Name,Convert.ToChar(tbTipoCorreo.Text));
+                CargarDataGrid(e.Node.Parent.Name, Convert.ToChar(tbTipoCorreo.Text));
             }
             else
             {
@@ -654,7 +659,7 @@ namespace Trabajo_Final.UI
         /// </summary>
         /// <param name="pNombreCuenta">Nombre de la cuenta</param>
         /// <param name="pTipoCorreo">Tipo de correo (recibidos,enviados,borradores)</param>
-        private void CargarDataGrid(String pNombreCuenta,Char pTipoCorreo)
+        private void CargarDataGrid(String pNombreCuenta, Char pTipoCorreo)
         {
             switch (pTipoCorreo)
             {
@@ -662,20 +667,20 @@ namespace Trabajo_Final.UI
                     break;
                 case 'E': { FiltarEnviados(pNombreCuenta); }
                     break;
-            }          
+            }
         }
 
         private void FiltarRecibidos(String pNombreCuenta)
         {
             IList<AdaptadorDataGrid> adaptador = new List<AdaptadorDataGrid>();
-            
+
             foreach (EmailDTO email in Fachada.Instancia.GetEmails(pNombreCuenta))
             {
                 CuentaDTO cuenta = Fachada.Instancia.GetCuenta(pNombreCuenta);
                 String remitente = StringsUtils.ObtenerEmail(email.Remitente);
                 if (remitente != cuenta.Direccion)
                 {
-                    adaptador.Add(new AdaptadorDataGrid(email.IdEmail, email.Remitente, email.Destinatario, email.ConCopia, email.Asunto, email.Cuerpo, email.Fecha, email.Leido));
+                    adaptador.Add(new AdaptadorDataGrid(email.IdEmail, email.Remitente, email.Destinatario, email.ConCopia, email.Asunto, email.Cuerpo, email.Adjuntos, email.Fecha, email.Leido));
                 }
             }
             //ordeno por fecha                         
@@ -686,10 +691,10 @@ namespace Trabajo_Final.UI
             //controlo si otro hilo de ejecucion requiere hacer uso del data grid
             //entonces creo un delegado para cederle la tarea de actualizar el data grid,
             //sino directamente le asigno los datos al data grid
-            if (dgEmails.InvokeRequired) 
+            if (dgEmails.InvokeRequired)
             {
-                    CallBack d = new CallBack( FiltarRecibidos);
-                    this.Invoke(d,pNombreCuenta);
+                CallBack d = new CallBack(FiltarRecibidos);
+                this.Invoke(d, pNombreCuenta);
             }
             else
             {
@@ -704,7 +709,7 @@ namespace Trabajo_Final.UI
                         fila.DefaultCellStyle.BackColor = Color.Wheat;
                     }
                 }
-            }         
+            }
             dgEmails.Columns["destinatario"].Visible = false;
             dgEmails.Columns["remitente"].Visible = true;
         }
@@ -723,13 +728,13 @@ namespace Trabajo_Final.UI
                 String remitente = StringsUtils.ObtenerEmail(email.Remitente);
                 if (remitente == cuenta.Direccion)
                 {
-                    adaptador.Add(new AdaptadorDataGrid(email.IdEmail, email.Remitente, email.Destinatario, email.ConCopia, email.Asunto, email.Cuerpo, email.Fecha, email.Leido));
+                    adaptador.Add(new AdaptadorDataGrid(email.IdEmail, email.Remitente, email.Destinatario, email.ConCopia, email.Asunto, email.Cuerpo, email.Adjuntos, email.Fecha, email.Leido));
                 }
             }
             //ordeno por fecha
             adaptador = (from e in adaptador
-                           orderby e.Fecha descending
-                           select e).ToList();
+                         orderby e.Fecha descending
+                         select e).ToList();
             //controlo si otro hilo de ejecucion requiere hacer uso del data grid
             //entonces creo un delegado para cederle la tarea de actualizar el data grid,
             //sino directamente le asigno los datos al data grid
@@ -737,7 +742,7 @@ namespace Trabajo_Final.UI
             {
                 CallBack d = new CallBack(FiltarEnviados);
                 this.Invoke(d, pNombreCuenta);
-                }
+            }
             else
             {
                 dgEmails.DataSource = adaptador;
@@ -745,7 +750,7 @@ namespace Trabajo_Final.UI
                 //y asi poder colorear los emails que fueron leidos
                 foreach (DataGridViewRow fila in dgEmails.Rows)
                 {
-                    DataGridViewTextBoxCell celda = (DataGridViewTextBoxCell) fila.Cells["leido"];
+                    DataGridViewTextBoxCell celda = (DataGridViewTextBoxCell)fila.Cells["leido"];
                     if (!(bool)celda.Value)
                     {
                         fila.DefaultCellStyle.BackColor = Color.Wheat;
@@ -815,18 +820,18 @@ namespace Trabajo_Final.UI
         }
 
 
-        private void ProgressCompleted(object sender,RunWorkerCompletedEventArgs e)
+        private void ProgressCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            this.iFormBarraProgreso.Close();    
+            this.iFormBarraProgreso.Close();
         }
 
         private void ObtenerMailDeUnaCuenta(object sender, DoWorkEventArgs e)
-        {         
+        {
             try
-            {               
+            {
                 Fachada.Instancia.ObtenerEmail(tbNombreCuenta.Text);
                 CargarDataGrid(tbNombreCuenta.Text, Convert.ToChar(tbTipoCorreo.Text));
-            }           
+            }
             catch (NombreCuentaExcepcion ex)
             {
                 MessageBox.Show(ex.Message, "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -839,7 +844,7 @@ namespace Trabajo_Final.UI
             {
                 MessageBox.Show(ex.Message, "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-          catch (DAOExcepcion ex)
+            catch (DAOExcepcion ex)
             {
                 MessageBox.Show(ex.Message, "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -852,14 +857,14 @@ namespace Trabajo_Final.UI
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void obtenerTodosToolStripMenuItem_Click(object sender, EventArgs e)
-        {          
-               this.iFormBarraProgreso = new FormBarraProgreso();
-               this.iFormBarraProgreso.Show();
-               BackgroundWorker hilo = new BackgroundWorker();
-               hilo.DoWork += new DoWorkEventHandler(ObtenerTodos);
-               hilo.WorkerReportsProgress = true;               
-               hilo.RunWorkerCompleted += new RunWorkerCompletedEventHandler(ProgressCompleted);
-               hilo.RunWorkerAsync();
+        {
+            this.iFormBarraProgreso = new FormBarraProgreso();
+            this.iFormBarraProgreso.Show();
+            BackgroundWorker hilo = new BackgroundWorker();
+            hilo.DoWork += new DoWorkEventHandler(ObtenerTodos);
+            hilo.WorkerReportsProgress = true;
+            hilo.RunWorkerCompleted += new RunWorkerCompletedEventHandler(ProgressCompleted);
+            hilo.RunWorkerAsync();
         }
 
         /// <summary>
@@ -869,35 +874,35 @@ namespace Trabajo_Final.UI
         /// <param name="e"></param>
         private void ObtenerTodos(object sender, DoWorkEventArgs e)
         {
-          try
-          {
-            //Obtiene los emails por cada una de las cuentas que estan en el tree view
-            IList<String> listaNombreCuentas = new List<String>();
-            //itera los nodos principales del tree view para obtener las cuentas configuradas
-            //para poder extraer sus emails
-            foreach (TreeNode tn in tvCuentas.Nodes)
-            {               
-                listaNombreCuentas.Add(tn.Name);
+            try
+            {
+                //Obtiene los emails por cada una de las cuentas que estan en el tree view
+                IList<String> listaNombreCuentas = new List<String>();
+                //itera los nodos principales del tree view para obtener las cuentas configuradas
+                //para poder extraer sus emails
+                foreach (TreeNode tn in tvCuentas.Nodes)
+                {
+                    listaNombreCuentas.Add(tn.Name);
+                }
+                Fachada.Instancia.ObtenerTodosEmails(listaNombreCuentas);
+                CargarDataGrid(tbNombreCuenta.Text, Convert.ToChar(tbTipoCorreo.Text));
             }
-            Fachada.Instancia.ObtenerTodosEmails(listaNombreCuentas);
-            CargarDataGrid(tbNombreCuenta.Text, Convert.ToChar(tbTipoCorreo.Text));
-          }
-          catch(DAOExcepcion ex)
-          {
-            MessageBox.Show(ex.Message, "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Error);
-          }
-          catch (NombreCuentaExcepcion ex)
-          {
-            MessageBox.Show(ex.Message, "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Error);
-          }
-          catch (EmailExcepcion ex)
-          {
-            MessageBox.Show(ex.Message, "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Error);
-          }
-          catch (InternetExcepcion ex)
-          {
-            MessageBox.Show(ex.Message, "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Error);
-          }
+            catch (DAOExcepcion ex)
+            {
+                MessageBox.Show(ex.Message, "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (NombreCuentaExcepcion ex)
+            {
+                MessageBox.Show(ex.Message, "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (EmailExcepcion ex)
+            {
+                MessageBox.Show(ex.Message, "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (InternetExcepcion ex)
+            {
+                MessageBox.Show(ex.Message, "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
 
@@ -907,7 +912,7 @@ namespace Trabajo_Final.UI
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void LeerMail(object sender, EventArgs e)
-        {            
+        {
             if (dgEmails.RowCount > 0)
             {
                 panelLeerMail.Visible = true;
@@ -938,6 +943,30 @@ namespace Trabajo_Final.UI
                     tbCuerpoLeerMail.Location = new Point(6, 109);
                     tbCuerpoLeerMail.Size = new Size(841, 314);
                 }
+                if (fila.Adjuntos != null)
+                {
+                    panelDatosAdLeerMail.Visible = true;
+                    IList<String> listaAdjuntos = generarListaCadenas(fila.Adjuntos);
+                    IList<ArchivoAdjunto> datosAdjuntos = new List<ArchivoAdjunto>();
+                    foreach (String adjunto in listaAdjuntos)
+                    {
+                        int indice = adjunto.Length - 1;
+                        String cadena = "";
+                        while (adjunto[indice] != Convert.ToChar(@"\"))
+                        {
+                            cadena = adjunto[indice] + cadena;
+                            indice--;
+                        }
+                        datosAdjuntos.Add(new ArchivoAdjunto(cadena, adjunto));
+                    }
+                    cbDatosAdLeerMail.DataSource = datosAdjuntos;
+                    tbCuerpoLeerMail.Location = new Point(6, 178);
+                    tbCuerpoLeerMail.Size = new Size(841, 231);
+                }
+                else
+                {
+                    panelDatosAdLeerMail.Visible = false;
+                }
                 tbDeLeerMail.Text = fila.Remitente;
                 tbParaLeerMail.Text = fila.Destinatario;
                 tbCuerpoLeerMail.Text = fila.Cuerpo;
@@ -958,7 +987,8 @@ namespace Trabajo_Final.UI
 
         private void exportarToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            FormExportar iFormExportar = new FormExportar(tbDeLeerMail.Text,tbAsuntoLeerMail.Text,tbParaLeerMail.Text,tbCuerpoLeerMail.Text,Convert.ToDateTime(tbFechaLeerMail.Text));                
+
+            FormExportar iFormExportar = new FormExportar(tbDeLeerMail.Text, tbAsuntoLeerMail.Text, generarListaCadenas(tbParaLeerMail.Text), generarListaCadenas(tbCCLeerMail.Text), tbCuerpoLeerMail.Text, Convert.ToDateTime(tbFechaLeerMail.Text));
             iFormExportar.ShowDialog();
         }
 
@@ -979,9 +1009,16 @@ namespace Trabajo_Final.UI
             catch (DAOExcepcion ex)
             {
                 MessageBox.Show(ex.Message, "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }           
+            }
         }
 
+        /// <summary>
+        /// Lo que hace es si se redacta un nuevo mail, cuando se escribe el asunto, si el textbox pasado los 
+        /// 50 caracteres, entonces se le modifica a este último la propiedad multiline, y se le aumenta de tamaño.
+        /// El proceso a la inversa se hace, si se esta borrando en el textbox.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void tbAsunto_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar != (char)13)
@@ -997,6 +1034,68 @@ namespace Trabajo_Final.UI
                     tbAsunto.Multiline = false;
                 }
             }
+        }
+        /// <summary>
+        /// Abre el archivo adjunto seleccionado, por una llamada al sistema operativos.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void bVerLeerMail_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                //Lo que hacemos es ejecutar un proceso que abre el archivo. 
+                Process proceso = new Process();
+                proceso.EnableRaisingEvents = false;
+                proceso.StartInfo.FileName = cbDatosAdLeerMail.SelectedValue.ToString();
+                proceso.Start();
+            }
+            catch (System.ComponentModel.Win32Exception)
+            {
+                MessageBox.Show("El archivo que intenta abrir no se encuentra disponible, se ha eliminado o cambiado de directorio", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Error);                    
+            }
+        }
+
+        /// <summary>
+        /// Guarda un archivo adjunto seleccionado como un nuevo archivo.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void bGuardarLeerMail_Click(object sender, EventArgs e)
+        {   
+            
+            int indice = cbDatosAdLeerMail.SelectedValue.ToString().Length - 1;
+            String cadenaPrueba = cbDatosAdLeerMail.SelectedValue.ToString();
+            String cadena = "";
+            //Lo que hacemos es tomar la extensión del archivo para guardarlo.
+            while (cadenaPrueba[indice] != '.')
+            {
+                cadena = cadenaPrueba[indice] + cadena;
+                indice--;
+            }
+            SaveFileDialog saveFileDialog1 = new SaveFileDialog();
+            saveFileDialog1.Filter = cadena + "|*." + cadena;
+
+            if (saveFileDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                FileStream archivoAGuardar = new FileStream(saveFileDialog1.FileName, FileMode.Create);
+                try
+                {
+                    FileStream archivoACopiar = File.Open(cbDatosAdLeerMail.SelectedValue.ToString(), FileMode.Open);
+                    archivoACopiar.CopyTo(archivoAGuardar, 4096);
+                    archivoACopiar.Close();
+                    MessageBox.Show("El archivo se ha guardado con éxito", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                catch (IOException)
+                {
+                    MessageBox.Show("Cierre el archivo antes de guardarlo", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Error);                    
+                    File.Delete(saveFileDialog1.FileName);
+                }
+                finally
+                {
+                    archivoAGuardar.Close();
+                }
+            }            
         }
     }
 }

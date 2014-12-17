@@ -31,7 +31,9 @@ namespace Trabajo_Final.DTO
 
         private IList<String> iConCopiaOculta;
 
-        public EmailDTO(int pIdCuenta, String pRemitente, IList<String> pDestinatario, IList<String> pConCopia, IList<String> pConCopiaOculta, String pCuerpo, String pAsunto, DateTime pFecha, bool pLeido)
+        private IList<String> iAdjuntos;
+
+        public EmailDTO(int pIdCuenta, String pRemitente, IList<String> pDestinatario, IList<String> pConCopia, IList<String> pConCopiaOculta, String pCuerpo, String pAsunto, IList<String> pAdjuntos, DateTime pFecha, bool pLeido)
         {
             this.iRemitente = pRemitente;
             this.iDestinatario = pDestinatario;
@@ -42,9 +44,10 @@ namespace Trabajo_Final.DTO
             this.iAsunto = pAsunto;
             this.iFecha = pFecha;
             this.iLeido = pLeido;
+            this.iAdjuntos = pAdjuntos;
         }
 
-        public EmailDTO(int pIdEmail, int pIdCuenta, String pRemitente, IList<String> pDestinatario, IList<String> pConCopia, IList<String> pConCopiaOculta, String pCuerpo, String pAsunto,DateTime pFecha,bool pLeido)
+        public EmailDTO(int pIdEmail, int pIdCuenta, String pRemitente, IList<String> pDestinatario, IList<String> pConCopia, IList<String> pConCopiaOculta, String pCuerpo, String pAsunto, IList<String> pAdjuntos, DateTime pFecha, bool pLeido)
         {
             this.iRemitente = pRemitente;
             this.iIdEmail = pIdEmail;
@@ -56,6 +59,7 @@ namespace Trabajo_Final.DTO
             this.iAsunto = pAsunto;
             this.iFecha = pFecha;
             this.iLeido = pLeido;
+            this.iAdjuntos = pAdjuntos;
         }
 
         /// <summary>
@@ -146,6 +150,15 @@ namespace Trabajo_Final.DTO
         {
             get { return this.iLeido; }
             set { this.iLeido = value; }
+        }
+
+        /// <summary>
+        /// Devuelve o establece los adjuntos del Email
+        /// </summary>
+        public IList<String> Adjuntos
+        {
+            get { return this.iAdjuntos; }
+            set { this.iAdjuntos = value; }
         }
     }
 }

@@ -12,11 +12,12 @@ namespace Trabajo_Final.Utils
         private String iRemitente;
         private String iDestinatario;
         private String iCC;
+        private String iAdjuntos; 
         private String iAsunto;
         private String iCuerpo;
         private DateTime iFecha;        
         private bool iLeido;
-        public AdaptadorDataGrid(int pIdEmail,String pRemitente,IList<String> pDestinatario,IList<String> pCC,String pAsunto,String pCuerpo,DateTime pFecha,bool pLeido)
+        public AdaptadorDataGrid(int pIdEmail, String pRemitente, IList<String> pDestinatario, IList<String> pCC, String pAsunto, String pCuerpo, IList<String> pAdjuntos, DateTime pFecha, bool pLeido)
         {
             this.iIdEmail = pIdEmail;
             this.iRemitente = pRemitente;
@@ -29,6 +30,13 @@ namespace Trabajo_Final.Utils
                 foreach (String CC in pCC)
                 {
                     this.iCC += CC + "; ";
+                }
+            }
+            if (pAdjuntos != null)
+            {
+                foreach (String adjunto in pAdjuntos)
+                {
+                    this.iAdjuntos += adjunto + "; ";
                 }
             }
             this.iAsunto = pAsunto;
@@ -50,6 +58,11 @@ namespace Trabajo_Final.Utils
         public String Destinatario
         {
             get { return this.iDestinatario; }
+        }
+
+        public String Adjuntos
+        {
+            get { return this.iAdjuntos; }
         }
 
         public String CC

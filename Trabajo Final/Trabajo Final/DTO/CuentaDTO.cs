@@ -22,12 +22,15 @@ namespace Trabajo_Final.DTO
 
         private String iContraseña;
 
+        private String iDirectorioDeAdjuntos;
+
         public CuentaDTO(String pNombre,String pDireccion, String pNombreServicio, String pContraseña)
         {
             this.iNombre = pNombre;
             this.iDireccion = pDireccion;
             this.iNombreServicio = pNombreServicio;
             this.iContraseña = pContraseña;
+            this.iDirectorioDeAdjuntos = @"C:\EmailManager\" + pNombre;
         }
 
         public CuentaDTO(int pIdCuenta,String pNombre,String pDireccion, String pNombreServicio, String pContraseña)
@@ -65,6 +68,11 @@ namespace Trabajo_Final.DTO
         {
             get { return this.iContraseña; }
             set { this.iContraseña = value; }
+        }
+
+        public String DirectorioDeAdjuntos
+        {
+            get { return this.iDirectorioDeAdjuntos; }
         }
 
     }

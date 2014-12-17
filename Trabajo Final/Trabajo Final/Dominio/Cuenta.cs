@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
 
 namespace Trabajo_Final.Dominio
 {
@@ -21,6 +22,8 @@ namespace Trabajo_Final.Dominio
 
         private IList<Email> iListaEmail;
 
+        private String iDirectorioDeAdjuntos;
+
         public Cuenta(String pNombre,String pDireccion, String pServicio, String pContraseña)
         {
             this.iNombre = pNombre;
@@ -28,6 +31,12 @@ namespace Trabajo_Final.Dominio
             this.iNombreServicio = pServicio;
             this.iContraseña = pContraseña;
             this.iListaEmail = new List<Email>();
+            this.iDirectorioDeAdjuntos = @"C:\EmailManager\" + pNombre;
+            if (! Directory.Exists(this.iDirectorioDeAdjuntos))
+            {
+                Directory.CreateDirectory(this.iDirectorioDeAdjuntos);
+            }
+
         }
 
         /// <summary>
@@ -108,6 +117,14 @@ namespace Trabajo_Final.Dominio
                 throw new ArgumentNullException();
             }
             this.iListaEmail.Remove(pEmail);
+        }
+
+        /// <summary>
+        /// Devuelve la componente directorio de los archivos adjuntos 
+        /// </summary>
+        public String DirectorioDeAdjuntos
+        {
+            get { return this.iDirectorioDeAdjuntos; }
         }
     }
 }
