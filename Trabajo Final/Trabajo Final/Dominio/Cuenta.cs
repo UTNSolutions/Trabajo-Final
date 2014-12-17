@@ -101,13 +101,13 @@ namespace Trabajo_Final.Dominio
         /// Elimina un Email de la cuenta
         /// </summary>
         /// <param name="pEmail"></param>
-        public void EliminarEmail(Email pEmail)
+        public void EliminarEmail(int pIdEmail)
         {
-            if (pEmail == null)
+            if (pIdEmail == null)
             {
                 throw new ArgumentNullException();
             }
-            this.iListaEmail.Remove(pEmail);
+           this.iListaEmail.Remove((from email in this.iListaEmail where email.IdEmail == pIdEmail select email).FirstOrDefault());
         }
     }
 }

@@ -33,10 +33,6 @@
             this.gbOpciones1 = new System.Windows.Forms.GroupBox();
             this.menuStrip2 = new System.Windows.Forms.MenuStrip();
             this.obtenerMailsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.obtenerTodosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.cuentasToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.redactarMailToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.acercaDeToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.gpNuevoMail = new System.Windows.Forms.GroupBox();
             this.labelDNValidaCC = new System.Windows.Forms.Label();
             this.labelDNValidaCCO = new System.Windows.Forms.Label();
@@ -51,7 +47,6 @@
             this.botonAgregarPara = new System.Windows.Forms.Button();
             this.combobDe = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.bAdjuntar = new System.Windows.Forms.Button();
             this.tbAsunto = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.tbCuerpo = new System.Windows.Forms.RichTextBox();
@@ -71,10 +66,16 @@
             this.tbTipoCorreo = new System.Windows.Forms.TextBox();
             this.tbNombreCuenta = new System.Windows.Forms.TextBox();
             this.dgEmails = new System.Windows.Forms.DataGridView();
+            this.remitente = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CC = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cuerpo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.destinatario = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.asunto = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.fecha = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.leido = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.idEmail = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panelLeerMail = new System.Windows.Forms.Panel();
             this.panelDatosAdLeerMail = new System.Windows.Forms.Panel();
-            this.button1 = new System.Windows.Forms.Button();
-            this.botonGuardarLeerMail = new System.Windows.Forms.Button();
             this.labelDatosAdjuntos = new System.Windows.Forms.Label();
             this.cbDatosAdLeerMail = new System.Windows.Forms.ComboBox();
             this.tbCCLeerMail = new System.Windows.Forms.TextBox();
@@ -87,26 +88,25 @@
             this.tbDeLeerMail = new System.Windows.Forms.TextBox();
             this.tbAsuntoLeerMail = new System.Windows.Forms.TextBox();
             this.gbEnviarMail = new System.Windows.Forms.GroupBox();
-            this.pictureBoxBarraProgreso = new System.Windows.Forms.PictureBox();
             this.lEnviado = new System.Windows.Forms.Label();
             this.menuStrip3 = new System.Windows.Forms.MenuStrip();
+            this.gbLeerMail = new System.Windows.Forms.GroupBox();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.administradorDeCuentasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.bEnviar = new System.Windows.Forms.ToolStripMenuItem();
             this.acercaDeToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
-            this.gbLeerMail = new System.Windows.Forms.GroupBox();
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.sadqadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.responderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exportarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.acercaDeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.remitente = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CC = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cuerpo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.destinatario = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.asunto = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.fecha = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.leido = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.idEmail = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.bEliminar = new System.Windows.Forms.Button();
+            this.bAdjuntar = new System.Windows.Forms.Button();
+            this.obtenerTodosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cuentasToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.redactarMailToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.acercaDeToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.button1 = new System.Windows.Forms.Button();
+            this.botonGuardarLeerMail = new System.Windows.Forms.Button();
             this.gbOpciones1.SuspendLayout();
             this.menuStrip2.SuspendLayout();
             this.gpNuevoMail.SuspendLayout();
@@ -115,7 +115,6 @@
             this.panelLeerMail.SuspendLayout();
             this.panelDatosAdLeerMail.SuspendLayout();
             this.gbEnviarMail.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxBarraProgreso)).BeginInit();
             this.menuStrip3.SuspendLayout();
             this.gbLeerMail.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -162,42 +161,6 @@
             this.obtenerMailsToolStripMenuItem.Size = new System.Drawing.Size(72, 23);
             this.obtenerMailsToolStripMenuItem.Text = "Obtener";
             this.obtenerMailsToolStripMenuItem.Click += new System.EventHandler(this.obtenerMailsToolStripMenuItem_Click);
-            // 
-            // obtenerTodosToolStripMenuItem
-            // 
-            this.obtenerTodosToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.obtenerTodosToolStripMenuItem.Image = global::Trabajo_Final.Properties.Resources.descarga;
-            this.obtenerTodosToolStripMenuItem.Name = "obtenerTodosToolStripMenuItem";
-            this.obtenerTodosToolStripMenuItem.Size = new System.Drawing.Size(129, 23);
-            this.obtenerTodosToolStripMenuItem.Text = "Obtener Todos";
-            this.obtenerTodosToolStripMenuItem.Click += new System.EventHandler(this.obtenerTodosToolStripMenuItem_Click);
-            // 
-            // cuentasToolStripMenuItem1
-            // 
-            this.cuentasToolStripMenuItem1.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.cuentasToolStripMenuItem1.Image = global::Trabajo_Final.Properties.Resources.Administrar;
-            this.cuentasToolStripMenuItem1.Name = "cuentasToolStripMenuItem1";
-            this.cuentasToolStripMenuItem1.Size = new System.Drawing.Size(87, 23);
-            this.cuentasToolStripMenuItem1.Text = "Cuentas";
-            this.cuentasToolStripMenuItem1.Click += new System.EventHandler(this.cuentasToolStripMenuItem_Click);
-            // 
-            // redactarMailToolStripMenuItem
-            // 
-            this.redactarMailToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.redactarMailToolStripMenuItem.Image = global::Trabajo_Final.Properties.Resources.icono_del_l_piz_y_del_cuaderno_7956808___1_;
-            this.redactarMailToolStripMenuItem.Name = "redactarMailToolStripMenuItem";
-            this.redactarMailToolStripMenuItem.Size = new System.Drawing.Size(126, 23);
-            this.redactarMailToolStripMenuItem.Text = "Redactar Email";
-            this.redactarMailToolStripMenuItem.Click += new System.EventHandler(this.redactarEmailToolStripMenuItem_Click);
-            // 
-            // acercaDeToolStripMenuItem1
-            // 
-            this.acercaDeToolStripMenuItem1.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.acercaDeToolStripMenuItem1.Image = global::Trabajo_Final.Properties.Resources.Help;
-            this.acercaDeToolStripMenuItem1.Name = "acercaDeToolStripMenuItem1";
-            this.acercaDeToolStripMenuItem1.Size = new System.Drawing.Size(105, 23);
-            this.acercaDeToolStripMenuItem1.Text = "Acerca de...";
-            this.acercaDeToolStripMenuItem1.Click += new System.EventHandler(this.acercaDeToolStripMenuItem_Click);
             // 
             // gpNuevoMail
             // 
@@ -380,16 +343,6 @@
             this.label2.TabIndex = 14;
             this.label2.Text = "De";
             // 
-            // bAdjuntar
-            // 
-            this.bAdjuntar.Image = global::Trabajo_Final.Properties.Resources.attach;
-            this.bAdjuntar.Location = new System.Drawing.Point(399, 391);
-            this.bAdjuntar.Name = "bAdjuntar";
-            this.bAdjuntar.Size = new System.Drawing.Size(36, 24);
-            this.bAdjuntar.TabIndex = 11;
-            this.bAdjuntar.UseVisualStyleBackColor = true;
-            this.bAdjuntar.Click += new System.EventHandler(this.botonAdjuntar_Click);
-            // 
             // tbAsunto
             // 
             this.tbAsunto.Location = new System.Drawing.Point(484, 50);
@@ -525,6 +478,7 @@
             // 
             // panelCuentas
             // 
+            this.panelCuentas.Controls.Add(this.bEliminar);
             this.panelCuentas.Controls.Add(this.label7);
             this.panelCuentas.Controls.Add(this.tvCuentas);
             this.panelCuentas.Controls.Add(this.tbTipoCorreo);
@@ -585,6 +539,69 @@
             this.dgEmails.TabIndex = 6;
             this.dgEmails.DoubleClick += new System.EventHandler(this.LeerMail);
             // 
+            // remitente
+            // 
+            this.remitente.DataPropertyName = "Remitente";
+            this.remitente.HeaderText = "Remitente";
+            this.remitente.Name = "remitente";
+            this.remitente.ReadOnly = true;
+            this.remitente.Width = 250;
+            // 
+            // CC
+            // 
+            this.CC.DataPropertyName = "CC";
+            this.CC.HeaderText = "CC";
+            this.CC.Name = "CC";
+            this.CC.ReadOnly = true;
+            this.CC.Visible = false;
+            // 
+            // cuerpo
+            // 
+            this.cuerpo.DataPropertyName = "Cuerpo";
+            this.cuerpo.HeaderText = "Cuerpo";
+            this.cuerpo.Name = "cuerpo";
+            this.cuerpo.ReadOnly = true;
+            this.cuerpo.Visible = false;
+            // 
+            // destinatario
+            // 
+            this.destinatario.DataPropertyName = "Destinatario";
+            this.destinatario.HeaderText = "Destinatario";
+            this.destinatario.Name = "destinatario";
+            this.destinatario.ReadOnly = true;
+            this.destinatario.Width = 250;
+            // 
+            // asunto
+            // 
+            this.asunto.DataPropertyName = "Asunto";
+            this.asunto.HeaderText = "Asunto";
+            this.asunto.Name = "asunto";
+            this.asunto.ReadOnly = true;
+            this.asunto.Width = 250;
+            // 
+            // fecha
+            // 
+            this.fecha.DataPropertyName = "Fecha";
+            this.fecha.HeaderText = "Fecha";
+            this.fecha.Name = "fecha";
+            this.fecha.ReadOnly = true;
+            // 
+            // leido
+            // 
+            this.leido.DataPropertyName = "Leido";
+            this.leido.HeaderText = "Leido";
+            this.leido.Name = "leido";
+            this.leido.ReadOnly = true;
+            this.leido.Visible = false;
+            // 
+            // idEmail
+            // 
+            this.idEmail.DataPropertyName = "IdEmail";
+            this.idEmail.HeaderText = "idEmail";
+            this.idEmail.Name = "idEmail";
+            this.idEmail.ReadOnly = true;
+            this.idEmail.Visible = false;
+            // 
             // panelLeerMail
             // 
             this.panelLeerMail.BackColor = System.Drawing.SystemColors.ButtonHighlight;
@@ -615,28 +632,6 @@
             this.panelDatosAdLeerMail.Size = new System.Drawing.Size(847, 33);
             this.panelDatosAdLeerMail.TabIndex = 12;
             this.panelDatosAdLeerMail.Visible = false;
-            // 
-            // button1
-            // 
-            this.button1.Image = global::Trabajo_Final.Properties.Resources.observar_smc__1_;
-            this.button1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button1.Location = new System.Drawing.Point(511, 4);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 14;
-            this.button1.Text = "  Ver";
-            this.button1.UseVisualStyleBackColor = true;
-            // 
-            // botonGuardarLeerMail
-            // 
-            this.botonGuardarLeerMail.Image = global::Trabajo_Final.Properties.Resources.filesave;
-            this.botonGuardarLeerMail.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.botonGuardarLeerMail.Location = new System.Drawing.Point(601, 4);
-            this.botonGuardarLeerMail.Name = "botonGuardarLeerMail";
-            this.botonGuardarLeerMail.Size = new System.Drawing.Size(75, 23);
-            this.botonGuardarLeerMail.TabIndex = 13;
-            this.botonGuardarLeerMail.Text = "   Guardar";
-            this.botonGuardarLeerMail.UseVisualStyleBackColor = true;
             // 
             // labelDatosAdjuntos
             // 
@@ -755,7 +750,6 @@
             // gbEnviarMail
             // 
             this.gbEnviarMail.BackColor = System.Drawing.Color.LightSkyBlue;
-            this.gbEnviarMail.Controls.Add(this.pictureBoxBarraProgreso);
             this.gbEnviarMail.Controls.Add(this.lEnviado);
             this.gbEnviarMail.Controls.Add(this.menuStrip3);
             this.gbEnviarMail.Location = new System.Drawing.Point(0, 2);
@@ -764,15 +758,6 @@
             this.gbEnviarMail.TabIndex = 8;
             this.gbEnviarMail.TabStop = false;
             this.gbEnviarMail.Visible = false;
-            // 
-            // pictureBoxBarraProgreso
-            // 
-            this.pictureBoxBarraProgreso.Location = new System.Drawing.Point(640, 24);
-            this.pictureBoxBarraProgreso.Name = "pictureBoxBarraProgreso";
-            this.pictureBoxBarraProgreso.Size = new System.Drawing.Size(132, 21);
-            this.pictureBoxBarraProgreso.TabIndex = 30;
-            this.pictureBoxBarraProgreso.TabStop = false;
-            this.pictureBoxBarraProgreso.Visible = false;
             // 
             // lEnviado
             // 
@@ -799,6 +784,31 @@
             this.menuStrip3.TabIndex = 0;
             this.menuStrip3.Text = "menuStrip3";
             // 
+            // gbLeerMail
+            // 
+            this.gbLeerMail.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.gbLeerMail.Controls.Add(this.menuStrip1);
+            this.gbLeerMail.Location = new System.Drawing.Point(0, 2);
+            this.gbLeerMail.Name = "gbLeerMail";
+            this.gbLeerMail.Size = new System.Drawing.Size(853, 45);
+            this.gbLeerMail.TabIndex = 16;
+            this.gbLeerMail.TabStop = false;
+            this.gbLeerMail.Visible = false;
+            // 
+            // menuStrip1
+            // 
+            this.menuStrip1.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.sadqadToolStripMenuItem,
+            this.responderToolStripMenuItem,
+            this.exportarToolStripMenuItem,
+            this.acercaDeToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(3, 16);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(847, 27);
+            this.menuStrip1.TabIndex = 0;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
             // administradorDeCuentasToolStripMenuItem
             // 
             this.administradorDeCuentasToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 10F);
@@ -824,31 +834,6 @@
             this.acercaDeToolStripMenuItem2.Size = new System.Drawing.Size(105, 23);
             this.acercaDeToolStripMenuItem2.Text = "Acerca de...";
             this.acercaDeToolStripMenuItem2.Click += new System.EventHandler(this.acercaDeToolStripMenuItem_Click);
-            // 
-            // gbLeerMail
-            // 
-            this.gbLeerMail.BackColor = System.Drawing.Color.LightSkyBlue;
-            this.gbLeerMail.Controls.Add(this.menuStrip1);
-            this.gbLeerMail.Location = new System.Drawing.Point(0, 2);
-            this.gbLeerMail.Name = "gbLeerMail";
-            this.gbLeerMail.Size = new System.Drawing.Size(853, 45);
-            this.gbLeerMail.TabIndex = 16;
-            this.gbLeerMail.TabStop = false;
-            this.gbLeerMail.Visible = false;
-            // 
-            // menuStrip1
-            // 
-            this.menuStrip1.BackColor = System.Drawing.Color.LightSkyBlue;
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.sadqadToolStripMenuItem,
-            this.responderToolStripMenuItem,
-            this.exportarToolStripMenuItem,
-            this.acercaDeToolStripMenuItem});
-            this.menuStrip1.Location = new System.Drawing.Point(3, 16);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(847, 27);
-            this.menuStrip1.TabIndex = 0;
-            this.menuStrip1.Text = "menuStrip1";
             // 
             // sadqadToolStripMenuItem
             // 
@@ -885,68 +870,86 @@
             this.acercaDeToolStripMenuItem.Text = "Acerca de...";
             this.acercaDeToolStripMenuItem.Click += new System.EventHandler(this.acercaDeToolStripMenuItem_Click);
             // 
-            // remitente
+            // bEliminar
             // 
-            this.remitente.DataPropertyName = "Remitente";
-            this.remitente.HeaderText = "Remitente";
-            this.remitente.Name = "remitente";
-            this.remitente.ReadOnly = true;
-            this.remitente.Width = 250;
+            this.bEliminar.Image = global::Trabajo_Final.Properties.Resources.mail_delete;
+            this.bEliminar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.bEliminar.Location = new System.Drawing.Point(603, 3);
+            this.bEliminar.Name = "bEliminar";
+            this.bEliminar.Size = new System.Drawing.Size(76, 25);
+            this.bEliminar.TabIndex = 10;
+            this.bEliminar.Text = "Eliminar";
+            this.bEliminar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.bEliminar.UseVisualStyleBackColor = true;
+            this.bEliminar.Click += new System.EventHandler(this.bEliminar_Click);
             // 
-            // CC
+            // bAdjuntar
             // 
-            this.CC.DataPropertyName = "CC";
-            this.CC.HeaderText = "CC";
-            this.CC.Name = "CC";
-            this.CC.ReadOnly = true;
-            this.CC.Visible = false;
+            this.bAdjuntar.Image = global::Trabajo_Final.Properties.Resources.attach;
+            this.bAdjuntar.Location = new System.Drawing.Point(399, 391);
+            this.bAdjuntar.Name = "bAdjuntar";
+            this.bAdjuntar.Size = new System.Drawing.Size(36, 24);
+            this.bAdjuntar.TabIndex = 11;
+            this.bAdjuntar.UseVisualStyleBackColor = true;
+            this.bAdjuntar.Click += new System.EventHandler(this.botonAdjuntar_Click);
             // 
-            // cuerpo
+            // obtenerTodosToolStripMenuItem
             // 
-            this.cuerpo.DataPropertyName = "Cuerpo";
-            this.cuerpo.HeaderText = "Cuerpo";
-            this.cuerpo.Name = "cuerpo";
-            this.cuerpo.ReadOnly = true;
-            this.cuerpo.Visible = false;
+            this.obtenerTodosToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.obtenerTodosToolStripMenuItem.Image = global::Trabajo_Final.Properties.Resources.descarga;
+            this.obtenerTodosToolStripMenuItem.Name = "obtenerTodosToolStripMenuItem";
+            this.obtenerTodosToolStripMenuItem.Size = new System.Drawing.Size(129, 23);
+            this.obtenerTodosToolStripMenuItem.Text = "Obtener Todos";
+            this.obtenerTodosToolStripMenuItem.Click += new System.EventHandler(this.obtenerTodosToolStripMenuItem_Click);
             // 
-            // destinatario
+            // cuentasToolStripMenuItem1
             // 
-            this.destinatario.DataPropertyName = "Destinatario";
-            this.destinatario.HeaderText = "Destinatario";
-            this.destinatario.Name = "destinatario";
-            this.destinatario.ReadOnly = true;
-            this.destinatario.Width = 250;
+            this.cuentasToolStripMenuItem1.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.cuentasToolStripMenuItem1.Image = global::Trabajo_Final.Properties.Resources.Administrar;
+            this.cuentasToolStripMenuItem1.Name = "cuentasToolStripMenuItem1";
+            this.cuentasToolStripMenuItem1.Size = new System.Drawing.Size(87, 23);
+            this.cuentasToolStripMenuItem1.Text = "Cuentas";
+            this.cuentasToolStripMenuItem1.Click += new System.EventHandler(this.cuentasToolStripMenuItem_Click);
             // 
-            // asunto
+            // redactarMailToolStripMenuItem
             // 
-            this.asunto.DataPropertyName = "Asunto";
-            this.asunto.HeaderText = "Asunto";
-            this.asunto.Name = "asunto";
-            this.asunto.ReadOnly = true;
-            this.asunto.Width = 250;
+            this.redactarMailToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.redactarMailToolStripMenuItem.Image = global::Trabajo_Final.Properties.Resources.icono_del_l_piz_y_del_cuaderno_7956808___1_;
+            this.redactarMailToolStripMenuItem.Name = "redactarMailToolStripMenuItem";
+            this.redactarMailToolStripMenuItem.Size = new System.Drawing.Size(126, 23);
+            this.redactarMailToolStripMenuItem.Text = "Redactar Email";
+            this.redactarMailToolStripMenuItem.Click += new System.EventHandler(this.redactarEmailToolStripMenuItem_Click);
             // 
-            // fecha
+            // acercaDeToolStripMenuItem1
             // 
-            this.fecha.DataPropertyName = "Fecha";
-            this.fecha.HeaderText = "Fecha";
-            this.fecha.Name = "fecha";
-            this.fecha.ReadOnly = true;
+            this.acercaDeToolStripMenuItem1.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.acercaDeToolStripMenuItem1.Image = global::Trabajo_Final.Properties.Resources.Help;
+            this.acercaDeToolStripMenuItem1.Name = "acercaDeToolStripMenuItem1";
+            this.acercaDeToolStripMenuItem1.Size = new System.Drawing.Size(105, 23);
+            this.acercaDeToolStripMenuItem1.Text = "Acerca de...";
+            this.acercaDeToolStripMenuItem1.Click += new System.EventHandler(this.acercaDeToolStripMenuItem_Click);
             // 
-            // leido
+            // button1
             // 
-            this.leido.DataPropertyName = "Leido";
-            this.leido.HeaderText = "Leido";
-            this.leido.Name = "leido";
-            this.leido.ReadOnly = true;
-            this.leido.Visible = false;
+            this.button1.Image = global::Trabajo_Final.Properties.Resources.observar_smc__1_;
+            this.button1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button1.Location = new System.Drawing.Point(511, 4);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 14;
+            this.button1.Text = "  Ver";
+            this.button1.UseVisualStyleBackColor = true;
             // 
-            // idEmail
+            // botonGuardarLeerMail
             // 
-            this.idEmail.DataPropertyName = "IdEmail";
-            this.idEmail.HeaderText = "idEmail";
-            this.idEmail.Name = "idEmail";
-            this.idEmail.ReadOnly = true;
-            this.idEmail.Visible = false;
+            this.botonGuardarLeerMail.Image = global::Trabajo_Final.Properties.Resources.filesave;
+            this.botonGuardarLeerMail.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.botonGuardarLeerMail.Location = new System.Drawing.Point(601, 4);
+            this.botonGuardarLeerMail.Name = "botonGuardarLeerMail";
+            this.botonGuardarLeerMail.Size = new System.Drawing.Size(75, 23);
+            this.botonGuardarLeerMail.TabIndex = 13;
+            this.botonGuardarLeerMail.Text = "   Guardar";
+            this.botonGuardarLeerMail.UseVisualStyleBackColor = true;
             // 
             // FormPrincipal
             // 
@@ -954,12 +957,12 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(851, 482);
-            this.Controls.Add(this.gbOpciones1);
             this.Controls.Add(this.gbEnviarMail);
             this.Controls.Add(this.gbLeerMail);
-            this.Controls.Add(this.panelLeerMail);
             this.Controls.Add(this.panelCuentas);
             this.Controls.Add(this.gpNuevoMail);
+            this.Controls.Add(this.gbOpciones1);
+            this.Controls.Add(this.panelLeerMail);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
@@ -984,7 +987,6 @@
             this.panelDatosAdLeerMail.PerformLayout();
             this.gbEnviarMail.ResumeLayout(false);
             this.gbEnviarMail.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxBarraProgreso)).EndInit();
             this.menuStrip3.ResumeLayout(false);
             this.menuStrip3.PerformLayout();
             this.gbLeerMail.ResumeLayout(false);
@@ -1059,7 +1061,6 @@
         private System.Windows.Forms.Label labelDNValidaCCO;
         private System.Windows.Forms.DataGridView dgEmails;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.PictureBox pictureBoxBarraProgreso;
         private System.Windows.Forms.TextBox tbCCLeerMail;
         private System.Windows.Forms.Label labelCC;
         private System.Windows.Forms.Panel panelDatosAdLeerMail;
@@ -1075,6 +1076,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn fecha;
         private System.Windows.Forms.DataGridViewTextBoxColumn leido;
         private System.Windows.Forms.DataGridViewTextBoxColumn idEmail;
+        private System.Windows.Forms.Button bEliminar;
     }
 }
 

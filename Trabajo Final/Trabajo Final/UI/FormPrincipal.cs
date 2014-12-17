@@ -550,7 +550,6 @@ namespace Trabajo_Final.UI
         {
             try
             {
-                pictureBoxBarraProgreso.Visible = true;
                 gpNuevoMail.Enabled = false;
                 gbEnviarMail.Enabled = false;
                 menuStrip1.Enabled = false;
@@ -560,17 +559,14 @@ namespace Trabajo_Final.UI
             }
             catch (DAOExcepcion ex)
             {
-                pictureBoxBarraProgreso.Visible = false;
                 MessageBox.Show(ex.Message, "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             catch (EmailExcepcion ex)
             {
-                pictureBoxBarraProgreso.Visible = false;
                 MessageBox.Show(ex.Message, "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             catch (InternetExcepcion ex)
             {
-                pictureBoxBarraProgreso.Visible = false;
                 MessageBox.Show(ex.Message, "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             finally
@@ -594,30 +590,30 @@ namespace Trabajo_Final.UI
             int ind = 0;
             if (pCadena != "")
             {
-            while (ind < pCadena.Length)
-            {
-                if (pCadena[ind] != ';' && ind != pCadena.Length)
+                while (ind < pCadena.Length)
                 {
-                    cadena = cadena + pCadena[ind].ToString();
-                        ind++;
-                }
-                else 
-                {
-                    if (pCadena[ind] == ';')
-                    {
-                        listaDestinatarios.Add(cadena);
-                        cadena = "";
-                        ind = ind + 2;
-                    }
-                    else
+                    if (pCadena[ind] != ';' && ind != pCadena.Length)
                     {
                         cadena = cadena + pCadena[ind].ToString();
-                        listaDestinatarios.Add(cadena);
-                        cadena = "";
                         ind++;
                     }
+                    else 
+                    {
+                        if (pCadena[ind] == ';')
+                        {
+                            listaDestinatarios.Add(cadena);
+                            cadena = "";
+                            ind = ind + 2;
+                        }
+                        else
+                        {
+                            cadena = cadena + pCadena[ind].ToString();
+                            listaDestinatarios.Add(cadena);
+                            cadena = "";
+                            ind++;
+                        }
+                    }
                 }
-            }
             }
             else
             {
@@ -787,7 +783,6 @@ namespace Trabajo_Final.UI
         private void BorrarLabelEnviadoYBarraProgreso(object sender, MouseEventArgs e)
         {
             lEnviado.Visible = false;
-            pictureBoxBarraProgreso.Visible = false;
         }
 
         /// <summary>
@@ -996,6 +991,34 @@ namespace Trabajo_Final.UI
                     tbAsunto.Size = new Size(354, 20);
                     tbAsunto.Multiline = false;
                 }
+            }
+        }
+
+        /// <summary>
+        /// Permite Eliminar un Email
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void bEliminar_Click(object sender, EventArgs e)
+        {
+            try
+            {                
+              if (dgEmails.RowCount > 0)
+              {
+                  DialogResult resultado = MessageBox.Show("¿Está seguro que desea eliminar el E-Mail seleccionado?", "Atención", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                  if (resultado == DialogResult.Yes)
+                  {
+                     AdaptadorDataGrid fila = (AdaptadorDataGrid)dgEmails.CurrentRow.DataBoundItem;
+                     int id = fila.IdEmail;
+                     Fachada.Instancia.EliminarEmail(tbNombreCuenta.Text, id);
+                     MessageBox.Show("El E-Mail ha sido eliminado con éxito", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                     CargarDataGrid(tbNombreCuenta.Text, Convert.ToChar(tbTipoCorreo.Text));                 
+                  }
+                }
+            }
+            catch (DAOExcepcion ex)
+            {
+                MessageBox.Show(ex.Message, "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }

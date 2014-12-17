@@ -91,7 +91,7 @@ namespace Trabajo_Final.UI
                     destinatarios.Add(this.iDestinatario);
                     String ruta = tbRutaDirectorio.Text + @"\" + tbNombreArchivo.Text;
                     Fachada.Instancia.Exportar(this.iRemitente, destinatarios, this.iAsunto, this.iCuerpo, ruta, cbTipoExportador.SelectedItem.ToString(),this.iFecha);
-                    MessageBox.Show("Se ha exportado el Email con éxito", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Se ha exportado el E-Mail con éxito","", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     this.Close();
                 }
                 catch (ExportadorExcepcion ex)

@@ -232,6 +232,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="icono-email11.ico" />
+    <None Include="Resources\mail_delete.ico" />
     <None Include="Resources\observar-smc %281%29.ico" />
     <None Include="Resources\ajax-loader %283%29.gif" />
     <None Include="Resources\ajax-loader %282%29.gif" />

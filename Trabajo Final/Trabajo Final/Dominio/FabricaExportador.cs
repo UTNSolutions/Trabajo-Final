@@ -12,14 +12,14 @@ namespace Trabajo_Final.Dominio
     class FabricaExportador
     {
         private static FabricaExportador iInstancia;
-        private IDictionary<String,IExportador> iDiccionarioExportadores;
+        private IDictionary<String,IExportador> iExportadores;
         private FabricaExportador()
         {
-            this.iDiccionarioExportadores = new Dictionary<String, IExportador>();
+            this.iExportadores = new Dictionary<String, IExportador>();
             IExportador expTextoPlano = new ExportadorTextoPlano("Texto Plano");
-            this.iDiccionarioExportadores.Add(expTextoPlano.Nombre, expTextoPlano);
+            this.iExportadores.Add(expTextoPlano.Nombre, expTextoPlano);
             IExportador expEML = new EMLExportador("EML");
-            this.iDiccionarioExportadores.Add(expEML.Nombre, expEML);
+            this.iExportadores.Add(expEML.Nombre, expEML);
         }
 
         public static FabricaExportador Instancia
@@ -42,9 +42,9 @@ namespace Trabajo_Final.Dominio
         public IExportador GetExportador(String pNombre)
         {
            //Verifico si dicho nombre pasado como parametro es clave del diccionario
-           if (this.iDiccionarioExportadores.ContainsKey(pNombre))
+           if (this.iExportadores.ContainsKey(pNombre))
            {
-                return this.iDiccionarioExportadores[pNombre];
+                return this.iExportadores[pNombre];
            }
            else
            {

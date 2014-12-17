@@ -93,7 +93,7 @@ namespace Trabajo_Final.Persistencia
         public void Eliminar(int pIdEmail)
         {
             SqlCommand comando = new SqlCommand("delete from Email where idMail=@idEmail", this.iConexion, this.iTransaccion);
-            comando.Parameters.AddWithValue("@idCuenta", pIdEmail);
+            comando.Parameters.AddWithValue("@idEmail", pIdEmail);
             try
             {
                 comando.ExecuteNonQuery();

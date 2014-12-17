@@ -10,8 +10,13 @@ using Trabajo_Final.DTO;
 
 namespace Trabajo_Final.Controladores
 {
+    /// <summary>
+    /// Representa un controlador de Fachada que expone funcionalidades para el manejo
+    /// de toda la aplicacion
+    /// </summary>
     public class Fachada
     {
+        //Instancia Singleton
         private static Fachada iInstanciaSingleton;
 
         private Fachada()
@@ -26,6 +31,7 @@ namespace Trabajo_Final.Controladores
             }
         }
 
+        //Devuelve la instancia de Fachada
         public static Fachada Instancia
         {
             get { 
@@ -167,6 +173,18 @@ namespace Trabajo_Final.Controladores
             } 
         }
 
+        public void EliminarEmail(String pNombreCuenta, int pIdEmail)
+        {
+            try
+            {
+                FachadaABMEmail.Instancia.EliminarEmail(pIdEmail);
+                Cuentas.Instancia.GetCuenta(pNombreCuenta).EliminarEmail(pIdEmail);
+            }
+            catch (DAOExcepcion ex)
+            {
+                throw ex;
+            }                        
+        }
 
         /// <summary>
         /// Obtiene las cuentas de correo de la base de datos y crea objetos de tipo Cuenta 
