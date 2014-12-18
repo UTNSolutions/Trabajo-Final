@@ -53,7 +53,10 @@ namespace Trabajo_Final.Controladores
             }
             finally
             {
-                factory.FinalizarConexion();
+                if (factory != null)
+                {
+                    factory.FinalizarConexion();
+                }
             }
         }
 
@@ -81,7 +84,10 @@ namespace Trabajo_Final.Controladores
             }
             finally
             {
-                factory.FinalizarConexion();
+                if (factory != null)
+                {
+                    factory.FinalizarConexion();
+                }
             }
         }
 
@@ -109,7 +115,10 @@ namespace Trabajo_Final.Controladores
             }
             finally
             {
-                factory.FinalizarConexion();
+                if (factory != null)
+                {
+                    factory.FinalizarConexion();
+                }
             }
         }
 
@@ -138,7 +147,10 @@ namespace Trabajo_Final.Controladores
             }
             finally
             {
-                factory.FinalizarConexion();
+                if (factory != null)
+                {
+                    factory.FinalizarConexion();
+                }
             }
         }
 
@@ -163,7 +175,10 @@ namespace Trabajo_Final.Controladores
             }
             finally
             {
-                factory.FinalizarConexion();
+                if (factory != null)
+                {
+                    factory.FinalizarConexion();
+                }
             }
         }
 
@@ -191,7 +206,10 @@ namespace Trabajo_Final.Controladores
             }
             finally
             {
-                factory.FinalizarConexion();
+                if (factory != null)
+                {
+                    factory.FinalizarConexion();
+                }
             }
         }
 
@@ -216,7 +234,10 @@ namespace Trabajo_Final.Controladores
             }
             finally
             {
-                factory.FinalizarConexion();
+                if (factory != null)
+                {
+                    factory.FinalizarConexion();
+                }
             }
         }
     }

@@ -75,7 +75,10 @@ namespace Trabajo_Final.Persistencia
 
         public override void FinalizarConexion()
         {
-            this.iConexion.Close();
+            if (this.iConexion != null)
+            {
+                this.iConexion.Close();
+            }
         }
         public override void RollBack()
         {
