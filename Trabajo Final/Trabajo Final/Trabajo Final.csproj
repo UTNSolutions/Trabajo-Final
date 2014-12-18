@@ -155,9 +155,9 @@
     <Compile Include="DTO\EmailDTO.cs" />
     <Compile Include="Persistencia\ICuentaDAO.cs" />
     <Compile Include="Persistencia\IMailDAO.cs" />
-    <Compile Include="Persistencia\SQLServerCuentaDAO.cs" />
-    <Compile Include="Persistencia\SQLServerDAOFactory.cs" />
-    <Compile Include="Persistencia\SQLServerEmailDAO.cs" />
+    <Compile Include="Persistencia\SQLServer\SQLServerCuentaDAO.cs" />
+    <Compile Include="Persistencia\SQLServer\SQLServerDAOFactory.cs" />
+    <Compile Include="Persistencia\SQLServer\SQLServerEmailDAO.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Dominio\ServicioGmail.cs" />

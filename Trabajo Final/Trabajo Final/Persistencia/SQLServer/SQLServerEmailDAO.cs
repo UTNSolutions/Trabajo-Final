@@ -8,7 +8,7 @@ using System.Data;
 using Trabajo_Final.DTO;
 using Trabajo_Final.Excepciones;
 
-namespace Trabajo_Final.Persistencia
+namespace Trabajo_Final.Persistencia.SQLServer
 {
     class SQLServerEmailDAO : IMailDAO
     {

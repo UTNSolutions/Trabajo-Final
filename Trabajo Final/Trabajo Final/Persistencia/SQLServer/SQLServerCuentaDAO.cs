@@ -9,7 +9,7 @@ using Trabajo_Final.Excepciones;
 using Trabajo_Final.DTO;
 using Trabajo_Final.Utils;
 
-namespace Trabajo_Final.Persistencia
+namespace Trabajo_Final.Persistencia.SQLServer
 {
     class SQLServerCuentaDAO : ICuentaDAO 
     {

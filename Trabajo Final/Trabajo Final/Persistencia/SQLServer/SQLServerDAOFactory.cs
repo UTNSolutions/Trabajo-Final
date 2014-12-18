@@ -7,7 +7,7 @@ using System.Data.SqlClient;
 using System.Configuration;
 using Trabajo_Final.Excepciones;
 
-namespace Trabajo_Final.Persistencia
+namespace Trabajo_Final.Persistencia.SQLServer
 {
     /// <summary>
     /// Representa un conjunto de funcionalidades para el acceso a base de datos SQL Server
