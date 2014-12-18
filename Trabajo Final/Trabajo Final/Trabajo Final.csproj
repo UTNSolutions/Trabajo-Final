@@ -12,7 +12,7 @@
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <IsWebBootstrapper>false</IsWebBootstrapper>
-    <PublishUrl>C:\Users\Administrador\Desktop\asd\</PublishUrl>
+    <PublishUrl>C:\Users\Administrador\Desktop\instalador\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
     <UpdateEnabled>false</UpdateEnabled>
@@ -101,6 +101,7 @@
     <Compile Include="Dominio\ExportadorTextoPlano.cs" />
     <Compile Include="Dominio\FabricaExportador.cs" />
     <Compile Include="Dominio\IExportador.cs" />
+    <Compile Include="Excepciones\AdjuntoExcepcion.cs" />
     <Compile Include="Excepciones\CuentasExcepcion.cs" />
     <Compile Include="Excepciones\DAOExcepcion.cs" />
     <Compile Include="Excepciones\EmailExcepcion.cs" />

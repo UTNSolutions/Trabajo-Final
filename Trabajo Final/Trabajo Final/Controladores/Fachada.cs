@@ -8,6 +8,7 @@ using Trabajo_Final.Excepciones;
 using Trabajo_Final.Dominio;
 using Trabajo_Final.DTO;
 using System.IO;
+using System.Diagnostics;
 
 namespace Trabajo_Final.Controladores
 {
@@ -159,7 +160,7 @@ namespace Trabajo_Final.Controladores
                 //Acá elimino el directorio.
                 if (Directory.Exists(cuenta.DirectorioDeAdjuntos))
                 {
-                    Directory.Delete(cuenta.DirectorioDeAdjuntos);
+                    Directory.Delete(cuenta.DirectorioDeAdjuntos,true);
                 }                
             }
             catch (DAOExcepcion ex)
@@ -535,6 +536,49 @@ namespace Trabajo_Final.Controladores
             {
                 throw ex;
             }
+        }
+
+        /// <summary>
+        /// Permite visualizar un adjunto de un email
+        /// </summary>
+        /// <param name="pRuta">ruta donde esta alojado el adjunto</param>
+        public void VerAdjunto(string pRuta)
+        {
+            try
+            {
+                //Lo que hacemos es ejecutar un proceso que abre el archivo. 
+                Process proceso = new Process();
+                proceso.EnableRaisingEvents = false;
+                proceso.StartInfo.FileName = pRuta;
+                proceso.Start();
+            }
+            catch (System.ComponentModel.Win32Exception)
+            {
+                throw new AdjuntoExcepcion("El archivo que intenta abrir no se encuentra disponible, se ha eliminado o cambiado de directorio");
+            }
+        }
+
+        /// <summary>
+        /// Permite guardar un adjunto en el sistema de archivos
+        /// </summary>
+        /// <param name="pRutaArchivo">ruta del archivo adjunto que se quiere guardar</param>
+        /// <param name="pArchivoAGuardar">archivo que contendra el adjunto a guardar</param>
+        public void GuardarAdjunto(string pRutaArchivo,Stream pArchivoAGuardar)
+        {          
+            try
+            {
+               FileStream archivoACopiar = File.Open(pRutaArchivo, FileMode.Open);
+               archivoACopiar.CopyTo(pArchivoAGuardar, 4096);
+               archivoACopiar.Close();                        
+             }
+             catch (IOException)
+             {
+                 throw new AdjuntoExcepcion("Cierre el archivo antes de guardarlo");
+             }
+             finally
+             {
+                 pArchivoAGuardar.Close();
+             }
         }
     }
 }

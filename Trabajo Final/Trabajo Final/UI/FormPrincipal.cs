@@ -1118,7 +1118,7 @@ namespace Trabajo_Final.UI
 
        
         /// <summary>
-        /// Abre el archivo adjunto seleccionado, por una llamada al sistema operativos.
+        /// Abre el archivo adjunto seleccionado
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -1126,15 +1126,11 @@ namespace Trabajo_Final.UI
         {
             try
             {
-                //Lo que hacemos es ejecutar un proceso que abre el archivo. 
-                Process proceso = new Process();
-                proceso.EnableRaisingEvents = false;
-                proceso.StartInfo.FileName = cbDatosAdLeerMail.SelectedValue.ToString();
-                proceso.Start();
+                Fachada.Instancia.VerAdjunto(cbDatosAdLeerMail.SelectedValue.ToString());
             }
-            catch (System.ComponentModel.Win32Exception)
+            catch (AdjuntoExcepcion ex)
             {
-                MessageBox.Show("El archivo que intenta abrir no se encuentra disponible, se ha eliminado o cambiado de directorio", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Error);                    
+                MessageBox.Show(ex.Message, "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Error);                    
             }
         }
 
@@ -1144,8 +1140,7 @@ namespace Trabajo_Final.UI
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void bGuardarLeerMail_Click(object sender, EventArgs e)
-        {   
-            
+        {     
             int indice = cbDatosAdLeerMail.SelectedValue.ToString().Length - 1;
             String cadenaPrueba = cbDatosAdLeerMail.SelectedValue.ToString();
             String cadena = "";
@@ -1164,19 +1159,13 @@ namespace Trabajo_Final.UI
                     FileStream archivoAGuardar = new FileStream(saveFileDialog1.FileName, FileMode.Create);
                     try
                     {
-                        FileStream archivoACopiar = File.Open(cbDatosAdLeerMail.SelectedValue.ToString(), FileMode.Open);
-                        archivoACopiar.CopyTo(archivoAGuardar, 4096);
-                        archivoACopiar.Close();
+                        Fachada.Instancia.GuardarAdjunto(cbDatosAdLeerMail.SelectedValue.ToString(), archivoAGuardar);                       
                         MessageBox.Show("El archivo se ha guardado con éxito", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
-                    catch (IOException)
+                    catch (AdjuntoExcepcion ex)
                     {
-                        MessageBox.Show("Cierre el archivo antes de guardarlo", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show(ex.Message, "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         File.Delete(saveFileDialog1.FileName);
-                    }
-                    finally
-                    {
-                        archivoAGuardar.Close();
                     }
                 }
             }
